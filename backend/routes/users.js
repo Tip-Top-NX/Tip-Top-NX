@@ -1,0 +1,45 @@
+var express = require('express');
+var passport = require('passport');
+var router = express.Router();
+var authenticate = require('../utils/authenticate');
+
+const User = require('../models/user');
+
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+  console.log("in");
+  res.send({
+      success: true,
+      mssg: "Hello"
+  });
+});
+
+router.post('/login',passport.authenticate(User.createStrategy()),(req,res) => {
+  res.send(
+    {
+      success:true,
+      token:authenticate.getToken({_id:req.user._id}),
+      user: req.user,
+    });
+});
+
+router.post('/sign-up',(req,res,next) => {
+  let newUser = new User({
+    email:req.body.email,
+    name:req.body.name,
+    contact:req.body.contact,
+    address:req.body.address
+  });
+  User.register(newUser,req.body.password,(err,user) => {
+    if(!err){
+      passport.authenticate(User.createStrategy())(req,res, () => {
+        res.json({user:user,success:true,token:authenticate.getToken({_id:req.user._id})});
+      });
+    }
+    else{
+      res.json({err:err});
+    }
+  });
+})
+
+module.exports = router;
