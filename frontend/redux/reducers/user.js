@@ -7,9 +7,9 @@ const initialState = {
 }
 
 const reducer = (state=initialState, action) => {
+    console.log(state,action);
     switch(action.type){
         case ActionTypes.SET_USER:
-            console.log("token",action.payload.token);
             AsyncStorage.setItem('token', action.payload.token);
             return {
                 ...state,
