@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React from "react";
+import Carousel from './Carousel';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -7,6 +8,11 @@ const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
+
+        <View style={{marginTop:30}}>
+          <Carousel />
+        </View>
+
         <View>
           <View style={[styles.outerBox, { marginTop: 15 }]}>
             <TouchableOpacity
