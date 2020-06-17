@@ -44,12 +44,12 @@ const styles = StyleSheet.create({
   },
   materialIcon: {
     alignSelf: "center",
-    color: "#fff",
+    color: "#000",
   },
   textStyle: {
     fontWeight: "500",
     fontSize: 20,
-    color: "#fff",
+    color: "#000",
     textAlign: "center",
   },
 });

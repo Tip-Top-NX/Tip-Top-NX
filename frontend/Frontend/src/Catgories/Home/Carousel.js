@@ -8,8 +8,9 @@ import {
   StyleSheet,
 } from "react-native";
 
-var { width } = Dimensions.get("window");
-width = width * 0.9;
+// var { width } = Dimensions.get("window");
+// width = width * 0.9;
+const width = Dimensions.get("window").width;
 const height = width * 0.6; //50%
 
 const images = [
@@ -67,9 +68,10 @@ export default class Carousel extends React.Component {
 
 const style = StyleSheet.create({
   container: {
-    marginLeft: 8,
-    width,
+    // marginLeft: 8,
+    width: width,
     height,
+    marginTop: 5,
   },
   image: {
     width,
