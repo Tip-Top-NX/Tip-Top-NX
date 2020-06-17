@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   View,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -89,6 +90,7 @@ const signUp = ({ navigation }) => {
   };
 
   return (
+    <ScrollView>
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <View style={styles.title}>
@@ -153,6 +155,7 @@ const signUp = ({ navigation }) => {
         </View>
       </View>
     </TouchableWithoutFeedback>
+    </ScrollView>
   );
 };
 
