@@ -65,6 +65,7 @@ class BackgroundCarousel extends React.Component {
           pagingEnabled
           onMomentumScrollEnd={this.setSelectedIndex}
           ref={this.scrollRef}
+          showsHorizontalScrollIndicator={false}
         >
           {images.map((image) => (
             <Image
