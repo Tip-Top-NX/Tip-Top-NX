@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: "silver",
     marginTop: 10,
-    backgroundColor: "#1a2228",
+    // backgroundColor: "#1a2228",
   },
   outerBox: {
     flexDirection: "row",

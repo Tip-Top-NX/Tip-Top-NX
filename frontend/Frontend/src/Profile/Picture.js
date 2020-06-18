@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, TouchableOpacity, Image, View, Text } from "react-native";
 import UserPermissions from "../../Utilities/UserPermissions";
 import * as ImagePicker from "expo-image-picker";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const Picture = () => {
+  const navigation = useNavigation();
   const [picture, setPicture] = useState();
   const handlePress = async () => {
     UserPermissions.getCameraPermission();
@@ -17,12 +20,28 @@ const Picture = () => {
     }
   };
   return (
-    <TouchableOpacity
-      style={styles.avatarPlaceholder}
-      onPress={() => handlePress()}
-    >
-      <Image source={{ uri: picture }} style={styles.avatar} />
-    </TouchableOpacity>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <MaterialCommunityIcons
+          name="chevron-left-circle"
+          size={30}
+          color="#F8A9A9"
+          style={{ position: "absolute", top: 30, left: 20 }}
+          onPress={() => {
+            navigation.openDrawer();
+          }}
+        />
+        <TouchableOpacity
+          style={styles.avatarPlaceholder}
+          onPress={() => handlePress()}
+        >
+          <Image source={{ uri: picture }} style={styles.avatar} />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.textContainer}>
+        <Text style={styles.textStyle}>{"Krishna tyagi".toUpperCase()}</Text>
+      </View>
+    </View>
   );
 };
 
@@ -37,7 +56,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   avatarPlaceholder: {
-    marginTop: 10,
+    marginVertical: 10,
+    marginTop: 30,
     width: 160,
     height: 160,
     backgroundColor: "#E1E2E6",
@@ -49,6 +69,22 @@ const styles = StyleSheet.create({
     borderColor: "#DDA0DD",
     borderStyle: "dotted",
   },
+  container: {
+    // borderWidth: 1,
+  },
+  textStyle: {
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#FFE5E5",
+  },
+  textContainer: {
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(52, 52, 52, 0.7)",
+  },
+  header: {},
 });
 
 export default Picture;

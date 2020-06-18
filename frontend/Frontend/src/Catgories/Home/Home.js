@@ -19,18 +19,10 @@ const Home = ({ navigation }) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <Carousel />
         <TouchableOpacity
-          style={{
-            height: 50,
-            backgroundColor: "teal",
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: 10,
-          }}
-          onPress={() => navigation.navigate("Profile")}
+          style={styles.viewAll}
+          onPress={() => navigation.navigate("Catelogue")}
         >
-          <Text style={{ color: "#fff", fontSize: 20 }}>
-            Temporary Profile Page
-          </Text>
+          <Text style={styles.textStyle}>VIEW ALL ITEMS</Text>
         </TouchableOpacity>
         <Categories navigation={navigation} />
         <Popular navigation={navigation} />
@@ -61,10 +53,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 5,
   },
+  viewAll: {
+    height: 50,
+    backgroundColor: "#96CDCD",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+  },
   textStyle: {
-    alignSelf: "center",
-    fontSize: 25,
+    color: "#00688B",
+    fontSize: 17,
     fontWeight: "bold",
+    letterSpacing: 0.3,
   },
 });
 

@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     marginTop: 20,
-    height: "72%",
+    height: "62%",
     paddingVertical: 15,
   },
   component: {
@@ -47,12 +47,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginHorizontal: 5,
     borderStyle: "dotted",
-    // backgroundColor: "#FFFAFA",
+    backgroundColor: "rgba(52, 52, 52, 0.7)",
   },
   textStyle: {
     fontWeight: "600",
     fontSize: 17,
     letterSpacing: 0.3,
+    color: "#fff",
   },
 });
 

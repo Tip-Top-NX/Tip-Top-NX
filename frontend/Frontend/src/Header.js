@@ -1,13 +1,23 @@
+/* eslint-disable */
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const header = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.sideImage}>
-        <MaterialIcons name="menu" size={30} style={styles.materialIcon} />
+        <MaterialIcons
+          name="menu"
+          size={30}
+          style={styles.materialIcon}
+          onPress={() => {
+            navigation.openDrawer();
+          }}
+        />
       </View>
       <View style={styles.headingStyle}>
         <Text style={styles.textStyle}>TIP TOP NX</Text>
