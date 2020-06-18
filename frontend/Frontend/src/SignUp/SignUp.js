@@ -12,7 +12,7 @@ import styles from "./SignUpStyles";
 import PropTypes from "prop-types";
 
 import { useSelector, useDispatch } from "react-redux";
-import { signup, signinFailed } from '../../../redux/ActionCreators';
+import { signup, signinFailed } from "../../../redux/ActionCreators";
 
 const signUp = ({ navigation }) => {
   // states for handling the input
@@ -27,19 +27,18 @@ const signUp = ({ navigation }) => {
   const [validPhone, checkPhone] = useState(true);
 
   // redux
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(signinFailed());
-  }, [])
-  
+  }, []);
+
   useEffect(() => {
-    if(user.isValid){
+    if (user.isValid) {
       navigation.navigate("Home");
     }
-  }, [user.isValid])
-
+  }, [user.isValid]);
 
   const validation = () => {
     const emailregex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
@@ -78,83 +77,89 @@ const signUp = ({ navigation }) => {
       checkPhone(true);
     }
 
-    if(validEmail && validName && validPassword && validPhone){
-      dispatch(signup({
-        name,
-        email,
-        password,
-        contact: phone,
-      }));
+    if (validEmail && validName && validPassword && validPhone) {
+      dispatch(
+        signup({
+          name,
+          email,
+          password,
+          contact: phone,
+        })
+      );
     }
-
   };
 
   return (
     <ScrollView>
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
-        <View style={styles.title}>
-          <Text style={styles.textStyle}>SIGN UP</Text>
-          <Text style={styles.textStyle}>TO CONTINUE</Text>
-        </View>
-        <View style={[styles.inputContainer, !validName ? styles.error : null]}>
-          <TextInput
-            style={styles.inputText}
-            placeholder="FULL NAME"
-            placeholderTextColor="#666"
-            onChangeText={(text) => setName(text)}
-            value={name}
-          ></TextInput>
-        </View>
-        <View
-          style={[styles.inputContainer, !validEmail ? styles.error : null]}
-        >
-          <TextInput
-            style={styles.inputText}
-            placeholder="EMAIL ADDRESS"
-            placeholderTextColor="#666"
-            onChangeText={(text) => setEmail(text)}
-            value={email}
-          ></TextInput>
-        </View>
-        <View
-          style={[styles.inputContainer, !validPassword ? styles.error : null]}
-        >
-          <TextInput
-            style={styles.inputText}
-            placeholder="PASSWORD"
-            placeholderTextColor="#666"
-            secureTextEntry={true}
-            onChangeText={(text) => setPassword(text)}
-            value={password}
-          ></TextInput>
-        </View>
-        <View
-          style={[styles.inputContainer, !validPhone ? styles.error : null]}
-        >
-          <TextInput
-            style={styles.inputText}
-            placeholder="PHONE NUMBER"
-            placeholderTextColor="#666"
-            keyboardType={"numeric"}
-            onChangeText={(text) => setPhone(text)}
-            value={phone}
-          ></TextInput>
-        </View>
-        <TouchableOpacity style={styles.button} onPress={() => validation()}>
-          <Text style={styles.buttonText}>JOIN US</Text>
-        </TouchableOpacity>
-        <View style={styles.signInBox}>
-          <Text style={styles.signInText}>ALREADY A MEMBER ?</Text>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate("Sign In")}
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View style={styles.container}>
+          <View style={styles.title}>
+            <Text style={styles.textStyle}>SIGN UP</Text>
+            <Text style={styles.textStyle}>TO CONTINUE</Text>
+          </View>
+          <View
+            style={[styles.inputContainer, !validName ? styles.error : null]}
           >
-            <Text style={styles.buttonText}>SIGN IN</Text>
+            <TextInput
+              style={styles.inputText}
+              placeholder="FULL NAME"
+              placeholderTextColor="#666"
+              onChangeText={(text) => setName(text)}
+              value={name}
+            ></TextInput>
+          </View>
+          <View
+            style={[styles.inputContainer, !validEmail ? styles.error : null]}
+          >
+            <TextInput
+              style={styles.inputText}
+              placeholder="EMAIL ADDRESS"
+              placeholderTextColor="#666"
+              onChangeText={(text) => setEmail(text)}
+              value={email}
+            ></TextInput>
+          </View>
+          <View
+            style={[
+              styles.inputContainer,
+              !validPassword ? styles.error : null,
+            ]}
+          >
+            <TextInput
+              style={styles.inputText}
+              placeholder="PASSWORD"
+              placeholderTextColor="#666"
+              secureTextEntry={true}
+              onChangeText={(text) => setPassword(text)}
+              value={password}
+            ></TextInput>
+          </View>
+          <View
+            style={[styles.inputContainer, !validPhone ? styles.error : null]}
+          >
+            <TextInput
+              style={styles.inputText}
+              placeholder="PHONE NUMBER"
+              placeholderTextColor="#666"
+              keyboardType={"numeric"}
+              onChangeText={(text) => setPhone(text)}
+              value={phone}
+            ></TextInput>
+          </View>
+          <TouchableOpacity style={styles.button} onPress={() => validation()}>
+            <Text style={styles.buttonText}>JOIN US</Text>
           </TouchableOpacity>
+          <View style={styles.signInBox}>
+            <Text style={styles.signInText}>ALREADY A MEMBER ?</Text>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate("Sign In")}
+            >
+              <Text style={styles.buttonText}>SIGN IN</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>
     </ScrollView>
   );
 };

@@ -7,13 +7,13 @@ const header = () => {
   return (
     <View style={styles.container}>
       <View style={styles.sideImage}>
-        <MaterialIcons name="menu" size={35} style={styles.materialIcon} />
+        <MaterialIcons name="menu" size={30} style={styles.materialIcon} />
       </View>
       <View style={styles.headingStyle}>
         <Text style={styles.textStyle}>TIP TOP NX</Text>
       </View>
       <View style={styles.sideImage}>
-        <AntDesign name="shoppingcart" size={35} style={styles.materialIcon} />
+        <AntDesign name="shoppingcart" size={30} style={styles.materialIcon} />
       </View>
     </View>
   );

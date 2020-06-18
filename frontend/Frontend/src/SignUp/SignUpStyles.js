@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
   signInBox: {
-    marginTop: 40,
+    marginVertical: 40,
     // borderWidth: 1,
     borderColor: "#000",
     height: 90,

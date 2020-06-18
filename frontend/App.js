@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import Stack from "./Frontend/Routes/SignUpStack";
-//import HomeStack from "./Frontend/Routes/HomeStack";
+import Stack from "./Frontend/Routes/HomeStack";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 import { ConfigureStore } from "./redux/ConfigureStore";

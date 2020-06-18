@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as React from "react";
 import { StyleSheet, View, ScrollView, Dimensions, Image } from "react-native";
 
@@ -12,7 +13,7 @@ class BackgroundCarousel extends React.Component {
     super(props);
 
     this.state = {
-      selectedIndex: 0
+      selectedIndex: 0,
     };
     this.scrollRef = React.createRef();
   }
@@ -20,17 +21,17 @@ class BackgroundCarousel extends React.Component {
   componentDidMount = () => {
     setInterval(() => {
       this.setState(
-        prev => ({
+        (prev) => ({
           selectedIndex:
             prev.selectedIndex === this.props.images.length - 1
               ? 0
-              : prev.selectedIndex + 1
+              : prev.selectedIndex + 1,
         }),
         () => {
           this.scrollRef.current.scrollTo({
             animated: true,
             x: DEVICE_WIDTH * this.state.selectedIndex,
-            y: 0
+            y: 0,
           });
         }
       );
@@ -38,14 +39,14 @@ class BackgroundCarousel extends React.Component {
   };
 
   nextImage = () =>
-    this.setState(prev => ({
+    this.setState((prev) => ({
       selectedIndex:
         prev.selectedIndex === this.props.images.length - 1
           ? 0
-          : prev.selectedIndex + 1
+          : prev.selectedIndex + 1,
     }));
 
-  setSelectedIndex = event => {
+  setSelectedIndex = (event) => {
     const contentOffset = event.nativeEvent.contentOffset;
     const viewSize = event.nativeEvent.layoutMeasurement;
 
@@ -58,14 +59,14 @@ class BackgroundCarousel extends React.Component {
     const { images } = this.props;
     const { selectedIndex } = this.state;
     return (
-      <View style={{ height: height, width: "100%", marginTop: 10}}>
+      <View style={{ height: height, width: "100%", marginTop: 10 }}>
         <ScrollView
           horizontal
           pagingEnabled
           onMomentumScrollEnd={this.setSelectedIndex}
           ref={this.scrollRef}
         >
-          {images.map(image => (
+          {images.map((image) => (
             <Image
               style={styles.backgroundImage}
               source={{ uri: image }}
@@ -78,7 +79,7 @@ class BackgroundCarousel extends React.Component {
             <View
               style={[
                 styles.whiteCircle,
-                { opacity: i === selectedIndex ? 1 : 0.5 }
+                { opacity: i === selectedIndex ? 1 : 0.5 },
               ]}
               key={image}
               active={i === selectedIndex}
@@ -93,7 +94,7 @@ class BackgroundCarousel extends React.Component {
 const styles = StyleSheet.create({
   backgroundImage: {
     height: "100%",
-    width: Dimensions.get("window").width
+    width: Dimensions.get("window").width,
   },
   circleDiv: {
     position: "absolute",
@@ -103,15 +104,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
-    height: 10
+    height: 10,
   },
   whiteCircle: {
     width: 6,
     height: 6,
     borderRadius: 3,
     margin: 5,
-    backgroundColor: "#fff"
-  }
+    backgroundColor: "#fff",
+  },
 });
 
 export { BackgroundCarousel };

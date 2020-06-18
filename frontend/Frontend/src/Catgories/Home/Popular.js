@@ -48,7 +48,9 @@ const popular = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.titleStyle}>
-        <Text style={{ fontWeight: "bold", fontSize: 16 }}>MOST LOVED ITEMS</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 16 }}>
+          MOST LOVED ITEMS
+        </Text>
         <TouchableOpacity
           style={{
             height: 50,
@@ -125,7 +127,6 @@ const styles = StyleSheet.create({
   textStyle: {
     fontSize: 15,
     fontWeight: "500",
-    fontFamily: "serif",
   },
   titleStyle: {
     width: width,

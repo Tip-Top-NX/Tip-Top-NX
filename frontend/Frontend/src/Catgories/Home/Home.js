@@ -1,7 +1,14 @@
 /* eslint-disable */
 import React from "react";
 import Carousel from "./Carousel";
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  Button,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Popular from "./Popular";
 import Categories from "./Categories";
@@ -11,6 +18,20 @@ const Home = ({ navigation }) => {
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Carousel />
+        <TouchableOpacity
+          style={{
+            height: 50,
+            backgroundColor: "teal",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: 10,
+          }}
+          onPress={() => navigation.navigate("Profile")}
+        >
+          <Text style={{ color: "#fff", fontSize: 20 }}>
+            Temporary Profile Page
+          </Text>
+        </TouchableOpacity>
         <Categories navigation={navigation} />
         <Popular navigation={navigation} />
       </ScrollView>
