@@ -32,7 +32,7 @@ const Options = () => {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    marginTop: 20,
+    marginTop: 10,
     height: "72%",
     paddingVertical: 15,
   },

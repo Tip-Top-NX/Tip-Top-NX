@@ -16,9 +16,10 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     marginTop: 30,
+    marginBottom: 30,
     flex: 1,
     height: 600,
-    // backgroundColor: "#fff",
+   // backgroundColor: "#fff",
   },
 });
 
