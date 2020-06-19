@@ -1,5 +1,4 @@
 var express = require('express');
-var passport = require('passport');
 var router = express.Router();
 var authenticate = require('../utils/authenticate');
 
@@ -14,7 +13,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.post('/login',passport.authenticate(User.createStrategy()),(req,res) => {
+router.post('/login',authenticate.local,(req,res) => {
   res.send(
     {
       success:true,
@@ -32,8 +31,10 @@ router.post('/sign-up',(req,res,next) => {
   });
   User.register(newUser,req.body.password,(err,user) => {
     if(!err){
-      passport.authenticate(User.createStrategy())(req,res, () => {
-        res.json({user:user,success:true,token:authenticate.getToken({_id:req.user._id})});
+      res.json({
+        user:user,
+        success:true,
+        token:authenticate.getToken({_id:user._id})
       });
     }
     else{
