@@ -102,7 +102,6 @@ const styles = StyleSheet.create({
   textStyle: {
     fontSize: 15,
     fontWeight: "500",
-    fontFamily: "PingFangHK-Regular",
   },
 });
 

@@ -2,6 +2,19 @@
 import * as ActionTypes from "./ActionTypes";
 import axios from "../axios";
 
+export const updateProfile = (user) => {
+  return (dispatch) => {
+    axios.post("/profile/uploadPhoto", { ...user }).then((res) => {
+      console.log("look here" + res.data);
+      // if (res.data.success === true) {
+      //   dispatch(setPicture(res.data.user));
+      // } else {
+      //   dispatch(signinFailed());
+      // }
+    });
+  };
+};
+
 export const signup = (user) => {
   return (dispatch) => {
     axios
@@ -29,6 +42,25 @@ export const signin = (user) => {
         }
       })
       .catch((err) => dispatch(signinFailed()));
+  };
+};
+
+export const setPicture = (user) => {
+  return {
+    type: ActionTypes.SET_PICTURE,
+    payload: {
+      address: user.address,
+      name: user.name,
+      contact: user.contact,
+      email: user.email,
+      _id: user._id,
+      image: user.image,
+      points: user.points,
+      orders: user.orders,
+      wishlist: user.wishlist,
+      cart: user.cart,
+      token: token,
+    },
   };
 };
 

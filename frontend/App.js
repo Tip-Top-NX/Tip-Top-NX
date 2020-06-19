@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-// import Stack from "./Frontend/Routes/HomeStack";
 import DrawerNav from "./Frontend/Routes/Drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
@@ -13,7 +12,6 @@ export default function App() {
     <Provider store={store}>
       <View style={styles.container}>
         <NavigationContainer>
-          {/* <Stack /> */}
           <DrawerNav />
         </NavigationContainer>
       </View>

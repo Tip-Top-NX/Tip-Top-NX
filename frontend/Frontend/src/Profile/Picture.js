@@ -1,13 +1,15 @@
+/* eslint-disable */
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, Image, View, Text } from "react-native";
 import UserPermissions from "../../Utilities/UserPermissions";
 import * as ImagePicker from "expo-image-picker";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 
 const Picture = () => {
   const navigation = useNavigation();
-  const [picture, setPicture] = useState();
+  const [picture, setPicture] = useState(state.image);
   const handlePress = async () => {
     UserPermissions.getCameraPermission();
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -16,9 +18,14 @@ const Picture = () => {
       aspect: [4, 3],
     });
     if (!result.cancelled) {
+      user.image = result.uri;
       setPicture(result.uri);
     }
   };
+
+  // redux
+  const user = useSelector((state) => state.user);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -39,7 +46,7 @@ const Picture = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.textStyle}>{"Krishna tyagi".toUpperCase()}</Text>
+        <Text style={styles.textStyle}>{user.name.toUpperCase()}</Text>
       </View>
     </View>
   );

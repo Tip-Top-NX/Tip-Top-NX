@@ -21,6 +21,11 @@ const reducer = (state = initialState, action) => {
         ...initialState,
         isValid: false,
       };
+    case ActionTypes.SET_PICTURE:
+      return {
+        ...state,
+        ...action.payload,
+      };
     default:
       return state;
   }
