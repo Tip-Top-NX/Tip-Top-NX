@@ -7,21 +7,35 @@ const User = require('../models/user');
 
 const secretKey = '1234-5678';
 
-exports.localPassport = passport.use(User.createStrategy());
+passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
-exports.local = passport.authenticate('local');
+exports.local = (req,res,next) => {
+    passport.authenticate('local',{session: false},(err,user) => {
+        if(err) next(err);
+        if(!user){
+            res.statusCode = 401,
+            res.json({
+                success : false,
+                message: "Incorrect ID/ Password"
+            })
+        }
+        else{
+            req.user = user;
+            next();
+        }
+    })(req,res,next);
+}
 
 exports.getToken = (user) => {
     return jwt.sign(user,secretKey);
 }
+let opts = {
+    jwtFromRequest : ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey : secretKey
+}
 
-let opts = {};
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = secretKey;
-
-exports.jwtPassport = passport.use(new JwtStrategy(opts,(jwt_payload,done) => {
+passport.use(new JwtStrategy(opts,(jwt_payload,done) => {
     User.findOne({_id: jwt_payload._id}, (err,user) => {
         if(err){
             return done(err,false);
@@ -37,4 +51,19 @@ exports.jwtPassport = passport.use(new JwtStrategy(opts,(jwt_payload,done) => {
 }));
 
 //middleware verify using jwt
-exports.verifyUser = passport.authenticate('jwt', {session: false});
+exports.verifyUser = (req,res,next) => {
+    passport.authenticate('jwt', {session: false},(err,user) => {
+        if(err) next(err);
+        if(!user){
+            res.statusCode = 401,
+            res.json({
+                success : false,
+                message: "Unauthorized"
+            })
+        }
+        else{
+            req.user = user;
+            next();
+        }
+    })(req,res,next);
+}
