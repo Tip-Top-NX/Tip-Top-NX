@@ -11,10 +11,7 @@ const userSchema = new Schema({
         type:Number,
         required:true
     },
-    address:{
-        type:String,
-        default:''
-    },
+    address:[String],
     image:{
         type:String,
         default:''

@@ -11,7 +11,6 @@ var authenticate = require("./utils/authenticate");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-var orderRouter = require("./routes/orders");
 var categoriesRouter = require("./routes/categories");
 var productsRouter = require("./routes/products");
 var profileRouter = require("./routes/profile");
@@ -19,13 +18,12 @@ var profileRouter = require("./routes/profile");
 var app = express();
 
 // MongoDb connection
-//  mongoose.connect('mongodb://localhost/ttnx',{useNewUrlParser:true})
-//  .then((db) => console.log("Mongo connection successfull!"))
-//  .catch((err) => console.log(err));
+// mongoose.connect('mongodb://localhost/ttnx',{useNewUrlParser:true})
+// .then((db) => console.log("Mongo connection successfull!"))
+// .catch((err) => console.log(err));
 mongoose
   .connect(
     "mongodb://mihirdb:mihirdb@cluster0-shard-00-00-auvdn.mongodb.net:27017,cluster0-shard-00-01-auvdn.mongodb.net:27017,cluster0-shard-00-02-auvdn.mongodb.net:27017/ttnx?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority",
-    // "mongodb+srv://vidhi:pass@cluster0.70qps.mongodb.net/ttnx?retryWrites=true&w=majority",
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then((db) => console.log("Mongo connection successfull!"))
@@ -58,7 +56,6 @@ app.use("/category", categoriesRouter);
 app.use("/product", productsRouter);
 
 app.use(authenticate.verifyUser);
-app.use("/orders", orderRouter);
 app.use("/profile", profileRouter);
 
 // catch 404 and forward to error handler

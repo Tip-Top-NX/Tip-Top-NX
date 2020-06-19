@@ -8,7 +8,8 @@ const orderSchema = new Schema({
             ref:'Product'
         },
         size:String,
-        color:String
+        color:String,
+        price:Number
     }],
     amount:{
         type:Number,
