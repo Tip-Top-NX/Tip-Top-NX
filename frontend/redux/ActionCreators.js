@@ -5,7 +5,7 @@ import axios from "../axios";
 export const updateProfile = (user) => {
   return (dispatch) => {
     axios.post("/profile/uploadPhoto", { ...user }).then((res) => {
-      console.log("look here" + res.data);
+      // console.log("look here" + res.data);
       // if (res.data.success === true) {
       //   dispatch(setPicture(res.data.user));
       // } else {

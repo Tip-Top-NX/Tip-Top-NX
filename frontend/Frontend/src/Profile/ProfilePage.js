@@ -1,10 +1,10 @@
 /* eslint-disable */
 import React from "react";
 import { StyleSheet, View, Dimensions, ImageBackground } from "react-native";
-import Picture from "./Picture";
-import Options from "./Options";
+import Picture from "./ProfilePage/Picture";
+import Options from "./ProfilePage/Options";
 
-const Profile = () => {
+const Profile = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -13,7 +13,7 @@ const Profile = () => {
         blurRadius={0}
       >
         <Picture />
-        <Options />
+        <Options navigation={navigation} />
       </ImageBackground>
     </View>
   );

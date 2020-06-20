@@ -1,16 +1,55 @@
+/* eslint-disable */
 import React from "react";
 import { StyleSheet, View, FlatList, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
-const Options = () => {
+const Options = (props) => {
+  const navigation = useNavigation();
   const optionList = [
-    { name: "Address", id: "1" },
-    { name: "Wishlist", id: "2" },
-    { name: "Points", id: "3" },
-    { name: "Orders", id: "4" },
-    { name: "Edit Profile", id: "5" },
-    { name: "Complaints", id: "6" },
+    {
+      name: "Address",
+      id: "1",
+      navigator: () => {
+        navigation.navigate("Home");
+      },
+    },
+    {
+      name: "Wishlist",
+      id: "2",
+      navigator: () => {
+        navigation.navigate("Catelogue");
+      },
+    },
+    {
+      name: "Points",
+      id: "3",
+      navigator: () => {
+        navigation.navigate("Home");
+      },
+    },
+    {
+      name: "Orders",
+      id: "4",
+      navigator: () => {
+        navigation.navigate("Catelogue");
+      },
+    },
+    {
+      name: "Edit Profile",
+      id: "5",
+      navigator: () => {
+        props.navigation.navigate("EditProfile");
+      },
+    },
+    {
+      name: "Complaints",
+      id: "6",
+      navigator: () => {
+        navigation.navigate("Catelogue");
+      },
+    },
   ];
   return (
     <View style={styles.container}>
@@ -19,7 +58,7 @@ const Options = () => {
         showsVerticalScrollIndicator={false}
         key={optionList.id}
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.component}>
+          <TouchableOpacity style={styles.component} onPress={item.navigator}>
             <Text style={styles.textStyle}>{item.name}</Text>
             <AntDesign name="right" size={25} color="silver" />
           </TouchableOpacity>

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, Image, View, Text } from "react-native";
-import UserPermissions from "../../Utilities/UserPermissions";
+import UserPermissions from "../../../Utilities/UserPermissions";
 import * as ImagePicker from "expo-image-picker";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 const Picture = () => {
   const navigation = useNavigation();
-  const [picture, setPicture] = useState(state.image);
+  const [picture, setPicture] = useState();
   const handlePress = async () => {
     UserPermissions.getCameraPermission();
     let result = await ImagePicker.launchImageLibraryAsync({
