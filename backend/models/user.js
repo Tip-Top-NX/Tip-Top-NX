@@ -11,10 +11,19 @@ const userSchema = new Schema({
         type:Number,
         required:true
     },
-    address:[String],
+    address:{
+        type:String,
+        default: ''
+    },
     image:{
         type:String,
         default:''
+    },
+    gender: {
+        type: String,
+    },
+    age: {
+        type: Number,
     },
     points:{
         type:Number,

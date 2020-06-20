@@ -6,12 +6,13 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  AsyncStorage,
 } from "react-native";
 import styles from "./SignInStyles";
 import PropTypes from "prop-types";
 
 import { useSelector, useDispatch } from "react-redux";
-import { signin, signinFailed } from '../../../redux/ActionCreators';
+import { signin, signinFailed, test } from '../../../redux/ActionCreators';
 
 
 const signIn = ({ navigation }) => {
@@ -32,7 +33,7 @@ const signIn = ({ navigation }) => {
   
   useEffect(() => {
     if(user.isValid){
-      navigation.navigate("Home");
+      navigation.navigate("Categories");
     }
   }, [user.isValid])
 
