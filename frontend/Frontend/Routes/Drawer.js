@@ -8,7 +8,19 @@ const Drawer = createDrawerNavigator();
 
 const DrawerNav = () => {
   return (
-    <Drawer.Navigator initialRouteName="HomeStack">
+    <Drawer.Navigator
+      initialRouteName="HomeStack"
+      hideStatusBar={true}
+      statusBarAnimation={"slide"}
+      // drawerStyle={{
+      //   backgroundColor: "#000",
+      // }}
+      // drawerContentOptions={{
+      //   labelStyle: { color: "#fff", marginVertical: 5 },
+      //   inactiveBackgroundColor: "#009ACD",
+      //   activeBackgroundColor: "#236B8E",
+      // }}
+    >
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="My Profile" component={ProfileStack} />
       <Drawer.Screen name="Sign Up | Log In" component={SignUpStack} />
