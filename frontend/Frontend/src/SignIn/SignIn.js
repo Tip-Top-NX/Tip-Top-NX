@@ -27,13 +27,13 @@ const signIn = ({ navigation }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    user.isValid = false;
     dispatch(signinFailed());
   }, []);
 
   useEffect(() => {
     if (user.isValid) {
       navigation.navigate("Categories");
-      console.log(user);
     }
   }, [user.isValid]);
 

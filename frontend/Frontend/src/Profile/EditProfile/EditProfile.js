@@ -15,7 +15,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import UserPermissions from "../../../Utilities/UserPermissions";
 import * as ImagePicker from "expo-image-picker";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { setProfile, postImage } from "../../../../redux/ActionCreators";
+import { setProfile, postImage, putProfile } from "../../../../redux/ActionCreators";
 
 const EditProfile = () => {
   // redux
@@ -56,45 +56,26 @@ const EditProfile = () => {
   const validation = () => {
     const alph = /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/;
 
-    console.log(name + "  " + phone);
-
     // name check
     if (name === "") {
       checkName(false);
-      console.log(validName + "empty");
     } else if (!alph.test(name)) {
       checkName(false);
-      console.log(validName + "numbers");
     } else {
       checkName(true);
-      console.log(validName + "correct");
     }
     // phone number check
     if (phone === "" || phone.length !== 10 || phone.charAt(0) < 7) {
       checkPhone(false);
-      console.log(
-        validPhone +
-          " wrong" +
-          " " +
-          phone +
-          " " +
-          phone.length +
-          " " +
-          phone.charAt(0)
-      );
     } else {
       checkPhone(true);
-      console.log(validPhone + "correct");
     }
-
     if (validName && validPhone) {
-      console.log("updated");
-      console.log(validName);
-      console.log(validPhone);
       dispatch(
-        setProfile({
+        putProfile({
           name,
           contact: phone,
+          address
         })
       );
     }
