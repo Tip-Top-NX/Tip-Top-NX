@@ -1,12 +1,23 @@
 import axios from "axios";
+import { AsyncStorage } from "react-native";
 
 const myIP = "172.20.10.2";
-// Vishwesh const myIP = "192.168.43.242";
 const port = "5000";
 
-const instance = axios.create({
+export const myAxios = axios.create({
   baseURL: "http://" + myIP + ":" + port,
   withCredentials: true,
 });
 
-export default instance;
+export const getConfig = () => {
+  return AsyncStorage.getItem("token")
+    .then((token) => {
+      let config = {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      };
+      return config;
+    })
+    .catch((err) => console.log(err));
+};

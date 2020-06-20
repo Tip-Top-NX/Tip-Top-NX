@@ -10,10 +10,13 @@ class userPermission {
       }
     }
     if (Platform.OS === "android") {
-      const { status } = await PermissionsAndroid.request(
-        PermissionsAndroid.CAMERA_ROLL
+      console.log("yes");
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
       );
-      if (status != "granted") {
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        // console.log("You can use the camera");
+      } else {
         alert("WE NEED PERMISSION TO USE YOUR CAMERA ROLL");
       }
     }
