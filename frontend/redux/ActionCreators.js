@@ -162,3 +162,42 @@ export const signinFailed = () => {
     type: ActionTypes.SIGNIN_FAILED,
   };
 };
+
+//ADDRESS ACTION CREATORS STARTS
+export const postAddress = (address,type) => (dispatch) => {
+
+    const newAddress = {
+        address : address,
+        type : type
+    };
+
+    return fetch(baseUrl + 'addresses', {
+        method: "POST",
+        body: JSON.stringify(newComment),
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "same-origin"
+    })
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            throw error;
+      })
+    .then(response => response.json())
+    .then(response => setTimeout(() => {dispatch(addAddress(response))}, 2000))
+    .catch(error =>  { console.log('post addresses', error.message); alert('Your address could not be posted\nError: '+error.message);})
+}
+
+export const addAddress = (address) => ({
+    type: ActionTypes.ADD_ADDRESS,
+    payload: address
+});
+//ADDRESS PART ENDS

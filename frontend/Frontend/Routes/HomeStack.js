@@ -6,6 +6,7 @@ import Header from "../src/Header";
 import Catelogue from "../src/Catgories/Catelogue";
 import Product from "../src/ProductDescription/ProductPage";
 import Profile from "../src/Profile/ProfilePage";
+import Address from "../src/Profile/Address";
 
 const Stack = createStackNavigator();
 
