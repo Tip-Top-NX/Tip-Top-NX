@@ -65,7 +65,7 @@ export const putProfile = (details) => {
   return (dispatch) => {
     getConfig().then((config) => {
       myAxios
-        .put("/profile", details)
+        .put("/profile/", details, config)
         .then((user) => {
           dispatch(setProfile(details));
         })
