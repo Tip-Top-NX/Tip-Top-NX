@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('../models/user');
 const Order = require('../models/order');
+const authenticate = require('../utils/authenticate');
 const { upload, getURLSingle, getURLMultiple } = require('../utils/upload');
 
 const router = express.Router();
@@ -43,6 +44,20 @@ router.route('/')
             })
             .catch((err) => next(err));
     })
+
+router.put('/changePassword', (req, res, next) => {
+    User.findById(req.user._id)
+        .then((user) => {
+            user.changePassword(req.body.oldPassword, req.body.newPassword)
+                .then((user) => {
+                    res.json({
+                        success: true,
+                        token: authenticate.getToken({ _id: user._id })
+                    });
+                })
+                .catch((err) => next(err));
+        })
+})
 
 router.post('/uploadPhoto', upload.single('myImage'), (req, res, next) => {
     User.findById(req.user._id)
