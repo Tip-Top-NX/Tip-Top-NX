@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -7,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   AsyncStorage,
+  ImageBackground,
 } from "react-native";
 import styles from "./SignInStyles";
 import PropTypes from "prop-types";
@@ -70,45 +72,64 @@ const signIn = ({ navigation }) => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
-        <View style={styles.title}>
-          <Text style={styles.textStyle}>SIGN IN</Text>
-          <Text style={styles.textStyle}>TO CONTINUE</Text>
-        </View>
-        <View
-          style={[styles.inputContainer, !validEmail ? styles.error : null]}
+        <ImageBackground
+          source={require("../../../assets/b1.jpg")}
+          style={{
+            flex: 1,
+            resizeMode: "cover",
+            justifyContent: "center",
+            width: "100%",
+          }}
+          blurRadius={0}
         >
-          <TextInput
-            style={styles.inputText}
-            placeholder="EMAIL ADDRESS"
-            placeholderTextColor="#666"
-            onChangeText={(text) => setEmail(text)}
-            value={email}
-          ></TextInput>
-        </View>
-        <View
-          style={[styles.inputContainer, !validPassword ? styles.error : null]}
-        >
-          <TextInput
-            style={styles.inputText}
-            placeholder="PASSWORD"
-            placeholderTextColor="#666"
-            secureTextEntry={true}
-            onChangeText={(text) => setPassword(text)}
-            value={password}
-          ></TextInput>
-        </View>
-        <TouchableOpacity style={styles.button} onPress={() => validation()}>
-          <Text style={styles.buttonText}>BEGIN</Text>
-        </TouchableOpacity>
-        <View style={styles.signUpBox}>
-          <Text style={styles.signUpText}>NOT A MEMBER YET ?</Text>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate("Sign Up")}
+          <View style={styles.title}>
+            <Text style={styles.textStyle}>SIGN IN</Text>
+            <Text style={styles.textStyle}>TO CONTINUE</Text>
+          </View>
+          <View
+            style={[styles.inputContainer, !validEmail ? styles.error : null]}
           >
-            <Text style={styles.buttonText}>SIGN UP</Text>
+            <TextInput
+              style={styles.inputText}
+              placeholder="EMAIL ADDRESS"
+              placeholderTextColor="#666"
+              onChangeText={(text) => setEmail(text)}
+              value={email}
+            ></TextInput>
+          </View>
+          <View
+            style={[
+              styles.inputContainer,
+              !validPassword ? styles.error : null,
+            ]}
+          >
+            <TextInput
+              style={styles.inputText}
+              placeholder="PASSWORD"
+              placeholderTextColor="#666"
+              secureTextEntry={true}
+              onChangeText={(text) => setPassword(text)}
+              value={password}
+            ></TextInput>
+          </View>
+          <TouchableOpacity style={styles.button} onPress={() => validation()}>
+            <Text style={styles.buttonText}>BEGIN</Text>
           </TouchableOpacity>
-        </View>
+          <View style={styles.signUpBox}>
+            <Text style={styles.signUpText}>NOT A MEMBER YET ?</Text>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() =>
+                navigation.reset({
+                  index: 0,
+                  routes: [{ name: "Sign Up" }],
+                })
+              }
+            >
+              <Text style={styles.buttonText}>SIGN UP</Text>
+            </TouchableOpacity>
+          </View>
+        </ImageBackground>
       </View>
     </TouchableWithoutFeedback>
   );
