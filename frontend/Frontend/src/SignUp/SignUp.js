@@ -15,7 +15,6 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 import { useSelector, useDispatch } from "react-redux";
 import { signup, signinFailed } from "../../../redux/ActionCreators";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { useNavigation } from "@react-navigation/native";
 
