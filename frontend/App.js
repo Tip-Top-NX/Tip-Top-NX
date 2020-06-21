@@ -1,9 +1,10 @@
+/* eslint-disable */
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 import { ConfigureStore } from "./redux/ConfigureStore";
-import SignOut from "./Frontend/src/SignOut";
+import CheckUser from "./Frontend/src/CheckUser";
 
 const store = ConfigureStore();
 
@@ -12,7 +13,7 @@ export default function App() {
     <Provider store={store}>
       <View style={styles.container}>
         <NavigationContainer>
-          <SignOut />
+          <CheckUser />
         </NavigationContainer>
       </View>
     </Provider>

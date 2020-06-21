@@ -10,18 +10,8 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { Entypo } from "@expo/vector-icons";
 
-import { signinFailed } from "../../../redux/ActionCreators";
-import { useSelector, useDispatch } from "react-redux";
-
 const NotLoggedIn = () => {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-
-  useEffect(() => {
-    user.isValid = false;
-    dispatch(signinFailed());
-  }, []);
 
   return (
     <View style={styles.container}>
@@ -44,28 +34,25 @@ const NotLoggedIn = () => {
         <Text
           style={{
             textAlign: "center",
-            fontSize: 60,
+            fontSize: 65,
             fontWeight: "bold",
-            marginBottom: 60,
+            marginBottom: 80,
             letterSpacing: 0.5,
             marginTop: 20,
           }}
         >
-          LOGGED OUT!
+          OOPS!
         </Text>
-        <Text style={{ textAlign: "center" }}>CHOOSE TO CONTINUE</Text>
+
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate("Home")}
-          >
-            <Text style={{ fontSize: 18 }}>GUEST USER</Text>
-          </TouchableOpacity>
+          <Text style={{ textAlign: "center", marginTop: 60 }}>
+            YOU NEED TO LOGIN IN ORDER TO VIEW YOUR PROFILE
+          </Text>
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate("Sign Up | Log In")}
           >
-            <Text style={{ fontSize: 18 }}>LOGIN IN</Text>
+            <Text style={{ fontSize: 18 }}>LOG IN</Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>
@@ -89,7 +76,11 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     padding: 2,
   },
-  buttonContainer: {},
+  buttonContainer: {
+    width: 250,
+    alignSelf: "center",
+    marginBottom: 80,
+  },
 });
 
 export default NotLoggedIn;
