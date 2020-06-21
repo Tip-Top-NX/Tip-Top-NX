@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -20,6 +20,7 @@ import {
   postImage,
   putProfile,
 } from "../../../../redux/ActionCreators";
+import { myIP, port } from "../../../../axios";
 
 const EditProfile = () => {
   // redux
@@ -27,11 +28,15 @@ const EditProfile = () => {
   const dispatch = useDispatch();
   const email = user.email;
 
+  const getURL = (path) => {
+    return "http://" + myIP + ":" + port + "/" + path;
+  };
+
   // states for handling the input
   const [name, setName] = useState(user.name);
   const [phone, setPhone] = useState(user.contact.toString());
   const [address, setAddress] = useState(user.address);
-  const [picture, setPicture] = useState(user.image);
+  const [picture, setPicture] = useState(getURL(user.image));
 
   // states for style change if not valid
   const [validName, checkName] = useState(true);
@@ -45,8 +50,6 @@ const EditProfile = () => {
       aspect: [4, 3],
     });
     if (!result.cancelled) {
-      console.log("posting" + result.uri);
-      setPicture(result.uri);
       const data = new FormData();
       data.append("myImage", {
         uri: result.uri,
@@ -57,6 +60,12 @@ const EditProfile = () => {
       dispatch(postImage(data));
     }
   };
+
+  useEffect(() => {
+    if (user.image != "") {
+      setPicture(getURL(user.image));
+    }
+  }, [user.image]);
 
   const validation = () => {
     const alph = /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/;
