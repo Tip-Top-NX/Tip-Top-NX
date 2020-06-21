@@ -2,7 +2,7 @@ const express = require('express');
 const User = require('../models/user');
 const Order = require('../models/order');
 const authenticate = require('../utils/authenticate');
-const { upload, getURLSingle, getURLMultiple } = require('../utils/upload');
+const { upload } = require('../utils/upload');
 
 const router = express.Router();
 
@@ -62,7 +62,7 @@ router.put('/changePassword', (req, res, next) => {
 router.post('/uploadPhoto', upload.single('myImage'), (req, res, next) => {
     User.findById(req.user._id)
         .then((user) => {
-            user.image = getURLSingle(req);
+            user.image = req.file.path;
             console.log("url", user.image);
             return user.save();
         })
