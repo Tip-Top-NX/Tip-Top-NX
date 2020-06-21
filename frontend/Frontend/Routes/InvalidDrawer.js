@@ -17,7 +17,6 @@ const InvalidDrawer = () => {
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="My Profile" component={ProfileStack} />
       <Drawer.Screen name="Sign Up | Log In" component={SignUpStack} />
-      <Drawer.Screen name="Log Out" component={SignOut} />
     </Drawer.Navigator>
   );
 };
