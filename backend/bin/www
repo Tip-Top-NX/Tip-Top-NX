@@ -7,6 +7,8 @@
 var app = require('../app');
 var debug = require('debug')('backend:server');
 var http = require('http');
+var https = require('https');
+var fs = require('fs');
 
 const Category = require('../models/category');
 
@@ -16,6 +18,9 @@ const Category = require('../models/category');
 
 var port = normalizePort(process.env.PORT || '5000');
 app.set('port', port);
+
+
+app.set('secPort', port + 443);
 
 /**
  * Create HTTP server.
@@ -27,16 +32,17 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
+//  HTTP Server
 server.listen(port, () => {
   // Adding a root category if not existing
-  Category.findOne({name:"root"})
+  Category.findOne({ name: "root" })
     .then((cat) => {
-      if(cat==null){
-        Category.create({_id:1,name:"root"})
+      if (cat == null) {
+        Category.create({ _id: 1, name: "root" })
           .then((cat) => console.log("Root created!"))
           .catch((err) => console.log(err));
       }
-      else{
+      else {
         console.log("Catgory root already existing!");
       }
     })
@@ -44,6 +50,33 @@ server.listen(port, () => {
 });
 server.on('error', onError);
 server.on('listening', onListening);
+
+// HTTPS Server
+// var options = {
+//   key: fs.readFileSync(__dirname + '/key.pem'),
+//   cert: fs.readFileSync(__dirname + '/cert.pem')
+// }
+
+// var sercureServer = https.createServer(options, app);
+
+// sercureServer.listen(app.get('secPort'), () => {
+//   console.log("Secure server started");
+//   // Adding a root category if not existing
+//   Category.findOne({ name: "root" })
+//     .then((cat) => {
+//       if (cat == null) {
+//         Category.create({ _id: 1, name: "root" })
+//           .then((cat) => console.log("Root created!"))
+//           .catch((err) => console.log(err));
+//       }
+//       else {
+//         console.log("Catgory root already existing!");
+//       }
+//     })
+//     .catch((err) => console.log(err));
+// });
+// sercureServer.on('error', onError);
+// sercureServer.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.
