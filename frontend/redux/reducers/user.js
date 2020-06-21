@@ -17,15 +17,12 @@ const reducer = (state = initialState, action) => {
         isValid: true,
       };
     case ActionTypes.SIGNIN_FAILED:
-      // console.log("called");
-      AsyncStorage.removeItem("token")
-        .then(() => {
-          return {
-            ...initialState,
-            isValid: false,
-            token: "",
-          };
-        });
+      AsyncStorage.removeItem("token");
+      return {
+        ...initialState,
+        isValid: false,
+        token: "",
+      };
     case ActionTypes.SET_PICTURE:
       return {
         ...state,

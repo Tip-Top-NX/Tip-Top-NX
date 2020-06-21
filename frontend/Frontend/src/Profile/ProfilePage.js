@@ -1,22 +1,34 @@
 /* eslint-disable */
 import React from "react";
-import { StyleSheet, View, Dimensions, ImageBackground } from "react-native";
-import Picture from "./Picture";
-import Options from "./Options";
+import { StyleSheet, View, Dimensions, ImageBackground, Text } from "react-native";
+import Picture from "./ProfilePage/Picture";
+import Options from "./ProfilePage/Options";
+import {useSelector} from 'react-redux';
 
-const Profile = () => {
-  return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require("../../../assets/back1.jpg")}
-        style={{ flex: 1, resizeMode: "cover", justifyContent: "center" }}
-        blurRadius={0}
-      >
-        <Picture />
-        <Options />
-      </ImageBackground>
-    </View>
-  );
+const Profile = ({ navigation }) => {
+  const user = useSelector(state => state.user);
+  if(user.isValid){
+    return (
+      <View style={styles.container}>
+        <ImageBackground
+          source={require("../../../assets/back1.jpg")}
+          style={{ flex: 1, resizeMode: "cover", justifyContent: "center" }}
+          blurRadius={0}
+        >
+          <Picture />
+          <Options navigation={navigation} />
+        </ImageBackground>
+      </View>
+    );
+  }
+  else{
+    return(
+      <View style={styles.container}>
+        <Text>Hello</Text>
+      </View>
+    );
+  }
+  
 };
 
 const styles = StyleSheet.create({

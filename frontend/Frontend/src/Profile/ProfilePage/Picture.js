@@ -1,28 +1,26 @@
 /* eslint-disable */
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { StyleSheet, TouchableOpacity, Image, View, Text } from "react-native";
-import UserPermissions from "../../Utilities/UserPermissions";
+import UserPermissions from "../../../Utilities/UserPermissions";
 import * as ImagePicker from "expo-image-picker";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { postImage } from '../../../redux/ActionCreators';
+import { postImage } from "../../../../redux/ActionCreators";
 
 const Picture = () => {
-
   // redux
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
 
   const navigation = useNavigation();
   const [picture, setPicture] = useState();
 
   useEffect(() => {
-    if(user.image!=""){
+    if (user.image != "") {
       setPicture(user.image);
     }
-  }, [user.image])
+  }, [user.image]);
 
   const handlePress = async () => {
     UserPermissions.getCameraPermission();
@@ -34,15 +32,14 @@ const Picture = () => {
     if (!result.cancelled) {
       setPicture(result.uri);
       const data = new FormData();
-      data.append('myImage', {
+      data.append("myImage", {
         uri: result.uri,
-        type: 'image/jpeg',
+        type: "image/jpeg",
         name: "profile.jpg",
       });
       dispatch(postImage(data));
     }
   };
-
 
   return (
     <View style={styles.container}>

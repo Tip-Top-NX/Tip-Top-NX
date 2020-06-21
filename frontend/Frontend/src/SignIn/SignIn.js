@@ -12,8 +12,7 @@ import styles from "./SignInStyles";
 import PropTypes from "prop-types";
 
 import { useSelector, useDispatch } from "react-redux";
-import { signin, signinFailed, test } from '../../../redux/ActionCreators';
-
+import { signin, signinFailed, test } from "../../../redux/ActionCreators";
 
 const signIn = ({ navigation }) => {
   // states for handling the input
@@ -24,18 +23,19 @@ const signIn = ({ navigation }) => {
   const [validPassword, checkPassword] = useState(true);
 
   // redux
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    user.isValid = false;
     dispatch(signinFailed());
-  }, [])
-  
+  }, []);
+
   useEffect(() => {
-    if(user.isValid){
+    if (user.isValid) {
       navigation.navigate("Categories");
     }
-  }, [user.isValid])
+  }, [user.isValid]);
 
   const validation = () => {
     const emailregex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
@@ -57,11 +57,13 @@ const signIn = ({ navigation }) => {
     } else {
       checkPassword(true);
     }
-    if(validEmail && validPassword){
-      dispatch(signin({
-        email,
-        password
-      }));
+    if (validEmail && validPassword) {
+      dispatch(
+        signin({
+          email,
+          password,
+        })
+      );
     }
   };
 
