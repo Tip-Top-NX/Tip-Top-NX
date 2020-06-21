@@ -30,6 +30,7 @@ const Picture = () => {
       aspect: [4, 3],
     });
     if (!result.cancelled) {
+      console.log(result.uri);
       setPicture(result.uri);
       const data = new FormData();
       data.append("myImage", {

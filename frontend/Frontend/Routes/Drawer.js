@@ -3,6 +3,7 @@ import React from "react";
 import HomeStack from "../Routes/HomeStack";
 import SignUpStack from "./SignUpStack";
 import ProfileStack from "./ProfileStack";
+import SignOut from "../src/SignOut/SignOut";
 
 const Drawer = createDrawerNavigator();
 
@@ -24,6 +25,7 @@ const DrawerNav = () => {
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="My Profile" component={ProfileStack} />
       <Drawer.Screen name="Sign Up | Log In" component={SignUpStack} />
+      <Drawer.Screen name="Log Out" component={SignOut} />
     </Drawer.Navigator>
   );
 };

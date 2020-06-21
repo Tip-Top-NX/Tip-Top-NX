@@ -15,7 +15,11 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import UserPermissions from "../../../Utilities/UserPermissions";
 import * as ImagePicker from "expo-image-picker";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { setProfile, postImage, putProfile } from "../../../../redux/ActionCreators";
+import {
+  setProfile,
+  postImage,
+  putProfile,
+} from "../../../../redux/ActionCreators";
 
 const EditProfile = () => {
   // redux
@@ -49,6 +53,7 @@ const EditProfile = () => {
         type: "image/jpeg",
         name: "profile.jpg",
       });
+      console.log(user);
       dispatch(postImage(data));
     }
   };
@@ -75,7 +80,7 @@ const EditProfile = () => {
         putProfile({
           name,
           contact: phone,
-          address
+          address,
         })
       );
     }
