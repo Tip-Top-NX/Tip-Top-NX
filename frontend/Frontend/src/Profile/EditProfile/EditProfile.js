@@ -96,12 +96,12 @@ const EditProfile = () => {
   };
 
   return (
-    <KeyboardAwareScrollView>
-      <ImageBackground
-        source={require("../../../../assets/b.jpg")}
-        style={{ flex: 1, resizeMode: "cover", justifyContent: "center" }}
-        blurRadius={0}
-      >
+    <ImageBackground
+      source={require("../../../../assets/b.jpg")}
+      style={{ flex: 1, resizeMode: "cover", justifyContent: "center" }}
+      blurRadius={0}
+    >
+      <KeyboardAwareScrollView>
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.container}>
             <TouchableOpacity
@@ -165,8 +165,8 @@ const EditProfile = () => {
             </TouchableOpacity>
           </View>
         </TouchableWithoutFeedback>
-      </ImageBackground>
-    </KeyboardAwareScrollView>
+      </KeyboardAwareScrollView>
+    </ImageBackground>
   );
 };
 

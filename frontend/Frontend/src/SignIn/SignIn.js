@@ -7,16 +7,13 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
-  AsyncStorage,
   ImageBackground,
 } from "react-native";
 import styles from "./SignInStyles";
 import PropTypes from "prop-types";
-import axios from 'axios';
 
 import { useSelector, useDispatch } from "react-redux";
 import { signin, signinFailed, test } from "../../../redux/ActionCreators";
-import { myAxios } from '../../../axios';
 // const fs = require('fs');
 // aCrt = fs.readFileSync('./cert.pem');
 

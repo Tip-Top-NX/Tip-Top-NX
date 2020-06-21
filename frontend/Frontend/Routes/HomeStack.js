@@ -19,7 +19,9 @@ const HomeStack = () => {
       <Stack.Screen
         name="Categories"
         component={Home}
-        options={{ headerShown: true }}
+        options={{
+          headerShown: true,
+        }}
       />
       <Stack.Screen name="Catelogue" component={Catelogue} />
       <Stack.Screen name="Product" component={Product} />

@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import styles from "./SignUpStyles";
 import PropTypes from "prop-types";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { useSelector, useDispatch } from "react-redux";
 import { signup, signinFailed } from "../../../redux/ActionCreators";

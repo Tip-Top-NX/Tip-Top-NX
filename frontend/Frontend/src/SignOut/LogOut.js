@@ -10,8 +10,17 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { Entypo } from "@expo/vector-icons";
 
-const NotLoggedIn = () => {
+import { signinFailed } from "../../../redux/ActionCreators";
+import { useSelector, useDispatch } from "react-redux";
+
+const LogOut = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+
+  useEffect(() => {
+    dispatch(signinFailed());
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -34,20 +43,16 @@ const NotLoggedIn = () => {
         <Text
           style={{
             textAlign: "center",
-            fontSize: 65,
+            fontSize: 60,
             fontWeight: "bold",
-            marginBottom: 80,
+            marginBottom: 60,
             letterSpacing: 0.5,
             marginTop: 20,
           }}
         >
-          OOPS!
+          LOGGED OUT!
         </Text>
-
         <View style={styles.buttonContainer}>
-          <Text style={{ textAlign: "center", marginTop: 60 }}>
-            YOU NEED TO LOGIN IN ORDER TO VIEW YOUR PROFILE
-          </Text>
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate("Sign Up | Log In")}
@@ -77,10 +82,9 @@ const styles = StyleSheet.create({
     padding: 2,
   },
   buttonContainer: {
-    width: 250,
-    alignSelf: "center",
-    marginBottom: 80,
+    marginTop: 70,
+    marginBottom: 50,
   },
 });
 
-export default NotLoggedIn;
+export default LogOut;

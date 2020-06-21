@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     justifyContent: "flex-end",
     borderColor: "#000",
-    marginLeft: 30,
+    alignSelf: "center",
   },
   textStyle: {
     fontWeight: "bold",
@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: "#000",
     justifyContent: "center",
-    padding: 5,
     alignSelf: "center",
+    padding: 5,
   },
   buttonText: {
     color: "#fff",
