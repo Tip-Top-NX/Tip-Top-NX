@@ -1,7 +1,6 @@
 import { AsyncStorage } from "react-native";
 import * as ActionTypes from "../ActionTypes";
 
-
 const initialState = {
   isValid: false,
   token: AsyncStorage.getItem("token"),

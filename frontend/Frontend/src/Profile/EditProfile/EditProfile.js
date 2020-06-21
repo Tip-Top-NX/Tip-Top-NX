@@ -15,8 +15,12 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import UserPermissions from "../../../Utilities/UserPermissions";
 import * as ImagePicker from "expo-image-picker";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { setProfile, postImage, putProfile } from "../../../../redux/ActionCreators";
-import { myIP, port } from '../../../../axios';
+import {
+  setProfile,
+  postImage,
+  putProfile,
+} from "../../../../redux/ActionCreators";
+import { myIP, port } from "../../../../axios";
 
 const EditProfile = () => {
   // redux
@@ -25,8 +29,8 @@ const EditProfile = () => {
   const email = user.email;
 
   const getURL = (path) => {
-    return "http://"+myIP+":"+port+"/"+path;
-  }
+    return "http://" + myIP + ":" + port + "/" + path;
+  };
 
   // states for handling the input
   const [name, setName] = useState(user.name);
@@ -38,7 +42,6 @@ const EditProfile = () => {
   const [validName, checkName] = useState(true);
   const [validPhone, checkPhone] = useState(true);
 
-  
   const handlePress = async () => {
     UserPermissions.getCameraPermission();
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -85,19 +88,19 @@ const EditProfile = () => {
         putProfile({
           name,
           contact: phone,
-          address
+          address,
         })
       );
     }
   };
 
   return (
-    <KeyboardAwareScrollView>
-      <ImageBackground
-        source={require("../../../../assets/b.jpg")}
-        style={{ flex: 1, resizeMode: "cover", justifyContent: "center" }}
-        blurRadius={0}
-      >
+    <ImageBackground
+      source={require("../../../../assets/b.jpg")}
+      style={{ flex: 1, resizeMode: "cover", justifyContent: "center" }}
+      blurRadius={0}
+    >
+      <KeyboardAwareScrollView>
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.container}>
             <TouchableOpacity
@@ -161,8 +164,8 @@ const EditProfile = () => {
             </TouchableOpacity>
           </View>
         </TouchableWithoutFeedback>
-      </ImageBackground>
-    </KeyboardAwareScrollView>
+      </KeyboardAwareScrollView>
+    </ImageBackground>
   );
 };
 

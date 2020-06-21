@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     justifyContent: "flex-end",
     borderColor: "#000",
+    alignSelf: "center",
   },
   textStyle: {
     fontWeight: "bold",
@@ -31,6 +32,7 @@ const styles = StyleSheet.create({
     borderColor: "#000",
     paddingLeft: 15,
     justifyContent: "center",
+    alignSelf: "center",
   },
   inputText: {
     height: 50,
@@ -44,6 +46,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: "#000",
     justifyContent: "center",
+    alignSelf: "center",
     padding: 5,
   },
   buttonText: {
@@ -60,6 +63,7 @@ const styles = StyleSheet.create({
     height: 90,
     width: 300,
     paddingTop: 10,
+    alignSelf: "center",
   },
   signInText: {
     color: "#000",
