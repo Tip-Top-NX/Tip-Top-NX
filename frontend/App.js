@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import DrawerNav from "./Frontend/Routes/Drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 import { ConfigureStore } from "./redux/ConfigureStore";
+import SignOut from "./Frontend/src/SignOut";
 
 const store = ConfigureStore();
 
@@ -12,7 +12,7 @@ export default function App() {
     <Provider store={store}>
       <View style={styles.container}>
         <NavigationContainer>
-          <DrawerNav />
+          <SignOut />
         </NavigationContainer>
       </View>
     </Provider>

@@ -11,7 +11,7 @@ const Profile = ({ navigation }) => {
     return (
       <View style={styles.container}>
         <ImageBackground
-          source={require("../../../assets/back1.jpg")}
+          source={require("../../../assets/back.jpg")}
           style={{ flex: 1, resizeMode: "cover", justifyContent: "center" }}
           blurRadius={0}
         >

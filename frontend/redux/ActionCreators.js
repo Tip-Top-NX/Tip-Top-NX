@@ -2,6 +2,7 @@
 import * as ActionTypes from "./ActionTypes";
 import { myAxios, getConfig } from "../axios";
 import axios from "axios";
+import { isValidElement } from "react";
 
 export const postCart = (prodId) => {
   return (dispatch) => {
