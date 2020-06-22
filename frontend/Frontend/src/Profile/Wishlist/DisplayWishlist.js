@@ -1,32 +1,28 @@
 /* eslint-disable */
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native";
+import ProductCard from "../../ProductCard";
 
 const DisplayWishlist = (props) => {
   return (
     <View style={styles.container}>
       <FlatList
         data={props.wishlist}
-        key={props.wishlist.id}
+        key={props.wishlist._id}
         numColumns={2}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => alert("Item Page Opens")}>
-            <View style={styles.cardStyle}>
-              <Image source={item.image} style={styles.imageView}></Image>
-              <View style={styles.details}>
-                <Text style={styles.textStyle}>Name : {item.name}</Text>
-                <Text style={styles.textStyle}>Price : {item.price}</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
+          <ProductCard
+            images={item.images}
+            name={item.name}
+            price={item.price}
+            _id={item._id}
+            navigation={props.navigation}
+            cardStyle={styles.cardStyle}
+            imageView={styles.imageView}
+            details={styles.details}
+            textStyle={styles.textStyle}
+          />
         )}
       />
     </View>

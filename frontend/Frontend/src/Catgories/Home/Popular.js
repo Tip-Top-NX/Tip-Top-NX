@@ -2,43 +2,44 @@
 import React from "react";
 import { View, StyleSheet, Text, Image, Dimensions } from "react-native";
 import { TouchableOpacity, FlatList } from "react-native-gesture-handler";
+import ProductCard from "../../ProductCard";
 
 const width = Dimensions.get("window").width;
 
 const popularItems = [
   {
-    image: require("../../../../assets/man.png"),
-    id: "1",
+    images: require("../../../../assets/man.png"),
+    _id: "1",
     name: "Name 1",
     price: "₹ 100",
   },
   {
-    image: require("../../../../assets/kid.png"),
-    id: "2",
+    images: require("../../../../assets/kid.png"),
+    _id: "2",
     name: "Name 2",
     price: "₹ 200",
   },
   {
-    image: require("../../../../assets/women.png"),
-    id: "3",
+    images: require("../../../../assets/women.png"),
+    _id: "3",
     name: "Name 3",
     price: "₹ 300",
   },
   {
-    image: require("../../../../assets/kid.png"),
-    id: "4",
+    images: require("../../../../assets/kid.png"),
+    _id: "4",
     name: "Name 4",
     price: "₹ 400",
   },
   {
-    image: require("../../../../assets/man.png"),
-    id: "5",
+    images: require("../../../../assets/man.png"),
+    _id: "5",
     name: "Name 5",
     price: "₹ 500",
   },
   {
-    image: require("../../../../assets/kid.png"),
-    id: "6",
+    images: require("../../../../assets/kid.png"),
+    _id: "6",
     name: "Name 6",
     price: "₹ 600",
   },
@@ -73,21 +74,21 @@ const popular = (props) => {
       </View>
       <FlatList
         data={popularItems}
-        key={popularItems.id}
+        key={popularItems._id}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate("Product")}
-          >
-            <View style={styles.cardStyle}>
-              <Image source={item.image} style={styles.imageView}></Image>
-              <View style={styles.details}>
-                <Text style={styles.textStyle}>Name : {item.name}</Text>
-                <Text style={styles.textStyle}>Price : {item.price}</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
+          <ProductCard
+            images={item.images}
+            name={item.name}
+            price={item.price}
+            _id={item._id}
+            navigation={props.navigation}
+            cardStyle={styles.cardStyle}
+            imageView={styles.imageView}
+            details={styles.details}
+            textStyle={styles.textStyle}
+          />
         )}
       />
     </View>
@@ -100,6 +101,16 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     justifyContent: "center",
     // flex: 1,
+  },
+  titleStyle: {
+    width: width,
+    height: 50,
+    // borderWidth: 1,
+    marginBottom: 5,
+    justifyContent: "space-between",
+    paddingLeft: 10,
+    flexDirection: "row",
+    alignItems: "center",
   },
   cardStyle: {
     width: 180,
@@ -127,16 +138,6 @@ const styles = StyleSheet.create({
   textStyle: {
     fontSize: 15,
     fontWeight: "500",
-  },
-  titleStyle: {
-    width: width,
-    height: 50,
-    // borderWidth: 1,
-    marginBottom: 5,
-    justifyContent: "space-between",
-    paddingLeft: 10,
-    flexDirection: "row",
-    alignItems: "center",
   },
 });
 
