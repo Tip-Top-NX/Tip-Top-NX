@@ -16,22 +16,33 @@ var productsRouter = require("./routes/products");
 var profileRouter = require("./routes/profile");
 
 var app = express();
-
+// app.all('*',(req,res,next) => {
+//   if(req.secure){
+//     return next();
+//   }else{
+//     console.log('rerouted http to https');
+//     res.redirect(307,'https://' + req.hostname + ':' + app.get('secPort') + req.url);
+//   }
+// })
 // MongoDb connection
 
 // mongoose.connect('mongodb://localhost/ttnx',{useNewUrlParser:true})
 // .then((db) => console.log("Mongo connection successfull!"))
 // .catch((err) => console.log(err));
-// mongoose.connect('mongodb+srv://vidhi:pass@cluster0.70qps.mongodb.net/ttnx?retryWrites=true&w=majority',{useNewUrlParser:true})
-// .then((db) => console.log("Mongo connection successfull!"))
-// .catch((err) => console.log(err));
 mongoose
   .connect(
-    "mongodb+srv://mihirdb:mihirdb@cluster0-auvdn.mongodb.net/ttnx?retryWrites=true&w=majority",
-    { useNewUrlParser: true, useUnifiedTopology: true }
+    "mongodb+srv://vidhi:pass@cluster0.70qps.mongodb.net/ttnx?retryWrites=true&w=majority",
+    { useNewUrlParser: true }
   )
   .then((db) => console.log("Mongo connection successfull!"))
   .catch((err) => console.log(err));
+// mongoose
+//   .connect(
+//     "mongodb+srv://mihirdb:mihirdb@cluster0-auvdn.mongodb.net/ttnx?retryWrites=true&w=majority",
+//     { useNewUrlParser: true, useUnifiedTopology: true }
+//   )
+//   .then((db) => console.log("Mongo connection successfull!"))
+//   .catch((err) => console.log(err));
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

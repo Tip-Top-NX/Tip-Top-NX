@@ -84,6 +84,24 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginLeft: 10,
   },
+  ageContainer: {
+    width: 70,
+    marginVertical: 10,
+    marginLeft: 0,
+    height: 80,
+    // borderWidth: 1,
+    borderColor: "#000",
+    justifyContent: "center",
+  },
+  genderContainer: {
+    width: 210,
+    marginVertical: 10,
+    marginLeft: 20,
+    height: 80,
+    // borderWidth: 1,
+    borderColor: "#000",
+    justifyContent: "center",
+  },
 });
 
 export default styles;
