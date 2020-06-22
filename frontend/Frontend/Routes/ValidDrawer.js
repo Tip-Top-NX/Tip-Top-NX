@@ -3,6 +3,7 @@ import React from "react";
 import HomeStack from "./HomeStack";
 import ProfileStack from "./ProfileStack";
 import LogOut from "../src/SignOut/LogOut";
+import CustomDrawer from './CustomDrawer';
 
 const Drawer = createDrawerNavigator();
 
@@ -12,10 +13,10 @@ const ValidDrawer = () => {
       initialRouteName="HomeStack"
       hideStatusBar={true}
       statusBarAnimation={"slide"}
+      drawerContent={(props) => <CustomDrawer {...props} />}
     >
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="My Profile" component={ProfileStack} />
-      <Drawer.Screen name="Log Out" component={LogOut} />
     </Drawer.Navigator>
   );
 };

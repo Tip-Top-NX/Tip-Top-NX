@@ -6,12 +6,11 @@ import DisplayWishlist from "./DisplayWishlist";
 
 const Wishlist = ({ navigation }) => {
   const user = useSelector((state) => state.user);
-  const wishlist = [...user.wishlist];
 
-  return wishlist.length === 0 ? (
+  return user.wishlist.length === 0 ? (
     <Empty navigation={navigation} />
   ) : (
-    <DisplayWishlist wishlist={wishlist} />
+    <DisplayWishlist wishlist={user.wishlist} />
   );
 };
 

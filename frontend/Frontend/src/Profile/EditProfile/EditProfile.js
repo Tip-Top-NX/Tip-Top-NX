@@ -20,7 +20,7 @@ import {
   postImage,
   putProfile,
 } from "../../../../redux/ActionCreators";
-import { myIP, port } from "../../../../axios";
+import { getURL } from "../../../../axios";
 import SwitchSelector from "react-native-switch-selector";
 
 const EditProfile = ({ navigation }) => {
@@ -28,10 +28,6 @@ const EditProfile = ({ navigation }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const email = user.email;
-
-  const getURL = (path) => {
-    return "http://" + myIP + ":" + port + "/" + path;
-  };
 
   // states for handling the input
   const [name, setName] = useState(user.name);
