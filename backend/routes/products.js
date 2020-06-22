@@ -2,6 +2,7 @@ const express = require('express');
 const Product = require('../models/product');
 const User = require('../models/user');
 const authenticate = require('../utils/authenticate');
+const {upload} = require('../utils/upload');
 
 const router = express.Router();
 
@@ -22,6 +23,18 @@ router.get('/:prodId', (req, res, next) => {
         .then((product) => {
             res.send(product);
         })
+        .catch((err) => next(err));
+})
+
+router.put('/:prodId', upload.array('myImages'), (req,res,next) => {
+    Product.findById(req.params.prodId)
+        .then((prod) => {
+            req.files.forEach(file => {
+                prod.images.push(file.path);
+            });
+            return prod.save();
+        })
+        .then((prod) => res.send(prod))
         .catch((err) => next(err));
 })
 
