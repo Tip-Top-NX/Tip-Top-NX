@@ -13,8 +13,8 @@ class BackgroundCarousel extends React.Component {
     super(props);
 
     this.state = {
-      selectedIndex: 0,
-    };
+      selectedIndex: 0
+    }
     this.scrollRef = React.createRef();
   }
 

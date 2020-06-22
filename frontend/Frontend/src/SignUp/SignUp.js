@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import {
   View,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -95,7 +96,7 @@ const signUp = () => {
   };
 
   return (
-    <KeyboardAwareScrollView scrollEnabled={false}>
+    <KeyboardAwareScrollView scrollEnabled={true}>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.container}>
           <ImageBackground
