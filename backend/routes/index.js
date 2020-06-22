@@ -1,21 +1,25 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-
-const { upload, getURLSingle, getURLMultiple } = require('../utils/upload');
-
+var fs = require("fs");
+var path = require("path");
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get("/", function (req, res, next) {
+  res.send({ name: "vidhi" });
 });
-
-// Example for file upload(single)
-router.post('/uploadSingle', upload.single('myImage') ,(req, res, next) => {
-  res.send(getURLSingle(req));
-})
-
-// Example for file upload(multiple)
-router.post('/uploadMultiple', upload.array('myImages',3) ,(req, res, next) => {
-  res.send(getURLMultiple(req));
-})
-
+router.get("/:path", (req, res, next) => {
+  let filepath = req.params.path;
+  console.log(filepath + "\n");
+  filepath = filepath.replace(/%5C/g, "/");
+  //filepath = filepath.replace(/\\/g,'/');
+  if (fs.existsSync(filepath)) {
+    console.log(filepath);
+    console.log("file found" + filepath);
+    res.sendFile(path.join(path.join(__dirname, "../"), filepath));
+  } else {
+    console.log(path);
+    console.log("file not fount " + path);
+    res.statusCode = 404;
+    res.send({ success: false });
+  }
+});
 module.exports = router;

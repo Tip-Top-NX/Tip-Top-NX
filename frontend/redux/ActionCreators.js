@@ -2,6 +2,7 @@
 import * as ActionTypes from "./ActionTypes";
 import { myAxios, getConfig } from "../axios";
 import axios from "axios";
+import { isValidElement } from "react";
 
 export const postCart = (prodId) => {
   return (dispatch) => {
@@ -65,7 +66,7 @@ export const putProfile = (details) => {
   return (dispatch) => {
     getConfig().then((config) => {
       myAxios
-        .put("/profile", details)
+        .put("/profile/", details, config)
         .then((user) => {
           dispatch(setProfile(details));
         })

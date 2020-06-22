@@ -1,22 +1,39 @@
 /* eslint-disable */
 import React from "react";
-import { StyleSheet, View, Dimensions, ImageBackground } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  ImageBackground,
+  Text,
+} from "react-native";
 import Picture from "./ProfilePage/Picture";
 import Options from "./ProfilePage/Options";
+import { useSelector } from "react-redux";
+import NotLoggedIn from "../SignOut/NotLoggedIn";
 
 const Profile = ({ navigation }) => {
-  return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require("../../../assets/back1.jpg")}
-        style={{ flex: 1, resizeMode: "cover", justifyContent: "center" }}
-        blurRadius={0}
-      >
-        <Picture />
-        <Options navigation={navigation} />
-      </ImageBackground>
-    </View>
-  );
+  const user = useSelector((state) => state.user);
+  if (user.isValid) {
+    return (
+      <View style={styles.container}>
+        <ImageBackground
+          source={require("../../../assets/back.jpg")}
+          style={{ flex: 1, resizeMode: "cover", justifyContent: "center" }}
+          blurRadius={0}
+        >
+          <Picture />
+          <Options navigation={navigation} />
+        </ImageBackground>
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+        <NotLoggedIn />
+      </View>
+    );
+  }
 };
 
 const styles = StyleSheet.create({

@@ -9,46 +9,32 @@ const Options = (props) => {
   const navigation = useNavigation();
   const optionList = [
     {
-      name: "Address",
+      name: "Edit Profile",
       id: "1",
       navigator: () => {
-        navigation.navigate("Home");
+        navigation.navigate("EditProfile");
       },
     },
     {
       name: "Wishlist",
       id: "2",
       navigator: () => {
-        navigation.navigate("Catelogue");
+        navigation.navigate("Wishlist");
       },
     },
     {
       name: "Points",
       id: "3",
       navigator: () => {
-        navigation.navigate("Home");
+        navigation.navigate("Points");
       },
     },
     {
       name: "Orders",
       id: "4",
-      navigator: () => {
-        navigation.navigate("Catelogue");
-      },
-    },
-    {
-      name: "Edit Profile",
-      id: "5",
-      navigator: () => {
-        props.navigation.navigate("EditProfile");
-      },
-    },
-    {
-      name: "Complaints",
-      id: "6",
-      navigator: () => {
-        navigation.navigate("Catelogue");
-      },
+      // navigator: () => {
+      //   navigation.navigate("Catelogue");
+      // },
     },
   ];
   return (

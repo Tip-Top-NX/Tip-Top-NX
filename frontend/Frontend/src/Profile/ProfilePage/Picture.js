@@ -7,6 +7,7 @@ import * as ImagePicker from "expo-image-picker";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { postImage } from "../../../../redux/ActionCreators";
+import { myIP, port } from "../../../../axios";
 
 const Picture = () => {
   // redux
@@ -16,9 +17,14 @@ const Picture = () => {
   const navigation = useNavigation();
   const [picture, setPicture] = useState();
 
+  const getURL = (path) => {
+    return "http://" + myIP + ":" + port + "/" + path;
+  };
+
   useEffect(() => {
     if (user.image != "") {
-      setPicture(user.image);
+      console.log(getURL(user.image));
+      setPicture(getURL(user.image));
     }
   }, [user.image]);
 
@@ -30,6 +36,7 @@ const Picture = () => {
       aspect: [4, 3],
     });
     if (!result.cancelled) {
+      console.log(result.uri);
       setPicture(result.uri);
       const data = new FormData();
       data.append("myImage", {
@@ -98,7 +105,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
     fontWeight: "bold",
-    color: "#FFE5E5",
+    color: "#fff",
   },
   textContainer: {
     height: 50,
