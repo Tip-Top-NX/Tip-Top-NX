@@ -21,7 +21,7 @@ import {
   putProfile,
 } from "../../../../redux/ActionCreators";
 import { myIP, port } from "../../../../axios";
-import { NavigationContainer } from "@react-navigation/native";
+import SwitchSelector from "react-native-switch-selector";
 
 const EditProfile = ({ navigation }) => {
   // redux
@@ -38,10 +38,13 @@ const EditProfile = ({ navigation }) => {
   const [phone, setPhone] = useState(user.contact.toString());
   const [address, setAddress] = useState(user.address);
   const [picture, setPicture] = useState(getURL(user.image));
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
 
   // states for style change if not valid
   const [validName, checkName] = useState(true);
   const [validPhone, checkPhone] = useState(true);
+  const [validAge, checkAge] = useState(true);
 
   const handlePress = async () => {
     UserPermissions.getCameraPermission();
@@ -85,6 +88,13 @@ const EditProfile = ({ navigation }) => {
     } else {
       checkPhone(true);
     }
+    // age check
+    if (age === "" || age.length >= 3) {
+      checkAge(false);
+    } else {
+      checkAge(true);
+    }
+
     if (validName && validPhone) {
       dispatch(
         putProfile({
@@ -128,6 +138,40 @@ const EditProfile = ({ navigation }) => {
                 editable={false}
               ></TextInput>
             </View>
+            <View style={{ flexDirection: "row" }}>
+              <View style={styles.ageContainer}>
+                <Text style={styles.heading}>AGE</Text>
+                <TextInput
+                  style={[styles.inputText, !validAge ? styles.error : null]}
+                  keyboardType={"numeric"}
+                  onChangeText={(text) => setAge(text)}
+                  maxLength={3}
+                  value={age}
+                ></TextInput>
+              </View>
+
+              <View style={styles.genderContainer}>
+                <Text style={styles.heading}>GENDER</Text>
+                <SwitchSelector
+                  initial={0}
+                  onPress={(value) => setGender(value)}
+                  borderRadius={0}
+                  height={50}
+                  fontSize={16}
+                  textColor={"#777"} //'#7a44cf'
+                  selectedColor={"white"}
+                  buttonColor={"black"}
+                  borderColor={"black"}
+                  backgroundColor={"rgba(112,128,144, 0.0)"}
+                  hasPadding
+                  options={[
+                    { label: "Male", value: "Male" },
+                    { label: "Female", value: "Female" },
+                  ]}
+                />
+              </View>
+            </View>
+
             <View style={styles.addressContainer}>
               <Text style={styles.heading}>DELIVERY ADDRESS</Text>
               <TextInput

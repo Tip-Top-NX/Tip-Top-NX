@@ -2,43 +2,43 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { useLinkProps } from "@react-navigation/native";
+import ProductCard from "../ProductCard";
 
 const Catelogue = ({ navigation }) => {
   const products = [
     {
-      image: require("../../../assets/man.png"),
-      id: "1",
+      images: require("../../../assets/man.png"),
+      _id: "1",
       name: "Name 1",
       price: "₹ 100",
     },
     {
-      image: require("../../../assets/kid.png"),
-      id: "2",
+      images: require("../../../assets/kid.png"),
+      _id: "2",
       name: "Name 2",
       price: "₹ 200",
     },
     {
-      image: require("../../../assets/women.png"),
-      id: "3",
+      images: require("../../../assets/women.png"),
+      _id: "3",
       name: "Name 3",
       price: "₹ 300",
     },
     {
-      image: require("../../../assets/kid.png"),
-      id: "4",
+      images: require("../../../assets/kid.png"),
+      _id: "4",
       name: "Name 4",
       price: "₹ 400",
     },
     {
-      image: require("../../../assets/man.png"),
-      id: "5",
+      images: require("../../../assets/man.png"),
+      _id: "5",
       name: "Name 5",
       price: "₹ 500",
     },
     {
-      image: require("../../../assets/kid.png"),
-      id: "6",
+      images: require("../../../assets/kid.png"),
+      _id: "6",
       name: "Name 6",
       price: "₹ 600",
     },
@@ -48,19 +48,21 @@ const Catelogue = ({ navigation }) => {
     <View style={styles.container}>
       <FlatList
         data={products}
-        key={products.id}
+        key={products._id}
         numColumns={2}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => navigation.navigate("Product")}>
-            <View style={styles.cardStyle}>
-              <Image source={item.image} style={styles.imageView}></Image>
-              <View style={styles.details}>
-                <Text style={styles.textStyle}>Name : {item.name}</Text>
-                <Text style={styles.textStyle}>Price : {item.price}</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
+          <ProductCard
+            images={item.images}
+            name={item.name}
+            price={item.price}
+            navigation={navigation}
+            _id={item._id}
+            cardStyle={styles.cardStyle}
+            imageView={styles.imageView}
+            details={styles.details}
+            textStyle={styles.textStyle}
+          />
         )}
       />
     </View>
