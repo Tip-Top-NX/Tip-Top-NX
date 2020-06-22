@@ -14,11 +14,11 @@ router.get('/:path',(req,res,next) => {
   filepath = filepath.replace(/%5C/g,'/');
   //filepath = filepath.replace(/\\/g,'/');
   if(fs.existsSync(filepath)){
-    console.log(filepath);
+    console.log("file found"+filepath);
     res.sendFile(path.join(path.join(__dirname,'../'),filepath));
   }
   else{
-    console.log(path);
+    console.log("file not fount " + path);
     res.statusCode = 404
     res.send({success:false})
   }
