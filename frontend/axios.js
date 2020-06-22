@@ -1,7 +1,6 @@
 import axios from "axios";
 import { AsyncStorage } from "react-native";
 
-// export const myIP = "172.20.10.2";
 export const myIP = "172.20.10.2";
 export const port = "5000";
 

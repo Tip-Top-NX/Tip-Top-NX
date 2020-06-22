@@ -21,8 +21,9 @@ import {
   putProfile,
 } from "../../../../redux/ActionCreators";
 import { myIP, port } from "../../../../axios";
+import { NavigationContainer } from "@react-navigation/native";
 
-const EditProfile = () => {
+const EditProfile = ({ navigation }) => {
   // redux
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -92,6 +93,7 @@ const EditProfile = () => {
           address,
         })
       );
+      navigation.goBack();
     }
   };
 

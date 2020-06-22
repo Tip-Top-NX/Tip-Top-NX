@@ -3,7 +3,6 @@ import React from "react";
 import HomeStack from "./HomeStack";
 import SignUpStack from "./SignUpStack";
 import ProfileStack from "./ProfileStack";
-import SignOut from "../src/SignOut/SignOut";
 
 const Drawer = createDrawerNavigator();
 

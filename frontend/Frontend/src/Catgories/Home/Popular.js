@@ -49,7 +49,7 @@ const popular = (props) => {
     <View style={styles.container}>
       <View style={styles.titleStyle}>
         <Text style={{ fontWeight: "bold", fontSize: 16 }}>
-          MOST LOVED ITEMS
+          POPULAR PRODUCTS
         </Text>
         <TouchableOpacity
           style={{
