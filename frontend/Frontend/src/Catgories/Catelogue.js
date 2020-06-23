@@ -50,6 +50,7 @@ const Catelogue = ({ navigation }) => {
         data={products}
         key={products._id}
         numColumns={2}
+        keyExtractor={item => item._id}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <ProductCard
