@@ -4,7 +4,7 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { postWishlist, delWishlist } from "../../redux/ActionCreators";
-import { getURL } from '../../axios';
+import { getURL } from "../../axios";
 
 const ProductCard = (props) => {
   const user = useSelector((state) => state.user);
@@ -45,7 +45,10 @@ const ProductCard = (props) => {
   return (
     <View>
       <View style={props.cardStyle}>
-        <Image source={{uri:getURL(props.images[0])}} style={props.imageView}></Image>
+        <Image
+          source={{ uri: getURL(props.images[0]) }}
+          style={props.imageView}
+        ></Image>
         {user.isValid ? <Icon /> : null}
         <TouchableOpacity onPress={() => props.navigation.navigate("Product")}>
           <View style={props.details}>
