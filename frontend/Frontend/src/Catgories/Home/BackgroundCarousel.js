@@ -23,30 +23,27 @@ class BackgroundCarousel extends React.Component {
   componentDidMount = () => {
     this._isMounted=true;
 
-    if(this._isMounted){
       setInterval(() => {
-        this.setState(
-          (prev) => ({
-            selectedIndex:
-              prev.selectedIndex === this.props.images.length - 1
-                ? 0
-                : prev.selectedIndex + 1,
-          }),
-          () => {
-            this.scrollRef.current.scrollTo({
-              animated: true,
-              x: DEVICE_WIDTH * this.state.selectedIndex,
-              y: 0,
-            });
-          }
-        );
+        if(this._isMounted){
+          this.setState(
+            (prev) => ({
+              selectedIndex:
+                prev.selectedIndex === this.props.images.length - 1
+                  ? 0
+                  : prev.selectedIndex + 1,
+            }),
+            () => {
+              this.scrollRef.current.scrollTo({
+                animated: true,
+                x: DEVICE_WIDTH * this.state.selectedIndex,
+                y: 0,
+              });
+            }
+          );
+        }
       }, AUTO_SWIPE_INTERVAL);
     }
   };
-
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
 
   nextImage = () =>
     this.setState((prev) => ({
