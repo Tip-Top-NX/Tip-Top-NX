@@ -42,9 +42,12 @@ class BackgroundCarousel extends React.Component {
           );
         }
       }, AUTO_SWIPE_INTERVAL);
-    }
   };
 
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+  
   nextImage = () =>
     this.setState((prev) => ({
       selectedIndex:
