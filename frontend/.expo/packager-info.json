@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "devToolsPort": 19002,
   "expoServerPort": null,
   "packagerPort": null,
@@ -8,3 +9,14 @@
   "ngrokPid": null,
   "webpackServerPort": null
 }
+=======
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 6832,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
+  "webpackServerPort": null,
+  "devToolsPort": 19002
+}
+>>>>>>> 6061619d5fa76f9c152c855bb21902e30605b55e

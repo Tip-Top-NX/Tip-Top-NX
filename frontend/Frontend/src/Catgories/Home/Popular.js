@@ -77,6 +77,7 @@ const popular = (props) => {
         key={popularItems._id}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
+        keyExtractor={(item) => item._id.toString()}
         renderItem={({ item }) => (
           <ProductCard
             images={item.images}
