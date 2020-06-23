@@ -8,8 +8,6 @@ const AUTO_SWIPE_INTERVAL = 3000;
 const height = DEVICE_WIDTH * 0.6; //60%
 
 class BackgroundCarousel extends React.Component {
-   _isMounted=false;
-
   scrollRef = React.createRef();
   constructor(props) {
     super(props);
@@ -21,34 +19,24 @@ class BackgroundCarousel extends React.Component {
   }
 
   componentDidMount = () => {
-
-      this. _isMounted=true;
-      setInterval(() => {
-
-        if(this._isMounted)
-        {
-          this.setState(
-            (prev) => ({
-              selectedIndex:
-                prev.selectedIndex === this.props.images.length - 1
-                  ? 0
-                  : prev.selectedIndex + 1,
-            }),
-            () => {
-              this.scrollRef.current.scrollTo({
-                animated: true,
-                x: DEVICE_WIDTH * this.state.selectedIndex,
-                y: 0,
-              });
-            }
-          );
+    setInterval(() => {
+      this.setState(
+        (prev) => ({
+          selectedIndex:
+            prev.selectedIndex === this.props.images.length - 1
+              ? 0
+              : prev.selectedIndex + 1,
+        }),
+        () => {
+          this.scrollRef.current.scrollTo({
+            animated: true,
+            x: DEVICE_WIDTH * this.state.selectedIndex,
+            y: 0,
+          });
         }
-      }, AUTO_SWIPE_INTERVAL);
+      );
+    }, AUTO_SWIPE_INTERVAL);
   };
-
-  componentWillUnmount(){
-   this. _isMounted=false;
-  }
 
   nextImage = () =>
     this.setState((prev) => ({

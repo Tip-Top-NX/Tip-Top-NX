@@ -7,7 +7,7 @@ import * as ImagePicker from "expo-image-picker";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { postImage } from "../../../../redux/ActionCreators";
-import { myIP, port } from "../../../../axios";
+import { getURL } from "../../../../axios";
 
 const Picture = () => {
   // redux
@@ -16,10 +16,6 @@ const Picture = () => {
 
   const navigation = useNavigation();
   const [picture, setPicture] = useState();
-
-  const getURL = (path) => {
-    return "http://" + myIP + ":" + port + "/" + path;
-  };
 
   useEffect(() => {
     if (user.image != "") {

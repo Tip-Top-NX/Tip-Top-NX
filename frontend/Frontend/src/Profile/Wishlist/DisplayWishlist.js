@@ -13,10 +13,15 @@ const DisplayWishlist = (props) => {
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <ProductCard
+            _id={item._id}
             images={item.images}
             name={item.name}
+            brand={item.brand}
+            category={item.category}
+            style={item.style}
+            description={item.description}
             price={item.price}
-            _id={item._id}
+            discountPercentage={item.discountPercentage}
             navigation={props.navigation}
             cardStyle={styles.cardStyle}
             imageView={styles.imageView}
