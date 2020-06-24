@@ -8,16 +8,16 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   ImageBackground,
+  Modal,
+  ActivityIndicator
 } from "react-native";
 import styles from "./SignInStyles";
 import PropTypes from "prop-types";
 
+import Spinner from '../Spinner';
 import { useSelector, useDispatch } from "react-redux";
-import { signin, signinFailed, test } from "../../../redux/ActionCreators";
-// const fs = require('fs');
-// aCrt = fs.readFileSync('./cert.pem');
+import { signin, signinFailed } from "../../../redux/ActionCreators";
 
-// const httpsAgent = new https.Agent({ ca: caCrt, keepAlive: false });
 
 const signIn = ({ navigation }) => {
   // states for handling the input
@@ -32,9 +32,6 @@ const signIn = ({ navigation }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // myAxios.get('/',{httpsAgent:httpsAgent})
-    //   .then((res) => console.log(res.data))
-    //   .catch((err) => console.log(err));
     user.isValid = false;
     dispatch(signinFailed());
   }, []);
@@ -46,6 +43,7 @@ const signIn = ({ navigation }) => {
   }, [user.isValid]);
 
   const validation = () => {
+    console.log("start",validEmail,validPassword);
     const emailregex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
     // email check
@@ -53,19 +51,17 @@ const signIn = ({ navigation }) => {
       checkEmail(false);
     } else if (!emailregex.test(email)) {
       checkEmail(false);
-      //   alert("Please enter a valid email address");
     } else {
       checkEmail(true);
     }
     // password check
     if (password == "" || password.length < 6) {
       checkPassword(false);
-      //   alert("The length of the password should be atleast 6");
       setPassword("");
     } else {
       checkPassword(true);
     }
-    if (validEmail && validPassword) {
+    if (validEmail===true && validPassword===true) {
       dispatch(
         signin({
           email,
@@ -75,9 +71,11 @@ const signIn = ({ navigation }) => {
     }
   };
 
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
+        <Spinner visible={user.isFetching} />
         <ImageBackground
           source={require("../../../assets/b1.jpg")}
           style={{
