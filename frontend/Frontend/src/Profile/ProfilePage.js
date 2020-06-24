@@ -12,7 +12,7 @@ import Options from "./ProfilePage/Options";
 import { useSelector } from "react-redux";
 import NotLoggedIn from "../SignOut/NotLoggedIn";
 
-const Profile = ({ navigation }) => {
+const Profile = () => {
   const user = useSelector((state) => state.user);
   if (user.isValid) {
     return (
@@ -23,7 +23,7 @@ const Profile = ({ navigation }) => {
           blurRadius={0}
         >
           <Picture />
-          <Options navigation={navigation} />
+          <Options />
         </ImageBackground>
       </View>
     );

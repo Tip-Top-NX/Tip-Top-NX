@@ -1,55 +1,29 @@
 /* eslint-disable */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import ProductCard from "../ProductCard";
+import { myAxios } from "../../../axios";
 
 const Catelogue = ({ navigation }) => {
-  const products = [
-    {
-      images: require("../../../assets/man.png"),
-      _id: "1",
-      name: "Name 1",
-      price: "₹ 100",
-    },
-    {
-      images: require("../../../assets/kid.png"),
-      _id: "2",
-      name: "Name 2",
-      price: "₹ 200",
-    },
-    {
-      images: require("../../../assets/women.png"),
-      _id: "3",
-      name: "Name 3",
-      price: "₹ 300",
-    },
-    {
-      images: require("../../../assets/kid.png"),
-      _id: "4",
-      name: "Name 4",
-      price: "₹ 400",
-    },
-    {
-      images: require("../../../assets/man.png"),
-      _id: "5",
-      name: "Name 5",
-      price: "₹ 500",
-    },
-    {
-      images: require("../../../assets/kid.png"),
-      _id: "6",
-      name: "Name 6",
-      price: "₹ 600",
-    },
-  ];
+  const [products, setProducts] = useState();
+  const getProducts = () => {
+    return myAxios
+      .get("/category/1/get-products")
+      .then((res) => setProducts([...res.data]))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
 
   return (
     <View style={styles.container}>
       <FlatList
         data={products}
-        key={products._id}
         numColumns={2}
+        keyExtractor={(item) => item._id}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <ProductCard

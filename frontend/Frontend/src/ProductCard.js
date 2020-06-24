@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,16 +11,25 @@ const ProductCard = (props) => {
   const dispatch = useDispatch();
   const [itemStatus, setItemStatus] = useState(false);
 
+  useEffect(() => {
+    if(user.isValid){
+      if(user.wishlist.filter((item) => item._id==props._id).length==0){
+        setItemStatus(false);
+      }
+      else{
+        setItemStatus(true);
+      }
+    }
+  }, [])
+
   const handleWishlist = () => {
-    setItemStatus(!itemStatus);
     if (itemStatus) {
-      dispatch(postWishlist(props._id));
-    } else {
       dispatch(delWishlist(props._id));
+    } else {
+      dispatch(postWishlist(props._id));
     }
   };
 
-  const item = props.item;
 
   const Icon = () => {
     return itemStatus ? (

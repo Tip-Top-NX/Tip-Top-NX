@@ -19,7 +19,7 @@ export const delCart = (prodId) => {
   return (dispatch) => {
     getConfig().then((config) => {
       myAxios
-        .delete("/product/" + prodId + "/cart", null, config)
+        .delete("/product/" + prodId + "/cart", config)
         .then((res) => dispatch(setCart(res.data.cart)))
         .catch((err) => console.log(err));
     });
@@ -46,9 +46,9 @@ export const postWishlist = (prodId) => {
 
 export const delWishlist = (prodId) => {
   return (dispatch) => {
-    getConfig().then((config) => {
+    getConfig().then((config) => { 
       myAxios
-        .delete("/product/" + prodId + "/wishlist", null, config)
+        .delete("/product/" + prodId + "/wishlist", config)
         .then((res) => dispatch(setWishlist(res.data.wishlist)))
         .catch((err) => console.log(err));
     });

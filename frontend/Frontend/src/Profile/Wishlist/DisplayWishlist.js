@@ -8,9 +8,9 @@ const DisplayWishlist = (props) => {
     <View style={styles.container}>
       <FlatList
         data={props.wishlist}
-        key={props.wishlist._id}
         numColumns={2}
         showsVerticalScrollIndicator={false}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <ProductCard
             _id={item._id}
