@@ -12,15 +12,14 @@ const ProductCard = (props) => {
   const [itemStatus, setItemStatus] = useState(false);
 
   useEffect(() => {
-    if(user.isValid){
-      if(user.wishlist.filter((item) => item._id==props._id).length==0){
+    if (user.isValid) {
+      if (user.wishlist.filter((item) => item._id == props._id).length == 0) {
         setItemStatus(false);
-      }
-      else{
+      } else {
         setItemStatus(true);
       }
     }
-  }, [])
+  }, []);
 
   const handleWishlist = () => {
     if (itemStatus) {
@@ -29,7 +28,6 @@ const ProductCard = (props) => {
       dispatch(postWishlist(props._id));
     }
   };
-
 
   const Icon = () => {
     return itemStatus ? (
@@ -61,7 +59,7 @@ const ProductCard = (props) => {
         {user.isValid ? <Icon /> : null}
         <TouchableOpacity onPress={() => props.navigation.navigate("Product")}>
           <View style={props.details}>
-            <Text style={props.textStyle}>Name : {props.name}</Text>
+            <Text style={props.textStyle}>{props.name}</Text>
             <Text style={props.textStyle}>Price : {props.price}</Text>
           </View>
         </TouchableOpacity>

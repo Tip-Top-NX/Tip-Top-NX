@@ -1,21 +1,13 @@
 import React from "react";
-import { View, Text, Dimensions } from "react-native";
+import { View } from "react-native";
+import ImageCarousel from "./ImageCarousel";
 
-const width = Dimensions.get("window").width;
-
-const Product = () => {
+const ProductPage = () => {
   return (
-    <View
-      style={{
-        justifyContent: "center",
-        alignItems: "center",
-        width: width,
-        height: "100%",
-      }}
-    >
-      <Text>THIS IS A DUMMY PRODUCT PAGE</Text>
+    <View>
+      <ImageCarousel />
     </View>
   );
 };
 
-export default Product;
+export default ProductPage;

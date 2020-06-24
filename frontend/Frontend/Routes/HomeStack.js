@@ -10,17 +10,13 @@ const Stack = createStackNavigator();
 
 const HomeStack = () => {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerTitle: () => <Header />,
-        headerShown: false,
-      }}
-    >
+    <Stack.Navigator>
       <Stack.Screen
         name="Categories"
         component={Home}
         options={{
           headerShown: true,
+          headerTitle: () => <Header />,
         }}
       />
       <Stack.Screen name="Catelogue" component={Catelogue} />
