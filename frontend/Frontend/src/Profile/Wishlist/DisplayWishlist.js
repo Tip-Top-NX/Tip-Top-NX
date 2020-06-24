@@ -10,7 +10,7 @@ const DisplayWishlist = (props) => {
         data={props.wishlist}
         numColumns={2}
         showsVerticalScrollIndicator={false}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item,index) => String(index)}
         renderItem={({ item }) => (
           <ProductCard
             _id={item._id}

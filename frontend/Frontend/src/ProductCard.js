@@ -28,6 +28,7 @@ const ProductCard = (props) => {
     } else {
       dispatch(postWishlist(props._id));
     }
+    setItemStatus(!itemStatus);
   };
 
 

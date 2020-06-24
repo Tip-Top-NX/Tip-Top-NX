@@ -40,7 +40,6 @@ router.get('/:catId/get-products', (req, res, next) => {
     Category.find({ ancestors: req.params.catId }).distinct("_id")
         .then((cats) => {
             cats.push(Number(req.params.catId));
-            console.log("bl",cats);
             return Product.find({ category: { $in: cats } });
         })
         .then((prods) => res.send(prods))

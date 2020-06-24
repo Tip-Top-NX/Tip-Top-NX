@@ -124,16 +124,20 @@ export const signup = (user) => {
 
 export const signin = (user) => {
   return (dispatch) => {
-    return myAxios
+    dispatch(isFetching(true));
+     setTimeout(() => {
+      myAxios
       .post("/users/login", { ...user })
       .then((res) => {
         if (res.data.success === true) {
           dispatch(setUser(res.data.user, res.data.token));
+          dispatch(isFetching(false));
         } else {
           dispatch(signinFailed());
         }
       })
       .catch((err) => dispatch(signinFailed()));
+    }, 5000);
   };
 };
 
@@ -157,6 +161,13 @@ export const setUser = (user, token) => {
     },
   };
 };
+
+export const isFetching = (b) => {
+  return {
+    type: ActionTypes.FETCHING_USER,
+    payload: b
+  }
+}
 
 export const signinFailed = () => {
   return {
