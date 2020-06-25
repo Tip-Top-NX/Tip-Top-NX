@@ -1,12 +1,22 @@
 import React from "react";
-import { View } from "react-native";
+import { ScrollView } from "react-native";
 import ImageCarousel from "./ImageCarousel";
+import ProductInfo from "./ProductInfo";
+import Size from "./Size";
+import ButtonBar from "./ButtonBar";
+import Colours from "./Colour";
+import ProductDetails from "./ProductDetails";
 
 const ProductPage = () => {
   return (
-    <View>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <ImageCarousel />
-    </View>
+      <ProductInfo />
+      <Colours />
+      <Size />
+      <ButtonBar />
+      <ProductDetails />
+    </ScrollView>
   );
 };
 

@@ -33,18 +33,18 @@ const ProductCard = (props) => {
   const Icon = () => {
     return itemStatus ? (
       <FontAwesome
-        style={{ position: "absolute", top: 220, right: 15 }}
+        style={{ position: "absolute", top: 20, right: 15 }}
         name="bookmark"
-        size={24}
+        size={20}
         color="black"
         onPress={() => handleWishlist()}
       />
     ) : (
       <FontAwesome
-        style={{ position: "absolute", top: 220, right: 15 }}
+        style={{ position: "absolute", top: 20, right: 15 }}
         name="bookmark-o"
         color="black"
-        size={24}
+        size={20}
         onPress={() => handleWishlist()}
       />
     );
