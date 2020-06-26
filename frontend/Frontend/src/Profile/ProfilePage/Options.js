@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-const Options = (props) => {
+const Options = () => {
   const navigation = useNavigation();
   const optionList = [
     {
@@ -32,9 +32,9 @@ const Options = (props) => {
     {
       name: "Orders",
       id: "4",
-      // navigator: () => {
-      //   navigation.navigate("Catelogue");
-      // },
+      navigator: () => {
+        navigation.navigate("Orders");
+      },
     },
   ];
   return (

@@ -8,10 +8,9 @@ const DisplayWishlist = (props) => {
     <View style={styles.container}>
       <FlatList
         data={props.wishlist}
-        key={props.wishlist._id}
         numColumns={2}
         showsVerticalScrollIndicator={false}
-        keyExtractor={item => item.id}
+        keyExtractor={(item,index) => String(index)}
         renderItem={({ item }) => (
           <ProductCard
             _id={item._id}
@@ -40,8 +39,6 @@ export default DisplayWishlist;
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
-    justifyContent: "center",
-    alignItems: "center",
     width: "100%",
     height: "100%",
     flex: 1,
@@ -52,7 +49,7 @@ const styles = StyleSheet.create({
     borderStyle: "dotted",
     borderColor: "#FFB6C1",
     borderWidth: 1,
-    marginHorizontal: 3,
+    marginHorizontal: 4,
     marginVertical: 5,
   },
   imageView: {

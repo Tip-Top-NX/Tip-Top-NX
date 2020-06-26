@@ -1,51 +1,24 @@
 /* eslint-disable */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, Image, Dimensions } from "react-native";
 import { TouchableOpacity, FlatList } from "react-native-gesture-handler";
 import ProductCard from "../../ProductCard";
+import { myAxios } from "../../../../axios";
 
 const width = Dimensions.get("window").width;
 
-const popularItems = [
-  {
-    images: require("../../../../assets/man.png"),
-    _id: "1",
-    name: "Name 1",
-    price: "₹ 100",
-  },
-  {
-    images: require("../../../../assets/kid.png"),
-    _id: "2",
-    name: "Name 2",
-    price: "₹ 200",
-  },
-  {
-    images: require("../../../../assets/women.png"),
-    _id: "3",
-    name: "Name 3",
-    price: "₹ 300",
-  },
-  {
-    images: require("../../../../assets/kid.png"),
-    _id: "4",
-    name: "Name 4",
-    price: "₹ 400",
-  },
-  {
-    images: require("../../../../assets/man.png"),
-    _id: "5",
-    name: "Name 5",
-    price: "₹ 500",
-  },
-  {
-    images: require("../../../../assets/kid.png"),
-    _id: "6",
-    name: "Name 6",
-    price: "₹ 600",
-  },
-];
-
 const popular = (props) => {
+  const [popularProducts, setPopularProducts] = useState();
+  const getProducts = () => {
+    return myAxios
+      .get("/category/5/get-products")
+      .then((res) => setPopularProducts([...res.data]))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.titleStyle}>
@@ -73,8 +46,7 @@ const popular = (props) => {
         </TouchableOpacity>
       </View>
       <FlatList
-        data={popularItems}
-        key={popularItems._id}
+        data={popularProducts}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => item._id.toString()}
@@ -117,27 +89,30 @@ const styles = StyleSheet.create({
     width: 180,
     height: "100%",
     alignItems: "center",
-    marginHorizontal: 3,
+    marginHorizontal: 4,
     borderStyle: "dotted",
     borderColor: "#FFB6C1",
     borderWidth: 1,
   },
   imageView: {
     width: 170,
-    height: 250,
+    height: 230,
     alignSelf: "center",
     marginTop: 2,
   },
   details: {
     marginTop: 5,
-    // borderWidth: 1,
+    borderTopWidth: 1,
+    borderColor: "grey",
     width: 170,
-    height: 60,
+    height: 80,
     justifyContent: "space-evenly",
     paddingLeft: 10,
+    paddingVertical: 3,
+    paddingRight: 5,
   },
   textStyle: {
-    fontSize: 15,
+    fontSize: 13,
     fontWeight: "500",
   },
 });

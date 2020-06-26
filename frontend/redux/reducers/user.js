@@ -4,6 +4,7 @@ import * as ActionTypes from "../ActionTypes";
 const initialState = {
   isValid: false,
   token: AsyncStorage.getItem("token"),
+  isFetching: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -20,8 +21,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...initialState,
         isValid: false,
-        token: "",
+        isFetching: false,
       };
+    case ActionTypes.FETCHING_USER:
+      return {
+        ...state,
+        isFetching: action.payload
+      }
     case ActionTypes.SET_PICTURE:
       return {
         ...state,

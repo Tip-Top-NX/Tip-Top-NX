@@ -1,21 +1,23 @@
 import React from "react";
-import { View, Text, Dimensions } from "react-native";
+import { ScrollView } from "react-native";
+import ImageCarousel from "./ImageCarousel";
+import ProductInfo from "./ProductInfo";
+import Size from "./Size";
+import ButtonBar from "./ButtonBar";
+import Colours from "./Colour";
+import ProductDetails from "./ProductDetails";
 
-const width = Dimensions.get("window").width;
-
-const Product = () => {
+const ProductPage = () => {
   return (
-    <View
-      style={{
-        justifyContent: "center",
-        alignItems: "center",
-        width: width,
-        height: "100%",
-      }}
-    >
-      <Text>THIS IS A DUMMY PRODUCT PAGE</Text>
-    </View>
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <ImageCarousel />
+      <ProductInfo />
+      <Colours />
+      <Size />
+      <ButtonBar />
+      <ProductDetails />
+    </ScrollView>
   );
 };
 
-export default Product;
+export default ProductPage;

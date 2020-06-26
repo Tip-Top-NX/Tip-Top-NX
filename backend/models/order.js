@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const orderSchema = new Schema({
     contents:[{
         product:{
-            type:mongoose.Schema.Types.ObjectId,
+            type:String,
             ref:'Product'
         },
         size:String,

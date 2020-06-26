@@ -22,19 +22,21 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 import Animated, { Easing } from 'react-native-reanimated'
 const { Value, timing } = Animated
 
+import { myAxios } from '../../axios';
+
 // Calculate window size
 const width = Dimensions.get('window').width
-const height = Dimensions.get('window').height
+const height = Dimensions.get('window').height/20
 
 // Declare component 
 class SearchPage extends React.Component {
   
   constructor(props){
     super(props)
-
+    
     // state
     this.state = {
-      isFocused: true,
+      isFocused: false,
       keyword: ''
     }
 
@@ -45,9 +47,14 @@ class SearchPage extends React.Component {
     this._content_opacity = new Value(0)
   }
 
+  componentDidMount(){
+      this._onFocus();
+  }
+
+
   _onFocus = () => {
     // update state
-  this.setState({isFocused: true})
+    this.setState({isFocused: true})
     // animation config
     // input box
     const input_box_translate_x_config = {
@@ -80,9 +87,9 @@ class SearchPage extends React.Component {
     timing(this._content_opacity, content_opacity_config).start()
 
     // force focus
-    this.refs.input.focus()
-
+    this.refs.input.focus();
   }
+  
 
   _onBlur = () => {
     // update state
@@ -122,12 +129,18 @@ class SearchPage extends React.Component {
     this.refs.input.blur();
 
   }
+
+  fetchHandler = () => {
+    myAxios.post('/product/search',{keyword:this.state.keyword})
+        .then((res) => this.setState({...this.state,products: res.data}))
+        .catch((err) => console.log(err));
+  }
   
   render(){
     return (
       <>
         <SafeAreaView style={styles.header_safe_area}>
-          {this._onFocus}
+          
           <Animated.View
             style={[ styles.input_box, {transform: [{translateX: this._input_box_translate_x}] } ]}
           >
@@ -135,7 +148,7 @@ class SearchPage extends React.Component {
               <TouchableHighlight
                 activeOpacity={1}
                 underlayColor={"#ccd0d5"}
-                onPress={this._onBlur}
+                // onPress={this._onBlur}
                 style={styles.back_icon_box}
               >
                 <Icon name="chevron-left" size={22} color="#000000" />
@@ -144,10 +157,10 @@ class SearchPage extends React.Component {
             <TextInput 
               ref="input"
               placeholder="Search Tip-Top-NX"
-              clearButtonMode="always"
               value={this.state.keyword}
               onChangeText={(value) => this.setState({keyword: value}) }
               style={styles.input}
+              onSubmitEditing={() => this.fetchHandler()}
             />
           </Animated.View>
         </SafeAreaView>
@@ -223,9 +236,7 @@ const styles = StyleSheet.create({
     height: 50,
     flexDirection: 'row',
     alignItems: 'center',
-    position: 'absolute',
-    top:40,
-    left:0,
+    marginTop:30,
     backgroundColor: 'white',
     width: width - 32
   },

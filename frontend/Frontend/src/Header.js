@@ -1,28 +1,11 @@
-/* eslint-disable */
 import React from "react";
-
-import {
-  SafeAreaView,
-  Dimensions,
-  StyleSheet,
-  View,
-  TextInput,
-  Text,
-  Image,
-  TouchableHighlight,
-  ScrollView,
-} from 'react-native'
+import { StyleSheet, View, Text } from "react-native";
 
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
+
 import { useNavigation } from "@react-navigation/native";
-
-import Icon from 'react-native-vector-icons/FontAwesome5'
-import Animated, { Easing } from 'react-native-reanimated'
-const { Value, timing } = Animated
-
-const width = Dimensions.get('window').width
-const height = Dimensions.get('window').height/20
 
 const header = () => {
   const navigation = useNavigation();
@@ -33,7 +16,7 @@ const header = () => {
         <MaterialIcons
           name="menu"
           size={30}
-          style={styles.materialIcon}
+          style={[styles.materialIcon, { alignSelf: "center" }]}
           onPress={() => {
             navigation.openDrawer();
           }}
@@ -43,15 +26,16 @@ const header = () => {
         <Text style={styles.textStyle}>TIP TOP NX</Text>
       </View>
 
-      <View>
-        <TouchableHighlight
-          activeOpacity={1}
-          underlayColor={"#ccd0d5"}
-          onPress={() => navigation.navigate("Search")}
-          style={styles.search_icon_box}
-        >
-          <Icon name="search" size={22} color="#000000" />
-        </TouchableHighlight>
+      <View style={styles.sideImage}>
+        <Feather
+          name="search"
+          style={styles.materialIcon}
+          size={30}
+          color="black"
+          onPress={() => {
+            navigation.navigate("Search");
+          }}
+        />
       </View>
 
       <View style={styles.sideImage}>
@@ -69,7 +53,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
   },
   sideImage: {
     width: "15%",
@@ -77,12 +61,14 @@ const styles = StyleSheet.create({
     borderColor: "#000",
     height: "100%",
     justifyContent: "center",
+    marginHorizontal: 15,
   },
   headingStyle: {
-    width: "50%",
+    width: "60%",
     height: "100%",
     // borderWidth: 1,
     justifyContent: "center",
+    marginHorizontal: 15,
   },
   materialIcon: {
     alignSelf: "center",
@@ -93,17 +79,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#000",
     textAlign: "center",
-  },
-  search_icon_box: {
-    width:40,
-    height: 40,
-    borderRadius: 40,
-    backgroundColor: '#e4e6eb',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 0,
-    marginLeft:20
   },
 });
 

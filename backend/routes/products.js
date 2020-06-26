@@ -26,6 +26,12 @@ router.get('/:prodId', (req, res, next) => {
         .catch((err) => next(err));
 })
 
+router.post('/search',(req, res, next) => {
+    Product.find({$text: {$search: req.body.keyword}},{score: {$meta: "textScore"}}).sort({score: {$meta: "textScore"}})
+        .then((prods) => res.send(prods))
+        .catch((err) => next(err));
+})
+
 router.put('/:prodId', upload.array('myImages'), (req,res,next) => {
     Product.findById(req.params.prodId)
         .then((prod) => {
