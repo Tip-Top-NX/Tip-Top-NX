@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from "react";
 import {
   View,
@@ -7,16 +8,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-const Size = () => {
+const Size = (props) => {
   const [selected, setSelected] = useState();
-
-  const data = [
-    { name: "S", id: "1" },
-    { name: "M", id: "2" },
-    { name: "L", id: "3" },
-    { name: "XL", id: "4" },
-    { name: "XXL", id: "5" },
-  ];
+  const size = [...props.size];
 
   return (
     <View style={styles.container}>
@@ -28,22 +22,25 @@ const Size = () => {
       </View>
       <View style={styles.optionsBox}>
         <FlatList
-          data={data}
+          data={size}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <TouchableOpacity
               style={[
                 styles.sizeBox,
-                { borderColor: item.id === selected ? "#3A66A7" : "#000" },
-                { borderWidth: item.id === selected ? 3 : 1 },
+                {
+                  borderColor:
+                    size.indexOf(item) === selected ? "#C2185B" : "#000",
+                },
+                { borderWidth: size.indexOf(item) === selected ? 3 : 1 },
               ]}
-              onPress={() => setSelected(item.id)}
+              onPress={() => setSelected(size.indexOf(item))}
             >
-              <Text style={styles.sizeStyle}>{item.name}</Text>
+              <Text style={styles.sizeStyle}>{item}</Text>
             </TouchableOpacity>
           )}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item, index) => index.toString()}
         />
       </View>
     </View>

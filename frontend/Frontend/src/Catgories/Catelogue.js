@@ -27,7 +27,13 @@ const Catelogue = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <ProductCard
+            brand={item.brand}
+            description={item.description}
+            colors={item.colors}
             images={item.images}
+            size={item.size}
+            style={item.style}
+            discountPercentage={item.discountPercentage}
             name={item.name}
             price={item.price}
             navigation={navigation}

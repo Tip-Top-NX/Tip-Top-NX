@@ -23,7 +23,12 @@ const header = () => {
         <Text style={styles.textStyle}>TIP TOP NX</Text>
       </View>
       <View style={styles.sideImage}>
-        <AntDesign name="shoppingcart" size={30} style={styles.materialIcon} />
+        <AntDesign
+          name="shoppingcart"
+          size={30}
+          style={styles.materialIcon}
+          onPress={() => navigation.push("Cart")}
+        />
       </View>
     </View>
   );

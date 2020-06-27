@@ -5,6 +5,7 @@ import Home from "../src/Catgories/Home/Home";
 import Header from "../src/Header";
 import Catelogue from "../src/Catgories/Catelogue";
 import Product from "../src/ProductDescription/ProductPage";
+import Cart from "../src/Cart/Cart";
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,7 @@ const HomeStack = () => {
       />
       <Stack.Screen name="Catelogue" component={Catelogue} />
       <Stack.Screen name="Product" component={Product} />
+      <Stack.Screen name="Cart" component={Cart} />
     </Stack.Navigator>
   );
 };
