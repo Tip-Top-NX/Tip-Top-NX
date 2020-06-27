@@ -43,7 +43,7 @@ const header = () => {
           name="shoppingcart"
           size={30}
           style={styles.materialIcon}
-          onPress={() => navigation.push("Cart")}
+          onPress={() => navigation.navigate("Cart")}
         />
       </View>
     </View>
