@@ -1,15 +1,9 @@
 /* eslint-disable */
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import styles from "./ProductCardStyles";
 
 const ProductCard = (props) => {
   const [quantity, setQuantity] = useState("1");
@@ -38,20 +32,11 @@ const ProductCard = (props) => {
             <View style={styles.smallBox}>
               <Text style={{ color: "#888" }}>QTY : </Text>
               <View style={{ flexDirection: "row" }}>
-                <View
-                  style={{
-                    borderWidth: 1,
-                    width: 22,
-                    height: 22,
-                    marginHorizontal: 5,
-                    borderRadius: 11,
-                    // borderColor: "red",
-                  }}
-                >
+                <View style={styles.minusBox}>
                   <AntDesign
                     name="minus"
                     size={20}
-                    // color="red"
+                    color="grey"
                     onPress={() => setQuantity(quantity - 1)}
                   />
                 </View>
@@ -63,20 +48,11 @@ const ProductCard = (props) => {
                 >
                   {quantity}
                 </Text>
-                <View
-                  style={{
-                    borderWidth: 1,
-                    width: 22,
-                    height: 22,
-                    marginHorizontal: 5,
-                    borderRadius: 11,
-                    // borderColor: "green",
-                  }}
-                >
+                <View style={styles.plusBox}>
                   <MaterialIcons
                     name="add"
                     size={20}
-                    // color="green"
+                    color="grey"
                     onPress={() => setQuantity(parseInt(quantity) + 1)}
                   />
                 </View>
@@ -91,89 +67,27 @@ const ProductCard = (props) => {
         </View>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.buttonBox}></TouchableOpacity>
-        <TouchableOpacity style={styles.buttonBox}></TouchableOpacity>
+        <View
+          style={{ borderWidth: 1, padding: 2, backgroundColor: "#3A66A7" }}
+        >
+          <TouchableOpacity
+            style={[styles.buttonBox, { backgroundColor: "#fff" }]}
+          >
+            <MaterialIcons name="delete" size={20} color="grey" />
+            <Text style={{ fontWeight: "bold" }}>REMOVE</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ borderWidth: 1, padding: 2 }}>
+          <TouchableOpacity
+            style={[styles.buttonBox, { backgroundColor: "#3A66A7" }]}
+          >
+            <MaterialIcons name="bookmark-border" size={20} color="white" />
+            <Text style={{ fontWeight: "bold", color: "#fff" }}>WISHLIST</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
 };
 
 export default ProductCard;
-
-const styles = StyleSheet.create({
-  container: {
-    width: 350,
-    borderWidth: 1,
-    marginVertical: 10,
-    alignItems: "center",
-    justifyContent: "space-evenly",
-  },
-  imageContainer: {
-    height: 160,
-    width: 120,
-    borderWidth: 1,
-    alignSelf: "center",
-    marginRight: 10,
-  },
-  detailBox: {
-    borderWidth: 1,
-    height: 190,
-    width: 200,
-    alignItems: "center",
-    paddingVertical: 5,
-  },
-  nameStyle: {
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 1,
-    width: "90%",
-    paddingVertical: 3,
-    paddingHorizontal: 5,
-    margin: 3,
-  },
-  subBox: {
-    justifyContent: "space-evenly",
-    borderWidth: 1,
-    width: "90%",
-    margin: 2,
-  },
-  smallBox: {
-    marginVertical: 5,
-    alignItems: "center",
-    borderWidth: 1,
-    paddingVertical: 3,
-    paddingHorizontal: 15,
-    flexDirection: "row",
-  },
-  priceBox: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 1,
-    width: "90%",
-    paddingVertical: 3,
-    paddingHorizontal: 5,
-    margin: 5,
-  },
-  discountedPriceText: {
-    fontSize: 15,
-    marginHorizontal: 8,
-    fontWeight: "bold",
-    color: "#444",
-  },
-  buttonContainer: {
-    width: 350,
-    borderWidth: 1,
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    paddingTop: 10,
-    paddingBottom: 10,
-    marginBottom: 10,
-  },
-  buttonBox: {
-    width: 150,
-    height: 50,
-    borderWidth: 1,
-    padding: 5,
-  },
-});
