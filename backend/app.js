@@ -29,7 +29,7 @@ var app = express();
 // mongoose.connect('mongodb://localhost/ttnx',{useNewUrlParser:true})
 // .then((db) => console.log("Mongo connection successfull!"))
 // .catch((err) => console.log(err));
-mongoose;
+// mongoose;
 // .connect(
 //   "mongodb+srv://admin:admin@cluster0-zzmbm.mongodb.net/ttnx?retryWrites=true&w=majority",
 //   { useNewUrlParser: true, useUnifiedTopology: true }
@@ -43,6 +43,13 @@ mongoose
   )
   .then((db) => console.log("Mongo connection successfull!"))
   .catch((err) => console.log(err));
+// mongoose
+//   .connect(
+//     "mongodb+srv://admin:admin@cluster0-zzmbm.mongodb.net/ttnx?retryWrites=true&w=majority",
+//     { useNewUrlParser: true }
+//   )
+//   .then((db) => console.log("Mongo connection successfull!"))
+//   .catch((err) => console.log(err));
 // mongoose
 //   .connect(
 //     "mongodb+srv://mihirdb:mihirdb@cluster0-auvdn.mongodb.net/ttnx?retryWrites=true&w=majority",

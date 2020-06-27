@@ -9,7 +9,7 @@ const Catelogue = ({ navigation }) => {
   const [products, setProducts] = useState();
   const getProducts = () => {
     return myAxios
-      .get("/category/5/get-products")
+      .get("/category/1/get-products")
       .then((res) => setProducts([...res.data]))
       .catch((err) => console.log(err));
   };
@@ -27,7 +27,13 @@ const Catelogue = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <ProductCard
+            brand={item.brand}
+            description={item.description}
+            colors={item.colors}
             images={item.images}
+            size={item.size}
+            style={item.style}
+            discountPercentage={item.discountPercentage}
             name={item.name}
             price={item.price}
             navigation={navigation}

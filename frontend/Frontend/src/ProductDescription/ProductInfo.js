@@ -1,22 +1,26 @@
+/* eslint-disable */
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-const ProductInfo = () => {
+const ProductInfo = (props) => {
+  let SP = props.price - (props.price * props.discountPercentage) / 100;
   return (
     <View style={styles.container}>
       <View style={styles.descriptionStyle}>
         <View style={styles.brandNameBox}>
-          <Text style={styles.brandNameText}>JOCKEY</Text>
+          <Text style={styles.brandNameText}>{props.brand.toUpperCase()}</Text>
         </View>
         <View style={styles.productNameBox}>
-          <Text style={styles.productNameText}>#US 04 Sleeveless Tshirt</Text>
+          <Text style={styles.productNameText}>{props.name}</Text>
         </View>
       </View>
       <View style={styles.priceBox}>
         <View style={styles.correctedPrice}>
-          <Text style={styles.discountedPriceText}>₹ 600</Text>
-          <Text style={styles.originalPriceText}>₹ 1200</Text>
-          <Text style={styles.discountedPercentText}>( 50% )</Text>
+          <Text style={styles.discountedPriceText}>₹ {SP}</Text>
+          <Text style={styles.originalPriceText}>₹ {props.price}</Text>
+          <Text style={styles.discountedPercentText}>
+            ( {props.discountPercentage} )
+          </Text>
         </View>
         <Text style={styles.note}>INCLUSIVE OF ALL TAXES</Text>
       </View>
@@ -42,10 +46,11 @@ const styles = StyleSheet.create({
   },
   brandNameBox: {
     width: "25%",
-    // borderWidth: 1,
+    borderColor: "#ccc",
     padding: 2,
     marginBottom: 10,
     marginTop: 10,
+    justifyContent: "center",
   },
   brandNameText: {
     fontSize: 15,
@@ -54,9 +59,11 @@ const styles = StyleSheet.create({
   },
   productNameBox: {
     width: "75%",
-    // borderWidth: 1,
+    borderLeftWidth: 1,
     padding: 2,
     marginTop: 10,
+    borderColor: "#ccc",
+    paddingLeft: 10,
   },
   productNameText: {
     fontSize: 15,

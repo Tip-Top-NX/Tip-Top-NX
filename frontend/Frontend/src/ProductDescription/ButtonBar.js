@@ -27,9 +27,9 @@ export default ButtonBar;
 const styles = StyleSheet.create({
   container: {
     borderBottomWidth: 1,
+    borderTopWidth: 1,
     height: 80,
     marginTop: 10,
-    marginBottom: 30,
     borderColor: "#ccc",
     // backgroundColor: "#FFF",
     flexDirection: "row",
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     height: 56,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#3A66A7",
+    backgroundColor: "#C2185B",
   },
   addToCartButtonContainer: {
     borderWidth: 1,
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   addToCartButton: {
     width: 180,
     borderWidth: 1,
-    backgroundColor: "#3A66A7",
+    backgroundColor: "#C2185B",
     height: 50,
     justifyContent: "center",
     alignItems: "center",

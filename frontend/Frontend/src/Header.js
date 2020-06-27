@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 
@@ -40,7 +39,12 @@ const header = () => {
       </View>
 
       <View style={styles.sideImage}>
-        <AntDesign name="shoppingcart" size={30} style={styles.materialIcon} />
+        <AntDesign
+          name="shoppingcart"
+          size={30}
+          style={styles.materialIcon}
+          onPress={() => navigation.push("Cart")}
+        />
       </View>
     </View>
   );

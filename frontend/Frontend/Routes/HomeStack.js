@@ -5,7 +5,8 @@ import Home from "../src/Catgories/Home/Home";
 import Header from "../src/Header";
 import Catelogue from "../src/Catgories/Catelogue";
 import Product from "../src/ProductDescription/ProductPage";
-import Search from '../src/SearchPage';
+import Cart from "../src/Cart/Cart";
+import Search from "../src/SearchPage";
 
 const Stack = createStackNavigator();
 
@@ -22,7 +23,12 @@ const HomeStack = () => {
       />
       <Stack.Screen name="Catelogue" component={Catelogue} />
       <Stack.Screen name="Product" component={Product} />
-      <Stack.Screen options={{headerShown:false}} name="Search" component={Search} />
+      <Stack.Screen name="Cart" component={Cart} />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Search"
+        component={Search}
+      />
     </Stack.Navigator>
   );
 };
