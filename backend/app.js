@@ -29,6 +29,13 @@ var app = express();
 // mongoose.connect('mongodb://localhost/ttnx',{useNewUrlParser:true})
 // .then((db) => console.log("Mongo connection successfull!"))
 // .catch((err) => console.log(err));
+mongoose;
+// .connect(
+//   "mongodb+srv://admin:admin@cluster0-zzmbm.mongodb.net/ttnx?retryWrites=true&w=majority",
+//   { useNewUrlParser: true, useUnifiedTopology: true }
+// )
+// .then((db) => console.log("Mongo connection successfull!"))
+// .catch((err) => console.log(err));
 mongoose
   .connect(
     "mongodb+srv://vidhi:pass@cluster0.70qps.mongodb.net/ttnx?retryWrites=true&w=majority",
@@ -72,13 +79,13 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 
 app.use(passport.initialize());
 
-app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/category", categoriesRouter);
 app.use("/product", productsRouter);
 
-app.use(authenticate.verifyUser);
-app.use("/profile", profileRouter);
+//app.use(authenticate.verifyUser);
+app.use("/profile", authenticate.verifyUser, profileRouter);
+app.use("/", indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

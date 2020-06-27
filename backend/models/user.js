@@ -34,12 +34,12 @@ const userSchema = new Schema({
         ref:'Order'
     }],
     wishlist:[{
-        type:mongoose.Schema.Types.ObjectId,
+        type:String,
         ref:'Product'
     }],
     cart:[{
         product:{
-            type:mongoose.Schema.Types.ObjectId,
+            type:String,
             ref:'Product'
         },
         size:String,

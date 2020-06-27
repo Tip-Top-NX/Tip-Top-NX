@@ -45,23 +45,26 @@ const signIn = ({ navigation }) => {
   const validation = () => {
     console.log("start",validEmail,validPassword);
     const emailregex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-
+    let valid = true;
     // email check
     if (email == "") {
       checkEmail(false);
+      valid = false;
     } else if (!emailregex.test(email)) {
       checkEmail(false);
+      valid = false;
     } else {
       checkEmail(true);
     }
     // password check
     if (password == "" || password.length < 6) {
       checkPassword(false);
+      valid = false;
       setPassword("");
     } else {
       checkPassword(true);
     }
-    if (validEmail===true && validPassword===true) {
+    if (valid) {
       dispatch(
         signin({
           email,
