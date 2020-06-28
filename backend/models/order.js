@@ -9,7 +9,8 @@ const orderSchema = new Schema({
         },
         size:String,
         color:String,
-        price:Number
+        price:Number,
+        quantity:Number
     }],
     amount:{
         type:Number,

@@ -14,7 +14,9 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/login', authenticate.local, (req, res, next) => {
-  User.findById(req.user._id).populate('wishlist').populate('cart').populate('orders')
+  User.findById(req.user._id).populate('wishlist')
+    .populate({path:'cart',populate:{path:'product'}})
+    .populate({path:'orders',populate:{path:'contents.product'}})
     .then((user) => {
       res.send(
         {

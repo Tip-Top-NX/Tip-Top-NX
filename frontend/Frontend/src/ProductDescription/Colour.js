@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from "react";
 import {
   View,
@@ -7,16 +8,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-const Colours = () => {
+const Colours = (props) => {
   const [selected, setSelected] = useState();
-
-  const data = [
-    { name: "blue", id: "1", col: "#0198E1" },
-    { name: "pink", id: "2", col: "pink" },
-    { name: "charcoal", id: "3", col: "#555" },
-    { name: "black", id: "4", col: "#000" },
-    { name: "white", id: "5", col: "#fff" },
-  ];
+  const colors = [...props.colors];
 
   return (
     <View style={styles.container}>
@@ -29,28 +23,29 @@ const Colours = () => {
         style={{
           flexDirection: "row",
           justifyContent: "space-evenly",
-          width: "100%",
+          width: "90%",
         }}
       >
         <FlatList
-          data={data}
+          data={colors}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <TouchableOpacity
               style={[
                 styles.colorBox,
-                { borderColor: item.id === selected ? "#3A66A7" : "#fff" },
+                {
+                  borderColor:
+                    colors.indexOf(item) === selected ? "#C2185B" : "#000",
+                  borderWidth: colors.indexOf(item) === selected ? 3 : 1,
+                },
               ]}
-              onPress={() => setSelected(item.id)}
+              onPress={() => setSelected(colors.indexOf(item))}
             >
-              <View
-                style={[styles.colorContainer, { backgroundColor: item.col }]}
-              />
-              <Text style={styles.colorTextStyle}>{item.name}</Text>
+              <Text style={styles.colorTextStyle}>{item}</Text>
             </TouchableOpacity>
           )}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item, index) => index.toString()}
         />
       </View>
     </View>
@@ -72,22 +67,10 @@ const styles = StyleSheet.create({
   colorBox: {
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: 3,
     borderRadius: 8,
-    width: 70,
+    width: 80,
     height: 80,
-    marginHorizontal: 2,
-  },
-  colorContainer: {
-    borderWidth: 1,
-    height: 40,
-    width: 40,
-    borderRadius: 20,
-    margin: 2,
-    justifyContent: "center",
-    alignItems: "center",
-    borderColor: "#ccc",
-    marginBottom: 10,
+    marginHorizontal: 5,
   },
   colorTextStyle: {
     fontWeight: "500",

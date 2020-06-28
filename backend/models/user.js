@@ -43,8 +43,10 @@ const userSchema = new Schema({
             ref:'Product'
         },
         size:String,
-        color:String
-    }]
+        color:String,
+        quantity:Number
+    }],
+    cartTotal:Number
 })
 userSchema.plugin(passportLocalMongoose,{usernameField:'email'});
 

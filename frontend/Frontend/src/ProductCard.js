@@ -58,7 +58,21 @@ const ProductCard = (props) => {
           style={props.imageView}
         ></Image>
         {user.isValid ? <Icon /> : null}
-        <TouchableOpacity onPress={() => props.navigation.navigate("Product")}>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigation.navigate("Product", {
+              brand: props.brand,
+              description: props.description,
+              colors: props.colors,
+              images: props.images,
+              size: props.size,
+              style: props.style,
+              discountPercentage: props.discountPercentage,
+              name: props.name,
+              price: props.price,
+            })
+          }
+        >
           <View style={props.details}>
             <Text style={props.textStyle}>{props.name}</Text>
             <Text style={props.textStyle}>Price : {props.price}</Text>
