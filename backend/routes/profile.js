@@ -15,13 +15,15 @@ router
   .route("/")
   .get((req, res, next) => {
     //send user details
-    User.findById(req.user._id)
-      .then((user) => {
-        res.send({
-          user: user,
-        });
-      })
-      .catch((err) => next(err));
+    User.findById(req.user._id).populate('wishlist')
+    .populate({path:'cart',populate:{path:'product'}})
+    .populate({path:'orders',populate:{path:'contents.product'}})
+    .then((user) => {
+      res.send({
+        user: user,
+      });
+    })
+    .catch((err) => next(err));
   })
   .put((req, res, next) => {
     //update user
@@ -89,11 +91,7 @@ router.get("/cart", (req, res, next) => {
     .populate("cart.product")
     .then(
       (user) => {
-        let totalCartValue = 0;
-        for (let i = 0; i < user.cart.length; i++) {
-          totalCartValue = totalCartValue + user.cart[i].product.price;
-        }
-        res.send({ cart: user.cart, total: totalCartValue });
+        res.send({ cart: user.cart, cartTotal: user.cartTotal });
       },
       (err) => next(err)
     )
@@ -102,7 +100,12 @@ router.get("/cart", (req, res, next) => {
 
 router.get("/orders", (req, res, next) => {
   User.findById(req.user._id)
-    .populate("orders")
+  .populate({
+    path:'orders',
+    populate:{
+      path:'contents.product'
+    }
+  })
     .then(
       (user) => {
         res.send(user.orders);
@@ -129,27 +132,30 @@ router.post("/cart/placeOrder", (req, res, next) => {
       product: req.body.cart[i].product._id,
       size: req.body.cart[i].size,
       color: req.body.cart[i].color,
+      price: req.body.cart[i].product.price*(1-req.body.cart[i].product.discountPercentage/100),
+      quantity: req.body.cart[i].quantity
     });
   }
   Order.create({
     contents: conents,
-    amount: req.body.total,
+    amount: req.user.cartTotal,
     status: "Placed",
     payment: {
       method: req.body.method,
       transactionid: 123,
     },
   })
-    .then((order) => {
-      User.findById(req.user._id).then((user) => {
-        user.orders.push(order._id); //add to orders
-        user.cart = []; //clear cart
-        user.save().then((user) => {
-          res.send(order);
-        });
+  .then((order) => {
+    User.findById(req.user._id).then((user) => {
+      user.orders.push(order._id); //add to orders
+      user.cart = []; //clear cart
+      user.cartTotal = 0;
+      user.save().then((user) => {
+        res.send(order);
       });
-    })
-    .catch((err) => next(err));
+    });
+  })
+  .catch((err) => next(err));
 });
 
 module.exports = router;

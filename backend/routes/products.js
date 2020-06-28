@@ -63,9 +63,15 @@ router.route('/:prodId/wishlist')
 router.route('/:prodId/cart')
     .post(authenticate.verifyUser, (req, res, next) => {
         User.findByIdAndUpdate(req.user._id,
-            { $push: { cart : { product: req.params.prodId, color: req.body.color, size: req.body.size}}},
+            { $push: { cart : { product: req.params.prodId, color: req.body.color, size: req.body.size, quantity: req.body.quantity}}},
             { safe: true, upsert: true, new: true}).populate('cart.product')
-            .then((user) => res.send({ cart: user.cart} ))
+            .then((user) =>{ 
+                length = user.cart.length - 1;
+                discountedPrice = user.cart[length].product.price*(1-user.cart[length].product.discountPercentage/100)
+                user.cartTotal += discountedPrice*user.cart[length].quantity
+                res.json({ cart: user.cart, cartTotal:user.cartTotal})
+                user.save()
+            })
             .catch((err) => next(err));
     })
     .delete(authenticate.verifyUser, (req, res, next) => {
