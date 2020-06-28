@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   StyleSheet,
   TouchableOpacity,
@@ -7,75 +7,64 @@ import {
   Image,
   View,
 } from "react-native";
-import Carousel from "react-native-anchor-carousel";
+import Carousel, { Pagination } from "react-native-snap-carousel";
+import { getURL } from "../../../axios";
 
 const { width } = Dimensions.get("window");
 
-const data = [
-  { uri: require("../../../assets/man.png") },
-  { uri: require("../../../assets/man.png") },
-  { uri: require("../../../assets/man.png") },
-  { uri: require("../../../assets/man.png") },
-  { uri: require("../../../assets/man.png") },
-];
-
-const ImageCarousel = () => {
+const ImageCarousel = (props) => {
   const carouselRef = useRef(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
-
+  const images = [...props.images];
   return (
     <View style={styles.container}>
       <Carousel
-        data={data}
-        renderItem={({ item, index }) => {
+        data={images}
+        renderItem={({ item }) => {
           return (
-            <TouchableOpacity
-              activeOpacity={1}
-              onPress={() => {
-                carouselRef.current.scrollToIndex(index);
-                setSelectedIndex(index);
-              }}
-            >
-              <Image source={item.uri} style={styles.imageStyle} />
+            <TouchableOpacity activeOpacity={1}>
+              <Image source={{ uri: getURL(item) }} style={styles.imageStyle} />
             </TouchableOpacity>
           );
         }}
         itemWidth={width}
+        sliderWidth={width}
         inActiveOpacity={0.1}
         ref={carouselRef}
+        onSnapToItem={(i) => setSelectedIndex(i)}
       />
       <View style={styles.marker}>
-        {data.map((image, i) => (
-          <View
-            style={[
-              styles.blackCircle,
-              { opacity: i === selectedIndex ? 1 : 0.3 },
-            ]}
-            key={i}
-            active={i === selectedIndex}
-          />
-        ))}
+        <Pagination
+          dotsLength={images.length}
+          activeDotIndex={selectedIndex}
+          containerStyle={{ paddingVertical: 10 }}
+          dotStyle={{
+            width: 8,
+            height: 8,
+            borderRadius: 4,
+            backgroundColor: "rgba(0, 0, 0, 0.92)",
+          }}
+          inactiveDotOpacity={0.4}
+          inactiveDotScale={0.6}
+        />
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    // borderWidth: 1,
-    height: 300,
-  },
   imageStyle: {
     borderWidth: 5,
     borderColor: "grey",
     alignSelf: "center",
+    width: "90%",
+    aspectRatio: 1,
+    marginBottom: 10,
+    marginTop: 10,
   },
   marker: {
-    flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    height: 10,
-    marginBottom: 10,
   },
   blackCircle: {
     width: 6,
