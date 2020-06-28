@@ -1,13 +1,25 @@
 /* eslint-disable */
 import React from "react";
 import { View, StyleSheet, Text, Image, ViewPropTypes } from "react-native";
+import { useSelector } from "react-redux";
 import OrderCard from "./OrderCard";
 
 const Orders = () => {
+  const user = useSelector((state) => state.user);
+
   return (
-    <View style={styles.container}>
-      <OrderCard />
-    </View>
+    <FlatList
+      style={styles.container}
+      data={user.order}
+      horizontal={true}
+      showsHorizontalScrollIndicator={false}
+      keyExtractor={(item) => item._id.toString()}
+      renderItem={({ item }) => (
+        <OrderCard
+          _id={item._id}
+        />
+      )}
+    />
   );
 };
 

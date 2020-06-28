@@ -5,7 +5,7 @@ import Profile from "../src/Profile/ProfilePage";
 import EditProfile from "../src/Profile/EditProfile/EditProfile";
 import Points from "../src/Profile/Points/Points";
 import Wishlist from "../src/Profile/Wishlist/Wishlist";
-import Orders from "../src/Profile/Orders/Orders";
+import Orders from "../src/Orders/Orders";
 
 const Stack = createStackNavigator();
 
@@ -32,7 +32,7 @@ const ProfileStack = () => {
         component={Wishlist}
         options={{ headerShown: true }}
       />
-      <Stack.Screen
+      /*<Stack.Screen
         name="Orders"
         component={Orders}
         options={{ headerShown: true }}

@@ -8,7 +8,7 @@ const ProductCard = () => {
     <View style={styles.productCard}>
       <Image
         style={styles.imageStyle}
-        source={require("../../../../assets/man.png")}
+        source={require("../../../assets/man.png")}
       />
       <View style={styles.detailsBox}>
         <View style={styles.details}>
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     height: 130,
     borderWidth: 1,
     borderColor: "silver",
+    marginBottom:8
   },
   detailsBox: {
     // borderWidth: 1,
@@ -68,17 +69,18 @@ const styles = StyleSheet.create({
   brandName: {
     fontWeight: "bold",
     fontSize: 15,
-    paddingVertical: 4,
+    paddingVertical: 2,
     letterSpacing: 0.5,
   },
   productDetails: {
     color: "grey",
-    paddingVertical: 4,
+    paddingVertical: 2,
+    paddingTop: -2
   },
   sizeStyle: {
     width: "50%",
     fontWeight: "bold",
-    paddingVertical: 4,
+    paddingVertical: 5,
   },
   qtyStyle: {
     width: "50%",

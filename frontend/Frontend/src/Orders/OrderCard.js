@@ -1,15 +1,13 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
-import ProductCard from "./OrderedProductCard";
+//import ProductCard from "./OrderedProductCard";
 
-const OrderCard = () => {
+const OrderCard = (props) => {
   return (
     <View style={styles.orderBox}>
       <Text style={{ paddingLeft: 10, paddingTop: 5 }}>
-        ORDER NUMBER :<Text style={styles.orderNumberText}> 653414216352</Text>
+        ORDER NUMBER :<Text style={styles.orderNumberText}> {props._id}</Text>
       </Text>
-      <ProductCard />
-      <ProductCard />
     </View>
   );
 };
@@ -17,7 +15,7 @@ const OrderCard = () => {
 const styles = StyleSheet.create({
   orderBox: {
     justifyContent: "center",
-    // borderWidth: 1,
+    borderWidth: 1,
     width: "100%",
     borderColor: "silver",
   },
