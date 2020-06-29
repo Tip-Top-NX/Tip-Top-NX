@@ -1,18 +1,23 @@
+/* eslint-disable */
 import * as React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Orders from "../src/Orders/Orders";
+import OrderProductDetails from "../src/Orders/OrderProductDetails";
+import OrderDetails from "../src/Orders/OrderDetails";
 
 const Stack = createStackNavigator();
 
 const OrderStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Stack.Screen
         name="My Orders"
         component={Orders}
-        options={{
-          headerShown: true,
-        }}
+        options={{ headerShown: true }}
       />
     </Stack.Navigator>
   );

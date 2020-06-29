@@ -18,7 +18,7 @@ const ValidDrawer = () => {
     >
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="My Profile" component={ProfileStack} />
-      <Drawer.screen name="My Orders" component={OrderStack} />
+      <Drawer.Screen name="My Orders" component={OrderStack} />
     </Drawer.Navigator>
   );
 };

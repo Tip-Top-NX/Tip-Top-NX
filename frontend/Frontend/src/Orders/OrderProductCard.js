@@ -2,24 +2,24 @@
 import React from "react";
 import { View, StyleSheet, Text, Image } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { getURL } from "../../../axios";
 
-const ProductCard = () => {
+const ProductCard = (props) => {
   return (
     <View style={styles.productCard}>
       <Image
         style={styles.imageStyle}
-        source={require("../../../assets/man.png")}
+        source={{ uri: getURL(props.image) }}
       />
       <View style={styles.detailsBox}>
         <View style={styles.details}>
-          <Text style={styles.brandName}>Jockey</Text>
-          <Text style={styles.productDetails}>#US04 Pack of 2 thermals</Text>
+          <Text style={styles.brandName}>{props.brand}</Text>
+          <Text style={styles.productDetails}>{props.name}</Text>
           <View style={{ flexDirection: "row" }}>
-            <Text style={styles.sizeStyle}>Size: M</Text>
-            <Text style={styles.qtyStyle}>Qty: 1</Text>
+            <Text style={styles.sizeStyle}>Size : {props.size}</Text>
+            <Text style={styles.qtyStyle}>Qty : {props.quantity}</Text>
           </View>
-          <Text style={styles.priceStyle}>Price: 669/-</Text>
-          <Text style={styles.statusStyle}>Status : Completed</Text>
+          <Text style={styles.priceStyle}>Price: ₹ {props.price}/-</Text>
         </View>
       </View>
       <View style={styles.iconBox}>
@@ -90,11 +90,6 @@ const styles = StyleSheet.create({
   priceStyle: {
     fontWeight: "bold",
     paddingVertical: 4,
-  },
-  statusStyle: {
-    fontWeight: "bold",
-    paddingVertical: 4,
-    fontSize: 15,
   },
 });
 
