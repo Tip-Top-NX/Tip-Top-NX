@@ -1,6 +1,7 @@
 const express = require("express");
 const User = require("../models/user");
 const Order = require("../models/order");
+const Counter = require("../models/counter");
 const authenticate = require("../utils/authenticate");
 const { upload } = require("../utils/upload");
 
@@ -136,26 +137,34 @@ router.post("/cart/placeOrder", (req, res, next) => {
       quantity: req.body.cart[i].quantity
     });
   }
-  Order.create({
-    contents: conents,
-    amount: req.user.cartTotal,
-    status: "Placed",
-    payment: {
-      method: req.body.method,
-      transactionid: 123,
-    },
-  })
-  .then((order) => {
-    User.findById(req.user._id).then((user) => {
-      user.orders.push(order._id); //add to orders
-      user.cart = []; //clear cart
-      user.cartTotal = 0;
-      user.save().then((user) => {
-        res.send(order);
+  Counter.findOneAndUpdate(
+    { name : "orderId" },
+    { $inc : { count : 1 }},
+    { safe: true, new: true }
+  )
+  .then((counter) => {
+    Order.create({
+      _id : counter.count,
+      contents: conents,
+      amount: req.body.cartTotal,
+      status: "Placed",
+      payment: {
+        method: req.body.method,
+        transactionid: 123,
+      },
+    })
+    .then((order) => {
+      User.findById(req.user._id).then((user) => {
+        user.orders.push(order._id); //add to orders
+        user.cart = []; //clear cart
+        user.cartTotal = 0;
+        user.save().then((user) => {
+          res.send(order);
+        });
       });
-    });
+    })
+    .catch((err) => next(err));
   })
-  .catch((err) => next(err));
 });
 
 module.exports = router;

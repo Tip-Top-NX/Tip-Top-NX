@@ -15,12 +15,10 @@ const ProductCard = (props) => {
         <View style={styles.imageContainer}></View>
         <View style={styles.detailBox}>
           <View style={styles.nameStyle}>
-            <Text style={{ fontWeight: "bold" }}>
-              {props.brand.toUpperCase()}
-            </Text>
+            <Text style={{ fontWeight: "bold" }}>{props.brand}</Text>
           </View>
           <View style={styles.nameStyle}>
-            <Text style={{ fontSize: 12 }}>{props.name.toUpperCase()}</Text>
+            <Text style={{ fontSize: 12 }}>{props._id}</Text>
           </View>
           <View style={styles.subBox}>
             <View style={styles.smallBox}>

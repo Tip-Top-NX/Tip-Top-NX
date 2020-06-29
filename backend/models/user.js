@@ -30,7 +30,7 @@ const userSchema = new Schema({
         default:0
     },
     orders:[{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Number,
         ref:'Order'
     }],
     wishlist:[{

@@ -1,11 +1,15 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import CartItems from "./CartItems";
+import { useSelector } from "react-redux";
+import Empty from "../Empty";
 
 const DisplatCart = () => {
+  const user = useSelector((state) => state.user);
+
   return (
     <View style={styles.container}>
-      <CartItems />
+      {user.cart.length === 0 ? <Empty /> : <CartItems cart={user.cart} />}
     </View>
   );
 };

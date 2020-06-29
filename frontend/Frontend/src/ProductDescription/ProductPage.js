@@ -8,7 +8,7 @@ import ButtonBar from "./ButtonBar";
 import Colours from "./Colour";
 import ProductDetails from "./ProductDetails";
 
-const ProductPage = ({ route }) => {
+const ProductPage = ({ route, navigation }) => {
   const colors = route.params.colors;
   const brand = route.params.brand;
   const description = route.params.description;
@@ -18,6 +18,7 @@ const ProductPage = ({ route }) => {
   const discountPercentage = route.params.discountPercentage;
   const name = route.params.name;
   const price = route.params.price;
+  const _id = route.params._id;
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -30,7 +31,7 @@ const ProductPage = ({ route }) => {
       />
       <Colours colors={colors} />
       <Size size={size} />
-      <ButtonBar />
+      <ButtonBar navigation={navigation} _id={_id} />
       <ProductDetails styles={styles} description={description} />
     </ScrollView>
   );

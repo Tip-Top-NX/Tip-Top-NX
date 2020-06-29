@@ -1,9 +1,14 @@
+/* eslint-disable */
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
+import { postCart } from "../../../redux/ActionCreators";
 
-const ButtonBar = () => {
+const ButtonBar = (props) => {
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.container}>
       <View style={styles.wishlistButtonContainer}>
@@ -13,7 +18,10 @@ const ButtonBar = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.addToCartButtonContainer}>
-        <TouchableOpacity style={styles.addToCartButton}>
+        <TouchableOpacity
+          style={styles.addToCartButton}
+          onPress={() => dispatch(postCart(props._id))}
+        >
           <AntDesign name="shoppingcart" size={25} color="white" />
           <Text style={styles.addToCartText}>ADD TO CART</Text>
         </TouchableOpacity>
