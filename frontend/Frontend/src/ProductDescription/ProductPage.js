@@ -8,7 +8,7 @@ import ButtonBar from "./ButtonBar";
 import Colours from "./Colour";
 import ProductDetails from "./ProductDetails";
 
-const ProductPage = ({ route, navigation }) => {
+const ProductPage = ({ route }) => {
   const colors = route.params.colors;
   const brand = route.params.brand;
   const description = route.params.description;
@@ -41,7 +41,6 @@ const ProductPage = ({ route, navigation }) => {
         onSizeChange={(sizeValue) => setChosenSize(sizeValue)}
       />
       <ButtonBar
-        navigation={navigation}
         _id={_id}
         chosenSize={chosenSize}
         chosenColor={chosenColor}

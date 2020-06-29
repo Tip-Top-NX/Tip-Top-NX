@@ -9,7 +9,7 @@ import NotLoggedIn from "../SignOut/NotLoggedIn";
 const Cart = ({ navigation }) => {
   const user = useSelector((state) => state.user);
   if (user.isValid) {
-    return <DisplayCart />;
+    return <DisplayCart navigation={navigation} />;
   } else {
     return (
       <View style={styles.container}>

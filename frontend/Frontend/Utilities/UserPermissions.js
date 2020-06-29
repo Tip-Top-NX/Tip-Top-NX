@@ -10,7 +10,7 @@ class userPermission {
       }
     }
     if (Platform.OS === "android") {
-      console.log("yes");
+      // console.log("yes");
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
       );

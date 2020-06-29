@@ -17,7 +17,11 @@ const popular = (props) => {
   };
 
   useEffect(() => {
-    getProducts();
+    let mounted = true;
+    if (mounted) {
+      getProducts();
+    }
+    return () => (mounted = false);
   }, []);
   return (
     <View style={styles.container}>
@@ -52,11 +56,17 @@ const popular = (props) => {
         keyExtractor={(item) => item._id.toString()}
         renderItem={({ item }) => (
           <ProductCard
+            brand={item.brand}
+            description={item.description}
+            colors={item.colors}
             images={item.images}
+            size={item.size}
+            style={item.style}
+            discountPercentage={item.discountPercentage}
             name={item.name}
             price={item.price}
-            _id={item._id}
             navigation={props.navigation}
+            _id={item._id}
             cardStyle={styles.cardStyle}
             imageView={styles.imageView}
             details={styles.details}

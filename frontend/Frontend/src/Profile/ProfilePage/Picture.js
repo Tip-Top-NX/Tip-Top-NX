@@ -19,7 +19,7 @@ const Picture = () => {
 
   useEffect(() => {
     if (user.image != "") {
-      console.log(getURL(user.image));
+      // console.log(getURL(user.image));
       setPicture(getURL(user.image));
     }
   }, [user.image]);
@@ -32,7 +32,7 @@ const Picture = () => {
       aspect: [4, 3],
     });
     if (!result.cancelled) {
-      console.log(result.uri);
+      // console.log(result.uri);
       setPicture(result.uri);
       const data = new FormData();
       data.append("myImage", {

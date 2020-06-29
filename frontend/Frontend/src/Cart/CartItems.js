@@ -9,7 +9,7 @@ const CartItems = (props) => {
   return (
     <View style={styles.overAllContainer}>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-        <FlatList
+        {/* <FlatList
           data={props.cart}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => String(index)}
@@ -25,7 +25,20 @@ const CartItems = (props) => {
               color={item.color}
             />
           )}
-        />
+        /> */}
+        {props.cart.map((item, index) => (
+          <ProductCard
+            key={index}
+            images={item.product.images}
+            _id={item.product._id}
+            name={item.product.name}
+            brand={item.product.brand}
+            price={item.product.price}
+            discountPercentage={item.discountPercentage}
+            size={item.size}
+            color={item.color}
+          />
+        ))}
         <View style={styles.tipStyle}>
           <Text>*** Shop for atleast Rs. 1000 for FREE delivery ***</Text>
         </View>

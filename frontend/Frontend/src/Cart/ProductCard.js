@@ -5,14 +5,32 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import styles from "./ProductCardStyles";
 import { getURL } from "../../../axios";
-import { useDispatch } from "react-redux";
-import { delCart } from "../../../redux/ActionCreators";
+import { useDispatch, useSelector } from "react-redux";
+import { delCart, postWishlist } from "../../../redux/ActionCreators";
 
 const ProductCard = (props) => {
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState("1");
   let SP = props.price - (props.price * props.discountPercentage) / 100;
   let totalItemPrice = props.price * quantity;
+
+  const onQuantityDec = () => {
+    if (quantity !== 1) {
+      setQuantity(quantity - 1);
+    } else {
+      dispatch(delCart(props._id));
+    }
+  };
+
+  const handleWishlist = () => {
+    if (user.wishlist.filter((item) => item._id === props._id).length == 0) {
+      dispatch(postWishlist(props._id));
+      alert(" added");
+    } else {
+      alert("already added");
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -63,7 +81,7 @@ const ProductCard = (props) => {
                     name="minus"
                     size={20}
                     color="grey"
-                    onPress={() => setQuantity(quantity - 1)}
+                    onPress={() => onQuantityDec()}
                   />
                 </View>
                 <Text
@@ -107,6 +125,7 @@ const ProductCard = (props) => {
         <View style={{ borderWidth: 1, padding: 2 }}>
           <TouchableOpacity
             style={[styles.buttonBox, { backgroundColor: "#3A66A7" }]}
+            onPress={() => handleWishlist()}
           >
             <MaterialIcons name="bookmark-border" size={20} color="white" />
             <Text style={{ fontWeight: "bold", color: "#fff" }}>WISHLIST</Text>

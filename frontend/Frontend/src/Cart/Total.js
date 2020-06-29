@@ -1,7 +1,14 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
+import { useSelector } from "react-redux";
+
 const Total = () => {
+  let deliveryCharges = 50;
+  const user = useSelector((state) => state.user);
+  let grandTotal = user.cartTotal + deliveryCharges;
+  console.log(user.cartTotal);
+
   return (
     <View style={styles.container}>
       <View style={styles.headerStyle}>
@@ -13,7 +20,7 @@ const Total = () => {
             <Text>SUB TOTAL</Text>
           </View>
           <View style={styles.valueTextBox}>
-            <Text>₹ 2000</Text>
+            <Text>₹ {user.cartTotal}</Text>
           </View>
         </View>
         <View style={styles.boxStyle}>
@@ -37,7 +44,7 @@ const Total = () => {
             <Text style={{ fontWeight: "bold" }}>GRAND TOTAL</Text>
           </View>
           <View style={styles.valueTextBox}>
-            <Text style={{ fontWeight: "bold" }}>₹ 2000</Text>
+            <Text style={{ fontWeight: "bold" }}>₹ {grandTotal}</Text>
           </View>
         </View>
       </View>

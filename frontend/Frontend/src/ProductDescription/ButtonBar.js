@@ -1,18 +1,30 @@
 /* eslint-disable */
 import React from "react";
-import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Text, Alert } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { postCart } from "../../../redux/ActionCreators";
+import { useNavigation } from "@react-navigation/native";
 
 const ButtonBar = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  console.log(props.chosenColor + " " + props.chosenSize);
 
-  const addToCart = () => {
-    dispatch(postCart(props._id, props.chosenColor, props.chosenSize));
+  const addToCartHandler = () => {
+    user.isValid
+      ? dispatch(postCart(props._id, props.chosenColor, props.chosenSize, 1))
+      : Alert.alert(
+          "Cannot Add To Cart",
+          "You need to login first in order to add items to the cart",
+          [
+            {
+              text: "Okay",
+              style: "okay",
+            },
+          ],
+          { cancelable: true }
+        );
   };
 
   return (
@@ -24,7 +36,10 @@ const ButtonBar = (props) => {
         </TouchableOpacity>
       </View>
       <View style={styles.addToCartButtonContainer}>
-        <TouchableOpacity style={styles.addToCartButton} onPress={addToCart}>
+        <TouchableOpacity
+          style={styles.addToCartButton}
+          onPress={addToCartHandler}
+        >
           <AntDesign name="shoppingcart" size={25} color="white" />
           <Text style={styles.addToCartText}>ADD TO CART</Text>
         </TouchableOpacity>

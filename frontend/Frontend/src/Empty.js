@@ -27,7 +27,7 @@ const Empty = (props) => {
         <Text style={styles.textStyle}>{props.desc}</Text>
         <TouchableOpacity
           style={styles.buttonStyle}
-          onPress={() => props.navigation.navigate("Categories")}
+          onPress={() => props.navigation.navigate("Catelogue")}
         >
           <Text>Browse</Text>
         </TouchableOpacity>

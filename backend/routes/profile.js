@@ -8,7 +8,7 @@ const { upload } = require("../utils/upload");
 const router = express.Router();
 
 router.get("/test", (req, res, next) => {
-  console.log("entered");
+  // console.log("entered");
   res.send("blah");
 });
 
@@ -16,15 +16,16 @@ router
   .route("/")
   .get((req, res, next) => {
     //send user details
-    User.findById(req.user._id).populate('wishlist')
-    .populate({path:'cart',populate:{path:'product'}})
-    .populate({path:'orders',populate:{path:'contents.product'}})
-    .then((user) => {
-      res.send({
-        user: user,
-      });
-    })
-    .catch((err) => next(err));
+    User.findById(req.user._id)
+      .populate("wishlist")
+      .populate({ path: "cart", populate: { path: "product" } })
+      .populate({ path: "orders", populate: { path: "contents.product" } })
+      .then((user) => {
+        res.send({
+          user: user,
+        });
+      })
+      .catch((err) => next(err));
   })
   .put((req, res, next) => {
     //update user
@@ -64,7 +65,7 @@ router.post("/uploadPhoto", upload.single("myImage"), (req, res, next) => {
       let filePath = req.file.path;
       filePath = filePath.replace(/\\/g, "/");
       user.image = req.file.path;
-      console.log("url", user.image);
+      // console.log("url", user.image);
       return user.save();
     })
     .then((user) => {
@@ -101,12 +102,12 @@ router.get("/cart", (req, res, next) => {
 
 router.get("/orders", (req, res, next) => {
   User.findById(req.user._id)
-  .populate({
-    path:'orders',
-    populate:{
-      path:'contents.product'
-    }
-  })
+    .populate({
+      path: "orders",
+      populate: {
+        path: "contents.product",
+      },
+    })
     .then(
       (user) => {
         res.send(user.orders);
@@ -133,18 +134,19 @@ router.post("/cart/placeOrder", (req, res, next) => {
       product: req.body.cart[i].product._id,
       size: req.body.cart[i].size,
       color: req.body.cart[i].color,
-      price: req.body.cart[i].product.price*(1-req.body.cart[i].product.discountPercentage/100),
-      quantity: req.body.cart[i].quantity
+      price:
+        req.body.cart[i].product.price *
+        (1 - req.body.cart[i].product.discountPercentage / 100),
+      quantity: req.body.cart[i].quantity,
     });
   }
   Counter.findOneAndUpdate(
-    { name : "orderId" },
-    { $inc : { count : 1 }},
+    { name: "orderId" },
+    { $inc: { count: 1 } },
     { safe: true, new: true }
-  )
-  .then((counter) => {
+  ).then((counter) => {
     Order.create({
-      _id : counter.count,
+      _id: counter.count,
       contents: conents,
       amount: req.body.cartTotal,
       status: "Placed",
@@ -153,18 +155,18 @@ router.post("/cart/placeOrder", (req, res, next) => {
         transactionid: 123,
       },
     })
-    .then((order) => {
-      User.findById(req.user._id).then((user) => {
-        user.orders.push(order._id); //add to orders
-        user.cart = []; //clear cart
-        user.cartTotal = 0;
-        user.save().then((user) => {
-          res.send(order);
+      .then((order) => {
+        User.findById(req.user._id).then((user) => {
+          user.orders.push(order._id); //add to orders
+          user.cart = []; //clear cart
+          user.cartTotal = 0;
+          user.save().then((user) => {
+            res.send(order);
+          });
         });
-      });
-    })
-    .catch((err) => next(err));
-  })
+      })
+      .catch((err) => next(err));
+  });
 });
 
 module.exports = router;

@@ -2,10 +2,11 @@
 import * as ActionTypes from "./ActionTypes";
 import { myAxios, getConfig } from "../axios";
 
-export const postCart = (prodId, color, size) => {
+export const postCart = (prodId, color, size, quantity) => {
   const bodyPart = {
     color: color,
     size: size,
+    quantity: quantity,
   };
   return (dispatch) => {
     getConfig().then((config) => {

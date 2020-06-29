@@ -15,7 +15,11 @@ const Catelogue = ({ navigation }) => {
   };
 
   useEffect(() => {
-    getProducts();
+    let mounted = true;
+    if (mounted) {
+      getProducts();
+    }
+    return () => (mounted = false);
   }, []);
 
   return (

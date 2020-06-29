@@ -12,13 +12,17 @@ const ProductCard = (props) => {
   const [itemStatus, setItemStatus] = useState(false);
 
   useEffect(() => {
-    if (user.isValid) {
-      if (user.wishlist.filter((item) => item._id == props._id).length == 0) {
-        setItemStatus(false);
-      } else {
-        setItemStatus(true);
+    let mounted = true;
+    if (mounted) {
+      if (user.isValid) {
+        if (user.wishlist.filter((item) => item._id == props._id).length == 0) {
+          setItemStatus(false);
+        } else {
+          setItemStatus(true);
+        }
       }
     }
+    return () => (mounted = false);
   }, []);
 
   const handleWishlist = () => {
