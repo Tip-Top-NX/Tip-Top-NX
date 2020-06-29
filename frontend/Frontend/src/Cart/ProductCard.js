@@ -4,31 +4,59 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import styles from "./ProductCardStyles";
+import { getURL } from "../../../axios";
+import { useDispatch } from "react-redux";
+import { delCart } from "../../../redux/ActionCreators";
 
 const ProductCard = (props) => {
+  const dispatch = useDispatch();
   const [quantity, setQuantity] = useState("1");
   let SP = props.price - (props.price * props.discountPercentage) / 100;
-  let totalItemPrice = SP * quantity;
+  let totalItemPrice = props.price * quantity;
+
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: "row" }}>
-        <View style={styles.imageContainer}></View>
+        <View style={styles.imageContainer}>
+          <Image
+            source={{ uri: getURL(props.images[0]) }}
+            style={{ height: 160, width: 120 }}
+          />
+        </View>
         <View style={styles.detailBox}>
           <View style={styles.nameStyle}>
             <Text style={{ fontWeight: "bold" }}>{props.brand}</Text>
           </View>
           <View style={styles.nameStyle}>
-            <Text style={{ fontSize: 12 }}>{props._id}</Text>
+            <Text style={{ fontSize: 12 }}>{props.name}</Text>
           </View>
           <View style={styles.subBox}>
-            <View style={styles.smallBox}>
-              <Text style={{ color: "#888" }}>SIZE : </Text>
-              <Text style={{ fontWeight: "500", fontSize: 18 }}>
-                {props.size}
-              </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                borderBottomWidth: 1,
+                borderColor: "#ccc",
+              }}
+            >
+              <View style={styles.smallBox}>
+                <Text style={{ color: "#888", fontSize: 12 }}>SIZE : </Text>
+                <Text style={{ fontWeight: "500", fontSize: 12 }}>
+                  {props.size}
+                </Text>
+              </View>
+              <View style={styles.smallBox}>
+                <Text style={{ color: "#888", fontSize: 12 }}>COLOR : </Text>
+                <Text style={{ fontWeight: "500", fontSize: 12 }}>
+                  {props.color}
+                </Text>
+              </View>
             </View>
             <View style={styles.smallBox}>
-              <Text style={{ color: "#888" }}>QTY : </Text>
+              <Text style={{ color: "#888", fontSize: 12, paddingLeft: 3 }}>
+                QTY :{" "}
+              </Text>
               <View style={{ flexDirection: "row" }}>
                 <View style={styles.minusBox}>
                   <AntDesign
@@ -70,6 +98,7 @@ const ProductCard = (props) => {
         >
           <TouchableOpacity
             style={[styles.buttonBox, { backgroundColor: "#fff" }]}
+            onPress={() => dispatch(delCart(props._id))}
           >
             <MaterialIcons name="delete" size={20} color="grey" />
             <Text style={{ fontWeight: "bold" }}>REMOVE</Text>

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -11,6 +11,10 @@ import {
 const Colours = (props) => {
   const [selected, setSelected] = useState();
   const colors = [...props.colors];
+
+  useEffect(() => {
+    props.onColorChange(colors[selected]);
+  }, [selected]);
 
   return (
     <View style={styles.container}>

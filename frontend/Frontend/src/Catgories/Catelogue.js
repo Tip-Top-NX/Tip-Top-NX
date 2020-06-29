@@ -9,7 +9,7 @@ const Catelogue = ({ navigation }) => {
   const [products, setProducts] = useState();
   const getProducts = () => {
     return myAxios
-      .get("/category/1/get-products")
+      .get("/category/5/get-products")
       .then((res) => setProducts([...res.data]))
       .catch((err) => console.log(err));
   };

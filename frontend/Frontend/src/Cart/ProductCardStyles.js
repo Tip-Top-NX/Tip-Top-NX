@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     backgroundColor: "#fff",
     borderColor: "#ccc",
+    alignSelf: "center",
   },
   imageContainer: {
     height: 160,
@@ -41,11 +42,11 @@ const styles = StyleSheet.create({
     margin: 2,
   },
   smallBox: {
-    marginVertical: 5,
+    marginVertical: 7,
     alignItems: "center",
     // borderWidth: 1,
     paddingVertical: 3,
-    paddingHorizontal: 15,
+    paddingHorizontal: 9,
     flexDirection: "row",
   },
   priceBox: {
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
     width: "90%",
     paddingVertical: 5,
     paddingHorizontal: 5,
-    margin: 5,
+    paddingTop: 10,
   },
   discountedPriceText: {
     fontSize: 17,
