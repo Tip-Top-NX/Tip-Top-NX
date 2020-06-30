@@ -17,7 +17,7 @@ const ProductCard = (props) => {
   const onQuantityDec = () => {
     if (props.quantity !== 1) {
       dispatch(
-        postCart(props._id, props.color, props.size, props.quantity - 1)
+        postCart(props._id, props.color, props.size,- 1)
       );
     } else {
       dispatch(delCart(props._id));
@@ -104,7 +104,7 @@ const ProductCard = (props) => {
                           props._id,
                           props.color,
                           props.size,
-                          props.quantity + 1
+                          1
                         )
                       )
                     }
