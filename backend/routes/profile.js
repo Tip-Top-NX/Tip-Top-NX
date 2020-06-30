@@ -126,6 +126,24 @@ router.get("/order/:orderId", (req, res, next) => {
     .catch((err) => next(err));
 });
 
+router.put("/order/:orderId",(req,res,next) => {
+  Order.findByIdAndUpdate(req.params.orderId,
+    { $set : {status : req.body.status}},
+    { safe: true, upsert:true, new:true})
+    .populate("contents.product")
+    .then((order) => {
+      res.send(order);
+    })
+    .catch((err) => next(err));
+})
+
+router.delete("/order/:orderId",(req,res,next) => {
+  Order.findByIdAndDelete(req.params.orderId)
+  .then((order)=>{
+    res.send({"success":true})
+  })
+})
+
 //test only
 router.post("/cart/placeOrder", (req, res, next) => {
   let conents = [];
@@ -154,10 +172,11 @@ router.post("/cart/placeOrder", (req, res, next) => {
         method: req.body.method,
         transactionid: 123,
       },
+      deliveryCharge : req.body.cartTotal>1000? 0 : 100
     })
       .then((order) => {
         User.findById(req.user._id).then((user) => {
-          user.orders.push(order._id); //add to orders
+          user.orders.splice(0,0,order._id); //add to orders
           user.cart = []; //clear cart
           user.cartTotal = 0;
           user.save().then((user) => {

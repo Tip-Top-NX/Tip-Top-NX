@@ -44,7 +44,8 @@ const userSchema = new Schema({
         },
         size:String,
         color:String,
-        quantity:Number
+        quantity:Number,
+        price:Number
     }],
     cartTotal:Number
 })
