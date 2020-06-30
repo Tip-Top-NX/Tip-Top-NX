@@ -1,28 +1,37 @@
 /* eslint-disable */
 import React from "react";
-import { View, StyleSheet, Text, Image, ViewPropTypes, FlatList } from "react-native";
+import { SafeAreaView, StyleSheet, Text, Image, ViewPropTypes, FlatList, Dimensions } from "react-native";
 import { useSelector } from "react-redux";
 import OrderCard from "./OrderCard";
+import Constants from 'expo-constants';
+
+const height = Dimensions.get("window").height;
 
 const Orders = ({navigation}) => {
   const user = useSelector((state) => state.user);
-  console.log("In orders.js");
   return (
-    <View>
+    <SafeAreaView style={styles.container}>
       <FlatList
         data={user.orders}
         vertical={true}
-        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         keyExtractor={(item) => item._id.toString()}
         renderItem={({ item }) => (
           <OrderCard
             _id={item._id}
+            amount={item.amount}
+            deliveryCharge={item.deliveryCharge}
+            status={item.status}
+            method={item.payment.method}
+            orderDate={item.orderDate}
             contents={item.contents}
+            name={user.name}
+            address={user.address}
             navigation={navigation}
           />
         )}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -30,9 +39,8 @@ export default Orders;
 
 const styles = StyleSheet.create({
   container: {
-    height: 380,
-    marginVertical: 20,
     justifyContent: "center",
-    // flex: 1,
+    flex: 1,
+    backgroundColor: "white"
   },
 });

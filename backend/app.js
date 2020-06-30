@@ -40,7 +40,7 @@ mongoose
   })
   .then((db) => console.log("Mongo connection successfull!"))
   .catch((err) => console.log(err));
->>>>>>> 7e08f91a75047a92be8ac0136fdb8b2a50de9638
+
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

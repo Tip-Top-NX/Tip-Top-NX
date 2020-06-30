@@ -19,6 +19,16 @@ const OrderStack = () => {
         component={Orders}
         options={{ headerShown: true }}
       />
+      <Stack.Screen
+        name="Product Details"
+        component={OrderProductDetails}
+        options={{ headerShown: true }}
+      />
+      <Stack.Screen
+        name="Order Details"
+        component={OrderDetails}
+        options={{ headerShown: true }}
+      />
     </Stack.Navigator>
   );
 };

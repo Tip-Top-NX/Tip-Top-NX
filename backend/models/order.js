@@ -13,6 +13,7 @@ const orderSchema = new Schema({
         price:Number,
         quantity:Number
     }],
+    deliveryCharge:Number,
     amount:{
         type:Number,
         required:true
