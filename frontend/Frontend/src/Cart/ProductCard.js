@@ -6,18 +6,19 @@ import { AntDesign } from "@expo/vector-icons";
 import styles from "./ProductCardStyles";
 import { getURL } from "../../../axios";
 import { useDispatch, useSelector } from "react-redux";
-import { delCart, postWishlist } from "../../../redux/ActionCreators";
+import { delCart, postWishlist, postCart } from "../../../redux/ActionCreators";
 
 const ProductCard = (props) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = useState("1");
   let SP = props.price - (props.price * props.discountPercentage) / 100;
-  let totalItemPrice = props.price * quantity;
+  let totalItemPrice = props.price * props.quantity;
 
   const onQuantityDec = () => {
-    if (quantity !== 1) {
-      setQuantity(quantity - 1);
+    if (props.quantity !== 1) {
+      dispatch(
+        postCart(props._id, props.color, props.size, props.quantity - 1)
+      );
     } else {
       dispatch(delCart(props._id));
     }
@@ -73,7 +74,7 @@ const ProductCard = (props) => {
             </View>
             <View style={styles.smallBox}>
               <Text style={{ color: "#888", fontSize: 12, paddingLeft: 3 }}>
-                QTY :{" "}
+                QTY :
               </Text>
               <View style={{ flexDirection: "row" }}>
                 <View style={styles.minusBox}>
@@ -90,14 +91,23 @@ const ProductCard = (props) => {
                     fontSize: 18,
                   }}
                 >
-                  {quantity}
+                  {props.quantity}
                 </Text>
                 <View style={styles.plusBox}>
                   <MaterialIcons
                     name="add"
                     size={20}
                     color="grey"
-                    onPress={() => setQuantity(parseInt(quantity) + 1)}
+                    onPress={() =>
+                      dispatch(
+                        postCart(
+                          props._id,
+                          props.color,
+                          props.size,
+                          props.quantity + 1
+                        )
+                      )
+                    }
                   />
                 </View>
               </View>

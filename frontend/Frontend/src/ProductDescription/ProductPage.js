@@ -20,8 +20,8 @@ const ProductPage = ({ route }) => {
   const price = route.params.price;
   const _id = route.params._id;
 
-  const [chosenSize, setChosenSize] = useState();
-  const [chosenColor, setChosenColor] = useState();
+  const [chosenSize, setChosenSize] = useState("No");
+  const [chosenColor, setChosenColor] = useState("No");
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -39,13 +39,9 @@ const ProductPage = ({ route }) => {
       <Size
         size={size}
         onSizeChange={(sizeValue) => setChosenSize(sizeValue)}
+        images={images[images.length - 1]}
       />
-      <ButtonBar
-        _id={_id}
-        chosenSize={chosenSize}
-        chosenColor={chosenColor}
-        chosenSize={chosenSize}
-      />
+      <ButtonBar _id={_id} chosenSize={chosenSize} chosenColor={chosenColor} />
       <ProductDetails styles={styles} description={description} />
     </ScrollView>
   );
