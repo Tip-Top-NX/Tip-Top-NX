@@ -12,27 +12,33 @@ export const postCart = (prodId, color, size, quantity) => {
     getConfig().then((config) => {
       myAxios
         .post("/product/" + prodId + "/cart", bodyPart, config)
-        .then((res) => dispatch(setCart(res.data.cart)))
+        .then((res) => dispatch(setCart(res.data.cart,res.data.cartTotal)))
         .catch((err) => console.log(err));
     });
   };
 };
 
-export const delCart = (prodId) => {
+export const delCart = (prodId, color, size) => {
+  const bodyPart = {
+    color: color,
+    size: size
+  };
   return (dispatch) => {
     getConfig().then((config) => {
+      config.data = bodyPart
       myAxios
-        .delete("/product/" + prodId + "/cart", config)
-        .then((res) => dispatch(setCart(res.data.cart)))
+        .delete("/product/" + prodId + "/cart",config)
+        .then((res) => dispatch(setCart(res.data.cart,res.data.cartTotal)))
         .catch((err) => console.log(err));
     });
   };
 };
 
-export const setCart = (cart) => {
+export const setCart = (cart,cartTotal) => {
   return {
     type: ActionTypes.SET_CART,
     payload: cart,
+    cartTotal:cartTotal
   };
 };
 

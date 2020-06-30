@@ -20,7 +20,7 @@ const ProductCard = (props) => {
         postCart(props._id, props.color, props.size,- 1)
       );
     } else {
-      dispatch(delCart(props._id));
+      dispatch(delCart(props._id,props.color,props.size));
     }
   };
 
@@ -126,7 +126,7 @@ const ProductCard = (props) => {
         >
           <TouchableOpacity
             style={[styles.buttonBox, { backgroundColor: "#fff" }]}
-            onPress={() => dispatch(delCart(props._id))}
+            onPress={() => dispatch(delCart(props._id,props.color,props.size))}
           >
             <MaterialIcons name="delete" size={20} color="grey" />
             <Text style={{ fontWeight: "bold" }}>REMOVE</Text>
