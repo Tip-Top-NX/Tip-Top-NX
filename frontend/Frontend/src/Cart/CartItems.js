@@ -37,6 +37,7 @@ const CartItems = (props) => {
             discountPercentage={item.discountPercentage}
             size={item.size}
             color={item.color}
+            quantity={item.quantity}
           />
         ))}
         <View style={styles.tipStyle}>

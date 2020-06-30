@@ -4,10 +4,11 @@ import { View, StyleSheet, Text } from "react-native";
 import { useSelector } from "react-redux";
 
 const Total = () => {
-  let deliveryCharges = 50;
   const user = useSelector((state) => state.user);
+  let deliveryCharges;
+  user.cartTotal >= 1000 ? (deliveryCharges = 0) : (deliveryCharges = 50);
   let grandTotal = user.cartTotal + deliveryCharges;
-  console.log(user.cartTotal);
+  console.log(user);
 
   return (
     <View style={styles.container}>
@@ -23,20 +24,20 @@ const Total = () => {
             <Text>₹ {user.cartTotal}</Text>
           </View>
         </View>
-        <View style={styles.boxStyle}>
+        {/* <View style={styles.boxStyle}>
           <View style={styles.totalTextBox}>
             <Text>TOTAL DISCOUNT</Text>
           </View>
           <View style={styles.valueTextBox}>
             <Text>₹ 2000</Text>
           </View>
-        </View>
+        </View> */}
         <View style={styles.boxStyle}>
           <View style={styles.totalTextBox}>
             <Text>DELIVERY CHARGES</Text>
           </View>
           <View style={styles.valueTextBox}>
-            <Text>₹ 2000</Text>
+            <Text>₹ {deliveryCharges}</Text>
           </View>
         </View>
         <View style={styles.boxStyle}>
@@ -58,9 +59,9 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 20,
     width: "100%",
-    height: 200,
-    borderWidth: 1,
-    borderColor: "#ccc",
+    height: 150,
+    // borderWidth: 1,
+    // borderColor: "#ccc",
     paddingVertical: 10,
     justifyContent: "space-evenly",
     alignItems: "center",

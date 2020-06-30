@@ -13,8 +13,11 @@ const PlaceOrderTab = (props) => {
       >
         <Text style={[styles.buttonText, { color: "#000" }]}>ADD MORE</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.buttonBox}>
-        <Text style={styles.buttonText}>PLACE ORDER</Text>
+      <TouchableOpacity
+        style={styles.buttonBox}
+        onPress={() => navigation.navigate("Address")}
+      >
+        <Text style={styles.buttonText}>NEXT</Text>
       </TouchableOpacity>
     </View>
   );

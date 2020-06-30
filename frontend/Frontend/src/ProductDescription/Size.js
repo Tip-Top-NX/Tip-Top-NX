@@ -7,8 +7,10 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const Size = (props) => {
+  const navigation = useNavigation();
   const [selected, setSelected] = useState();
   const size = [...props.size];
 
@@ -20,7 +22,12 @@ const Size = (props) => {
     <View style={styles.container}>
       <View style={styles.headerStyle}>
         <Text style={styles.headerText}>SELECT SIZE</Text>
-        <TouchableOpacity style={styles.sizeChartButton}>
+        <TouchableOpacity
+          style={styles.sizeChartButton}
+          onPress={() =>
+            navigation.navigate("SizeChart", { sizeChart: props.images })
+          }
+        >
           <Text style={styles.sizeChartButtonText}>SIZE CHART</Text>
         </TouchableOpacity>
       </View>
