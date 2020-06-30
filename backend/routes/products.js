@@ -60,20 +60,66 @@ router.route('/:prodId/wishlist')
             .catch((err) => next(err));
     })
 
+function updateUserCart(req,res,user){
+    cart = user.cart
+    for(let i=0;i<cart.length;i++){
+        if(cart[i].product == req.params.prodId && cart[i].size == req.body.size && cart[i].color == req.body.color){
+            cart[i].quantity += req.body.quantity
+            user.cart = cart;
+            return i
+        }
+    }
+    cart.push({ product: req.params.prodId, color: req.body.color, size: req.body.size, quantity: req.body.quantity});
+    return -1
+}
+
+function getCartItem(req,res,user){
+    cart = user.cart
+    for(let i=0;i<cart.length;i++){
+        if(cart[i].product == req.params.prodId && cart[i].size == req.body.size && cart[i].color == req.body.color){
+            return i
+        }
+    }
+    return -1
+}
+
 router.route('/:prodId/cart')
     .post(authenticate.verifyUser, (req, res, next) => {
-        User.findByIdAndUpdate(req.user._id,
-            { $push: { cart : { product: req.params.prodId, color: req.body.color, size: req.body.size}}},
-            { safe: true, upsert: true, new: true}).populate('cart.product')
-            .then((user) => res.send({ cart: user.cart} ))
-            .catch((err) => next(err));
+        var i = -1
+        User.findById(req.user._id)
+            .then((user) => {
+                i =  updateUserCart(req,res,user)
+                return User.populate(user,{path:'cart.product'})
+            })
+            .then((user) => {
+                if(i>=0){
+                    user.cartTotal += user.cart[i].price * req.body.quantity
+                }
+                else{
+                    user.cart[cart.length - 1].price = user.cart[cart.length - 1].product.price * (1-user.cart[cart.length-1].product.discountPercentage/100)
+                    user.cartTotal += user.cart[cart.length-1].price * req.body.quantity
+                }
+                res.json({cart:user.cart, cartTotal:user.cartTotal})
+                user.save()
+            })
+            .catch((err) => next(err))
     })
     .delete(authenticate.verifyUser, (req, res, next) => {
-        User.findByIdAndUpdate(req.user._id,
-            { $pull : {cart : {product:req.params.prodId}}},
-            { safe: true, upsert:true, new:true}).populate('cart.product')
-            .then((user) => res.send({ cart: user.cart} ))
-            .catch((err) => next(err));
+        var i = -1
+        User.findById(req.user._id)
+            .then((user) => {
+                i = getCartItem(req,res,user)
+                if(i>=0){
+                    user.cartTotal = user.cartTotal - user.cart[i].price * user.cart[i].quantity
+                    user.cart.splice(i,1)
+                }
+                return User.populate(user,{path:'cart.product'})
+            })
+            .then((user) => {
+                res.json({cart:user.cart,cartTotal:user.cartTotal})
+                user.save()
+            })
+            .catch((err)=>next)
     })
 
 module.exports = router;

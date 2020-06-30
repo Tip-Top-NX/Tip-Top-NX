@@ -42,6 +42,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         cart: action.payload,
+        cartTotal : action.cartTotal
       };
     case ActionTypes.SET_PROFILE:
       return {

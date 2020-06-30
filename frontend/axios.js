@@ -24,6 +24,5 @@ export const getConfig = () => {
 
 export const getURL = (path) => {
   uri = "http://" + myIP + ":" + port + "/" + path;
-  uri = encodeURI(uri);
   return uri;
 };

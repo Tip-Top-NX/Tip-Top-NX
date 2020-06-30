@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from "react";
+import React, { useState } from "react";
 import { ScrollView } from "react-native";
 import ImageCarousel from "./ImageCarousel";
 import ProductInfo from "./ProductInfo";
@@ -18,6 +18,10 @@ const ProductPage = ({ route }) => {
   const discountPercentage = route.params.discountPercentage;
   const name = route.params.name;
   const price = route.params.price;
+  const _id = route.params._id;
+
+  const [chosenSize, setChosenSize] = useState("No");
+  const [chosenColor, setChosenColor] = useState("No");
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -28,9 +32,16 @@ const ProductPage = ({ route }) => {
         price={price}
         discountPercentage={discountPercentage}
       />
-      <Colours colors={colors} />
-      <Size size={size} />
-      <ButtonBar />
+      <Colours
+        colors={colors}
+        onColorChange={(colorValue) => setChosenColor(colorValue)}
+      />
+      <Size
+        size={size}
+        onSizeChange={(sizeValue) => setChosenSize(sizeValue)}
+        images={images[images.length - 1]}
+      />
+      <ButtonBar _id={_id} chosenSize={chosenSize} chosenColor={chosenColor} />
       <ProductDetails styles={styles} description={description} />
     </ScrollView>
   );

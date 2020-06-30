@@ -9,15 +9,14 @@ import {
   Keyboard,
   ImageBackground,
   Modal,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 import styles from "./SignInStyles";
 import PropTypes from "prop-types";
 
-import Spinner from '../Spinner';
+import Spinner from "../Spinner";
 import { useSelector, useDispatch } from "react-redux";
 import { signin, signinFailed } from "../../../redux/ActionCreators";
-
 
 const signIn = ({ navigation }) => {
   // states for handling the input
@@ -43,7 +42,7 @@ const signIn = ({ navigation }) => {
   }, [user.isValid]);
 
   const validation = () => {
-    console.log("start",validEmail,validPassword);
+    // console.log("start",validEmail,validPassword);
     const emailregex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     let valid = true;
     // email check
@@ -73,7 +72,6 @@ const signIn = ({ navigation }) => {
       );
     }
   };
-
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
