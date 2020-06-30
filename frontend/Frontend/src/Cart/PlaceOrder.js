@@ -3,7 +3,7 @@ import React from "react";
 import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const PlaceOrderTab = (props) => {
+const PlaceOrderTab = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.placeOrderTab}>

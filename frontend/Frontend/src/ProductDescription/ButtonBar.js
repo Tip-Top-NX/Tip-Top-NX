@@ -5,9 +5,11 @@ import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { postCart, postWishlist } from "../../../redux/ActionCreators";
+import { useNavigation } from "@react-navigation/native";
 
 const ButtonBar = (props) => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const user = useSelector((state) => state.user);
   const [buttonText, setButtonText] = useState("ADD TO CART");
   const [itemStatus, setItemStatus] = useState("WISHLIST");
@@ -66,7 +68,11 @@ const ButtonBar = (props) => {
       <View style={styles.addToCartButtonContainer}>
         <TouchableOpacity
           style={styles.addToCartButton}
-          onPress={addToCartHandler}
+          onPress={
+            buttonText === "GO TO CART"
+              ? () => navigation.navigate("Cart")
+              : addToCartHandler
+          }
         >
           <AntDesign name="shoppingcart" size={25} color="white" />
           <Text style={styles.addToCartText}>{buttonText}</Text>

@@ -8,7 +8,7 @@ const Total = () => {
   let deliveryCharges;
   user.cartTotal >= 1000 ? (deliveryCharges = 0) : (deliveryCharges = 50);
   let grandTotal = user.cartTotal + deliveryCharges;
-  console.log(user);
+  // console.log(user);
 
   return (
     <View style={styles.container}>
