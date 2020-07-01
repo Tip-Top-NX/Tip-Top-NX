@@ -5,6 +5,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { getURL } from "../../../axios";
 
 const height = Dimensions.get("window").height;
+const width = Dimensions.get("window").width;
 
 const OrderProductDetails = ({route,navigation}) => {
 
@@ -20,116 +21,124 @@ const OrderProductDetails = ({route,navigation}) => {
     let total=amount+deliveryCharge;
 
     return (
-        <View style={styles.orderCard}>
-            <View style={{flexDirection:"row"}}>
-                <Text style={[styles.headingDetails,{marginTop:5}]}>Placed on : {" "}</Text>
-                <Text style={[styles.info,{marginTop:5}]}>
-                    {orderDate.charAt(8)}
-                    {orderDate.charAt(9)}
-                    /
-                    {orderDate.charAt(5)}
-                    {orderDate.charAt(6)}
-                    /
-                    {orderDate.charAt(0)}
-                    {orderDate.charAt(1)}
-                    {orderDate.charAt(2)}
-                    {orderDate.charAt(3)}
-                </Text>
-            </View>
-            <View style={{flexDirection:"row"}}>
-                <Text style={styles.headingDetails}>Order No. :</Text>
+        <View style={{backgroundColor:"#f5f5f5"}}>
+          <View style={styles.orderCard}>
+              <View style={{flexDirection:"row"}}>
+                  <Text style={[styles.headingDetails,{marginTop:5}]}>Placed on : {" "}</Text>
+                  <Text style={[styles.info,{marginTop:7}]}>
+                      {orderDate.charAt(8)}
+                      {orderDate.charAt(9)}
+                      /
+                      {orderDate.charAt(5)}
+                      {orderDate.charAt(6)}
+                      /
+                      {orderDate.charAt(0)}
+                      {orderDate.charAt(1)}
+                      {orderDate.charAt(2)}
+                      {orderDate.charAt(3)}
+                  </Text>
+              </View>
+              <View style={{flexDirection:"row"}}>
+                <Text style={styles.headingDetails}>Order No.  :</Text>
                 <Text style={styles.info}>  {_id}</Text>
-            </View>
-            <Text style={styles.headingDetails}>Billing details :-</Text>
-            <View style={styles.priceBox}>
-                <Text style={styles.line}>________________________________</Text>
-                <Text style={styles.headingDetails1}>MRP :                        ₹ {amount.toFixed(2)}</Text>
-                <Text style={styles.headingDetails1}>Delivery charges :  ₹ {deliveryCharge.toFixed(2)}</Text>
-                <Text style={styles.line}>________________________________</Text>
-                <Text style={{fontWeight:"bold",fontSize:18,fontFamily:"sans-serif"}}>TOTAL :                ₹ {total.toFixed(2)}</Text>
-                <Text style={{fontSize:14,fontFamily:"sans-serif-thin",fontWeight:"bold"}}>(including GST)</Text>
-            </View>
-            <Text style={styles.line}>_____________________________________________________</Text>
-            <Text style={styles.headingDetails}>Shipping Address :</Text>
-            <Text style={styles.name}>{name}</Text>
-            <Text style={styles.headingDetails1}>{address}</Text>
-            <Text style={styles.line}>_____________________________________________________</Text>
-            <Text style={styles.headingDetails}>Payment mode :</Text>
-            <Text style={styles.headingDetails1}>{method}</Text>
-            <Text style={styles.line}>_____________________________________________________</Text>
-            <Text style={styles.headingDetails}>Any Queries ?</Text>
-            <Text style={styles.iconRow}>
-                <FontAwesome name="whatsapp" style={styles.whatsapp}/>
-                {"  "}8055025499
-            </Text>
-            <Text style={styles.iconRow}>
-                <FontAwesome name="envelope-o" style={styles.email}/>
-                {"  "}tiptopnx@gmail.com
-            </Text>
+              </View>
+              <Text style={styles.headingDetails}>Bill details :</Text>
+              <View style={styles.priceBox}>
+                <Text style={styles.mrpDetails}>MRP :                        ₹ {amount.toFixed(2)}</Text>
+                <Text style={styles.mrpDetails}>Delivery charges :  ₹ {deliveryCharge.toFixed(2)}</Text>
+              </View>
+              <Text style={[styles.info,{marginLeft:83,marginTop:2}]}>TOTAL :                ₹ {total.toFixed(2)}</Text>
+              <Text style={[styles.headingDetails,{marginLeft:83,marginTop:-5}]}>(including GST)</Text>
+              <View style={[styles.infoBox,{marginTop:7}]}>
+                <Text style={styles.headingDetails}>Shipping Address :</Text>
+                <Text style={styles.name}>{name.toUpperCase()}</Text>
+                <Text style={styles.boxDetails}>{address}</Text>
+              </View>
+              <View style={styles.infoBox}>
+                <Text style={styles.headingDetails}>Payment mode :</Text>
+                <Text style={[styles.boxDetails,{marginTop:2}]}>{method}</Text>
+              </View>
+              <View style={styles.infoBox}>
+                <Text style={styles.headingDetails}>Any Queries ?</Text>
+                <Text style={[styles.boxDetails,{marginTop:3}]}>
+                    <FontAwesome name="phone" style={styles.phone}/>
+                    {"  "}8055025499
+                </Text>
+                <Text style={styles.boxDetails}>
+                    <FontAwesome name="envelope-o" style={styles.email}/>
+                    {"  "}tiptopnx@gmail.com
+                </Text>
+              </View>
+          </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
   orderCard: {
-    height: height,
+    height: 406,
     paddingLeft: 10,
-    backgroundColor: "#FFFAFA",
+    backgroundColor: "#ffffff",
+    marginTop:height/2-240
   },
   priceBox:{
-    marginLeft:60,
+    borderTopWidth:1,
+    borderBottomWidth:1,
+    borderColor:"#818181",
+    width:200,
+    marginLeft:83,
+    marginTop:-12
   },
   priceDetails:{
     marginTop:-70
   },
   headingDetails:{
-    fontSize:17,
-    fontFamily:"sans-serif-thin",
-    fontWeight:"bold",
-    color:"grey",
+    color: "#818181",
+    paddingVertical: 2,
+    fontSize:15
   },
-  headingDetails1:{
-    fontSize:17,
-    fontFamily:"sans-serif-thin",
-    fontWeight:"bold",
+  mrpDetails:{
+    color:"#666666",
+    paddingVertical: 2,
+    fontSize:15
+  },
+  boxDetails:{
+    color:"#4c4c4c",
+    paddingVertical: 2,
+    fontSize:15,
+    marginTop:-4
   },
   name:{
-    fontSize:19,
-    fontFamily:"sans-serif-condensed",
-    fontWeight:"bold",
-    marginTop:7
+    fontWeight: "bold",
+    fontSize: 15,
+    color:"#5e6269",
+    marginTop:2
   },
   info:{
-    fontSize:17,
-    fontFamily:"sans-serif",
-    fontWeight:"bold",
-    color:"black"
+    fontWeight: "bold",
+    fontSize: 15,
+    letterSpacing: 0.5,
+    color:"#5e6269",
+    marginTop:2,
   },
   priceText:{
     fontSize:18,
     fontFamily:"sans-serif-thin",
     fontWeight:"bold"
   },
-  line:{
-    marginTop:-8,
-    marginBottom:2,
-    color:"silver",
-    fontWeight:"bold"
-  },
-  iconRow:{
-    fontSize:17,
-    fontFamily:"sans-serif-thin",
-    fontWeight:"bold",
-    flexDirection:"row",
-    marginTop:5
-  },
-  whatsapp:{
-      fontSize:24,
-      color:"green",
+  phone:{
+      fontSize:16,
+      color:"black",
   },
   email:{
-      fontSize:22,
-      color:"#2874A6"
+      fontSize:16,
+      color:"black"
+  },
+  infoBox:{
+    borderTopWidth:1,
+    borderColor:"#818181",
+    paddingBottom:10,
+    width:width-20
   }
 });
 

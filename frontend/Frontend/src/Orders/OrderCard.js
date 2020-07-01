@@ -1,18 +1,19 @@
 import React from "react";
 import { View, StyleSheet, Text, Dimensions, FlatList, TouchableOpacity } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
 import OrderProductCard from "./OrderProductCard";
 
 const width = Dimensions.get("window").width;
 
 const OrderCard = (props) => {
   
+  let padding=132-props._id.toString().length*9;
+
   return (
-    <View style={styles.orderBox}>
-      <View style={{flexDirection:"row",marginTop:-2,paddingVertical:2}}>
-        <FontAwesome name="address-card" style={styles.address}/>
-        <Text style={{ paddingLeft: 10, paddingBottom: 5,fontSize:16 }}>
-          ORDER NUMBER :<Text style={styles.orderNumberText}> {props._id}</Text>
+    
+    <View style={[styles.orderBox,(props.status == "Cancelled") ? {borderColor:"#e27070"} : (props.status == "Completed") ? {borderColor:"#627dcb"} : {borderColor:"#4fc2a6"}]}>
+      <View style={styles.orderRow}>
+        <Text style={[styles.orderNumber,{paddingRight:padding}]}>
+        ORDER NUMBER :<Text style={styles.orderNumberText}> {props._id}</Text>
         </Text>
         <TouchableOpacity onPress={()=>props.navigation.navigate("Order Details",{
             _id:props._id,
@@ -42,13 +43,13 @@ const OrderCard = (props) => {
             size={item.size}
             price={item.price}
             quantity={item.quantity}
+            color={item.color}
             navigation={props.navigation}
           />
         )}
       />
-      <View style={{ flexDirection:"row",paddingVertical:4 }}>
-        <FontAwesome name="info-circle" style={styles.info}/>
-        <Text style={{paddingLeft: 10, paddingBottom: 5,fontSize:17}}>Status : </Text>
+      <View style={{ flexDirection:"row",paddingVertical:1 }}>
+        <Text style={{paddingLeft: 10,fontSize:15,color:"#7b7b7b"}}>Status : </Text>
         <Text style={(props.status == "Cancelled") ? styles.red : (props.status == "Completed") ? styles.blue : styles.green}>{props.status}</Text>
       </View>
     </View>
@@ -59,59 +60,64 @@ const OrderCard = (props) => {
 const styles = StyleSheet.create({
   orderBox: {
     justifyContent: "center",
-    borderWidth: 0.7,
+    borderWidth: 1,
     width: width,
-    borderColor: "grey",
     paddingTop:15,
     marginTop:10,
     marginBottom:5,
-    backgroundColor:"#FFFAFA"
+    backgroundColor:"#f5f5f5"
+  },
+  orderRow:{
+    flexDirection:"row",
+    justifyContent:"flex-end",
+    marginTop:-6
+  },
+  orderNumber:{  
+    paddingBottom: 2,
+    fontSize:14,
+    color:"#7b7b7b",
+    
   },
   orderNumberText: {
-    fontWeight: "bold",
+    ...Platform.select({
+      ios: {
+          fontWeight: '600',
+      },
+      android: {
+        fontWeight:"bold"
+      }
+    }),
     fontSize: 16,
-    letterSpacing:0.2,
-    fontFamily:"sans-serif-medium"
+    color:"#4f515e",
   },
   orderDetails:{
-    color:"#0CB8EB",
-    marginLeft:38,
-    fontSize:17,
+    color:"#627dcb",
+    fontSize:15.5,
     marginTop:-1,
-    fontWeight: "bold"
+    marginRight:3,
+    fontWeight: "bold",
+    paddingRight:8
   },
   green:{
     fontWeight:"bold",
-    color:"limegreen",
-    fontSize:17,
+    color:"#4fc2a6",
+    fontSize:16,
     paddingBottom: 5,
     letterSpacing:0.7
   },
   red:{
     fontWeight:"bold",
-    color:"red",
-    fontSize:17,
+    color:"#e27070",
+    fontSize:16,
     paddingBottom: 5,
     letterSpacing:0.7
   },
   blue:{
     fontWeight:"bold",
-    color:"#2874A6",
-    fontSize:17,
+    color:"#627dcb",
+    fontSize:16,
     paddingBottom: 5,
     letterSpacing:0.7
-  },
-  info:{
-    fontSize:20,
-    color:"darkblue",
-    marginLeft:10,
-    marginTop:1
-  },
-  address:{
-    fontSize:20,
-    color:"black",
-    marginLeft:11,
-    marginTop:1
   }
 });
 

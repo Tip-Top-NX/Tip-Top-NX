@@ -39,6 +39,7 @@ const OrderProductCard = (props) => {
         image:props.image,
         size:props.size,
         price:props.price,
+        color:props.color,
         quantity:props.quantity
       }
     )}>
@@ -51,9 +52,10 @@ const OrderProductCard = (props) => {
           <View style={styles.details}>
             <Text style={styles.brandName}>{props.brand.toUpperCase()}</Text>
             <Text numberOfLines={1} style={styles.productDetails}>{props.name}</Text>
-            <View style={{ flexDirection: "row" }}>
-              <Text style={styles.sizeStyle}>SIZE : {props.size}   |   </Text>
-              <Text style={styles.qtyStyle}>QTY : {props.quantity}</Text>
+            <View style={{ flexDirection: "row",marginTop:-5}}>
+              <Text style={styles.sizeStyle}>Size : {props.size} | </Text>
+              <Text style={styles.colorStyle}>Color : {props.color} | </Text>
+              <Text style={styles.qtyStyle}>Qty : {props.quantity}</Text>
             </View>
             <View>
               {props.discountPercentage ? withDiscount() : withoutDiscount()}
@@ -74,10 +76,7 @@ const styles = StyleSheet.create({
     height: 150,
     flexDirection: "row",
     paddingLeft: 13,
-    backgroundColor: "#F0FFFF",
-    borderTopWidth: 0.5,
-    borderBottomWidth: 0.5,
-    borderColor: "silver",
+    backgroundColor: "#ffffff",
     justifyContent:"center",
     alignItems:"center"
   },
@@ -85,13 +84,12 @@ const styles = StyleSheet.create({
     width: 100,
     height: 130,
     borderWidth: 0.5,
-    borderColor: "silver",
+    borderColor: "#efefef",
     marginBottom:8,
     marginTop:8,
     marginLeft:8
   },
   detailsBox: {
-    // borderWidth: 1,
     width: 200,
     height: 150,
     justifyContent: "center",
@@ -101,54 +99,51 @@ const styles = StyleSheet.create({
     width: 40,
     height: 50,
     justifyContent: "center",
-    //alignpropss: "center",
     marginLeft: 15,
   },
   details: {
     justifyContent: "center",
-    // borderWidth: 1,
     paddingHorizontal: 5,
     paddingVertical: 7,
   },
   brandName: {
     fontWeight: "bold",
     fontSize: 15,
-    paddingVertical: 2,
     letterSpacing: 0.5,
+    color:"#5e6269"
   },
   productDetails: {
-    color: "grey",
+    color: "#818181",
     paddingVertical: 10,
     paddingTop: -2,
     fontSize:15
   },
   sizeStyle: {
-    width: "50%",
-    fontFamily:"sans-serif-medium",
     paddingVertical: 5,
-    color:"grey"
+    color:"#818181"
+  },
+  colorStyle: {
+    paddingVertical: 5,
+    color:"#818181"
   },
   qtyStyle: {
-    width: "50%",
-    fontFamily:"sans-serif-medium",
     paddingVertical: 5,
-    color:"grey",
-    marginLeft:-25
+    color:"#818181",
+    marginLeft:0
   },
   discountedPriceText: {
-    fontSize: 19,
+    fontSize: 15.5,
     marginHorizontal: 8,
     fontWeight: "bold",
-    color: "#444",
+    color: "#494c52"
   },
   originalPriceText: {
-    fontSize: 17,
+    fontSize: 15,
     textDecorationLine: "line-through",
     textDecorationStyle: "solid",
-    color: "grey",
+    color: "#969a9d",
     marginHorizontal: 5,
     marginLeft:-1,
-    marginTop:2
   },
   correctedPrice: {
     flexDirection: "row",
@@ -156,10 +151,9 @@ const styles = StyleSheet.create({
     marginTop:7
   },
   discountedPercentText: {
-    fontSize: 12,
-    color: "red",
+    fontSize: 14,
+    color: "#e27070",
     marginHorizontal: 2,
-    marginTop:5
   },
 });
 
