@@ -76,7 +76,7 @@ const ProductCard = (props) => {
         >
           <View style={props.details}>
             <Text style={props.textStyle}>{props.name}</Text>
-            <Text style={props.textStyle}>Price : {props.price}</Text>
+            <Text style={props.textStyle}>Price : ₹ {props.price}</Text>
           </View>
         </TouchableOpacity>
       </View>

@@ -11,7 +11,7 @@ const popular = (props) => {
   const [popularProducts, setPopularProducts] = useState();
   const getProducts = () => {
     return myAxios
-      .get("/category/5/get-products")
+      .get("/category/1/get-products")
       .then((res) => setPopularProducts([...res.data]))
       .catch((err) => console.log(err));
   };

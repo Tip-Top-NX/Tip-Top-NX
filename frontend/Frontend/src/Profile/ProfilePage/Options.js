@@ -33,7 +33,7 @@ const Options = () => {
       name: "Orders",
       id: "4",
       navigator: () => {
-        navigation.navigate("Orders");
+        navigation.navigate("My Orders");
       },
     },
   ];
