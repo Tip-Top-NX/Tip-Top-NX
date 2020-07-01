@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // borderWidth: 1,
     paddingVertical: 3,
-    paddingHorizontal: 9,
+    paddingHorizontal: 5,
     flexDirection: "row",
   },
   priceBox: {

@@ -5,19 +5,34 @@ import { useNavigation } from "@react-navigation/native";
 
 const PlaceOrderTab = (props) => {
   const navigation = useNavigation();
+  const handleRightButton = () => {
+    if (props.rightButton === "NEXT") {
+      navigation.navigate("CartPage2");
+    } else {
+      props.addressVal && props.paymentVal
+        ? navigation.navigate("Categories")
+        : alert("Cannot leave address or payment empty");
+    }
+  };
   return (
     <View style={styles.placeOrderTab}>
       <TouchableOpacity
         style={[styles.buttonBox, { backgroundColor: "#fff", borderWidth: 1 }]}
-        onPress={() => navigation.navigate("Catelogue")}
+        onPress={() => {
+          props.leftButton === "BACK"
+            ? navigation.goBack()
+            : navigation.navigate("Catelogue");
+        }}
       >
-        <Text style={[styles.buttonText, { color: "#000" }]}>ADD MORE</Text>
+        <Text style={[styles.buttonText, { color: "#000" }]}>
+          {props.leftButton}
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.buttonBox}
-        onPress={() => navigation.navigate("Address")}
+        onPress={() => handleRightButton()}
       >
-        <Text style={styles.buttonText}>NEXT</Text>
+        <Text style={styles.buttonText}>{props.rightButton}</Text>
       </TouchableOpacity>
     </View>
   );

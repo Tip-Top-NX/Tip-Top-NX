@@ -7,18 +7,16 @@ import { myAxios } from "../../../axios";
 
 const Catelogue = ({ navigation }) => {
   const [products, setProducts] = useState();
-  const getProducts = () => {
-    return myAxios
-      .get("/category/1/get-products")
-      .then((res) => setProducts([...res.data]))
-      .catch((err) => console.log(err));
-  };
-
   useEffect(() => {
     let mounted = true;
-    if (mounted) {
-      getProducts();
-    }
+    myAxios
+      .get("/category/5/get-products")
+      .then((res) => {
+        if (mounted) {
+          setProducts([...res.data]);
+        }
+      })
+      .catch((err) => console.log(err));
     return () => (mounted = false);
   }, []);
 

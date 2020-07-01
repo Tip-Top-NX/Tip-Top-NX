@@ -1,6 +1,5 @@
 /* eslint-disable */
 import React from "react";
-import Empty from "../Empty";
 import { useSelector } from "react-redux";
 import DisplayCart from "./DisplayCart";
 import { StyleSheet, View } from "react-native";
