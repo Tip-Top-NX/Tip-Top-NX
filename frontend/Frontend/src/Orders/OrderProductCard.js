@@ -52,9 +52,8 @@ const OrderProductCard = (props) => {
           <View style={styles.details}>
             <Text style={styles.brandName}>{props.brand.toUpperCase()}</Text>
             <Text numberOfLines={1} style={styles.productDetails}>{props.name}</Text>
-            <View style={{ flexDirection: "row",marginTop:-5}}>
-              <Text style={styles.sizeStyle}>Size : {props.size} | </Text>
-              <Text style={styles.colorStyle}>Color : {props.color} | </Text>
+            <View style={{ flexDirection: "row",marginTop:-3}}>
+              <Text style={styles.sizeStyle}>Size : {props.size}   |   </Text>
               <Text style={styles.qtyStyle}>Qty : {props.quantity}</Text>
             </View>
             <View>
@@ -115,7 +114,6 @@ const styles = StyleSheet.create({
   productDetails: {
     color: "#818181",
     paddingVertical: 10,
-    paddingTop: -2,
     fontSize:15
   },
   sizeStyle: {

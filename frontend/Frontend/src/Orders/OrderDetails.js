@@ -25,7 +25,7 @@ const OrderProductDetails = ({route,navigation}) => {
           <View style={styles.orderCard}>
               <View style={{flexDirection:"row"}}>
                   <Text style={[styles.headingDetails,{marginTop:5}]}>Placed on : {" "}</Text>
-                  <Text style={[styles.info,{marginTop:7}]}>
+                  <Text style={[styles.info,{marginTop:8}]}>
                       {orderDate.charAt(8)}
                       {orderDate.charAt(9)}
                       /
@@ -44,12 +44,21 @@ const OrderProductDetails = ({route,navigation}) => {
               </View>
               <Text style={styles.headingDetails}>Bill details :</Text>
               <View style={styles.priceBox}>
-                <Text style={styles.mrpDetails}>MRP :                        ₹ {amount.toFixed(2)}</Text>
-                <Text style={styles.mrpDetails}>Delivery charges :  ₹ {deliveryCharge.toFixed(2)}</Text>
+                <View style={{flexDirection:"row"}}>
+                  <Text style={styles.mrpDetails}>MRP :</Text>
+                  <Text style={[styles.mrpDetails,{marginLeft:85}]}>₹ {amount.toFixed(2)}</Text>
+                </View>
+                <View style={{flexDirection:"row"}}>
+                  <Text style={styles.mrpDetails}>Delivery charges :</Text>
+                  <Text style={[styles.mrpDetails,{marginLeft:7}]}>₹ {deliveryCharge.toFixed(2)}</Text>
+                </View>
               </View>
-              <Text style={[styles.info,{marginLeft:83,marginTop:2}]}>TOTAL :                ₹ {total.toFixed(2)}</Text>
+              <View style={{flexDirection:"row"}}>
+                <Text style={[styles.info,{marginLeft:83,marginTop:2}]}>TOTAL :</Text>
+                <Text style={[styles.info,{marginLeft:63,marginTop:2}]}>₹ {total.toFixed(2)}</Text>
+              </View>
               <Text style={[styles.headingDetails,{marginLeft:83,marginTop:-5}]}>(including GST)</Text>
-              <View style={[styles.infoBox,{marginTop:7}]}>
+              <View style={[styles.infoBox,{marginTop:9}]}>
                 <Text style={styles.headingDetails}>Shipping Address :</Text>
                 <Text style={styles.name}>{name.toUpperCase()}</Text>
                 <Text style={styles.boxDetails}>{address}</Text>
@@ -76,16 +85,16 @@ const OrderProductDetails = ({route,navigation}) => {
 
 const styles = StyleSheet.create({
   orderCard: {
-    height: 406,
+    height: 454,
     paddingLeft: 10,
     backgroundColor: "#ffffff",
-    marginTop:height/2-240
+    marginTop:height/2-266
   },
   priceBox:{
     borderTopWidth:1,
     borderBottomWidth:1,
     borderColor:"#818181",
-    width:200,
+    width:width/2+15,
     marginLeft:83,
     marginTop:-12
   },
@@ -104,7 +113,7 @@ const styles = StyleSheet.create({
   },
   boxDetails:{
     color:"#4c4c4c",
-    paddingVertical: 2,
+    paddingVertical: 3,
     fontSize:15,
     marginTop:-4
   },
@@ -112,7 +121,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 15,
     color:"#5e6269",
-    marginTop:2
+    marginTop:4
   },
   info:{
     fontWeight: "bold",
@@ -137,7 +146,7 @@ const styles = StyleSheet.create({
   infoBox:{
     borderTopWidth:1,
     borderColor:"#818181",
-    paddingBottom:10,
+    paddingVertical:10,
     width:width-20
   }
 });

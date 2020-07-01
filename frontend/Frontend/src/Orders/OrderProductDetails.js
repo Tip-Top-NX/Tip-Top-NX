@@ -32,16 +32,25 @@ const OrderProductDetails = ({route,navigation}) => {
                   <Text style={styles.descDetails}>{desc}</Text>
                   <View style={{ flexDirection: "row",paddingLeft:1}}>
                     <Text style={styles.midStyle}>Size : {size} | </Text>
-                    <Text style={styles.midStyle}>Color : {color} | </Text>
                     <Text style={styles.midStyle}>Qty : {quantity}</Text>
                   </View> 
+                  <Text style={styles.colorStyle}>Color : {color}</Text>
                   <Text style={styles.priceText}>Price details :</Text>
                   <View style={styles.priceBox}>
-                    <Text style={styles.priceDetails}>MRP :                    ₹ {price.toFixed(2)}</Text>
-                    <Text style={styles.priceDetails}>Discount :           (-)₹ {discount.toFixed(2)}</Text>
+                    <View style={{flexDirection:"row"}}>
+                      <Text style={styles.priceDetails}>MRP :</Text>
+                      <Text style={[styles.priceDetails,{marginLeft:75}]}>₹ {price.toFixed(2)}</Text>
+                    </View>
+                    <View style={{flexDirection:"row"}}>
+                      <Text style={styles.priceDetails}>Discount :</Text>
+                      <Text style={[styles.priceDetails,{marginLeft:40}]}>(-)₹ {discount.toFixed(2)}</Text>
+                    </View>
                   </View>
-                    <Text style={[styles.brandName,{marginTop:2}]}>TOTAL :             ₹ {SP.toFixed(2)}</Text>
-                    <Text style={{color:"#818181",fontSize:14}}>(including GST)</Text>
+                  <View style={{flexDirection:"row"}}>
+                    <Text style={[styles.brandName,{marginTop:2}]}>TOTAL :</Text>            
+                    <Text style={[styles.brandName,{marginTop:2,marginLeft:50}]}>₹ {SP.toFixed(2)}</Text>
+                  </View>
+                  <Text style={{color:"#818181",fontSize:14}}>(including GST)</Text>
                 </View>
             </View>
         </View>
@@ -50,7 +59,7 @@ const OrderProductDetails = ({route,navigation}) => {
 
 const styles = StyleSheet.create({
   productCard: {
-    height: 280,
+    height: 300,
     paddingLeft: 8,
     backgroundColor: "#ffffff",
     marginTop:height/2-190,
@@ -65,7 +74,7 @@ const styles = StyleSheet.create({
   },
   detailsBox: {
     width: 100,
-    height: 280,
+    height: 300,
     flex:1,
     paddingLeft:8,
     paddingHorizontal: 5,
@@ -92,11 +101,15 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     color:"#818181"
   },
+  colorStyle: {
+    paddingBottom:5,
+    color:"#818181"
+  },
   priceBox:{
     borderTopWidth:1,
     borderBottomWidth:1,
     borderColor:"#818181",
-    width:170,
+    width:width/2-5,
   },
   priceDetails:{
     color: "#818181",

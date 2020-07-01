@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
     paddingBottom: 2,
     fontSize:14,
     color:"#7b7b7b",
-    
   },
   orderNumberText: {
     ...Platform.select({
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
     color:"#4f515e",
   },
   orderDetails:{
-    color:"#627dcb",
+    color:"#777777",
     fontSize:15.5,
     marginTop:-1,
     marginRight:3,
