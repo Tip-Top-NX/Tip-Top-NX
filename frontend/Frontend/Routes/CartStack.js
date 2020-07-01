@@ -3,7 +3,7 @@ import * as React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Cart from "../src/Cart/Cart";
 import CartPage2 from "../src/Cart/CartPage2/CartPage2";
-import OrderConfirm from "../src/Cart/CartPage3/OrderConfirm";
+import OrderConfirm from "../src/Cart/CartPage3/OrderConfirmed";
 
 const Stack = createStackNavigator();
 

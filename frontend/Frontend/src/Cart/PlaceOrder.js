@@ -2,6 +2,7 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { myAxios } from "../../../axios";
 
 const PlaceOrderTab = (props) => {
   const navigation = useNavigation();
@@ -11,7 +12,8 @@ const PlaceOrderTab = (props) => {
     } else {
       props.addressVal && props.paymentVal
         ? navigation.navigate("OrderConfirm")
-        : alert("Cannot leave address or payment empty");
+        : // myAxios.post("/profile/cart/postCart", null, config))
+          alert("Cannot leave address or payment empty");
     }
   };
   return (

@@ -4,9 +4,12 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import ProductCard from "../ProductCard";
 import { myAxios } from "../../../axios";
+import Splash from "../Splash";
 
 const Catelogue = ({ navigation }) => {
   const [products, setProducts] = useState();
+  const [show, setShow] = useState(true);
+
   useEffect(() => {
     let mounted = true;
     myAxios
@@ -17,36 +20,43 @@ const Catelogue = ({ navigation }) => {
         }
       })
       .catch((err) => console.log(err));
+    setTimeout(() => {
+      setShow(false);
+    }, 2000);
     return () => (mounted = false);
   }, []);
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={products}
-        numColumns={2}
-        keyExtractor={(item) => item._id}
-        showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => (
-          <ProductCard
-            brand={item.brand}
-            description={item.description}
-            colors={item.colors}
-            images={item.images}
-            size={item.size}
-            style={item.style}
-            discountPercentage={item.discountPercentage}
-            name={item.name}
-            price={item.price}
-            navigation={navigation}
-            _id={item._id}
-            cardStyle={styles.cardStyle}
-            imageView={styles.imageView}
-            details={styles.details}
-            textStyle={styles.textStyle}
-          />
-        )}
-      />
+      {show ? (
+        <Splash />
+      ) : (
+        <FlatList
+          data={products}
+          numColumns={2}
+          keyExtractor={(item) => item._id}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <ProductCard
+              brand={item.brand}
+              description={item.description}
+              colors={item.colors}
+              images={item.images}
+              size={item.size}
+              style={item.style}
+              discountPercentage={item.discountPercentage}
+              name={item.name}
+              price={item.price}
+              navigation={navigation}
+              _id={item._id}
+              cardStyle={styles.cardStyle}
+              imageView={styles.imageView}
+              details={styles.details}
+              textStyle={styles.textStyle}
+            />
+          )}
+        />
+      )}
     </View>
   );
 };
