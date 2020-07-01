@@ -10,7 +10,7 @@ const PlaceOrderTab = (props) => {
       navigation.navigate("CartPage2");
     } else {
       props.addressVal && props.paymentVal
-        ? navigation.navigate("Categories")
+        ? navigation.navigate("OrderConfirm")
         : alert("Cannot leave address or payment empty");
     }
   };
