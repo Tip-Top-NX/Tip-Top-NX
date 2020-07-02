@@ -13,12 +13,12 @@ const PlaceOrderTab = (props) => {
     if (props.rightButton === "NEXT") {
       navigation.navigate("CartPage2");
     } else {
-      if(props.addressVal && props.paymentVal){
+      if (props.addressVal && props.paymentVal) {
         dispatch(placeOrder("COD"));
-        navigation.navigate("OrderConfirm")
+        navigation.navigate("OrderConfirm");
+      } else {
+        alert("Cannot leave address or payment empty");
       }
-      else {
-        alert("Cannot leave address or payment empty");}
     }
   };
   return (
@@ -28,7 +28,7 @@ const PlaceOrderTab = (props) => {
         onPress={() => {
           props.leftButton === "BACK"
             ? navigation.goBack()
-            : navigation.navigate("Catelogue");
+            : navigation.navigate("Home");
         }}
       >
         <Text style={[styles.buttonText, { color: "#000" }]}>

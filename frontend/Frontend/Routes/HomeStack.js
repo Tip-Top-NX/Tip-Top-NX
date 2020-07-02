@@ -15,7 +15,7 @@ const HomeStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Categories"
+        name="Home"
         component={Home}
         options={{
           headerShown: true,

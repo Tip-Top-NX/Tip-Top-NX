@@ -82,6 +82,8 @@ const styles = StyleSheet.create({
     height: 380,
     marginVertical: 20,
     justifyContent: "center",
+    borderTopWidth: 1,
+    borderColor: "#ccc",
     // flex: 1,
   },
   titleStyle: {

@@ -38,7 +38,7 @@ const signIn = ({ navigation }) => {
 
   useEffect(() => {
     if (user.isValid) {
-      navigation.navigate("Categories");
+      navigation.navigate("Home");
     }
   }, [user.isValid]);
 
@@ -113,7 +113,7 @@ const signIn = ({ navigation }) => {
                   alignSelf: "flex-end",
                 },
               ]}
-              onPress={() => navigation.navigate("Categories")}
+              onPress={() => navigation.navigate("Home")}
             >
               <Text style={styles.buttonText}>SKIP</Text>
             </TouchableOpacity>

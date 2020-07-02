@@ -23,14 +23,32 @@ const Catelogue = ({ navigation }) => {
 
     setTimeout(() => {
       setShow(false);
+<<<<<<< HEAD
+    }, 3000);
+=======
     }, 2000);
+>>>>>>> b4ecba67547c6e0ef28d8560e8a5fa6e4ce08510
     return () => (mounted = false);
   }, []);
 
   return (
     <View style={styles.container}>
       {show ? (
-        <Splash />
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            height: "100%",
+            backgroundColor: "#fff",
+          }}
+        >
+          <Image
+            source={require("../../../assets/i.gif")}
+            style={{ height: 100, width: 100 }}
+          />
+        </View>
       ) : (
         <FlatList
           data={products}
