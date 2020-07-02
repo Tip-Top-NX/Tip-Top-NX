@@ -25,7 +25,7 @@ const OrderConfirmed = () => {
       }}
     >
       <Image
-        source={require("../../../../assets/z.gif")}
+        source={require("../../../../assets/u.gif")}
         style={{ height: 300, width: 300 }}
       />
       <Text style={{ marginVertical: 20, fontWeight: "bold", fontSize: 18 }}>
@@ -48,7 +48,7 @@ const OrderConfirmed = () => {
             justifyContent: "center",
             alignItems: "center",
           }}
-          onPress={() => navigation.navigate("Categories")}
+          onPress={() => navigation.navigate("Home")}
         >
           <Text style={{ color: "white", fontWeight: "bold" }}>
             BROWSE MORE

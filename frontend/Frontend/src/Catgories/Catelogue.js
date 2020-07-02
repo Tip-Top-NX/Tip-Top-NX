@@ -4,7 +4,6 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import ProductCard from "../ProductCard";
 import { myAxios } from "../../../axios";
-import Splash from "../Splash";
 
 const Catelogue = ({ navigation }) => {
   const [products, setProducts] = useState();
@@ -23,14 +22,28 @@ const Catelogue = ({ navigation }) => {
 
     setTimeout(() => {
       setShow(false);
-    }, 2000);
+    }, 3000);
     return () => (mounted = false);
   }, []);
 
   return (
     <View style={styles.container}>
       {show ? (
-        <Splash />
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            height: "100%",
+            backgroundColor: "#fff",
+          }}
+        >
+          <Image
+            source={require("../../../assets/i.gif")}
+            style={{ height: 100, width: 100 }}
+          />
+        </View>
       ) : (
         <FlatList
           data={products}

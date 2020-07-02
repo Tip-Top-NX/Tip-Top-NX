@@ -12,7 +12,6 @@ const Categories = (props) => {
             onPress={() => props.navigation.navigate("Catelogue")}
           >
             <View>
-              {/* <Text>Men</Text> */}
               <Image
                 source={require("../../../../assets/v.gif")}
                 style={styles.imageStyle}
@@ -24,7 +23,6 @@ const Categories = (props) => {
             onPress={() => props.navigation.navigate("Catelogue")}
           >
             <View>
-              {/* <Text>Women</Text> */}
               <Image
                 source={require("../../../../assets/t.gif")}
                 style={styles.imageStyle}
@@ -40,9 +38,8 @@ const Categories = (props) => {
             onPress={() => props.navigation.navigate("Catelogue")}
           >
             <View>
-              {/* <Text>Men</Text> */}
               <Image
-                source={require("../../../../assets/o.jpg")}
+                source={require("../../../../assets/y.gif")}
                 style={styles.imageStyle}
               />
             </View>
@@ -52,7 +49,6 @@ const Categories = (props) => {
             onPress={() => props.navigation.navigate("Catelogue")}
           >
             <View>
-              {/* <Text>Women</Text> */}
               <Image
                 source={require("../../../../assets/n.jpg")}
                 style={styles.imageStyle}
@@ -73,7 +69,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: "silver",
     marginTop: 10,
-    backgroundColor: "#000",
+    backgroundColor: "#fff",
     marginBottom: 10,
   },
   outerBox: {
