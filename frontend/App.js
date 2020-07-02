@@ -17,7 +17,6 @@ export default function App() {
         </NavigationContainer>
       </View>
     </Provider>
-    
   );
 }
 

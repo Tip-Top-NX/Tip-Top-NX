@@ -1,31 +1,14 @@
 /* eslint-disable */
 import React from "react";
 import { ScrollView, StyleSheet, FlatList, View, Text } from "react-native";
-import ProductCard from "./ProductCard";
-import Total from "./Total";
+import ProductCard from "./CartPage1/ProductCard";
+import Total from "./CartPage1/Total";
 import PlaceOrderTab from "./PlaceOrder";
 
 const CartItems = (props) => {
   return (
     <View style={styles.overAllContainer}>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-        {/* <FlatList
-          data={props.cart}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(item, index) => String(index)}
-          renderItem={({ item }) => (
-            <ProductCard
-              images={item.product.images}
-              _id={item.product._id}
-              name={item.product.name}
-              brand={item.product.brand}
-              price={item.product.price}
-              discountPercentage={item.discountPercentage}
-              size={item.size}
-              color={item.color}
-            />
-          )}
-        /> */}
         {props.cart.map((item, index) => (
           <ProductCard
             key={index}
@@ -45,7 +28,7 @@ const CartItems = (props) => {
         </View>
         <Total />
       </ScrollView>
-      <PlaceOrderTab />
+      <PlaceOrderTab leftButton="ADD MORE" rightButton="NEXT" />
     </View>
   );
 };

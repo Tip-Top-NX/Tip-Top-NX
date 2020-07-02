@@ -4,9 +4,13 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import styles from "./ProductCardStyles";
-import { getURL } from "../../../axios";
+import { getURL } from "../../../../axios";
 import { useDispatch, useSelector } from "react-redux";
-import { delCart, postWishlist, postCart } from "../../../redux/ActionCreators";
+import {
+  delCart,
+  postWishlist,
+  postCart,
+} from "../../../../redux/ActionCreators";
 
 const ProductCard = (props) => {
   const user = useSelector((state) => state.user);
@@ -16,11 +20,9 @@ const ProductCard = (props) => {
 
   const onQuantityDec = () => {
     if (props.quantity !== 1) {
-      dispatch(
-        postCart(props._id, props.color, props.size,- 1)
-      );
+      dispatch(postCart(props._id, props.color, props.size, -1));
     } else {
-      dispatch(delCart(props._id,props.color,props.size));
+      dispatch(delCart(props._id, props.color, props.size));
     }
   };
 
@@ -99,14 +101,7 @@ const ProductCard = (props) => {
                     size={20}
                     color="grey"
                     onPress={() =>
-                      dispatch(
-                        postCart(
-                          props._id,
-                          props.color,
-                          props.size,
-                          1
-                        )
-                      )
+                      dispatch(postCart(props._id, props.color, props.size, 1))
                     }
                   />
                 </View>
@@ -126,7 +121,9 @@ const ProductCard = (props) => {
         >
           <TouchableOpacity
             style={[styles.buttonBox, { backgroundColor: "#fff" }]}
-            onPress={() => dispatch(delCart(props._id,props.color,props.size))}
+            onPress={() =>
+              dispatch(delCart(props._id, props.color, props.size))
+            }
           >
             <MaterialIcons name="delete" size={20} color="grey" />
             <Text style={{ fontWeight: "bold" }}>REMOVE</Text>

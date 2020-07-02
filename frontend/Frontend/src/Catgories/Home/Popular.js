@@ -9,18 +9,17 @@ const width = Dimensions.get("window").width;
 
 const popular = (props) => {
   const [popularProducts, setPopularProducts] = useState();
-  const getProducts = () => {
-    return myAxios
-      .get("/category/5/get-products")
-      .then((res) => setPopularProducts([...res.data]))
-      .catch((err) => console.log(err));
-  };
 
   useEffect(() => {
     let mounted = true;
-    if (mounted) {
-      getProducts();
-    }
+    myAxios
+      .get("/category/5/get-products")
+      .then((res) => {
+        if (mounted) {
+          setPopularProducts([...res.data]);
+        }
+      })
+      .catch((err) => console.log(err));
     return () => (mounted = false);
   }, []);
   return (
