@@ -30,8 +30,8 @@ const EditProfile = ({ navigation }) => {
   const [phone, setPhone] = useState(user.contact.toString());
   const [address, setAddress] = useState(user.address);
   const [picture, setPicture] = useState(getURL(user.image));
-  const [age, setAge] = useState("");
-  const [gender, setGender] = useState("");
+  const [age, setAge] = useState(user.age);
+  const [gender, setGender] = useState(user.gender);
 
   // states for style change if not valid
   const [validName, checkName] = useState(true);
