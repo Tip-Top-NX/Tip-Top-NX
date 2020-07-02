@@ -1,1 +1,1 @@
-web: expo start
+web: node ./bin/www
