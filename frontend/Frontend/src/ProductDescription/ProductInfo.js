@@ -16,10 +16,10 @@ const ProductInfo = (props) => {
       </View>
       <View style={styles.priceBox}>
         <View style={styles.correctedPrice}>
-          <Text style={styles.discountedPriceText}>₹ {SP}</Text>
+          <Text style={styles.discountedPriceText}>₹ {SP.toFixed(2)}</Text>
           <Text style={styles.originalPriceText}>₹ {props.price}</Text>
           <Text style={styles.discountedPercentText}>
-            ( {props.discountPercentage} )
+            ( {props.discountPercentage} % )
           </Text>
         </View>
         <Text style={styles.note}>INCLUSIVE OF ALL TAXES</Text>

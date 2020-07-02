@@ -70,6 +70,7 @@ const ProductCard = (props) => {
               discountPercentage: props.discountPercentage,
               name: props.name,
               price: props.price,
+              _id: props._id,
             })
           }
         >

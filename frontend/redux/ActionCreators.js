@@ -1,35 +1,44 @@
 /* eslint-disable */
 import * as ActionTypes from "./ActionTypes";
 import { myAxios, getConfig } from "../axios";
-import axios from "axios";
-import { isValidElement } from "react";
 
-export const postCart = (prodId) => {
+export const postCart = (prodId, color, size, quantity) => {
+  const bodyPart = {
+    color: color,
+    size: size,
+    quantity: quantity,
+  };
   return (dispatch) => {
     getConfig().then((config) => {
       myAxios
-        .post("/product/" + prodId + "/cart", null, config)
-        .then((res) => dispatch(setCart(res.data.cart)))
+        .post("/product/" + prodId + "/cart", bodyPart, config)
+        .then((res) => dispatch(setCart(res.data.cart,res.data.cartTotal)))
         .catch((err) => console.log(err));
     });
   };
 };
 
-export const delCart = (prodId) => {
+export const delCart = (prodId, color, size) => {
+  const bodyPart = {
+    color: color,
+    size: size
+  };
   return (dispatch) => {
     getConfig().then((config) => {
+      config.data = bodyPart
       myAxios
-        .delete("/product/" + prodId + "/cart", config)
-        .then((res) => dispatch(setCart(res.data.cart)))
+        .delete("/product/" + prodId + "/cart",config)
+        .then((res) => dispatch(setCart(res.data.cart,res.data.cartTotal)))
         .catch((err) => console.log(err));
     });
   };
 };
 
-export const setCart = (cart) => {
+export const setCart = (cart,cartTotal) => {
   return {
     type: ActionTypes.SET_CART,
     payload: cart,
+    cartTotal:cartTotal
   };
 };
 
@@ -46,7 +55,7 @@ export const postWishlist = (prodId) => {
 
 export const delWishlist = (prodId) => {
   return (dispatch) => {
-    getConfig().then((config) => { 
+    getConfig().then((config) => {
       myAxios
         .delete("/product/" + prodId + "/wishlist", config)
         .then((res) => dispatch(setWishlist(res.data.wishlist)))
@@ -125,18 +134,18 @@ export const signup = (user) => {
 export const signin = (user) => {
   return (dispatch) => {
     dispatch(isFetching(true));
-     setTimeout(() => {
+    setTimeout(() => {
       myAxios
-      .post("/users/login", { ...user })
-      .then((res) => {
-        if (res.data.success === true) {
-          dispatch(setUser(res.data.user, res.data.token));
-          dispatch(isFetching(false));
-        } else {
-          dispatch(signinFailed());
-        }
-      })
-      .catch((err) => dispatch(signinFailed()));
+        .post("/users/login", { ...user })
+        .then((res) => {
+          if (res.data.success === true) {
+            dispatch(setUser(res.data.user, res.data.token));
+            dispatch(isFetching(false));
+          } else {
+            dispatch(signinFailed());
+          }
+        })
+        .catch((err) => dispatch(signinFailed()));
     }, 5000);
   };
 };
@@ -165,9 +174,9 @@ export const setUser = (user, token) => {
 export const isFetching = (b) => {
   return {
     type: ActionTypes.FETCHING_USER,
-    payload: b
-  }
-}
+    payload: b,
+  };
+};
 
 export const signinFailed = () => {
   return {

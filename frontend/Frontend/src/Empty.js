@@ -14,7 +14,7 @@ const Empty = (props) => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require("../../../../assets/b1.jpg")}
+        source={require("../../assets/b1.jpg")}
         style={{
           flex: 1,
           resizeMode: "cover",
@@ -23,11 +23,11 @@ const Empty = (props) => {
         }}
         blurRadius={0}
       >
-        <Text style={styles.headingStyle}>YOUR WISHLIST IS EMPTY</Text>
-        <Text style={styles.textStyle}>TO ADD ITEMS TO YOUR WISHLIST</Text>
+        <Text style={styles.headingStyle}>{props.title}</Text>
+        <Text style={styles.textStyle}>{props.desc}</Text>
         <TouchableOpacity
           style={styles.buttonStyle}
-          onPress={() => props.navigation.navigate("Categories")}
+          onPress={() => props.navigation.navigate("Catelogue")}
         >
           <Text>Browse</Text>
         </TouchableOpacity>

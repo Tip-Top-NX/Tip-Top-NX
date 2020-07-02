@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -7,16 +7,27 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const Size = (props) => {
+  const navigation = useNavigation();
   const [selected, setSelected] = useState();
   const size = [...props.size];
+
+  useEffect(() => {
+    props.onSizeChange(size[selected]);
+  }, [selected]);
 
   return (
     <View style={styles.container}>
       <View style={styles.headerStyle}>
         <Text style={styles.headerText}>SELECT SIZE</Text>
-        <TouchableOpacity style={styles.sizeChartButton}>
+        <TouchableOpacity
+          style={styles.sizeChartButton}
+          onPress={() =>
+            navigation.navigate("SizeChart", { sizeChart: props.images })
+          }
+        >
           <Text style={styles.sizeChartButtonText}>SIZE CHART</Text>
         </TouchableOpacity>
       </View>
@@ -35,7 +46,9 @@ const Size = (props) => {
                 },
                 { borderWidth: size.indexOf(item) === selected ? 3 : 1 },
               ]}
-              onPress={() => setSelected(size.indexOf(item))}
+              onPress={() => {
+                setSelected(size.indexOf(item));
+              }}
             >
               <Text style={styles.sizeStyle}>{item}</Text>
             </TouchableOpacity>
