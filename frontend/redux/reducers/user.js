@@ -26,8 +26,8 @@ const reducer = (state = initialState, action) => {
     case ActionTypes.FETCHING_USER:
       return {
         ...state,
-        isFetching: action.payload
-      }
+        isFetching: action.payload,
+      };
     case ActionTypes.SET_PICTURE:
       return {
         ...state,
@@ -42,13 +42,18 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         cart: action.payload,
-        cartTotal : action.cartTotal
+        cartTotal: action.cartTotal,
       };
     case ActionTypes.SET_PROFILE:
       return {
         ...state,
         ...action.payload,
       };
+    case ActionTypes.PLACE_ORDER:
+      return {
+        ...state,
+        ...action.payload
+      }
     default:
       return state;
   }

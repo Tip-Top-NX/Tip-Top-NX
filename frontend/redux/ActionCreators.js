@@ -2,6 +2,31 @@
 import * as ActionTypes from "./ActionTypes";
 import { myAxios, getConfig } from "../axios";
 
+export const placeOrder = (method) => {
+  const bodyPart = {
+    method:method
+  };
+  return (dispatch) => {
+    getConfig().then((config) => {
+      myAxios
+        .post("/profile/cart/placeOrder", bodyPart, config)
+        .then((res) => dispatch(setOrder(res.data)))
+        .catch((err) => console.log(err));
+    });
+  }
+}
+
+export const setOrder = (orders) => {
+  return {
+    type: ActionTypes.PLACE_ORDER,
+    payload:{
+      orders:orders,
+      cart: [],
+      cartTotal: 0
+    }
+  };
+};
+
 export const postCart = (prodId, color, size, quantity) => {
   const bodyPart = {
     color: color,
@@ -167,6 +192,7 @@ export const setUser = (user, token) => {
       token: token,
       gender: user.gender,
       age: user.age,
+      cartTotal:user.cartTotal
     },
   };
 };

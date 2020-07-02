@@ -6,25 +6,44 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image,
-  Button,
+  ImageBackground,
+  Dimensions,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Popular from "./Popular";
 import Categories from "./Categories";
+
+const width = Dimensions.get("window").width;
 
 const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Carousel />
+        <Categories navigation={navigation} />
         <TouchableOpacity
-          style={styles.viewAll}
+          style={styles.innerBox}
           onPress={() => navigation.navigate("Catelogue")}
         >
-          <Text style={styles.textStyle}>VIEW ALL ITEMS</Text>
+          <View>
+            <ImageBackground
+              source={require("../../../../assets/e.jpg")}
+              style={styles.innerBox}
+              blurRadius={4}
+            >
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  color: "#fff",
+                  fontSize: 35,
+                  letterSpacing: 15,
+                }}
+              >
+                VIEW ALL
+              </Text>
+            </ImageBackground>
+          </View>
         </TouchableOpacity>
-        <Categories navigation={navigation} />
         <Popular navigation={navigation} />
       </ScrollView>
     </View>
@@ -65,6 +84,27 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: "bold",
     letterSpacing: 0.3,
+  },
+
+  innerBox: {
+    width: width,
+    height: 280,
+    marginTop: 10,
+    marginBottom: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "silver",
+    shadowOpacity: 0.5,
+    shadowOffset: { width: 0, height: 1 },
+    shadowRadius: 4,
+    elevation: 3,
+    alignSelf: "center",
+  },
+  imageStyle: {
+    // borderWidth: 1,
+    height: 255,
+    width: width,
+    alignSelf: "center",
   },
 });
 

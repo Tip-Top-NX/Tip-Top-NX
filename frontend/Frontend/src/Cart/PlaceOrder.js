@@ -2,22 +2,44 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { myAxios } from "../../../axios";
+import { useDispatch } from "react-redux";
+import { placeOrder } from "../../../redux/ActionCreators";
 
-const PlaceOrderTab = () => {
+const PlaceOrderTab = (props) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const handleRightButton = () => {
+    if (props.rightButton === "NEXT") {
+      navigation.navigate("CartPage2");
+    } else {
+      if(props.addressVal && props.paymentVal){
+        dispatch(placeOrder("COD"));
+        navigation.navigate("OrderConfirm")
+      }
+      else {
+        alert("Cannot leave address or payment empty");}
+    }
+  };
   return (
     <View style={styles.placeOrderTab}>
       <TouchableOpacity
         style={[styles.buttonBox, { backgroundColor: "#fff", borderWidth: 1 }]}
-        onPress={() => navigation.navigate("Catelogue")}
+        onPress={() => {
+          props.leftButton === "BACK"
+            ? navigation.goBack()
+            : navigation.navigate("Catelogue");
+        }}
       >
-        <Text style={[styles.buttonText, { color: "#000" }]}>ADD MORE</Text>
+        <Text style={[styles.buttonText, { color: "#000" }]}>
+          {props.leftButton}
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.buttonBox}
-        onPress={() => navigation.navigate("Address")}
+        onPress={() => handleRightButton()}
       >
-        <Text style={styles.buttonText}>NEXT</Text>
+        <Text style={styles.buttonText}>{props.rightButton}</Text>
       </TouchableOpacity>
     </View>
   );

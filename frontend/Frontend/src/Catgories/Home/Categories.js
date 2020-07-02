@@ -14,7 +14,7 @@ const Categories = (props) => {
             <View>
               {/* <Text>Men</Text> */}
               <Image
-                source={require("../../../../assets/man.png")}
+                source={require("../../../../assets/v.gif")}
                 style={styles.imageStyle}
               />
             </View>
@@ -26,7 +26,7 @@ const Categories = (props) => {
             <View>
               {/* <Text>Women</Text> */}
               <Image
-                source={require("../../../../assets/women.png")}
+                source={require("../../../../assets/t.gif")}
                 style={styles.imageStyle}
               />
             </View>
@@ -42,7 +42,7 @@ const Categories = (props) => {
             <View>
               {/* <Text>Men</Text> */}
               <Image
-                source={require("../../../../assets/kid.png")}
+                source={require("../../../../assets/o.jpg")}
                 style={styles.imageStyle}
               />
             </View>
@@ -54,7 +54,7 @@ const Categories = (props) => {
             <View>
               {/* <Text>Women</Text> */}
               <Image
-                source={require("../../../../assets/towel.jpg")}
+                source={require("../../../../assets/n.jpg")}
                 style={styles.imageStyle}
               />
             </View>
@@ -73,7 +73,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: "silver",
     marginTop: 10,
-    // backgroundColor: "#1a2228",
+    backgroundColor: "#000",
+    marginBottom: 10,
   },
   outerBox: {
     flexDirection: "row",
@@ -87,10 +88,18 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
+
+    shadowColor: "silver",
+    shadowOpacity: 0.5,
+    shadowOffset: { width: 0, height: 1 },
+    shadowRadius: 4,
+    elevation: 3,
   },
   imageStyle: {
     // borderWidth: 1,
     borderRadius: 30,
+    height: 255,
+    width: 170,
   },
 });
 

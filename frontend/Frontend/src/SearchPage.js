@@ -2,24 +2,14 @@ import React from 'react'
 
 // Import react-native components
 import {
-  SafeAreaView,
-  Dimensions,
-  StyleSheet,
-  View,
-  TextInput,
-  Text,
-  Image,
-  TouchableHighlight,
-  ScrollView,
+  SafeAreaView,Dimensions,StyleSheet,View,TextInput,Text,Image,TouchableHighlight,ScrollView,
 } from 'react-native'
 
-// Import react-native-vector-icons
-// from "https://github.com/oblador/react-native-vector-icons"
 import Icon from 'react-native-vector-icons/FontAwesome5'
-
-// Import react-native-reanimated
-// from "https://github.com/software-mansion/react-native-reanimated"
 import Animated, { Easing } from 'react-native-reanimated'
+
+import { useNavigation } from "@react-navigation/native"
+
 const { Value, timing } = Animated
 
 import { myAxios } from '../../axios';
@@ -137,6 +127,7 @@ class SearchPage extends React.Component {
   }
   
   render(){
+    const {navigation}=this.props;
     return (
       <>
         <SafeAreaView style={styles.header_safe_area}>
@@ -148,7 +139,9 @@ class SearchPage extends React.Component {
               <TouchableHighlight
                 activeOpacity={1}
                 underlayColor={"#ccd0d5"}
-                // onPress={this._onBlur}
+                onPress={() => {
+                  navigation.navigate("Categories");
+                }}
                 style={styles.back_icon_box}
               >
                 <Icon name="chevron-left" size={22} color="#000000" />
@@ -214,7 +207,11 @@ class SearchPage extends React.Component {
   }
 }
 
-export default SearchPage;
+export default function(props) {
+  const navigation = useNavigation();
+
+  return <SearchPage {...props} navigation={navigation} />;
+}
 
 const styles = StyleSheet.create({
   header_safe_area: {
@@ -238,7 +235,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop:30,
     backgroundColor: 'white',
-    width: width - 32
+    width: width-3
   },
   back_icon_box: {
     width: 40,
@@ -251,6 +248,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
+    width: 20,
     height: 40,
     backgroundColor: '#e4e6eb',
     borderRadius: 16,
