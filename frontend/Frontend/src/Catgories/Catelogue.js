@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import ProductCard from "../ProductCard";
 import { myAxios } from "../../../axios";
+import Splash from "../Splash";
 
 const Catelogue = ({ navigation }) => {
   const [products, setProducts] = useState();
@@ -22,7 +23,11 @@ const Catelogue = ({ navigation }) => {
 
     setTimeout(() => {
       setShow(false);
+<<<<<<< HEAD
     }, 3000);
+=======
+    }, 2000);
+>>>>>>> b4ecba67547c6e0ef28d8560e8a5fa6e4ce08510
     return () => (mounted = false);
   }, []);
 

@@ -48,7 +48,11 @@ const OrderConfirmed = () => {
             justifyContent: "center",
             alignItems: "center",
           }}
+<<<<<<< HEAD
           onPress={() => navigation.navigate("Home")}
+=======
+          onPress={() => navigation.navigate("Categories")}
+>>>>>>> b4ecba67547c6e0ef28d8560e8a5fa6e4ce08510
         >
           <Text style={{ color: "white", fontWeight: "bold" }}>
             BROWSE MORE

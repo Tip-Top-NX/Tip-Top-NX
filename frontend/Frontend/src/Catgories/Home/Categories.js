@@ -69,7 +69,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: "silver",
     marginTop: 10,
+<<<<<<< HEAD
     backgroundColor: "#fff",
+=======
+    backgroundColor: "#000",
+>>>>>>> b4ecba67547c6e0ef28d8560e8a5fa6e4ce08510
     marginBottom: 10,
   },
   outerBox: {
