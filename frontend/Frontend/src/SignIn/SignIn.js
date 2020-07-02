@@ -104,6 +104,19 @@ const signIn = ({ navigation }) => {
             }}
             blurRadius={0}
           >
+            <TouchableOpacity
+              style={[
+                styles.button,
+                {
+                  width: 100,
+                  backgroundColor: "rgba(0, 0, 0, 0.75)",
+                  alignSelf: "flex-end",
+                },
+              ]}
+              onPress={() => navigation.navigate("Categories")}
+            >
+              <Text style={styles.buttonText}>SKIP</Text>
+            </TouchableOpacity>
             <View style={styles.title}>
               <Text style={styles.textStyle}>SIGN IN</Text>
               <Text style={styles.textStyle}>TO CONTINUE</Text>

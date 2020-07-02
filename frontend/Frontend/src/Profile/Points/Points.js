@@ -1,5 +1,11 @@
 import React from "react";
-import { View, StyleSheet, Text, ScrollView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  ScrollView,
+  ImageBackground,
+} from "react-native";
 import { useSelector } from "react-redux";
 
 const Points = () => {
@@ -7,64 +13,85 @@ const Points = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headingBox}>
-        <Text style={styles.headingText}>YOU HAVE EARNED</Text>
-      </View>
-      <View style={styles.pointBox}>
-        <Text style={styles.pointStyle}>{user.points}</Text>
-        <Text style={{ fontSize: 15, fontWeight: "bold", textAlign: "center" }}>
-          Points
-        </Text>
-      </View>
-      <View style={{ height: 85 }}></View>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={{ width: "100%", marginBottom: 15 }}
+      <ImageBackground
+        source={require("../../../../assets/p.jpg")}
+        style={{
+          flex: 1,
+          resizeMode: "cover",
+          justifyContent: "center",
+          width: "100%",
+        }}
+        blurRadius={0}
       >
-        <View style={styles.detailsBox}>
-          <View style={styles.subTitleBox}>
-            <Text style={[styles.subTitleText, { color: "#888" }]}>
-              HOW DOES THIS WORK
-            </Text>
-          </View>
-          <View style={styles.subTitleBox}>
-            <Text style={styles.subTitleText}>SHOP AND EARN</Text>
-          </View>
-          <View style={styles.textBox}>
-            <Text style={[styles.textBox, { borderBottomWidth: 0 }]}>
-              1] On every purchase, 10% of your cart total will be awarded you
-              as Points
-            </Text>
-          </View>
-          <View style={styles.textBox}>
-            <Text style={styles.exampleText}>
-              For example: On a purchase of Rs 1000 you earn a total of 100
-              points.
-            </Text>
-          </View>
-          <View style={[styles.textBox, { borderBottomWidth: 0 }]}>
-            <Text style={styles.textStyle}>
-              2] Once you have collected a minimum of 500 points,you are
-              entitled to a discount amounting to the number of points you have
-              collected.
-            </Text>
-          </View>
-          <View style={styles.textBox}>
-            <Text style={styles.exampleText}>
-              For example:If the number of points collected by you is:510, you
-              are entitled to a dicount of Rs.510. Disclaimer:This discount can
-              only be availed on an in-store purchase of minimum Rs.2000.
-            </Text>
-          </View>
-          <View style={styles.textBox}>
-            <Text style={styles.exampleText}>
-              For example:If the number of points collected by you is:510, you
-              are entitled to a dicount of Rs.510. Disclaimer:This discount can
-              only be availed on an in-store purchase of minimum Rs.2000.
-            </Text>
-          </View>
+        <View style={styles.headingBox}>
+          <Text style={styles.headingText}>YOU HAVE EARNED</Text>
         </View>
-      </ScrollView>
+        <View style={styles.pointBox}>
+          <Text style={styles.pointStyle}>{user.points}</Text>
+          <Text
+            style={{ fontSize: 15, fontWeight: "bold", textAlign: "center" }}
+          >
+            Points
+          </Text>
+        </View>
+
+        <View style={{ height: 85 }}></View>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{ width: "100%", marginBottom: 15 }}
+        >
+          <View style={styles.detailsBox}>
+            <View style={styles.subTitleBox}>
+              <Text style={[styles.subTitleText, { color: "#00688B" }]}>
+                HOW DOES THIS WORK
+              </Text>
+            </View>
+            <View style={styles.subTitleBox}>
+              <Text
+                style={[
+                  styles.subTitleText,
+                  { color: "#0D4F8B", fontWeight: "bold" },
+                ]}
+              >
+                SHOP AND EARN
+              </Text>
+            </View>
+            <View style={[styles.textBox, { borderBottomWidth: 0 }]}>
+              <Text style={styles.textStyle}>
+                1] On every purchase, 10% of your cart total will be awarded you
+                as Points
+              </Text>
+            </View>
+            <View style={styles.textBox}>
+              <Text style={styles.exampleText}>
+                For example : On a purchase of Rs 1000 you earn a total of 100
+                points.
+              </Text>
+            </View>
+            <View style={[styles.textBox, { borderBottomWidth: 0 }]}>
+              <Text style={styles.textStyle}>
+                2] Once you have collected a minimum of 500 points, you are
+                entitled to a discount amounting to the number of points you
+                have collected.
+              </Text>
+            </View>
+            <View style={styles.textBox}>
+              <Text style={styles.exampleText}>
+                For example : If the number of points collected by you is : 510,
+                you are entitled to a dicount of Rs.510.
+              </Text>
+            </View>
+            <View style={styles.tipStyle}>
+              <Text
+                style={{ fontSize: 15, fontWeight: "500", color: "skyblue" }}
+              >
+                *** This discount can only be availed on an in-store purchase of
+                minimum Rs.2000 ***
+              </Text>
+            </View>
+          </View>
+        </ScrollView>
+      </ImageBackground>
     </View>
   );
 };
@@ -85,7 +112,7 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     alignSelf: "center",
     paddingTop: 30,
-    backgroundColor: "silver",
+    // backgroundColor: "silver",
   },
   headingText: {
     textAlign: "center",
@@ -102,7 +129,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center",
     borderStyle: "dashed",
-    backgroundColor: "grey",
+    // backgroundColor: "grey",
   },
   pointStyle: {
     textAlign: "center",
@@ -128,16 +155,33 @@ const styles = StyleSheet.create({
   },
   textBox: {
     borderBottomWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "#05B8CC",
     paddingVertical: 10,
     justifyContent: "center",
-    paddingHorizontal: 5,
+    paddingHorizontal: 10,
   },
   textStyle: {
-    fontSize: 14,
+    fontSize: 15,
+    fontWeight: "400",
   },
   exampleText: {
-    fontSize: 13,
-    color: "#376439",
+    fontSize: 14,
+    fontWeight: "400",
+    color: "#36648B",
+  },
+  tipStyle: {
+    width: "100%",
+    paddingVertical: 15,
+    paddingHorizontal: 10,
+    marginVertical: 15,
+    justifyContent: "center",
+    paddingLeft: 20,
+    backgroundColor: "#104E8B",
+    shadowColor: "blue",
+    shadowOpacity: 0.9,
+    shadowOffset: { width: 0, height: 1 },
+    shadowRadius: 5,
+    elevation: 5,
+    marginTop: 30,
   },
 });

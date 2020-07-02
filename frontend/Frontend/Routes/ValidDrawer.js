@@ -3,8 +3,8 @@ import React from "react";
 import HomeStack from "./HomeStack";
 import ProfileStack from "./ProfileStack";
 import OrderStack from "./OrderStack";
-import LogOut from "../src/SignOut/LogOut";
-import CustomDrawer from './CustomDrawer';
+import CustomDrawer from "./CustomDrawer";
+import CartStack from "./CartStack";
 
 const Drawer = createDrawerNavigator();
 
@@ -17,8 +17,10 @@ const ValidDrawer = () => {
       drawerContent={(props) => <CustomDrawer {...props} />}
     >
       <Drawer.Screen name="Home" component={HomeStack} />
-      <Drawer.Screen name="My Profile" component={ProfileStack} />
-      <Drawer.Screen name="My Orders" component={OrderStack} />
+      <Drawer.Screen name="Cart" component={CartStack} />
+      <Drawer.Screen name="Profile" component={ProfileStack} />
+      <Drawer.Screen name="Wishlist" component={ProfileStack} />
+      <Drawer.Screen name="Orders" component={OrderStack} />
     </Drawer.Navigator>
   );
 };
