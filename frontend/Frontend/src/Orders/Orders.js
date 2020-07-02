@@ -1,13 +1,10 @@
 /* eslint-disable */
 import React from "react";
-import { SafeAreaView, StyleSheet, Text, Image, ViewPropTypes, FlatList, Dimensions } from "react-native";
+import { SafeAreaView, StyleSheet, FlatList } from "react-native";
 import { useSelector } from "react-redux";
 import OrderCard from "./OrderCard";
-import Constants from 'expo-constants';
 
-const height = Dimensions.get("window").height;
-
-const Orders = ({navigation}) => {
+const Orders = ({ navigation }) => {
   const user = useSelector((state) => state.user);
   return (
     <SafeAreaView style={styles.container}>
@@ -41,6 +38,6 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     flex: 1,
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
 });

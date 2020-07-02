@@ -15,13 +15,21 @@ const ProductInfo = (props) => {
         </View>
       </View>
       <View style={styles.priceBox}>
-        <View style={styles.correctedPrice}>
-          <Text style={styles.discountedPriceText}>₹ {SP.toFixed(2)}</Text>
-          <Text style={styles.originalPriceText}>₹ {props.price}</Text>
-          <Text style={styles.discountedPercentText}>
-            ( {props.discountPercentage} % )
-          </Text>
-        </View>
+        {props.discountPercentage !== 0 ? (
+          <View style={styles.correctedPrice}>
+            <Text style={styles.discountedPriceText}>₹ {SP.toFixed(2)}</Text>
+            <Text style={styles.originalPriceText}>₹ {props.price}</Text>
+
+            <Text style={styles.discountedPercentText}>
+              ( {props.discountPercentage} % )
+            </Text>
+          </View>
+        ) : (
+          <View style={styles.correctedPrice}>
+            <Text style={styles.discountedPriceText}>₹ {SP.toFixed(2)}</Text>
+          </View>
+        )}
+
         <Text style={styles.note}>INCLUSIVE OF ALL TAXES</Text>
       </View>
     </View>

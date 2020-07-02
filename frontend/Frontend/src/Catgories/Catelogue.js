@@ -20,6 +20,7 @@ const Catelogue = ({ navigation }) => {
         }
       })
       .catch((err) => console.log(err));
+
     setTimeout(() => {
       setShow(false);
     }, 2000);

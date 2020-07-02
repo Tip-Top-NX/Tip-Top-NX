@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 
 const OrderConfirmed = () => {
   const [show, setShow] = useState("");
+  const navigation = useNavigation();
 
   useEffect(() => {
     setTimeout(() => {
@@ -46,6 +48,7 @@ const OrderConfirmed = () => {
             justifyContent: "center",
             alignItems: "center",
           }}
+          onPress={() => navigation.navigate("Categories")}
         >
           <Text style={{ color: "white", fontWeight: "bold" }}>
             BROWSE MORE
@@ -59,6 +62,7 @@ const OrderConfirmed = () => {
             justifyContent: "center",
             alignItems: "center",
           }}
+          onPress={() => navigation.navigate("My Orders")}
         >
           <Text style={{ color: "white", fontWeight: "bold" }}>SHOW ORDER</Text>
         </TouchableOpacity>

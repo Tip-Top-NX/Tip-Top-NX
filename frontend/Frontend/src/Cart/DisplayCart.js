@@ -26,7 +26,6 @@ export default DisplatCart;
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
     width: "100%",
     flex: 1,
     alignItems: "center",
