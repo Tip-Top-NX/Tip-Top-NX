@@ -7,3 +7,5 @@ export const SET_PROFILE = "SET_PROFILE";
 
 export const SET_WISHLIST = "SET_WISHLIST";
 export const SET_CART = "SET_CART";
+
+export const PLACE_ORDER = "PLACE_ORDER";

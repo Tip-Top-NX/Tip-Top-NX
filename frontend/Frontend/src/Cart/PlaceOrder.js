@@ -3,17 +3,22 @@ import React from "react";
 import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { myAxios } from "../../../axios";
+import { useDispatch } from "react-redux";
+import { placeOrder } from "../../../redux/ActionCreators";
 
 const PlaceOrderTab = (props) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const handleRightButton = () => {
     if (props.rightButton === "NEXT") {
       navigation.navigate("CartPage2");
     } else {
-      props.addressVal && props.paymentVal
-        ? navigation.navigate("OrderConfirm")
-        : // myAxios.post("/profile/cart/postCart", null, config))
-          alert("Cannot leave address or payment empty");
+      if(props.addressVal && props.paymentVal){
+        dispatch(placeOrder("COD"));
+        navigation.navigate("OrderConfirm")
+      }
+      else {
+        alert("Cannot leave address or payment empty");}
     }
   };
   return (

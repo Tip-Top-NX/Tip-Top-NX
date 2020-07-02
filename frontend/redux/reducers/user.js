@@ -49,6 +49,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         ...action.payload,
       };
+    case ActionTypes.PLACE_ORDER:
+      return {
+        ...state,
+        ...action.payload
+      }
     default:
       return state;
   }
