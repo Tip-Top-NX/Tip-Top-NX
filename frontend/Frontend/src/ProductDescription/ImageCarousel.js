@@ -23,7 +23,15 @@ const ImageCarousel = (props) => {
         renderItem={({ item }) => {
           return (
             <TouchableOpacity activeOpacity={1}>
-              <Image source={{ uri: getURL(item) }} style={styles.imageStyle} />
+              <Image
+                source={{ uri: getURL(item) }}
+                style={[
+                  styles.imageStyle,
+                  {
+                    aspectRatio: images.indexOf(item) === 0 ? 79 / 137 : 1,
+                  },
+                ]}
+              />
             </TouchableOpacity>
           );
         }}
@@ -54,11 +62,12 @@ const ImageCarousel = (props) => {
 
 const styles = StyleSheet.create({
   imageStyle: {
-    borderWidth: 5,
+    // borderWidth: 5,
     borderColor: "grey",
     alignSelf: "center",
     width: "90%",
-    aspectRatio: 1,
+    height: 340,
+    // aspectRatio: 79 / 137,
     marginBottom: 10,
     marginTop: 10,
   },
@@ -72,6 +81,11 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     margin: 5,
     backgroundColor: "#000",
+  },
+  container: {
+    // borderWidth: 1,
+    height: 385,
+    marginVertical: 0,
   },
 });
 
