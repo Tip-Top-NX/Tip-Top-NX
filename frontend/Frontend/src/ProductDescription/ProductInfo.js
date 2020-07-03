@@ -15,6 +15,7 @@ const ProductInfo = (props) => {
         </View>
       </View>
       <View style={styles.priceBox}>
+<<<<<<< HEAD
         <View style={styles.correctedPrice}>
           <Text style={styles.discountedPriceText}>₹ {SP.toFixed(2)}</Text>
           <Text style={styles.originalPriceText}>₹ {props.price}</Text>
@@ -22,6 +23,23 @@ const ProductInfo = (props) => {
             ( {props.discountPercentage} % )
           </Text>
         </View>
+=======
+        {props.discountPercentage !== 0 ? (
+          <View style={styles.correctedPrice}>
+            <Text style={styles.discountedPriceText}>₹ {SP.toFixed(2)}</Text>
+            <Text style={styles.originalPriceText}>₹ {props.price}</Text>
+
+            <Text style={styles.discountedPercentText}>
+              ( {props.discountPercentage} % )
+            </Text>
+          </View>
+        ) : (
+          <View style={styles.correctedPrice}>
+            <Text style={styles.discountedPriceText}>₹ {SP.toFixed(2)}</Text>
+          </View>
+        )}
+
+>>>>>>> 591ddc4e8fcb4bf9fca194bd8015fb919838f325
         <Text style={styles.note}>INCLUSIVE OF ALL TAXES</Text>
       </View>
     </View>

@@ -1,14 +1,16 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 
 const header = () => {
   const navigation = useNavigation();
+  const user = useSelector((state) => state.user);
 
   return (
     <View style={styles.container}>
@@ -45,6 +47,16 @@ const header = () => {
           style={styles.materialIcon}
           onPress={() => navigation.navigate("Cart")}
         />
+        {user.isValid ? (
+          <TouchableOpacity
+            style={styles.counterStyle}
+            onPress={() => navigation.navigate("Cart")}
+          >
+            <Text style={{ color: "#fff", fontWeight: "500" }}>
+              {user.cart.length}
+            </Text>
+          </TouchableOpacity>
+        ) : null}
       </View>
     </View>
   );
@@ -52,9 +64,7 @@ const header = () => {
 
 const styles = StyleSheet.create({
   container: {
-    // marginTop: 15,
-    // borderWidth: 1,
-    borderColor: "blue",
+    marginTop: 5,
     width: "100%",
     height: "100%",
     flexDirection: "row",
@@ -84,6 +94,18 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#000",
     textAlign: "center",
+  },
+  counterStyle: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    borderWidth: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    position: "absolute",
+    top: 0,
+    right: 0,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

@@ -12,9 +12,8 @@ const Categories = (props) => {
             onPress={() => props.navigation.navigate("Catelogue")}
           >
             <View>
-              {/* <Text>Men</Text> */}
               <Image
-                source={require("../../../../assets/man.png")}
+                source={require("../../../../assets/v.gif")}
                 style={styles.imageStyle}
               />
             </View>
@@ -24,9 +23,8 @@ const Categories = (props) => {
             onPress={() => props.navigation.navigate("Catelogue")}
           >
             <View>
-              {/* <Text>Women</Text> */}
               <Image
-                source={require("../../../../assets/women.png")}
+                source={require("../../../../assets/t.gif")}
                 style={styles.imageStyle}
               />
             </View>
@@ -40,9 +38,8 @@ const Categories = (props) => {
             onPress={() => props.navigation.navigate("Catelogue")}
           >
             <View>
-              {/* <Text>Men</Text> */}
               <Image
-                source={require("../../../../assets/kid.png")}
+                source={require("../../../../assets/y.gif")}
                 style={styles.imageStyle}
               />
             </View>
@@ -52,9 +49,8 @@ const Categories = (props) => {
             onPress={() => props.navigation.navigate("Catelogue")}
           >
             <View>
-              {/* <Text>Women</Text> */}
               <Image
-                source={require("../../../../assets/towel.jpg")}
+                source={require("../../../../assets/n.jpg")}
                 style={styles.imageStyle}
               />
             </View>
@@ -73,7 +69,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: "silver",
     marginTop: 10,
-    // backgroundColor: "#1a2228",
+<<<<<<< HEAD
+    backgroundColor: "#fff",
+=======
+    backgroundColor: "#000",
+>>>>>>> b4ecba67547c6e0ef28d8560e8a5fa6e4ce08510
+    marginBottom: 10,
   },
   outerBox: {
     flexDirection: "row",
@@ -87,10 +88,18 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
+
+    shadowColor: "silver",
+    shadowOpacity: 0.5,
+    shadowOffset: { width: 0, height: 1 },
+    shadowRadius: 4,
+    elevation: 3,
   },
   imageStyle: {
     // borderWidth: 1,
     borderRadius: 30,
+    height: 255,
+    width: 170,
   },
 });
 

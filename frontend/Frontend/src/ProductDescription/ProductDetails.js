@@ -25,6 +25,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     alignSelf: "center",
+    justifyContent: "center",
+    paddingBottom: 20,
   },
   header: {
     height: 50,

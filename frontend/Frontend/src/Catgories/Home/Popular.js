@@ -9,15 +9,18 @@ const width = Dimensions.get("window").width;
 
 const popular = (props) => {
   const [popularProducts, setPopularProducts] = useState();
-  const getProducts = () => {
-    return myAxios
-      .get("/category/1/get-products")
-      .then((res) => setPopularProducts([...res.data]))
-      .catch((err) => console.log(err));
-  };
 
   useEffect(() => {
-    getProducts();
+    let mounted = true;
+    myAxios
+      .get("/category/5/get-products")
+      .then((res) => {
+        if (mounted) {
+          setPopularProducts([...res.data]);
+        }
+      })
+      .catch((err) => console.log(err));
+    return () => (mounted = false);
   }, []);
   return (
     <View style={styles.container}>
@@ -52,11 +55,17 @@ const popular = (props) => {
         keyExtractor={(item) => item._id.toString()}
         renderItem={({ item }) => (
           <ProductCard
+            brand={item.brand}
+            description={item.description}
+            colors={item.colors}
             images={item.images}
+            size={item.size}
+            style={item.style}
+            discountPercentage={item.discountPercentage}
             name={item.name}
             price={item.price}
-            _id={item._id}
             navigation={props.navigation}
+            _id={item._id}
             cardStyle={styles.cardStyle}
             imageView={styles.imageView}
             details={styles.details}
@@ -73,6 +82,8 @@ const styles = StyleSheet.create({
     height: 380,
     marginVertical: 20,
     justifyContent: "center",
+    borderTopWidth: 1,
+    borderColor: "#ccc",
     // flex: 1,
   },
   titleStyle: {

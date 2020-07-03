@@ -5,8 +5,9 @@ import Home from "../src/Catgories/Home/Home";
 import Header from "../src/Header";
 import Catelogue from "../src/Catgories/Catelogue";
 import Product from "../src/ProductDescription/ProductPage";
-import Cart from "../src/Cart/Cart";
 import Search from "../src/SearchPage";
+import CartStack from "./CartStack";
+import SizeChart from "../src/ProductDescription/SizeChart";
 
 const Stack = createStackNavigator();
 
@@ -14,7 +15,7 @@ const HomeStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Categories"
+        name="Home"
         component={Home}
         options={{
           headerShown: true,
@@ -23,7 +24,8 @@ const HomeStack = () => {
       />
       <Stack.Screen name="Catelogue" component={Catelogue} />
       <Stack.Screen name="Product" component={Product} />
-      <Stack.Screen name="Cart" component={Cart} />
+      <Stack.Screen name="SizeChart" component={SizeChart} />
+      <Stack.Screen name="Cart" component={CartStack} />
       <Stack.Screen
         options={{ headerShown: false }}
         name="Search"

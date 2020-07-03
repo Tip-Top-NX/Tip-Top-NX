@@ -15,11 +15,11 @@ const Picture = () => {
   const dispatch = useDispatch();
 
   const navigation = useNavigation();
-  const [picture, setPicture] = useState();
+  const [picture, setPicture] = useState("");
 
   useEffect(() => {
     if (user.image != "") {
-      console.log(getURL(user.image));
+      // console.log(getURL(user.image));
       setPicture(getURL(user.image));
     }
   }, [user.image]);
@@ -32,7 +32,7 @@ const Picture = () => {
       aspect: [4, 3],
     });
     if (!result.cancelled) {
-      console.log(result.uri);
+      // console.log(result.uri);
       setPicture(result.uri);
       const data = new FormData();
       data.append("myImage", {
@@ -60,7 +60,14 @@ const Picture = () => {
           style={styles.avatarPlaceholder}
           onPress={() => handlePress()}
         >
-          <Image source={{ uri: picture }} style={styles.avatar} />
+          {picture === "" ? (
+            <Image
+              source={require("../../../../assets/k.gif")}
+              style={{ height: 100, width: 100, borderRadius: 50 }}
+            ></Image>
+          ) : (
+            <Image source={{ uri: picture }} style={styles.avatar} />
+          )}
         </TouchableOpacity>
       </View>
       <View style={styles.textContainer}>

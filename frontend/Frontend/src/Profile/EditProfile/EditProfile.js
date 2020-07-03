@@ -52,7 +52,7 @@ const EditProfile = ({ navigation }) => {
         type: "image/jpeg",
         name: "profile.jpg",
       });
-      console.log(user);
+      // console.log(user);
       dispatch(postImage(data));
     }
   };

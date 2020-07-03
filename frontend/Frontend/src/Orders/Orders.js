@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React from "react";
+<<<<<<< HEAD
 import { SafeAreaView, StyleSheet, Text, Image, ViewPropTypes, FlatList, Dimensions } from "react-native";
 import { useSelector } from "react-redux";
 import OrderCard from "./OrderCard";
@@ -8,6 +9,13 @@ import Constants from 'expo-constants';
 const height = Dimensions.get("window").height;
 
 const Orders = ({navigation}) => {
+=======
+import { SafeAreaView, StyleSheet, FlatList } from "react-native";
+import { useSelector } from "react-redux";
+import OrderCard from "./OrderCard";
+
+const Orders = ({ navigation }) => {
+>>>>>>> 591ddc4e8fcb4bf9fca194bd8015fb919838f325
   const user = useSelector((state) => state.user);
   return (
     <SafeAreaView style={styles.container}>
@@ -41,6 +49,10 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     flex: 1,
+<<<<<<< HEAD
     backgroundColor: "white"
+=======
+    backgroundColor: "white",
+>>>>>>> 591ddc4e8fcb4bf9fca194bd8015fb919838f325
   },
 });

@@ -9,15 +9,15 @@ import {
   Keyboard,
   ImageBackground,
   Modal,
-  ActivityIndicator
+  ActivityIndicator,
+  Image,
 } from "react-native";
 import styles from "./SignInStyles";
 import PropTypes from "prop-types";
 
-import Spinner from '../Spinner';
+import Splash from "../Splash";
 import { useSelector, useDispatch } from "react-redux";
 import { signin, signinFailed } from "../../../redux/ActionCreators";
-
 
 const signIn = ({ navigation }) => {
   // states for handling the input
@@ -38,12 +38,12 @@ const signIn = ({ navigation }) => {
 
   useEffect(() => {
     if (user.isValid) {
-      navigation.navigate("Categories");
+      navigation.navigate("Home");
     }
   }, [user.isValid]);
 
   const validation = () => {
-    console.log("start",validEmail,validPassword);
+    // console.log("start",validEmail,validPassword);
     const emailregex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     let valid = true;
     // email check
@@ -74,69 +74,101 @@ const signIn = ({ navigation }) => {
     }
   };
 
-
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
-        <Spinner visible={user.isFetching} />
-        <ImageBackground
-          source={require("../../../assets/b1.jpg")}
-          style={{
-            flex: 1,
-            resizeMode: "cover",
-            justifyContent: "center",
-            width: "100%",
-          }}
-          blurRadius={0}
-        >
-          <View style={styles.title}>
-            <Text style={styles.textStyle}>SIGN IN</Text>
-            <Text style={styles.textStyle}>TO CONTINUE</Text>
-          </View>
+        {/* <Splash visible={user.isFetching} /> */}
+        {user.isFetching ? (
           <View
-            style={[styles.inputContainer, !validEmail ? styles.error : null]}
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              height: "100%",
+            }}
           >
-            <TextInput
-              style={styles.inputText}
-              placeholder="EMAIL ADDRESS"
-              placeholderTextColor="#666"
-              onChangeText={(text) => setEmail(text)}
-              value={email}
-            ></TextInput>
+            <Image
+              source={require("../../../assets/q.gif")}
+              style={{ height: 100, width: 100 }}
+            />
           </View>
-          <View
-            style={[
-              styles.inputContainer,
-              !validPassword ? styles.error : null,
-            ]}
+        ) : (
+          <ImageBackground
+            source={require("../../../assets/b1.jpg")}
+            style={{
+              flex: 1,
+              resizeMode: "cover",
+              justifyContent: "center",
+              width: "100%",
+            }}
+            blurRadius={0}
           >
-            <TextInput
-              style={styles.inputText}
-              placeholder="PASSWORD"
-              placeholderTextColor="#666"
-              secureTextEntry={true}
-              onChangeText={(text) => setPassword(text)}
-              value={password}
-            ></TextInput>
-          </View>
-          <TouchableOpacity style={styles.button} onPress={() => validation()}>
-            <Text style={styles.buttonText}>BEGIN</Text>
-          </TouchableOpacity>
-          <View style={styles.signUpBox}>
-            <Text style={styles.signUpText}>NOT A MEMBER YET ?</Text>
+            <TouchableOpacity
+              style={[
+                styles.button,
+                {
+                  width: 100,
+                  backgroundColor: "rgba(0, 0, 0, 0.75)",
+                  alignSelf: "flex-end",
+                },
+              ]}
+              onPress={() => navigation.navigate("Home")}
+            >
+              <Text style={styles.buttonText}>SKIP</Text>
+            </TouchableOpacity>
+            <View style={styles.title}>
+              <Text style={styles.textStyle}>SIGN IN</Text>
+              <Text style={styles.textStyle}>TO CONTINUE</Text>
+            </View>
+            <View
+              style={[styles.inputContainer, !validEmail ? styles.error : null]}
+            >
+              <TextInput
+                style={styles.inputText}
+                placeholder="EMAIL ADDRESS"
+                placeholderTextColor="#666"
+                onChangeText={(text) => setEmail(text)}
+                value={email}
+              ></TextInput>
+            </View>
+            <View
+              style={[
+                styles.inputContainer,
+                !validPassword ? styles.error : null,
+              ]}
+            >
+              <TextInput
+                style={styles.inputText}
+                placeholder="PASSWORD"
+                placeholderTextColor="#666"
+                secureTextEntry={true}
+                onChangeText={(text) => setPassword(text)}
+                value={password}
+              ></TextInput>
+            </View>
             <TouchableOpacity
               style={styles.button}
-              onPress={() =>
-                navigation.reset({
-                  index: 0,
-                  routes: [{ name: "Sign Up" }],
-                })
-              }
+              onPress={() => validation()}
             >
-              <Text style={styles.buttonText}>SIGN UP</Text>
+              <Text style={styles.buttonText}>BEGIN</Text>
             </TouchableOpacity>
-          </View>
-        </ImageBackground>
+            <View style={styles.signUpBox}>
+              <Text style={styles.signUpText}>NOT A MEMBER YET ?</Text>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() =>
+                  navigation.reset({
+                    index: 0,
+                    routes: [{ name: "Sign Up" }],
+                  })
+                }
+              >
+                <Text style={styles.buttonText}>SIGN UP</Text>
+              </TouchableOpacity>
+            </View>
+          </ImageBackground>
+        )}
       </View>
     </TouchableWithoutFeedback>
   );
