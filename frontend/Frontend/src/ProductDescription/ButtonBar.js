@@ -86,10 +86,9 @@ export default ButtonBar;
 
 const styles = StyleSheet.create({
   container: {
-    borderBottomWidth: 1,
-    borderTopWidth: 1,
-    height: 80,
-    marginTop: 10,
+    // borderBottomWidth: 1,
+    // borderTopWidth: 1,
+    height: 60,
     borderColor: "#ccc",
     // backgroundColor: "#FFF",
     flexDirection: "row",

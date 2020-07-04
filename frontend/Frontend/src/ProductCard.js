@@ -35,16 +35,16 @@ const ProductCard = (props) => {
       <FontAwesome
         style={{ position: "absolute", top: 20, right: 15 }}
         name="bookmark"
-        size={20}
+        size={22}
         color="black"
         onPress={() => handleWishlist()}
       />
     ) : (
       <FontAwesome
-        style={{ position: "absolute", top: 20, right: 15 }}
+        style={{ position: "absolute", top: 20, right: 10 }}
         name="bookmark-o"
         color="black"
-        size={20}
+        size={22}
         onPress={() => handleWishlist()}
       />
     );
@@ -53,10 +53,12 @@ const ProductCard = (props) => {
   return (
     <View>
       <View style={props.cardStyle}>
-        <Image
-          source={{ uri: getURL(props.images[0]) }}
-          style={props.imageView}
-        ></Image>
+        <View style={props.imageContainer}>
+          <Image
+            source={{ uri: getURL(props.images[0]) }}
+            style={props.imageView}
+          ></Image>
+        </View>
         {user.isValid ? <Icon /> : null}
         <TouchableOpacity
           onPress={() =>
@@ -75,8 +77,15 @@ const ProductCard = (props) => {
           }
         >
           <View style={props.details}>
+            <Text style={{ fontWeight: "700", color: "grey" }}>
+              {props.brand}
+            </Text>
             <Text style={props.textStyle}>{props.name}</Text>
-            <Text style={props.textStyle}>Price : ₹ {props.price}</Text>
+            <Text
+              style={[props.textStyle, { color: "grey", fontWeight: "600" }]}
+            >
+              Price : ₹ {props.price}
+            </Text>
           </View>
         </TouchableOpacity>
       </View>
