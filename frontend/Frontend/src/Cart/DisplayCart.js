@@ -16,7 +16,7 @@ const DisplatCart = (props) => {
           navigation={props.navigation}
         />
       ) : (
-        <CartItems cart={user.cart} />
+        <CartItems cart={user.cart} navigation={props.navigation} />
       )}
     </View>
   );

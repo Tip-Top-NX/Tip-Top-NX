@@ -20,9 +20,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    borderWidth: 1,
-    borderColor: "#DDA0DD",
-    borderStyle: "dotted",
+    borderWidth: 0.5,
+    borderColor: "silver",
   },
   container: {
     width: "100%",

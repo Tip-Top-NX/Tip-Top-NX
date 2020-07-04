@@ -1,29 +1,31 @@
 /* eslint-disable */
 import React from "react";
-import { View, StyleSheet, Text, Image, Dimensions } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+  Icon,
+} from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-
+import { getURL } from "../../../axios";
 const height = Dimensions.get("window").height;
 const width = Dimensions.get("window").width;
-
 const OrderProductDetails = ({ route, navigation }) => {
   const _id = route.params._id;
   const amount = route.params.amount;
   const deliveryCharge = route.params.deliveryCharge;
+  const status = route.params.status;
   const method = route.params.method;
   const orderDate = route.params.orderDate;
   const name = route.params.name;
   const address = route.params.address;
-
   let total = amount + deliveryCharge;
-
   return (
     <View style={{ backgroundColor: "#f5f5f5" }}>
       <View style={styles.orderCard}>
-        <View style={{ flexDirection: "row" }}>
-          <Text style={styles.headingDetails}>Order No. :</Text>
-          <Text style={styles.info}> {_id}</Text>
-        </View>
         <View style={{ flexDirection: "row" }}>
           <Text style={[styles.headingDetails, { marginTop: 5 }]}>
             Placed on :{" "}
@@ -36,6 +38,10 @@ const OrderProductDetails = ({ route, navigation }) => {
             {orderDate.charAt(2)}
             {orderDate.charAt(3)}
           </Text>
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.headingDetails}>Order No. :</Text>
+          <Text style={styles.info}> {_id}</Text>
         </View>
         <Text style={styles.headingDetails}>Bill details :</Text>
         <View style={styles.priceBox}>
@@ -92,14 +98,11 @@ const OrderProductDetails = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
   orderCard: {
-    height: 500,
-    paddingLeft: 15,
+    height: 410,
+    paddingLeft: 10,
     backgroundColor: "#ffffff",
     marginTop: 10,
     justifyContent: "center",
-    borderBottomWidth: 1,
-    borderTopWidth: 1,
-    borderColor: "#ccc",
   },
   priceBox: {
     borderTopWidth: 1,
@@ -108,11 +111,13 @@ const styles = StyleSheet.create({
     width: width / 2 + 15,
     marginLeft: 83,
     marginTop: -12,
-    paddingVertical: 3,
+  },
+  priceDetails: {
+    marginTop: -70,
   },
   headingDetails: {
     color: "#818181",
-    paddingVertical: 5,
+    paddingVertical: 2,
     fontSize: 15,
   },
   mrpDetails: {
@@ -124,6 +129,7 @@ const styles = StyleSheet.create({
     color: "#4c4c4c",
     paddingVertical: 3,
     fontSize: 15,
+    marginTop: -4,
   },
   name: {
     fontWeight: "bold",
@@ -137,7 +143,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     color: "#5e6269",
     marginTop: 2,
-    paddingVertical: 2,
   },
   priceText: {
     fontSize: 18,
@@ -159,5 +164,4 @@ const styles = StyleSheet.create({
     width: width - 20,
   },
 });
-
 export default OrderProductDetails;

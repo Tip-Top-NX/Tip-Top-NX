@@ -8,22 +8,6 @@ import { myAxios } from "../../../axios";
 const width = Dimensions.get("window").width;
 
 const popular = (props) => {
-  // const [popularProducts, setPopularProducts] = useState();
-
-  // useEffect(() => {
-  //   let mounted = true;
-  //   myAxios
-  //     .get("/category/5/get-products")
-  //     .then((res) => {
-  //       if (mounted) {
-  //         props.checkLoading(false);
-  //         setPopularProducts([...res.data]);
-  //       }
-  //     })
-  //     .catch((err) => console.log(err));
-  //   return () => (mounted = false);
-  // }, []);
-
   return (
     <View style={styles.container}>
       <View style={styles.titleStyle}>
@@ -36,7 +20,7 @@ const popular = (props) => {
             width: 80,
             justifyContent: "center",
           }}
-          onPress={() => props.navigation.navigate("Catelogue")}
+          onPress={() => props.navigation.navigate("Catalogue")}
         >
           <Text
             style={{

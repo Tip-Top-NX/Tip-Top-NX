@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { useNavigation } from "@react-navigation/native";
 
-const OrderConfirmed = () => {
+const OrderConfirmed = ({ navigation }) => {
   const [show, setShow] = useState("");
-  const navigation = useNavigation();
 
   useEffect(() => {
     setTimeout(() => {
       setShow("ORDER PLACED SUCCESSFULLY!");
-    }, 2000);
+    }, 3000);
   });
 
   return (
@@ -25,7 +23,7 @@ const OrderConfirmed = () => {
       }}
     >
       <Image
-        source={require("../../../../assets/u.gif")}
+        source={require("../../../../assets/x.gif")}
         style={{ height: 300, width: 300 }}
       />
       <Text style={{ marginVertical: 20, fontWeight: "bold", fontSize: 18 }}>
@@ -48,7 +46,12 @@ const OrderConfirmed = () => {
             justifyContent: "center",
             alignItems: "center",
           }}
-          onPress={() => navigation.navigate("Home")}
+          onPress={() =>
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "Home" }],
+            })
+          }
         >
           <Text style={{ color: "white", fontWeight: "bold" }}>
             BROWSE MORE
@@ -62,7 +65,13 @@ const OrderConfirmed = () => {
             justifyContent: "center",
             alignItems: "center",
           }}
-          onPress={() => navigation.navigate("My Orders")}
+          onPress={() => {
+            navigation.navigate("Orders", { screen: "My Orders" }),
+              navigation.reset({
+                index: 0,
+                routes: [{ name: "Home" }],
+              });
+          }}
         >
           <Text style={{ color: "white", fontWeight: "bold" }}>SHOW ORDER</Text>
         </TouchableOpacity>

@@ -50,7 +50,7 @@ const Picture = () => {
         <MaterialCommunityIcons
           name="chevron-left-circle"
           size={30}
-          color="#F8A9A9"
+          color="grey"
           style={{ position: "absolute", top: 30, left: 20 }}
           onPress={() => {
             navigation.openDrawer();
@@ -62,8 +62,8 @@ const Picture = () => {
         >
           {picture === "" ? (
             <Image
-              source={require("../../../../assets/k.gif")}
-              style={{ height: 100, width: 100, borderRadius: 50 }}
+              source={require("../../../../assets/l.png")}
+              style={{ height: 150, width: 150, borderRadius: 75 }}
             ></Image>
           ) : (
             <Image source={{ uri: picture }} style={styles.avatar} />
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 75,
-    backgroundColor: "#E1E2E6",
+    backgroundColor: "rgba(52, 52, 52, 0.2)",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -97,9 +97,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    borderWidth: 1,
-    borderColor: "#DDA0DD",
-    borderStyle: "dotted",
+    borderWidth: 0.5,
+    borderColor: "silver",
   },
   container: {
     // borderWidth: 1,
@@ -114,9 +113,9 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(52, 52, 52, 0.7)",
+    backgroundColor: "rgba(52, 52, 52, 0.2)",
+    paddingHorizontal: 5,
   },
-  header: {},
 });
 
 export default Picture;

@@ -106,7 +106,7 @@ const ProductCard = (props) => {
                         fontSize: 18,
                       }}
                     >
-                      {qty}
+                      {props.quantity}
                     </Text>
                     <View style={styles.plusBox}>
                       <MaterialIcons

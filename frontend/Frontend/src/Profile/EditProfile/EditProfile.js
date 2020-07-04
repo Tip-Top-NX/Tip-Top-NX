@@ -101,7 +101,7 @@ const EditProfile = ({ navigation }) => {
 
   return (
     <ImageBackground
-      source={require("../../../../assets/b.jpg")}
+      source={require("../../../../assets/r.jpg")}
       style={{ flex: 1, resizeMode: "cover", justifyContent: "center" }}
       blurRadius={0}
     >
@@ -152,7 +152,7 @@ const EditProfile = ({ navigation }) => {
                   fontSize={16}
                   textColor={"#777"} //'#7a44cf'
                   selectedColor={"white"}
-                  buttonColor={"black"}
+                  buttonColor={"rgba(52,52,52, 1)"}
                   borderColor={"black"}
                   backgroundColor={"rgba(112,128,144, 0.0)"}
                   hasPadding
@@ -191,8 +191,8 @@ const EditProfile = ({ navigation }) => {
                 justifyContent: "center",
                 marginTop: 15,
                 marginBottom: 30,
-                backgroundColor: "rgba(112,128,144, 0.7)",
-                borderColor: "#2F4F4F",
+                backgroundColor: "rgba(52,52,52, 1)",
+                borderColor: "grey",
                 borderWidth: 3,
               }}
               onPress={() => validation()}

@@ -28,7 +28,11 @@ const CartItems = (props) => {
         </View>
         <Total />
       </ScrollView>
-      <PlaceOrderTab leftButton="ADD MORE" rightButton="NEXT" />
+      <PlaceOrderTab
+        leftButton="ADD MORE"
+        rightButton="NEXT"
+        navigation={props.navigation}
+      />
     </View>
   );
 };
