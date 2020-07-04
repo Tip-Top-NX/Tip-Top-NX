@@ -144,7 +144,6 @@ router.delete("/order/:orderId",(req,res,next) => {
   })
 })
 
-//test only
 router.post("/cart/placeOrder", (req, res, next) => {
   let conents = [];
   for (let i = 0; i < req.user.cart.length; i++) {
@@ -176,12 +175,14 @@ router.post("/cart/placeOrder", (req, res, next) => {
       User.findById(req.user._id)
       .then((user) => {
         user.orders.splice(0,0,order._id); //add to orders
+        user.points += user.cartTotal*10/100
+        user.points = user.points.toFixed()
         user.cart = []; //clear cart
         user.cartTotal = 0;
         return User.populate(user,{ path: "orders", populate: { path: "contents.product" }})
       })
       .then((user) => {
-        res.send(user.orders)
+        res.send({orders:user.orders,cart:user.cart,cartTotal:user.cartTotal,points:user.points})
         user.save()
       })
       .catch((err) => next(err));
