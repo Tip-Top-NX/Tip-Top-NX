@@ -32,14 +32,9 @@
     "react-native-form-validator": "^0.3.2",
     "react-native-gesture-handler": "~1.6.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.1",
-<<<<<<< HEAD
-    "react-native-material-dropdown": "^0.11.1",
-    "react-native-reanimated": "^1.9.0",
-=======
     "react-native-linear-gradient": "^2.5.6",
     "react-native-material-dropdown": "^0.11.1",
     "react-native-reanimated": "~1.7.0",
->>>>>>> 591ddc4e8fcb4bf9fca194bd8015fb919838f325
     "react-native-safe-area-context": "0.7.3",
     "react-native-screens": "~2.2.0",
     "react-native-skeleton-content": "^1.0.18",

@@ -1,33 +1,5 @@
 /* eslint-disable */
 import React from "react";
-<<<<<<< HEAD
-import { View, StyleSheet, FlatList } from "react-native";
-import ProductCard from "./ProductCard";
-import { useSelector } from "react-redux";
-
-const CartItems = (props) => {
-  console.log(props.cart);
-  return (
-    <View style={styles.container}>
-      <FlatList
-        data={props.cart}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={(item, index) => String(index)}
-        renderItem={({ item }) => (
-          <ProductCard
-            _id={item._id}
-            name={item.name}
-            brand={item.brand}
-            category={item.category}
-            style={item.style}
-            description={item.description}
-            size={item.size}
-            price={item.price}
-            discountPercentage={item.discountPercentage}
-          />
-        )}
-      />
-=======
 import { ScrollView, StyleSheet, FlatList, View, Text } from "react-native";
 import ProductCard from "./CartPage1/ProductCard";
 import Total from "./CartPage1/Total";
@@ -57,7 +29,6 @@ const CartItems = (props) => {
         <Total />
       </ScrollView>
       <PlaceOrderTab leftButton="ADD MORE" rightButton="NEXT" />
->>>>>>> 591ddc4e8fcb4bf9fca194bd8015fb919838f325
     </View>
   );
 };
@@ -66,13 +37,6 @@ export default CartItems;
 
 const styles = StyleSheet.create({
   container: {
-<<<<<<< HEAD
-    borderWidth: 1,
-    width: "100%",
-    paddingBottom: 20,
-    justifyContent: "center",
-    alignItems: "center",
-=======
     // borderWidth: 1,
     width: "100%",
     paddingBottom: 20,
@@ -90,7 +54,6 @@ const styles = StyleSheet.create({
     marginTop: 50,
     justifyContent: "center",
     paddingLeft: 20,
-    backgroundColor: "#FAEBEB",
->>>>>>> 591ddc4e8fcb4bf9fca194bd8015fb919838f325
+    backgroundColor: "#FAEBEB"
   },
 });

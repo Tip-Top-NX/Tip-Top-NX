@@ -1,15 +1,4 @@
 /* eslint-disable */
-<<<<<<< HEAD
-import React from "react";
-import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
-import { useDispatch } from "react-redux";
-import { postCart } from "../../../redux/ActionCreators";
-
-const ButtonBar = (props) => {
-  const dispatch = useDispatch();
-=======
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, TouchableOpacity, Text, Alert } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
@@ -64,7 +53,6 @@ const ButtonBar = (props) => {
       );
     }
   };
->>>>>>> 591ddc4e8fcb4bf9fca194bd8015fb919838f325
 
   return (
     <View style={styles.container}>
@@ -80,15 +68,11 @@ const ButtonBar = (props) => {
       <View style={styles.addToCartButtonContainer}>
         <TouchableOpacity
           style={styles.addToCartButton}
-<<<<<<< HEAD
-          onPress={() => dispatch(postCart(props._id))}
-=======
           onPress={
             buttonText === "GO TO CART"
               ? () => navigation.navigate("Cart")
               : addToCartHandler
           }
->>>>>>> 591ddc4e8fcb4bf9fca194bd8015fb919838f325
         >
           <AntDesign name="shoppingcart" size={25} color="white" />
           <Text style={styles.addToCartText}>{buttonText}</Text>

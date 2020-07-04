@@ -17,10 +17,6 @@ export default function App() {
         </NavigationContainer>
       </View>
     </Provider>
-<<<<<<< HEAD
-    
-=======
->>>>>>> 591ddc4e8fcb4bf9fca194bd8015fb919838f325
   );
 }
 

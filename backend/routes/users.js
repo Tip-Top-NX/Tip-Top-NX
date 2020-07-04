@@ -13,18 +13,11 @@ router.get("/", function (req, res, next) {
   });
 });
 
-<<<<<<< HEAD
-router.post('/login', authenticate.local, (req, res, next) => {
-  User.findById(req.user._id).populate('wishlist')
-    .populate({path:'cart',populate:{path:'product'}})
-    .populate({path:'orders',populate:{path:'contents.product'}})
-=======
 router.post("/login", authenticate.local, (req, res, next) => {
   User.findById(req.user._id)
     .populate("wishlist")
     .populate({ path: "cart", populate: { path: "product" } })
     .populate({ path: "orders", populate: { path: "contents.product" } })
->>>>>>> 591ddc4e8fcb4bf9fca194bd8015fb919838f325
     .then((user) => {
       res.send({
         success: true,

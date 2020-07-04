@@ -19,12 +19,8 @@ const ProductPage = ({ route, navigation }) => {
   const name = route.params.name;
   const price = route.params.price;
   const _id = route.params._id;
-<<<<<<< HEAD
-=======
-
   const [chosenSize, setChosenSize] = useState("No");
   const [chosenColor, setChosenColor] = useState("No");
->>>>>>> 591ddc4e8fcb4bf9fca194bd8015fb919838f325
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -35,11 +31,6 @@ const ProductPage = ({ route, navigation }) => {
         price={price}
         discountPercentage={discountPercentage}
       />
-<<<<<<< HEAD
-      <Colours colors={colors} />
-      <Size size={size} />
-      <ButtonBar navigation={navigation} _id={_id} />
-=======
       <Colours
         colors={colors}
         onColorChange={(colorValue) => setChosenColor(colorValue)}
@@ -50,7 +41,6 @@ const ProductPage = ({ route, navigation }) => {
         images={images[images.length - 1]}
       />
       <ButtonBar _id={_id} chosenSize={chosenSize} chosenColor={chosenColor} />
->>>>>>> 591ddc4e8fcb4bf9fca194bd8015fb919838f325
       <ProductDetails styles={styles} description={description} />
     </ScrollView>
   );

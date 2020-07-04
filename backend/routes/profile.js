@@ -149,21 +149,11 @@ router.post("/cart/placeOrder", (req, res, next) => {
   let conents = [];
   for (let i = 0; i < req.user.cart.length; i++) {
     conents.push({
-<<<<<<< HEAD
-      product: req.body.cart[i].product._id,
-      size: req.body.cart[i].size,
-      color: req.body.cart[i].color,
-      price:
-        req.body.cart[i].product.price *
-        (1 - req.body.cart[i].product.discountPercentage / 100),
-      quantity: req.body.cart[i].quantity,
-=======
       product: req.user.cart[i].product,
       size: req.user.cart[i].size,
       color: req.user.cart[i].color,
       price: req.user.cart[i].price,
       quantity: req.user.cart[i].quantity,
->>>>>>> 591ddc4e8fcb4bf9fca194bd8015fb919838f325
     });
   }
   Counter.findOneAndUpdate(
@@ -174,31 +164,12 @@ router.post("/cart/placeOrder", (req, res, next) => {
     Order.create({
       _id: counter.count,
       contents: conents,
-<<<<<<< HEAD
-      amount: req.body.cartTotal,
-=======
       amount: req.user.cartTotal,
->>>>>>> 591ddc4e8fcb4bf9fca194bd8015fb919838f325
       status: "Placed",
       payment: {
         method: req.body.method,
         transactionid: 123,
       },
-<<<<<<< HEAD
-      deliveryCharge : req.body.cartTotal>1000? 0 : 100
-    })
-      .then((order) => {
-        User.findById(req.user._id).then((user) => {
-          user.orders.splice(0,0,order._id); //add to orders
-          user.cart = []; //clear cart
-          user.cartTotal = 0;
-          user.save().then((user) => {
-            res.send(order);
-          });
-        });
-      })
-      .catch((err) => next(err));
-=======
       deliveryCharge : req.user.cartTotal>1000? 0 : 50
     })
     .then((order) => {
@@ -216,7 +187,6 @@ router.post("/cart/placeOrder", (req, res, next) => {
       .catch((err) => next(err));
     })
     .catch((err) => next(err));
->>>>>>> 591ddc4e8fcb4bf9fca194bd8015fb919838f325
   });
 });
 

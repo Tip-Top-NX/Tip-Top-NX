@@ -23,11 +23,7 @@ const Catelogue = ({ navigation }) => {
 
     setTimeout(() => {
       setShow(false);
-<<<<<<< HEAD
-    }, 3000);
-=======
     }, 2000);
->>>>>>> b4ecba67547c6e0ef28d8560e8a5fa6e4ce08510
     return () => (mounted = false);
   }, []);
 

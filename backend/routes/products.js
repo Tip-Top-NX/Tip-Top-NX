@@ -85,19 +85,6 @@ function getCartItem(req,res,user){
 
 router.route('/:prodId/cart')
     .post(authenticate.verifyUser, (req, res, next) => {
-<<<<<<< HEAD
-        User.findByIdAndUpdate(req.user._id,
-            { $push: { cart : { product: req.params.prodId, color: req.body.color, size: req.body.size, quantity: req.body.quantity}}},
-            { safe: true, upsert: true, new: true}).populate('cart.product')
-            .then((user) =>{ 
-                length = user.cart.length - 1;
-                discountedPrice = user.cart[length].product.price*(1-user.cart[length].product.discountPercentage/100)
-                user.cartTotal += discountedPrice*user.cart[length].quantity
-                res.json({ cart: user.cart, cartTotal:user.cartTotal})
-                user.save()
-            })
-            .catch((err) => next(err));
-=======
         var i = -1
         User.findById(req.user._id)
             .then((user) => {
@@ -116,7 +103,6 @@ router.route('/:prodId/cart')
                 user.save()
             })
             .catch((err) => next(err))
->>>>>>> 591ddc4e8fcb4bf9fca194bd8015fb919838f325
     })
     .delete(authenticate.verifyUser, (req, res, next) => {
         var i = -1

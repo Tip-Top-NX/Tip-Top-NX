@@ -34,20 +34,12 @@ mongoose_connections = [
 ];
 
 mongoose
-<<<<<<< HEAD
-  .connect(mongoose_connections[1], {
-=======
   .connect(mongoose_connections[3], {
->>>>>>> 591ddc4e8fcb4bf9fca194bd8015fb919838f325
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then((db) => console.log("Mongo connection successfull!"))
   .catch((err) => console.log(err));
-<<<<<<< HEAD
-
-=======
->>>>>>> 591ddc4e8fcb4bf9fca194bd8015fb919838f325
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
