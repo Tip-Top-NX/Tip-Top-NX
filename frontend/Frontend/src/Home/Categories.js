@@ -14,9 +14,9 @@ const Categories = (props) => {
   return (
     <View style={styles.container}>
       <View>
-        <View style={[styles.outerBox, { marginTop: 15 }]}>
+        <View style={styles.outerBox}>
           <TouchableOpacity
-            style={[styles.innerBox, { borderTopWidth: 0 }]}
+            style={styles.innerBox}
             onPress={() => props.navigation.navigate("Catalogue")}
           >
             <View>
@@ -27,7 +27,7 @@ const Categories = (props) => {
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.innerBox, { borderTopWidth: 0 }]}
+            style={styles.innerBox}
             onPress={() => props.navigation.navigate("Catalogue")}
           >
             <View>
@@ -42,7 +42,7 @@ const Categories = (props) => {
       <View>
         <View style={styles.outerBox}>
           <TouchableOpacity
-            style={[styles.innerBox, { borderBottomWidth: 0 }]}
+            style={styles.innerBox}
             onPress={() => props.navigation.navigate("Catalogue")}
           >
             <View>
@@ -53,7 +53,7 @@ const Categories = (props) => {
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.innerBox, { borderBottomWidth: 0 }]}
+            style={styles.innerBox}
             onPress={() => props.navigation.navigate("Catalogue")}
           >
             <View>
@@ -88,22 +88,25 @@ const styles = StyleSheet.create({
     // marginTop: 5,
   },
   innerBox: {
-    width: width / 2,
-    height: 280,
+    width: width / 2 - 20,
+    height: 255,
     justifyContent: "center",
     alignItems: "center",
-    shadowColor: "silver",
-    shadowOpacity: 0.5,
-    shadowOffset: { width: 0, height: 1 },
-    shadowRadius: 4,
-    elevation: 3,
+    // shadowColor: "silver",
+    // shadowOpacity: 0.5,
+    // shadowOffset: { width: 1, height: 1 },
+    // shadowRadius: 4,
+    // elevation: 4,
+    marginHorizontal: 5,
+    marginVertical: 12.5,
+    // borderRadius: 30,
     // borderWidth: 1,
     // borderColor: "#ccc",
     // borderRadius: 30,
     // backgroundColor: "silver",
   },
   imageStyle: {
-    // borderWidth: 1,
+    borderWidth: 1,
     borderRadius: 30,
     height: 255,
     width: width / 2 - 20,

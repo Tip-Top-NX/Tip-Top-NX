@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     marginTop: 50,
     justifyContent: "center",
+    alignItems: "center",
     paddingHorizontal: 15,
     backgroundColor: "#FAEBEB",
   },

@@ -1,10 +1,12 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import ProductCard from "../ProductCard";
 import { myAxios } from "../../../axios";
 import ButtonBox from "./ButtonBox";
+
+const width = Dimensions.get("window").width;
 
 const Catalogue = ({ navigation }) => {
   const [products, setProducts] = useState();
@@ -53,7 +55,13 @@ const Catalogue = ({ navigation }) => {
           />
         </View>
       ) : (
-        <View>
+        <View
+          style={{
+            alignSelf: "center",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <FlatList
             data={products}
             numColumns={2}
@@ -95,9 +103,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
   cardStyle: {
-    width: 180,
+    width: width / 2 - 10,
     height: 320,
     alignItems: "center",
     marginHorizontal: 3,
@@ -114,9 +124,9 @@ const styles = StyleSheet.create({
   },
   details: {
     marginTop: 5,
-    // borderTopWidth: 1,
+    // borderWidth: 1,
     borderColor: "grey",
-    width: 170,
+    width: width / 2 - 20,
     height: 80,
     justifyContent: "space-evenly",
     paddingLeft: 10,
@@ -125,6 +135,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: 13,
+    // borderWidth: 1,
     fontWeight: "500",
   },
   imageContainer: {
