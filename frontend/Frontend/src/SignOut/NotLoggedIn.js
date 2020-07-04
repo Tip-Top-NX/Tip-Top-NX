@@ -46,7 +46,7 @@ const NotLoggedIn = () => {
 
         <View style={styles.buttonContainer}>
           <Text style={{ textAlign: "center", marginTop: 60 }}>
-            YOU NEED TO LOGIN IN ORDER TO VIEW YOUR PROFILE
+            SORRY, YOU NEED TO LOGIN FIRST
           </Text>
           <TouchableOpacity
             style={styles.button}
