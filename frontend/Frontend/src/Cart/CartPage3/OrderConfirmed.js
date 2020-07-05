@@ -3,9 +3,9 @@ import { View, Text, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
-const OrderConfirmed = () => {
+const OrderConfirmed = ({navigation}) => {
   const [show, setShow] = useState("");
-  const navigation = useNavigation();
+  //const navigation = useNavigation();
 
   useEffect(() => {
     setTimeout(() => {

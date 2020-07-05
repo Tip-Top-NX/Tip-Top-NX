@@ -11,23 +11,23 @@ import ProductDetails from "./ProductDetails";
 const height = Dimensions.get("window").height;
 
 const ProductPage = ({ route }) => {
-  const colors = route.params.colors;
-  const brand = route.params.brand;
-  const description = route.params.description;
-  const images = route.params.images;
-  const size = route.params.size;
-  const styles = route.params.style;
-  const discountPercentage = route.params.discountPercentage;
-  const name = route.params.name;
-  const price = route.params.price;
-  const _id = route.params._id;
-  const [chosenSize, setChosenSize] = useState("No");
-  const [chosenColor, setChosenColor] = useState("No");
-  const [checkHeight, setHeight] = useState();
+const colors = route.params.colors;
+const brand = route.params.brand;
+const description = route.params.description;
+const images = route.params.images;
+const size = route.params.size;
+const styles = route.params.style;
+const discountPercentage = route.params.discountPercentage;
+const name = route.params.name;
+const price = route.params.price;
+const _id = route.params._id;
+const [chosenSize, setChosenSize] = useState("No");
+const [chosenColor, setChosenColor] = useState("No");
+const [checkHeight, setHeight] = useState();
 
-  const handleScroll = (event) => {
-    setHeight(event.nativeEvent.contentOffset.y);
-  };
+const handleScroll = (event) => {
+  setHeight(event.nativeEvent.contentOffset.y);
+};
 
   return (
     <View style={styles1.overAllContainer}>
