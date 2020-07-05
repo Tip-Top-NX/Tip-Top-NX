@@ -5,6 +5,7 @@ import {
   Text,
   ScrollView,
   ImageBackground,
+  SafeAreaView,
 } from "react-native";
 import { useSelector } from "react-redux";
 
@@ -12,7 +13,7 @@ const Points = () => {
   const user = useSelector((state) => state.user);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ImageBackground
         source={require("../../../../assets/p.jpg")}
         style={{
@@ -92,7 +93,7 @@ const Points = () => {
           </View>
         </ScrollView>
       </ImageBackground>
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -10,7 +10,7 @@ const Drawer = createDrawerNavigator();
 const InvalidDrawer = () => {
   return (
     <Drawer.Navigator
-      initialRouteName="HomeStack"
+      initialRouteName="Sign Up | Log In"
       hideStatusBar={true}
       statusBarAnimation={"slide"}
     >

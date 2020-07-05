@@ -6,6 +6,7 @@ import EditProfile from "../src/Profile/EditProfile/EditProfile";
 import Points from "../src/Profile/Points/Points";
 import Wishlist from "../src/Profile/Wishlist/Wishlist";
 import OrderStack from "./OrderStack";
+import CustomBack from "../src/BackButton";
 
 const Stack = createStackNavigator();
 
@@ -14,11 +15,15 @@ const ProfileStack = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
+        headerStyle: { height: 60 },
+        headerBackTitle: null,
+        headerTruncatedBackTitle: "",
+        headerBackImage: () => <CustomBack />,
       }}
     >
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen
-        name="EditProfile"
+        name="Edit Profile"
         component={EditProfile}
         options={{ headerShown: true }}
       />

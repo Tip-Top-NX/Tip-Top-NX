@@ -9,6 +9,7 @@ import {
   ImageBackground,
   Dimensions,
   Image,
+  SafeAreaView,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Popular from "./Popular";
@@ -36,7 +37,7 @@ const Home = ({ navigation }) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {isLoading ? (
         <View
           style={{
@@ -83,7 +84,7 @@ const Home = ({ navigation }) => {
           <Popular navigation={navigation} popularProducts={popularProducts} />
         </ScrollView>
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -12,7 +12,7 @@ const Options = () => {
       name: "Edit Profile",
       id: "1",
       navigator: () => {
-        navigation.navigate("EditProfile");
+        navigation.navigate("Edit Profile");
       },
     },
     {

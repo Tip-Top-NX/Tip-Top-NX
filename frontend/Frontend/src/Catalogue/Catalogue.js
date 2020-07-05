@@ -1,6 +1,13 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Image,
+  SafeAreaView,
+} from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import ProductCard from "../ProductCard";
 import { myAxios } from "../../../axios";
@@ -37,7 +44,7 @@ const Catalogue = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {isLoading ? (
         <View
           style={{
@@ -92,7 +99,7 @@ const Catalogue = ({ navigation }) => {
           {checkHeight > 200 ? null : <ButtonBox />}
         </View>
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 
