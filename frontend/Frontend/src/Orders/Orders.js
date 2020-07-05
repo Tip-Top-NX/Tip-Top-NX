@@ -11,7 +11,7 @@ const Orders = ({ navigation }) => {
       <FlatList
         data={user.orders}
         vertical={true}
-        showsVerticalScrollIndicator={false}
+        showsVerticalScrollIndicator={true}
         keyExtractor={(item) => item._id.toString()}
         renderItem={({ item }) => (
           <OrderCard

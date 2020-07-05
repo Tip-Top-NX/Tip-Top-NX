@@ -1,6 +1,12 @@
 /* eslint-disable */
 import React, { useState } from "react";
-import { ScrollView, View, Dimensions, StyleSheet } from "react-native";
+import {
+  ScrollView,
+  View,
+  Dimensions,
+  StyleSheet,
+  SafeAreaView,
+} from "react-native";
 import ImageCarousel from "./ImageCarousel";
 import ProductInfo from "./ProductInfo";
 import Size from "./Size";
@@ -30,7 +36,7 @@ const handleScroll = (event) => {
 };
 
   return (
-    <View style={styles1.overAllContainer}>
+    <SafeAreaView style={styles1.overAllContainer}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         onScroll={handleScroll}
@@ -68,7 +74,7 @@ const handleScroll = (event) => {
           chosenColor={chosenColor}
         />
       ) : null}
-    </View>
+    </SafeAreaView>
   );
 };
 

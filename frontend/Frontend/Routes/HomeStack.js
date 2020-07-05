@@ -10,26 +10,48 @@ import CartStack from "./CartStack";
 import SizeChart from "../src/ProductDescription/SizeChart";
 import Filters from "../src/Catalogue/Filters";
 import Sort from "../src/Catalogue/Sort";
+import CustomBack from "../src/BackButton";
+import RightHeaderButton from "../src/RightHeaderButton";
 
 const Stack = createStackNavigator();
 
 const HomeStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { height: 60 },
+        headerBackTitle: null,
+        headerTruncatedBackTitle: "",
+        headerBackImage: () => <CustomBack />,
+      }}
+    >
       <Stack.Screen
         name="Home"
         component={Home}
         options={{
           headerShown: true,
-          headerTitle: () => <Header />,
+          headerTitle: () => <Header title="Home" showRight={true} />,
         }}
       />
-      <Stack.Screen name="Catalogue" component={Catalogue} />
-      <Stack.Screen name="Product" component={Product} />
+      <Stack.Screen
+        name="Catalogue"
+        component={Catalogue}
+        options={{
+          headerTitle: null,
+          headerRight: () => <RightHeaderButton />,
+        }}
+      />
+      <Stack.Screen
+        name="Product"
+        component={Product}
+        options={{
+          headerTitle: null,
+          headerRight: () => <RightHeaderButton />,
+        }}
+      />
       <Stack.Screen name="Filters" component={Filters} />
       <Stack.Screen name="Sort" component={Sort} />
-      <Stack.Screen name="SizeChart" component={SizeChart} />
-      <Stack.Screen name="Cart" component={CartStack} />
+      <Stack.Screen name="Size Chart" component={SizeChart} />
       <Stack.Screen
         options={{ headerShown: false }}
         name="Search"

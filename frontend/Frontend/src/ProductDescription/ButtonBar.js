@@ -25,9 +25,23 @@ const ButtonBar = (props) => {
   }, []);
 
   const wishlistHandler = () => {
-    if (itemStatus === "WISHLIST") {
-      dispatch(postWishlist(props._id));
-      setItemStatus("ADDED");
+    if (user.isValid) {
+      if (itemStatus === "WISHLIST") {
+        dispatch(postWishlist(props._id));
+        setItemStatus("ADDED");
+      }
+    } else {
+      Alert.alert(
+        "Cannot Add To Wishlist",
+        "You need to login first in order to add items to the wishlist",
+        [
+          {
+            text: "Okay",
+            style: "okay",
+          },
+        ],
+        { cancelable: true }
+      );
     }
   };
 

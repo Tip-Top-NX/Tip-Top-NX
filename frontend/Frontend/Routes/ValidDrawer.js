@@ -5,6 +5,7 @@ import ProfileStack from "./ProfileStack";
 import OrderStack from "./OrderStack";
 import CustomDrawer from "./CustomDrawer";
 import CartStack from "./CartStack";
+import WishlistStack from "./WishlistStack";
 
 const Drawer = createDrawerNavigator();
 
@@ -19,7 +20,7 @@ const ValidDrawer = () => {
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="Cart" component={CartStack} />
       <Drawer.Screen name="Profile" component={ProfileStack} />
-      <Drawer.Screen name="Wishlist" component={ProfileStack} />
+      <Drawer.Screen name="Wishlist" component={WishlistStack} />
       <Drawer.Screen name="Orders" component={OrderStack} />
     </Drawer.Navigator>
   );

@@ -90,21 +90,19 @@ const ProductCard = (props) => {
                   </View>
                 </View>
                 <View style={styles.smallBox}>
-                  <Text style={{ color: "#888", fontSize: 12, paddingLeft: 3 }}>
-                    QTY :
-                  </Text>
+                  <Text style={{ color: "#888", fontSize: 12 }}>QTY :</Text>
                   <View style={{ flexDirection: "row" }}>
                     <View style={styles.minusBox}>
                       <AntDesign
                         name="minus"
                         size={20}
-                        color="grey"
+                        color="#000"
                         onPress={() => onQuantityDec()}
                       />
                     </View>
                     <Text
                       style={{
-                        marginHorizontal: 12,
+                        marginHorizontal: 10,
                         fontSize: 18,
                       }}
                     >
@@ -114,12 +112,11 @@ const ProductCard = (props) => {
                       <MaterialIcons
                         name="add"
                         size={20}
-                        color="grey"
+                        color="#000"
                         onPress={() => {
                           dispatch(
                             postCart(props._id, props.color, props.size, 1)
                           );
-
                           setShow(true);
                         }}
                       />

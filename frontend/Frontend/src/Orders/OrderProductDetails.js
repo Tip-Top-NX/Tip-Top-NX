@@ -64,12 +64,13 @@ const OrderProductDetails = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
   productCard: {
-    height: 320,
+    // height: 380,
     paddingLeft: 8,
     backgroundColor: "#ffffff",
     marginTop: 10,
     flexDirection: "row",
     alignItems: "center",
+    paddingVertical: 10,
   },
   imageStyle: {
     width: 120,
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   detailsBox: {
-    height: 300,
+    // height: 300,
     flex: 1,
     paddingLeft: 8,
     paddingHorizontal: 7,

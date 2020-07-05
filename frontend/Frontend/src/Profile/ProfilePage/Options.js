@@ -12,7 +12,7 @@ const Options = () => {
       name: "Edit Profile",
       id: "1",
       navigator: () => {
-        navigation.navigate("EditProfile");
+        navigation.navigate("Edit Profile");
       },
     },
     {
@@ -63,16 +63,19 @@ const styles = StyleSheet.create({
   },
   component: {
     height: 80,
-    borderWidth: 1.5,
-    borderColor: "#DDA0DD",
+    // borderWidth: 0.5,
+    borderColor: "#fff",
     justifyContent: "space-between",
     paddingHorizontal: 15,
     marginVertical: 5,
     flexDirection: "row",
     alignItems: "center",
     marginHorizontal: 5,
-    borderStyle: "dotted",
-    backgroundColor: "rgba(52, 52, 52, 0.7)",
+    // borderStyle: "dotted",
+    shadowColor: "#fff",
+    shadowRadius: 4,
+    shadowOpacity: 0.2,
+    backgroundColor: "rgba(52, 52, 52, 0.5)",
   },
   textStyle: {
     fontWeight: "600",

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   Dimensions,
+  Platform,
 } from "react-native";
 
 const width = Dimensions.get("window").width;
@@ -14,54 +15,46 @@ const Categories = (props) => {
   return (
     <View style={styles.container}>
       <View>
-        <View style={[styles.outerBox, { marginTop: 15 }]}>
+        <View style={styles.outerBox}>
           <TouchableOpacity
-            style={[styles.innerBox, { borderTopWidth: 0 }]}
+            style={styles.innerBox}
             onPress={() => props.navigation.navigate("Catalogue")}
           >
-            <View>
-              <Image
-                source={require("../../../assets/v.gif")}
-                style={styles.imageStyle}
-              />
-            </View>
+            <Image
+              source={require("../../../assets/v.gif")}
+              style={styles.imageStyle}
+            />
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.innerBox, { borderTopWidth: 0 }]}
+            style={styles.innerBox}
             onPress={() => props.navigation.navigate("Catalogue")}
           >
-            <View>
-              <Image
-                source={require("../../../assets/t.gif")}
-                style={styles.imageStyle}
-              />
-            </View>
+            <Image
+              source={require("../../../assets/t.gif")}
+              style={styles.imageStyle}
+            />
           </TouchableOpacity>
         </View>
       </View>
       <View>
         <View style={styles.outerBox}>
           <TouchableOpacity
-            style={[styles.innerBox, { borderBottomWidth: 0 }]}
+            style={styles.innerBox}
             onPress={() => props.navigation.navigate("Catalogue")}
           >
-            <View>
-              <Image
-                source={require("../../../assets/g.gif")}
-                style={styles.imageStyle}
-              />
-            </View>
+            <Image
+              source={require("../../../assets/g.gif")}
+              style={styles.imageStyle}
+            />
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.innerBox, { borderBottomWidth: 0 }]}
+            style={styles.innerBox}
             onPress={() => props.navigation.navigate("Catalogue")}
           >
-            <View>
-              <Image
-                source={require("../../../assets/n.jpg")}
-                style={styles.imageStyle}
-              />
-            </View>
+            <Image
+              source={require("../../../assets/n.jpg")}
+              style={styles.imageStyle}
+            />
           </TouchableOpacity>
         </View>
       </View>
@@ -84,32 +77,31 @@ const styles = StyleSheet.create({
   outerBox: {
     flexDirection: "row",
     justifyContent: "space-evenly",
-    shadowOpacity: 0.2,
-    // marginTop: 5,
   },
   innerBox: {
-    width: width / 2,
-    height: 280,
+    width: width / 2 - 20,
+    height: 255,
     justifyContent: "center",
     alignItems: "center",
-    shadowColor: "silver",
-    shadowOpacity: 0.5,
-    shadowOffset: { width: 0, height: 1 },
-    shadowRadius: 4,
-    elevation: 4,
-    // borderWidth: 1,
-    marginHorizontal:5,
-    marginVertical:12.5,
-    borderRadius:30,
-    // borderColor: "#ccc",
-    // borderRadius: 30,
-    // backgroundColor: "silver",
+    marginHorizontal: 5,
+    marginVertical: 12.5,
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 8,
+    borderWidth: 0.1,
   },
   imageStyle: {
-    // borderWidth: 1,
-    borderRadius: 30,
     height: 255,
     width: width / 2 - 20,
+    ...Platform.select({
+      ios: {
+        borderRadius: 30,
+      },
+      android: {
+        borderRadius: 0,
+      },
+    }),
   },
 });
 

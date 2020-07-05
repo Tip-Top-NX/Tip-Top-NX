@@ -1,21 +1,21 @@
 /* eslint-disable */
 import React from "react";
 import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { myAxios } from "../../../axios";
 import { useDispatch } from "react-redux";
 import { placeOrder } from "../../../redux/ActionCreators";
 
 const PlaceOrderTab = (props) => {
-  const navigation = useNavigation();
   const dispatch = useDispatch();
   const handleRightButton = () => {
     if (props.rightButton === "NEXT") {
-      navigation.navigate("CartPage2");
+      props.navigation.navigate("Address and Payment");
     } else {
       if (props.addressVal && props.paymentVal) {
         dispatch(placeOrder("COD"));
-        navigation.navigate("OrderConfirm");
+        props.navigation.reset({
+          index: 0,
+          routes: [{ name: "OrderConfirm" }],
+        });
       } else {
         alert("Cannot leave address or payment empty");
       }
@@ -27,8 +27,8 @@ const PlaceOrderTab = (props) => {
         style={[styles.buttonBox, { backgroundColor: "#fff", borderWidth: 1 }]}
         onPress={() => {
           props.leftButton === "BACK"
-            ? navigation.goBack()
-            : navigation.navigate("Home");
+            ? props.navigation.goBack()
+            : props.navigation.navigate("Home");
         }}
       >
         <Text style={[styles.buttonText, { color: "#000" }]}>

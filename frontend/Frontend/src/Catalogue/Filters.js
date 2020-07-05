@@ -5,6 +5,7 @@ import {
   Dimensions,
   Text,
   TouchableOpacity,
+  SafeAreaView,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
@@ -40,7 +41,7 @@ const Filters = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.overAllContainer}>
+    <SafeAreaView style={styles.overAllContainer}>
       <View style={styles.container}>
         <View style={styles.filterType}>
           <FlatList
@@ -155,7 +156,7 @@ const Filters = () => {
           <Text style={styles.buttonText}>APPLY</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

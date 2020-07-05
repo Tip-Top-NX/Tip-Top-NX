@@ -8,11 +8,12 @@ import {
   TouchableOpacity,
   ImageBackground,
   Image,
+  SafeAreaView,
 } from "react-native";
 
 const Empty = (props) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ImageBackground
         source={require("../../assets/b1.jpg")}
         style={{
@@ -32,7 +33,7 @@ const Empty = (props) => {
           <Text>Browse</Text>
         </TouchableOpacity>
       </ImageBackground>
-    </View>
+    </SafeAreaView>
   );
 };
 

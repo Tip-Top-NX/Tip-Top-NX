@@ -8,6 +8,7 @@ import {
   TextInput,
   Keyboard,
   ImageBackground,
+  SafeAreaView,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./EditProfileStyles";
@@ -24,19 +25,22 @@ const EditProfile = ({ navigation }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const email = user.email;
+  const contact=user.contact.toString();
 
   // states for handling the input
   const [name, setName] = useState(user.name);
-  const [phone, setPhone] = useState(user.contact.toString());
   const [address, setAddress] = useState(user.address);
   const [picture, setPicture] = useState(getURL(user.image));
   const [age, setAge] = useState(user.age);
   const [gender, setGender] = useState(user.gender);
 
+  let init=0;
+  if(user.gender=="Female")
+    init=1;
+
   // states for style change if not valid
-  const [validName, checkName] = useState(true);
-  const [validPhone, checkPhone] = useState(true);
-  const [validAge, checkAge] = useState(true);
+  const [validName, checkName] = useState(-1);
+  const [validAge, checkAge] = useState(-1);
 
   const handlePress = async () => {
     UserPermissions.getCameraPermission();
@@ -68,144 +72,142 @@ const EditProfile = ({ navigation }) => {
 
     // name check
     if (name === "") {
-      checkName(false);
+      checkName(0);
     } else if (!alph.test(name)) {
-      checkName(false);
+      checkName(0);
     } else {
-      checkName(true);
+      checkName(1);
     }
-    // phone number check
-    if (phone === "" || phone.length !== 10 || phone.charAt(0) < 7) {
-      checkPhone(false);
-    } else {
-      checkPhone(true);
-    }
+    
     // age check
     if (age === "" || age.length >= 3) {
-      checkAge(false);
+      checkAge(0);
     } else {
-      checkAge(true);
+      checkAge(1);
     }
 
-    if (validName && validPhone) {
+    if (validName==1 && validAge==1) {
       dispatch(
         putProfile({
           name,
-          contact: phone,
           address,
+          age,
+          gender
         })
       );
       navigation.goBack();
     }
   };
 
+
   return (
-    <ImageBackground
-      source={require("../../../../assets/b.jpg")}
-      style={{ flex: 1, resizeMode: "cover", justifyContent: "center" }}
-      blurRadius={0}
-    >
-      <KeyboardAwareScrollView>
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <View style={styles.container}>
-            <TouchableOpacity
-              style={styles.avatarPlaceholder}
-              onPress={() => handlePress()}
-            >
-              <Image source={{ uri: picture }} style={styles.avatar} />
-            </TouchableOpacity>
-            <View style={styles.inputContainer}>
-              <Text style={styles.heading}>FULL NAME</Text>
-              <TextInput
-                style={[styles.inputText, !validName ? styles.error : null]}
-                onChangeText={(text) => setName(text)}
-                value={name}
-              ></TextInput>
-            </View>
-            <View style={styles.emailContainer}>
-              <Text style={styles.heading}>EMAIL ADDRESS</Text>
-              <TextInput
-                style={styles.emailText}
-                value={email}
-                editable={false}
-              ></TextInput>
-            </View>
-            <View style={{ flexDirection: "row" }}>
-              <View style={styles.ageContainer}>
-                <Text style={styles.heading}>AGE</Text>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ImageBackground
+        source={require("../../../../assets/r.jpg")}
+        style={{ flex: 1, resizeMode: "cover", justifyContent: "center" }}
+        blurRadius={0}
+      >
+        <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+          <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            <View style={styles.container}>
+              <TouchableOpacity
+                style={styles.avatarPlaceholder}
+                onPress={() => handlePress()}
+              >
+                <Image source={{ uri: picture }} style={styles.avatar} />
+              </TouchableOpacity>
+              <View style={styles.inputContainer}>
+                <Text style={styles.heading}>FULL NAME</Text>
                 <TextInput
-                  style={[styles.inputText, !validAge ? styles.error : null]}
-                  keyboardType={"numeric"}
-                  onChangeText={(text) => setAge(text)}
-                  maxLength={3}
-                  value={age}
+                  style={[styles.inputText, validName==0 ? styles.error : null]}
+                  onChangeText={(text) => setName(text)}
+                  value={name}
                 ></TextInput>
               </View>
-
-              <View style={styles.genderContainer}>
-                <Text style={styles.heading}>GENDER</Text>
-                <SwitchSelector
-                  initial={0}
-                  onPress={(value) => setGender(value)}
-                  borderRadius={0}
-                  height={50}
-                  fontSize={16}
-                  textColor={"#777"} //'#7a44cf'
-                  selectedColor={"white"}
-                  buttonColor={"black"}
-                  borderColor={"black"}
-                  backgroundColor={"rgba(112,128,144, 0.0)"}
-                  hasPadding
-                  options={[
-                    { label: "Male", value: "Male" },
-                    { label: "Female", value: "Female" },
-                  ]}
-                />
+              <View style={styles.emailContainer}>
+                <Text style={styles.heading}>EMAIL ADDRESS</Text>
+                <TextInput
+                  style={styles.emailText}
+                  value={email}
+                  editable={false}
+                ></TextInput>
               </View>
-            </View>
+              <View style={{ flexDirection: "row" }}>
+                <View style={styles.ageContainer}>
+                  <Text style={styles.heading}>AGE</Text>
+                  <TextInput
+                    style={[styles.inputText, validAge==0 ? styles.error : null]}
+                    keyboardType={"numeric"}
+                    onChangeText={(text) => setAge(text)}
+                    maxLength={3}
+                    value={age}
+                  ></TextInput>
+                </View>
 
-            <View style={styles.addressContainer}>
-              <Text style={styles.heading}>DELIVERY ADDRESS</Text>
-              <TextInput
-                style={styles.addressText}
-                onChangeText={(text) => setAddress(text)}
-                value={address}
-                multiline={true}
-              ></TextInput>
+                <View style={styles.genderContainer}>
+                  <Text style={styles.heading}>GENDER</Text>
+                  <SwitchSelector
+                    initial={init}
+                    onPress={(value) => setGender(value)}
+                    borderRadius={0}
+                    height={50}
+                    fontSize={16}
+                    textColor={"#777"} //'#7a44cf'
+                    selectedColor={"white"}
+                    buttonColor={"rgba(52,52,52, 1)"}
+                    borderColor={"black"}
+                    backgroundColor={"rgba(112,128,144, 0.0)"}
+                    hasPadding
+                    options={[
+                      { label: "Male", value: "Male" },
+                      { label: "Female", value: "Female" },
+                    ]}
+                  />
+                </View>
+              </View>
+
+              <View style={styles.addressContainer}>
+                <Text style={styles.heading}>DELIVERY ADDRESS</Text>
+                <TextInput
+                  style={styles.addressText}
+                  onChangeText={(text) => setAddress(text)}
+                  value={address}
+                  multiline={true}
+                ></TextInput>
+              </View>
+              <View style={styles.inputContainer}>
+                <Text style={styles.heading}>CONTACT</Text>
+                  <TextInput
+                    style={styles.emailText}
+                    value={contact}
+                    editable={false}
+                  ></TextInput>
+              </View>
+              <TouchableOpacity
+                style={{
+                  width: 200,
+                  height: 50,
+                  // backgroundColor: "#813743",
+                  justifyContent: "center",
+                  marginTop: 15,
+                  marginBottom: 30,
+                  backgroundColor: "rgba(52,52,52, 1)",
+                  borderColor: "grey",
+                  borderWidth: 3,
+                }}
+                onPress={() => validation()}
+              >
+                <Text style={{ textAlign: "center", color: "#fff" }}>
+                  SAVE CHANGES
+                </Text>
+              </TouchableOpacity>
             </View>
-            <View style={styles.inputContainer}>
-              <Text style={styles.heading}>CONTACT</Text>
-              <TextInput
-                style={[styles.inputText, !validPhone ? styles.error : null]}
-                keyboardType={"numeric"}
-                onChangeText={(text) => setPhone(text)}
-                maxLength={10}
-                value={phone}
-              ></TextInput>
-            </View>
-            <TouchableOpacity
-              style={{
-                width: 200,
-                height: 50,
-                // backgroundColor: "#813743",
-                justifyContent: "center",
-                marginTop: 15,
-                marginBottom: 30,
-                backgroundColor: "rgba(112,128,144, 0.7)",
-                borderColor: "#2F4F4F",
-                borderWidth: 3,
-              }}
-              onPress={() => validation()}
-            >
-              <Text style={{ textAlign: "center", color: "#fff" }}>
-                SAVE CHANGES
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </TouchableWithoutFeedback>
-      </KeyboardAwareScrollView>
-    </ImageBackground>
+          </TouchableWithoutFeedback>
+        </KeyboardAwareScrollView>
+      </ImageBackground>
+    </SafeAreaView>
   );
 };
+
 
 export default EditProfile;

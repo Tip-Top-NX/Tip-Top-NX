@@ -10,19 +10,20 @@ export const placeOrder = (method) => {
     getConfig().then((config) => {
       myAxios
         .post("/profile/cart/placeOrder", bodyPart, config)
-        .then((res) => dispatch(setOrder(res.data)))
+        .then((res) => dispatch(setOrder(res.data.orders,res.data.cart,res.data.cartTotal,res.data.points)))
         .catch((err) => console.log(err));
     });
   }
 }
 
-export const setOrder = (orders) => {
+export const setOrder = (orders,cart,cartTotal,points) => {
   return {
     type: ActionTypes.PLACE_ORDER,
     payload:{
       orders:orders,
-      cart: [],
-      cartTotal: 0
+      cart: cart,
+      cartTotal: cartTotal,
+      points: points
     }
   };
 };

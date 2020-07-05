@@ -12,7 +12,7 @@ const Cart = ({ navigation }) => {
   } else {
     return (
       <View style={styles.container}>
-        <NotLoggedIn />
+        <NotLoggedIn message="SORRY, YOU NEED TO LOG IN, IN ORDER TO VIEW YOUR CART" />
       </View>
     );
   }
