@@ -7,6 +7,7 @@ import Points from "../src/Profile/Points/Points";
 import Wishlist from "../src/Profile/Wishlist/Wishlist";
 import OrderStack from "./OrderStack";
 import CustomBack from "../src/BackButton";
+import ChangePassword from "../src/Profile/ChangePassword";
 
 const Stack = createStackNavigator();
 
@@ -41,6 +42,11 @@ const ProfileStack = () => {
         name="My Orders"
         component={OrderStack}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Change Password"
+        component={ChangePassword}
+        options={{ headerShown: true }}
       />
     </Stack.Navigator>
   );

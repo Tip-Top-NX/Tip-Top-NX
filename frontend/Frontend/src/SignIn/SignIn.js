@@ -8,15 +8,12 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   ImageBackground,
-  Modal,
-  ActivityIndicator,
   Image,
   SafeAreaView,
 } from "react-native";
 import styles from "./SignInStyles";
 import PropTypes from "prop-types";
 
-import Splash from "../Splash";
 import { useSelector, useDispatch } from "react-redux";
 import { signin, signinFailed } from "../../../redux/ActionCreators";
 

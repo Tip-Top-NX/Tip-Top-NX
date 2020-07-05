@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="caa81cd7-9022-4852-a538-a89dbe34f90b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.expo/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/Catalogue/Catalogue.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Catalogue/Catalogue.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/Catalogue/Filters.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Catalogue/Filters.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/Home/Categories.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Home/Categories.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

@@ -20,7 +20,7 @@ const popular = (props) => {
             width: 80,
             justifyContent: "center",
           }}
-          onPress={() => props.navigation.navigate("Catalogue")}
+          onPress={() => props.navigation.navigate("Catalogue", { prodId: 5 })}
         >
           <Text
             style={{

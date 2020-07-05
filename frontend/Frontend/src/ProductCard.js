@@ -83,19 +83,16 @@ const ProductCard = (props) => {
                 flexDirection: "row",
                 justifyContent: "space-between",
                 alignItems: "center",
-                // borderWidth: 1,
               }}
             >
-              <Text style={{ fontWeight: "700", color: "grey" }}>
-                {props.brand}
-              </Text>
+              <Text style={{ fontWeight: "700" }}>{props.brand}</Text>
               {user.isValid ? <Icon /> : null}
             </View>
 
-            <Text style={props.textStyle}>{props.name}</Text>
-            <Text
-              style={[props.textStyle, { color: "grey", fontWeight: "600" }]}
-            >
+            <Text style={[props.textStyle, { color: "grey", fontSize: 11 }]}>
+              {props.name}
+            </Text>
+            <Text style={[props.textStyle, { fontWeight: "600" }]}>
               Price : ₹ {props.price}
             </Text>
           </View>

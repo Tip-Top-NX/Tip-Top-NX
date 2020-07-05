@@ -1,45 +1,19 @@
 import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  Dimensions,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
+import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-
-const width = Dimensions.get("window").width;
+import styles from "./FilterStyles";
+import filteredOptions from "./FilterOptions";
 
 const filterTypes = ["size", "color", "categories", "price", "discount"];
-const filteredOptions = [
-  ["XS", "S", "M", "L", "XL", "XXL"],
-  [
-    "white",
-    "black",
-    "navy-blue",
-    "charcoal-mel",
-    "grey mel",
-    "red mel",
-    "ink blue mel",
-    "light denim mel",
-    "navy",
-    "zone red",
-    "mid grey mel",
-  ],
-  [],
-  ["₹0 - ₹199", "₹200 - ₹499", "₹500 - ₹1000", "Above ₹1000"],
-  ["Above 50%", "40% - 50%", "30% - 20%", "Below 20%"],
-];
 
 const Filters = () => {
   const [selectedFilter, setSelectedFilter] = useState();
   const [selectedOption, setSelectedOption] = useState();
+  const [prodId, setProdId] = useState();
 
   const navigation = useNavigation();
-
   return (
     <SafeAreaView style={styles.overAllContainer}>
       <View style={styles.container}>
@@ -59,7 +33,10 @@ const Filters = () => {
                         : null,
                   },
                 ]}
-                onPress={() => setSelectedFilter(filterTypes.indexOf(item))}
+                onPress={() => {
+                  setSelectedFilter(filterTypes.indexOf(item)),
+                    setSelectedOption();
+                }}
               >
                 <Text
                   style={[
@@ -90,11 +67,16 @@ const Filters = () => {
             renderItem={({ item }) => (
               <TouchableOpacity
                 style={styles.eachFilter}
-                onPress={() =>
-                  setSelectedOption(
-                    filteredOptions[selectedFilter].indexOf(item)
-                  )
-                }
+                onPress={() => {
+                  selectedFilter !== 2
+                    ? setSelectedOption(
+                        filteredOptions[selectedFilter].indexOf(item)
+                      )
+                    : (setSelectedOption(
+                        filteredOptions[selectedFilter].indexOf(item)
+                      ),
+                      setProdId(item.id));
+                }}
               >
                 <View
                   style={{
@@ -121,7 +103,7 @@ const Filters = () => {
                       },
                     ]}
                   >
-                    {item}
+                    {selectedFilter !== 2 ? item : item.name}
                   </Text>
                   {filteredOptions[selectedFilter].indexOf(item) ===
                   selectedOption ? (
@@ -148,9 +130,7 @@ const Filters = () => {
         <TouchableOpacity
           style={styles.buttonBox}
           onPress={() => {
-            alert(
-              "This function will not work as the dependent work is yet to be completed"
-            );
+            navigation.navigate("Catalogue", { prodId: prodId });
           }}
         >
           <Text style={styles.buttonText}>APPLY</Text>
@@ -161,73 +141,3 @@ const Filters = () => {
 };
 
 export default Filters;
-
-const styles = StyleSheet.create({
-  overAllContainer: {
-    width: width,
-    // borderWidth: 1,
-    minHeight: "100%",
-  },
-  container: {
-    width: width,
-    // height: "100%",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    // borderWidth: 1,
-    flex: 1,
-  },
-  filterType: {
-    width: "35%",
-    // borderWidth: 1,
-    height: "100%",
-  },
-  filteredOptionsStyle: {
-    width: "65%",
-    // borderWidth: 1,
-    height: "100%",
-    backgroundColor: "#fff",
-  },
-  headerStyle: {
-    width: "100%",
-    height: 50,
-    // borderWidth: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  eachFilter: {
-    width: "100%",
-    height: 50,
-    borderBottomWidth: 1,
-    borderColor: "#ccc",
-    paddingLeft: 10,
-    justifyContent: "center",
-  },
-  eachFilterText: {
-    fontSize: 13,
-    color: "#777",
-  },
-  buttonBoxStyle: {
-    width: "100%",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    flexDirection: "row",
-    paddingVertical: 5,
-    backgroundColor: "#fff",
-    borderWidth: 1,
-    borderColor: "#ccc",
-    alignSelf: "flex-end",
-  },
-  buttonBox: {
-    width: 170,
-    height: 50,
-    // borderWidth: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#C2185B",
-  },
-  buttonText: {
-    color: "#fff",
-    fontWeight: "bold",
-  },
-});

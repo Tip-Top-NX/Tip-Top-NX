@@ -18,7 +18,9 @@ const Categories = (props) => {
         <View style={styles.outerBox}>
           <TouchableOpacity
             style={styles.innerBox}
-            onPress={() => props.navigation.navigate("Catalogue")}
+            onPress={() =>
+              props.navigation.navigate("Catalogue", { prodId: 2 })
+            }
           >
             <Image
               source={require("../../../assets/v.gif")}
@@ -27,7 +29,8 @@ const Categories = (props) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.innerBox}
-            onPress={() => props.navigation.navigate("Catalogue")}
+            // onPress={() => props.navigation.navigate("Catalogue")}
+            onPress={() => alert("Women's section is under development")}
           >
             <Image
               source={require("../../../assets/t.gif")}
@@ -40,7 +43,8 @@ const Categories = (props) => {
         <View style={styles.outerBox}>
           <TouchableOpacity
             style={styles.innerBox}
-            onPress={() => props.navigation.navigate("Catalogue")}
+            // onPress={() => props.navigation.navigate("Catalogue")}
+            onPress={() => alert("Kids Section is under development")}
           >
             <Image
               source={require("../../../assets/g.gif")}
@@ -49,7 +53,8 @@ const Categories = (props) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.innerBox}
-            onPress={() => props.navigation.navigate("Catalogue")}
+            // onPress={() => props.navigation.navigate("Catalogue")}
+            onPress={() => alert("Accessories is under development")}
           >
             <Image
               source={require("../../../assets/n.jpg")}
