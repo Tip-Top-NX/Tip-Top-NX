@@ -7,7 +7,7 @@ import Points from "../src/Profile/Points/Points";
 import Wishlist from "../src/Profile/Wishlist/Wishlist";
 import OrderStack from "./OrderStack";
 import CustomBack from "../src/BackButton";
-import ChangePassword from "../src/Profile/ChangePassword";
+import ChangePassword from "../src/Profile/ChangePassword/ChangePassword";
 
 const Stack = createStackNavigator();
 
