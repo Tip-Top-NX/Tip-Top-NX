@@ -21,7 +21,11 @@ const Address = (props) => {
   const [address, setAddress] = useState("");
 
   useEffect(() => {
-    props.onAddressChange(selected);
+    if (user.address === "") {
+      props.onAddressChange(false);
+    } else {
+      props.onAddressChange(selected);
+    }
   }, [selected]);
 
   const handleSubmit = () => {

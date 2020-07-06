@@ -9,7 +9,8 @@ const CustomBack = () => {
     <MaterialIcons
       name="arrow-back"
       size={28}
-      color={colors.primary}
+      // color={colors.primary}
+      color="#C2185B"
       style={{
         ...Platform.select({
           ios: {

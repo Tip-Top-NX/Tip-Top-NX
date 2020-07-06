@@ -5,8 +5,7 @@ import Home from "../src/Home/Home";
 import Header from "../src/Header";
 import Catalogue from "../src/Catalogue/Catalogue";
 import Product from "../src/ProductDescription/ProductPage";
-import Search from "../src/SearchPage";
-import CartStack from "./CartStack";
+import Search from "../src/Search/Search";
 import SizeChart from "../src/ProductDescription/SizeChart";
 import Filters from "../src/Catalogue/Filters";
 import Sort from "../src/Catalogue/Sort";
@@ -53,7 +52,9 @@ const HomeStack = () => {
       <Stack.Screen name="Sort" component={Sort} />
       <Stack.Screen name="Size Chart" component={SizeChart} />
       <Stack.Screen
-        options={{ headerShown: false }}
+        options={{
+          headerTitle: "Search",
+        }}
         name="Search"
         component={Search}
       />

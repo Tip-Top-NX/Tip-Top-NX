@@ -33,7 +33,7 @@ const header = (props) => {
         {props.showRight ? (
           <Feather
             name="search"
-            style={styles.materialIcon}
+            style={[styles.materialIcon, { alignSelf: "flex-end" }]}
             size={24}
             color="black"
             onPress={() => {

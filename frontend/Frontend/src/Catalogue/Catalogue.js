@@ -20,6 +20,7 @@ const Catalogue = ({ navigation, route }) => {
   // const [show, setShow] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [checkHeight, setHeight] = useState();
+  const [checkBox, setBox] = useState(true);
   const prodId = route.params.prodId;
 
   useEffect(() => {
@@ -42,6 +43,10 @@ const Catalogue = ({ navigation, route }) => {
   }, [prodId]);
 
   const handleScroll = (event) => {
+    var currentHeight = event.nativeEvent.contentOffset.y;
+    currentHeight > checkHeight && currentHeight > 0
+      ? setBox(false)
+      : setBox(true);
     setHeight(event.nativeEvent.contentOffset.y);
   };
 
@@ -66,9 +71,9 @@ const Catalogue = ({ navigation, route }) => {
       ) : (
         <View
           style={{
-            alignSelf: "center",
+            // alignSelf: "center",
             justifyContent: "center",
-            alignItems: "center",
+            // alignItems: "center",
           }}
         >
           <FlatList
@@ -98,7 +103,7 @@ const Catalogue = ({ navigation, route }) => {
               />
             )}
           />
-          {checkHeight > 1000 ? null : <ButtonBox />}
+          {checkBox ? <ButtonBox /> : null}
         </View>
       )}
     </SafeAreaView>
