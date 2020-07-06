@@ -33,18 +33,7 @@ const signUp = () => {
   const [validPhone, checkPhone] = useState(-1);
 
   // redux
-  const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(signinFailed());
-  }, []);
-
-  useEffect(() => {
-    if (user.isValid) {
-      navigation.navigate("Home");
-    }
-  }, [user.isValid]);
+  
 
   const validation = () => {
     const emailregex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
@@ -84,14 +73,12 @@ const signUp = () => {
     }
 
     if (validEmail==1 && validName==1 && validPassword==1 && validPhone==1) {
-      dispatch(
-        signup({
-          name,
-          email,
-          password,
-          contact: phone,
-        })
-      );
+      navigation.navigate("Otp Mobile",{
+        name:name,
+        email:email,
+        password:password,
+        contact:phone
+      })
     }
   };
 

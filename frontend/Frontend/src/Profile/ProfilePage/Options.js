@@ -36,6 +36,13 @@ const Options = () => {
         navigation.navigate("My Orders");
       },
     },
+    {
+      name: "Change Password",
+      id: "5",
+      navigator: () => {
+        navigation.navigate("Change Password");
+      },
+    },
   ];
   return (
     <View style={styles.container}>

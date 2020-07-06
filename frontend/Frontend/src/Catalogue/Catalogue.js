@@ -15,16 +15,18 @@ import ButtonBox from "./ButtonBox";
 
 const width = Dimensions.get("window").width;
 
-const Catalogue = ({ navigation }) => {
+const Catalogue = ({ navigation, route }) => {
   const [products, setProducts] = useState();
   // const [show, setShow] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [checkHeight, setHeight] = useState();
+  const prodId = route.params.prodId;
 
   useEffect(() => {
     let mounted = true;
+    console.log(prodId);
     myAxios
-      .get("/category/5/get-products")
+      .get("/category/" + prodId + "/get-products")
       .then((res) => {
         if (mounted) {
           setIsLoading(false);
@@ -37,7 +39,7 @@ const Catalogue = ({ navigation }) => {
     //   setShow(false);
     // }, 3000);
     return () => (mounted = false);
-  }, []);
+  }, [prodId]);
 
   const handleScroll = (event) => {
     setHeight(event.nativeEvent.contentOffset.y);
@@ -96,7 +98,7 @@ const Catalogue = ({ navigation }) => {
               />
             )}
           />
-          {checkHeight > 200 ? null : <ButtonBox />}
+          {checkHeight > 1000 ? null : <ButtonBox />}
         </View>
       )}
     </SafeAreaView>
@@ -108,14 +110,13 @@ const styles = StyleSheet.create({
     height: "100%",
     // borderWidth: 1,
     flex: 1,
-    alignItems: "center",
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
   cardStyle: {
     width: width / 2 - 10,
-    height: 320,
+    height: 300,
     alignItems: "center",
     marginHorizontal: 3,
     marginVertical: 7,
@@ -124,10 +125,10 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
   },
   imageView: {
-    height: 230,
+    height: 210,
     aspectRatio: 5 / 8,
     alignSelf: "center",
-    marginTop: 2,
+    // marginTop: 2,
   },
   details: {
     marginTop: 5,
@@ -150,6 +151,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#E6E4E4",
     borderWidth: 1,
     borderColor: "silver",
+    height: 210,
   },
 });
 

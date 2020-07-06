@@ -60,7 +60,7 @@ const Home = ({ navigation }) => {
           <Categories navigation={navigation} />
           <TouchableOpacity
             style={styles.innerBox}
-            onPress={() => navigation.navigate("Catalogue")}
+            onPress={() => navigation.navigate("Catalogue", { prodId: 5 })}
           >
             <View>
               <ImageBackground
