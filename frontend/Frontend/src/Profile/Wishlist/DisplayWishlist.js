@@ -44,9 +44,8 @@ const styles = StyleSheet.create({
     height: "100%",
     // borderWidth: 1,
     flex: 1,
-    alignItems: "center",
     backgroundColor: "#fff",
-    alignItems: "center",
+    // alignItems: "center",
     justifyContent: "center",
   },
   cardStyle: {

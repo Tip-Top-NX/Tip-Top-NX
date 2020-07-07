@@ -4,27 +4,36 @@ import { myAxios, getConfig } from "../axios";
 
 export const placeOrder = (method) => {
   const bodyPart = {
-    method:method
+    method: method,
   };
   return (dispatch) => {
     getConfig().then((config) => {
       myAxios
         .post("/profile/cart/placeOrder", bodyPart, config)
-        .then((res) => dispatch(setOrder(res.data.orders,res.data.cart,res.data.cartTotal,res.data.points)))
+        .then((res) =>
+          dispatch(
+            setOrder(
+              res.data.orders,
+              res.data.cart,
+              res.data.cartTotal,
+              res.data.points
+            )
+          )
+        )
         .catch((err) => console.log(err));
     });
-  }
-}
+  };
+};
 
-export const setOrder = (orders,cart,cartTotal,points) => {
+export const setOrder = (orders, cart, cartTotal, points) => {
   return {
     type: ActionTypes.PLACE_ORDER,
-    payload:{
-      orders:orders,
+    payload: {
+      orders: orders,
       cart: cart,
       cartTotal: cartTotal,
-      points: points
-    }
+      points: points,
+    },
   };
 };
 
@@ -38,7 +47,7 @@ export const postCart = (prodId, color, size, quantity) => {
     getConfig().then((config) => {
       myAxios
         .post("/product/" + prodId + "/cart", bodyPart, config)
-        .then((res) => dispatch(setCart(res.data.cart,res.data.cartTotal)))
+        .then((res) => dispatch(setCart(res.data.cart, res.data.cartTotal)))
         .catch((err) => console.log(err));
     });
   };
@@ -47,24 +56,24 @@ export const postCart = (prodId, color, size, quantity) => {
 export const delCart = (prodId, color, size) => {
   const bodyPart = {
     color: color,
-    size: size
+    size: size,
   };
   return (dispatch) => {
     getConfig().then((config) => {
-      config.data = bodyPart
+      config.data = bodyPart;
       myAxios
-        .delete("/product/" + prodId + "/cart",config)
-        .then((res) => dispatch(setCart(res.data.cart,res.data.cartTotal)))
+        .delete("/product/" + prodId + "/cart", config)
+        .then((res) => dispatch(setCart(res.data.cart, res.data.cartTotal)))
         .catch((err) => console.log(err));
     });
   };
 };
 
-export const setCart = (cart,cartTotal) => {
+export const setCart = (cart, cartTotal) => {
   return {
     type: ActionTypes.SET_CART,
     payload: cart,
-    cartTotal:cartTotal
+    cartTotal: cartTotal,
   };
 };
 
@@ -193,7 +202,7 @@ export const setUser = (user, token) => {
       token: token,
       gender: user.gender,
       age: user.age,
-      cartTotal:user.cartTotal
+      cartTotal: user.cartTotal,
     },
   };
 };

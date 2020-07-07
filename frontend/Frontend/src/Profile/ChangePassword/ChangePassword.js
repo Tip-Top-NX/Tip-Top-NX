@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -11,14 +11,55 @@ import {
   Dimensions,
   ImageBackground,
 } from "react-native";
+import { myAxios, getConfig } from "../../../../axios";
+import { useNavigation } from "@react-navigation/native";
+
 const width = Dimensions.get("window").width;
 const ChangePassword = () => {
+  const [oldPassword, setOldPassword] = useState();
+  const [newPassword, setNewPassword] = useState();
+  const [confirmPass, setConfirmPass] = useState();
+  const [message, setMessage] = useState("");
+
+  const navigation = useNavigation();
+
+  const validation = () => {
+    // password check
+    console.log(oldPassword + " " + newPassword + " " + confirmPass);
+    setMessage("");
+    if (newPassword === "" || newPassword.length < 6) {
+      setMessage("The password should be atleast 6 characters long");
+    } else if (newPassword !== confirmPass) {
+      setMessage("The passwords dont match");
+    } else {
+      console.log("dispatching");
+      const bodyPart = {
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+      };
+      getConfig().then((config) => {
+        myAxios
+          .put("/profile/changePassword", bodyPart, config)
+          .then((res) => {
+            if (res.status === 200) {
+              alert("Your Password has been changed");
+              console.log(res.status);
+              navigation.navigate("Profile");
+            }
+          })
+          .catch((err) => {
+            console.log(err), setMessage("Incorrect current password");
+          });
+      });
+    }
+  };
+
   return (
     <SafeAreaView>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.container}>
           <ImageBackground
-            source={require("../../../assets/b1.jpg")}
+            source={require("../../../../assets/b1.jpg")}
             style={{
               flex: 1,
               resizeMode: "cover",
@@ -33,6 +74,8 @@ const ChangePassword = () => {
                 placeholder="CURRENT PASSWORD"
                 placeholderTextColor="#666"
                 secureTextEntry={true}
+                onChangeText={(text) => setOldPassword(text)}
+                value={oldPassword}
               ></TextInput>
             </View>
             <View style={styles.inputContainer}>
@@ -41,6 +84,8 @@ const ChangePassword = () => {
                 placeholder="NEW PASSWORD"
                 placeholderTextColor="#666"
                 secureTextEntry={true}
+                onChangeText={(text) => setNewPassword(text)}
+                value={newPassword}
               ></TextInput>
             </View>
             <View style={styles.inputContainer}>
@@ -49,9 +94,25 @@ const ChangePassword = () => {
                 placeholder="CONFIRM NEW PASSWORD"
                 placeholderTextColor="#666"
                 secureTextEntry={true}
+                onChangeText={(text) => setConfirmPass(text)}
+                value={confirmPass}
               ></TextInput>
             </View>
-            <TouchableOpacity style={styles.button}>
+            <Text
+              style={{
+                marginTop: 80,
+                textAlign: "center",
+                marginBottom: 10,
+                color: "red",
+                letterSpacing: 0.2,
+              }}
+            >
+              {message}
+            </Text>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => validation()}
+            >
               <Text style={styles.buttonText}>SAVE</Text>
             </TouchableOpacity>
           </ImageBackground>
@@ -85,7 +146,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   button: {
-    marginTop: 80,
     width: width - 75,
     height: 50,
     borderWidth: 1,
