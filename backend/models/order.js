@@ -14,6 +14,11 @@ const orderSchema = new Schema({
         quantity:Number
     }],
     deliveryCharge:Number,
+    address:{
+        type:String,
+        default:""
+    },
+    contact:Number,
     amount:{
         type:Number,
         required:true

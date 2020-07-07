@@ -39,7 +39,7 @@ createFilter = (body) => {
     filter ={}
     keys = Object.keys(body)
     if(keys.includes('color')){
-        filter.colors = body.color
+        filter.colors = {$in : body.color}
     }
     if(keys.includes('priceLower')){
         filter.price = {$gt : body.priceLower, $lt : body.priceUpper}
