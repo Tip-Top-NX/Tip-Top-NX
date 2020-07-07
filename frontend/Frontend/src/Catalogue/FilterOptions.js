@@ -34,7 +34,12 @@ const filteredOptions = [
     { name: "pyjama", id: 37 },
   ],
   // Price
-  ["₹0 - ₹199", "₹200 - ₹499", "₹500 - ₹1000", "Above ₹1000"],
+  [
+    { name: "₹0 - ₹199", priceLower: 0, priceUpper: 199 },
+    { name: "₹200 - ₹499", priceLower: 200, priceUpper: 499 },
+    { name: "₹500 - ₹1000", priceLower: 500, priceUpper: 1000 },
+    { name: "Above ₹1000", priceLower: 1000, priceUpper: 10000 },
+  ],
   // Discount
   ["Above 50%", "40% - 50%", "30% - 20%", "Below 20%"],
 ];
