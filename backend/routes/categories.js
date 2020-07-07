@@ -35,12 +35,34 @@ router.get('/:catId/get-subs', (req,res,next) => {
         .catch((err) => next(err));
 })
 
+createFilter = (body) => {
+    filter ={}
+    keys = Object.keys(body)
+    if(keys.includes('color')){
+        filter.colors = body.color
+    }
+    if(keys.includes('priceLower')){
+        filter.price = {$gt : body.priceLower, $lt : body.priceUpper}
+    }
+    if(keys.includes('discountPercentage')){
+        filter.discountPercentage = {$gte : body.discountPercentage}
+    }
+    return filter
+}
+
 // For getting products of catId and ancestors of catId
 router.get('/:catId/get-products', (req, res, next) => {
     Category.find({ ancestors: req.params.catId }).distinct("_id")
         .then((cats) => {
             cats.push(Number(req.params.catId));
-            return Product.find({ category: { $in: cats } });
+            filter = createFilter(req.body)
+            filter.category = {$in : cats}
+            if(req.body.sort === "Price"){
+                return Product.find(filter).sort({"price":req.body.order})
+            }
+            else{
+                return Product.find(filter);
+            }
         })
         .then((prods) => res.send(prods))
         .catch((err) => next(err));
