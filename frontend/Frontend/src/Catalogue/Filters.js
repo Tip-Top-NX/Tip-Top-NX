@@ -20,7 +20,7 @@ const Filters = () => {
   const [allSelected, setAllSelected] = useState([]);
 
   useEffect(() => {
-    console.log(allSelected, size, color, priceLower, priceUpper);
+    console.log(allSelected + size + color + priceLower + priceUpper);
   }, [allSelected]);
 
   const navigation = useNavigation();
@@ -88,6 +88,19 @@ const Filters = () => {
                     setSelectedOption(-1);
                     var ind = allSelected.indexOf(item);
                     if (ind !== -1) allSelected.splice(ind, 1);
+                    var ind1 = size.indexOf(item);
+                    if (ind1 !== -1) size.splice(ind1, 1);
+                    var ind2 = color.indexOf(item);
+                    if (ind2 !== -1) color.splice(ind2, 1);
+                    var ind3 = priceLower.indexOf(item.priceLower);
+                    if (ind3 !== -1) priceLower.splice(ind3, 1);
+                    var ind4 = priceUpper.indexOf(item.priceUpper);
+                    if (ind4 !== -1) priceUpper.splice(ind4, 1);
+                    setAllSelected([...allSelected]);
+                    setSize([...size]);
+                    setColor([...color]);
+                    setPriceLower([...priceLower]);
+                    setPriceUpper([...priceUpper]);
                   } else if (selectedFilter === 2) {
                     setSelectedOption(
                       filteredOptions[selectedFilter].indexOf(item)

@@ -34,7 +34,7 @@ const Catalogue = ({ navigation, route }) => {
 
   useEffect(() => {
     let mounted = true;
-    console.log(prodId);
+    console.log(prodId, body);
     myAxios
       .get("/category/" + prodId + "/get-products", body)
       .then((res) => {
@@ -49,7 +49,7 @@ const Catalogue = ({ navigation, route }) => {
     //   setShow(false);
     // }, 3000);
     return () => (mounted = false);
-  }, [prodId]);
+  }, [prodId, body]);
 
   const handleScroll = (event) => {
     var currentHeight = event.nativeEvent.contentOffset.y;
