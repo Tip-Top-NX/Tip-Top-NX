@@ -169,6 +169,8 @@ router.post("/cart/placeOrder", (req, res, next) => {
         method: req.body.method,
         transactionid: 123,
       },
+      address:req.user.address,
+      contact:req.user.contact,
       deliveryCharge : req.user.cartTotal>1000? 0 : 50
     })
     .then((order) => {
