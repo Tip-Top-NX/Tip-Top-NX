@@ -22,9 +22,11 @@ const mapStateToProps = state => {
     };
 }
 
-const mapDispatchToProps = dispatch => ({  
-    signup: (props.user) => dispatch({name,email,password,contact})
-})
+const mapDispatchToProps = dispatch => { 
+    return{ 
+        signup: (name,email,password,contact) => dispatch(signup({name,email,password,contact}))
+    };
+}
 
 class OtpMobile extends Component{
     constructor(props){
@@ -45,6 +47,8 @@ class OtpMobile extends Component{
 
     componentDidMount=()=>{
         this.refs.ref1.focus();
+        if(this.props.user.isValid)
+            this.props.navigation.navigate("Home");
     }
 
     checkOtp=()=>{
@@ -58,10 +62,7 @@ class OtpMobile extends Component{
             }
             else{
                 Alert.alert("Success","Mobile number verified successfully!");
-                this.props.user.isValid=true;
-                console.log(this.props.user.isValid);
-                if(this.props.user.isValid)
-                    this.props.navigation.navigate("Home");
+                this.props.signup(this.props.route.params.name,this.props.route.params.email,this.props.route.params.password,this.props.route.params.contact);
             }
         }
         else
