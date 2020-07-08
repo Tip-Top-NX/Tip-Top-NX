@@ -50,6 +50,22 @@ passport.use(new JwtStrategy(opts,(jwt_payload,done) => {
     })
 }));
 
+exports.verifyAdmin = (req,res,next) => {
+    passport.authenticate('jwt',{session: false},(err,user) => {
+        if(err) next(err);
+        if(!user || user.email != 'admin@ttnx.com'){
+            res.statusCode = 401,
+            res.json({
+                success : false,
+                message: "Unauthorized"
+            })
+        }else{
+            req.user = user;
+            next();
+        }
+    })(req,res,next);
+}
+
 //middleware verify using jwt
 exports.verifyUser = (req,res,next) => {
     passport.authenticate('jwt', {session: false},(err,user) => {
