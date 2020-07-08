@@ -27,13 +27,13 @@ const ChangePassword = () => {
     // password check
     console.log(oldPassword + " " + newPassword + " " + confirmPass);
     setMessage("");
-    if (
-      newPassword === "" ||
-      newPassword.length < 6 ||
-      newPassword !== confirmPass
-    ) {
+    if ( newPassword === "" || newPassword.length < 6 ){
+      setMessage("The password should be atleast 6 characters long");
+    }
+    else if ( newPassword !== confirmPass ){
       setMessage("The passwords dont match");
-    } else {
+    } 
+    else {
       console.log("dispatching");
       const bodyPart = {
         oldPassword: oldPassword,

@@ -14,7 +14,7 @@ import styles from "./SignUpStyles";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { useSelector, useDispatch } from "react-redux";
-import { signup, signinFailed } from "../../../redux/ActionCreators";
+import { signinFailed } from "../../../redux/ActionCreators";
 
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -33,7 +33,13 @@ const signUp = () => {
   const [validPhone, checkPhone] = useState(-1);
 
   // redux
-  
+
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+        dispatch(signinFailed());
+  }, []);
 
   const validation = () => {
     const emailregex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
@@ -77,7 +83,8 @@ const signUp = () => {
         name:name,
         email:email,
         password:password,
-        contact:phone
+        contact:phone,
+        type:"verify"
       })
     }
   };

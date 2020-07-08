@@ -76,6 +76,12 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: "red",
   },
+  forgotPwd:{
+    textDecorationLine:"underline",
+    fontWeight:"bold",
+    marginRight:30,
+    textAlign:"right"
+  }
 });
 
 export default styles;
