@@ -22,12 +22,21 @@ const Catalogue = ({ navigation, route }) => {
   const [checkHeight, setHeight] = useState();
   const [checkBox, setBox] = useState(true);
   const prodId = route.params.prodId;
+  const body = {
+    sort: route.params.sort,
+    order: -1,
+    size: route.params.size,
+    color: route.params.color,
+    priceLower: route.params.priceLower,
+    priceUpper: route.params.priceUpper,
+    filter: route.params.filter,
+  };
 
   useEffect(() => {
     let mounted = true;
-    console.log(prodId);
+    console.log(prodId, body);
     myAxios
-      .get("/category/" + prodId + "/get-products")
+      .get("/category/" + prodId + "/get-products", body)
       .then((res) => {
         if (mounted) {
           setIsLoading(false);
@@ -40,7 +49,7 @@ const Catalogue = ({ navigation, route }) => {
     //   setShow(false);
     // }, 3000);
     return () => (mounted = false);
-  }, [prodId]);
+  }, [prodId, body]);
 
   const handleScroll = (event) => {
     var currentHeight = event.nativeEvent.contentOffset.y;
@@ -73,7 +82,7 @@ const Catalogue = ({ navigation, route }) => {
           style={{
             // alignSelf: "center",
             justifyContent: "center",
-            // alignItems: "center",
+            alignItems: "center",
           }}
         >
           <FlatList
