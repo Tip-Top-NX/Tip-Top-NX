@@ -24,24 +24,19 @@ const Catalogue = ({ navigation, route }) => {
   const prodId = route.params.prodId;
   const sort = route.params.sort;
   const order = -1;
-  const size = route.params.size;
-  const color = route.params.color;
   const priceLower = route.params.priceLower;
   const priceUpper = route.params.priceUpper;
-  const filter = route.params.filter;
+  const allSelected = route.params.allSelected;
+  const catArr = route.params.catArr;
 
   useEffect(() => {
     let mounted = true;
     const body = {
       sort: sort,
       order: order,
-      size: size,
-      color: color,
       priceLower: priceLower,
       priceUpper: priceUpper,
-      filter: filter,
     };
-    console.log(prodId, body);
     myAxios
       .get("/category/" + prodId + "/get-products", body)
       .then((res) => {
@@ -52,7 +47,7 @@ const Catalogue = ({ navigation, route }) => {
       })
       .catch((err) => console.log(err));
     return () => (mounted = false);
-  }, [prodId, sort, order, size, color, priceLower, priceUpper, filter]);
+  }, [prodId, sort, order, priceLower, priceUpper]);
 
   const handleScroll = (event) => {
     var currentHeight = event.nativeEvent.contentOffset.y;
@@ -115,7 +110,15 @@ const Catalogue = ({ navigation, route }) => {
               />
             )}
           />
-          {checkBox ? <ButtonBox prodId={prodId} /> : null}
+          {checkBox ? (
+            <ButtonBox
+              prodId={prodId}
+              allSelected={allSelected}
+              priceLower={priceLower}
+              priceUpper={priceUpper}
+              catArr={catArr}
+            />
+          ) : null}
         </View>
       )}
     </SafeAreaView>

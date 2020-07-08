@@ -13,14 +13,9 @@ import { useNavigation } from "@react-navigation/native";
 
 const width = Dimensions.get("window").width;
 
-const sortBy = [
-  "Alphabetical Order",
-  "Price High to Low",
-  "Price Low to High",
-  "Popularity",
-];
+const sortBy = ["Price High to Low", "Price Low to High", "Popularity"];
 
-const Sort = () => {
+const Sort = ({ route }) => {
   const [selected, setSelected] = useState();
   const navigation = useNavigation();
 
@@ -71,7 +66,7 @@ const Sort = () => {
         <TouchableOpacity
           style={[
             styles.buttonBox,
-            { backgroundColor: "#fff", borderWidth: 1 },
+            { backgroundColor: "#fff", borderWidth: 1, borderColor: "#C2185B" },
           ]}
           onPress={() => {
             navigation.goBack();
@@ -82,9 +77,10 @@ const Sort = () => {
         <TouchableOpacity
           style={styles.buttonBox}
           onPress={() => {
-            alert(
-              "This function will not work as the dependent work is yet to be completed"
-            );
+            navigation.navigate("Catalogue", {
+              prodId: route.params.prodId,
+              sort: sortBy[selected],
+            });
           }}
         >
           <Text style={styles.buttonText}>APPLY</Text>
@@ -141,7 +137,7 @@ const styles = StyleSheet.create({
   },
   buttonBox: {
     width: 170,
-    height: 50,
+    height: 40,
     // borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",

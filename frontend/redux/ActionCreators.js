@@ -169,19 +169,17 @@ export const signup = (user) => {
 export const signin = (user) => {
   return (dispatch) => {
     dispatch(isFetching(true));
-    setTimeout(() => {
-      myAxios
-        .post("/users/login", { ...user })
-        .then((res) => {
-          if (res.data.success === true) {
-            dispatch(setUser(res.data.user, res.data.token));
-            dispatch(isFetching(false));
-          } else {
-            dispatch(signinFailed());
-          }
-        })
-        .catch((err) => dispatch(signinFailed()));
-    }, 5000);
+    myAxios
+      .post("/users/login", { ...user })
+      .then((res) => {
+        if (res.data.success === true) {
+          dispatch(setUser(res.data.user, res.data.token));
+          dispatch(isFetching(false));
+        } else {
+          dispatch(signinFailed());
+        }
+      })
+      .catch((err) => dispatch(signinFailed()));
   };
 };
 

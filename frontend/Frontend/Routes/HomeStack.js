@@ -7,8 +7,7 @@ import Catalogue from "../src/Catalogue/Catalogue";
 import Product from "../src/ProductDescription/ProductPage";
 import Search from "../src/Search/Search";
 import SizeChart from "../src/ProductDescription/SizeChart";
-import FiltersMen from "../src/Catalogue/Filters/FiltersMen";
-import FiltersAcc from "../src/Catalogue/Filters/FiltersAcc";
+import Filters from "../src/Catalogue/Filters/Filters";
 import Sort from "../src/Catalogue/Sort";
 import CustomBack from "../src/BackButton";
 import RightHeaderButton from "../src/RightHeaderButton";
@@ -49,8 +48,7 @@ const HomeStack = () => {
           headerRight: () => <RightHeaderButton />,
         }}
       />
-      <Stack.Screen name="FiltersMen" component={FiltersMen} />
-      <Stack.Screen name="FiltersAcc" component={FiltersAcc} />
+      <Stack.Screen name="Filters" component={Filters} />
       <Stack.Screen name="Sort" component={Sort} />
       <Stack.Screen name="Size Chart" component={SizeChart} />
       <Stack.Screen

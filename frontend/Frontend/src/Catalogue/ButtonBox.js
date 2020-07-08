@@ -2,7 +2,7 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
 
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useLinkProps } from "@react-navigation/native";
 
 const ButtonBox = (props) => {
   const navigation = useNavigation();
@@ -11,7 +11,7 @@ const ButtonBox = (props) => {
       <TouchableOpacity
         style={[styles.buttonBox, { backgroundColor: "#fff", borderWidth: 1 }]}
         onPress={() => {
-          navigation.navigate("Sort");
+          navigation.navigate("Sort", { prodId: props.prodId });
         }}
       >
         <Text style={[styles.buttonText, { color: "#000" }]}>SORT</Text>
@@ -19,9 +19,13 @@ const ButtonBox = (props) => {
       <TouchableOpacity
         style={styles.buttonBox}
         onPress={() => {
-          props.prodId === 2
-            ? navigation.navigate("FiltersMen")
-            : navigation.navigate("FiltersAcc");
+          navigation.navigate("Filters", {
+            prodId: props.prodId,
+            allSelected: props.allSelected,
+            priceLower: props.priceLower,
+            priceUpper: props.priceUpper,
+            catArr: props.catArr,
+          });
         }}
       >
         <Text style={styles.buttonText}>FILTER</Text>
