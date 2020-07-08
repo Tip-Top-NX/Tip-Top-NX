@@ -4,11 +4,11 @@ import { FlatList } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./FilterStyles";
-import filteredOptions from "./FilterOptions";
+import { filteredOptionsMen } from "./FilterOptions";
 
 const filterTypes = ["size", "color", "categories", "price", "discount"];
 
-const Filters = () => {
+const FiltersMen = () => {
   const [selectedFilter, setSelectedFilter] = useState();
   const [selectedOption, setSelectedOption] = useState();
   const [prodId, setProdId] = useState();
@@ -72,7 +72,7 @@ const Filters = () => {
         </View>
         <View style={styles.filteredOptionsStyle}>
           <FlatList
-            data={filteredOptions[selectedFilter]}
+            data={filteredOptionsMen[selectedFilter]}
             keyExtractor={(item, index) => index.toString()}
             showsVerticalScrollIndicator={false}
             renderItem={({ item, index }) => (
@@ -81,8 +81,8 @@ const Filters = () => {
                 onPress={() => {
                   if (
                     allSelected.find((i) => i === item) ||
-                    filteredOptions[selectedFilter][index] ===
-                      filteredOptions[selectedFilter][selectedOption]
+                    filteredOptionsMen[selectedFilter][index] ===
+                      filteredOptionsMen[selectedFilter][selectedOption]
                   ) {
                     console.log("entering");
                     setSelectedOption(-1);
@@ -103,49 +103,52 @@ const Filters = () => {
                     setPriceUpper([...priceUpper]);
                   } else if (selectedFilter === 2) {
                     setSelectedOption(
-                      filteredOptions[selectedFilter].indexOf(item)
+                      filteredOptionsMen[selectedFilter].indexOf(item)
                     ),
                       setProdId(item.id);
                   } else if (selectedFilter === 0) {
                     setSelectedOption(
-                      filteredOptions[selectedFilter].indexOf(item)
+                      filteredOptionsMen[selectedFilter].indexOf(item)
                     );
-                    setSize([...size, filteredOptions[selectedFilter][index]]);
+                    setSize([
+                      ...size,
+                      filteredOptionsMen[selectedFilter][index],
+                    ]);
                     setAllSelected([
                       ...allSelected,
-                      filteredOptions[selectedFilter][index],
+                      filteredOptionsMen[selectedFilter][index],
                     ]);
                   } else if (selectedFilter === 1) {
                     setSelectedOption(
-                      filteredOptions[selectedFilter].indexOf(item)
+                      filteredOptionsMen[selectedFilter].indexOf(item)
                     );
                     setColor([
                       ...color,
-                      filteredOptions[selectedFilter][index],
+                      filteredOptionsMen[selectedFilter][index],
                     ]);
                     setAllSelected([
                       ...allSelected,
-                      filteredOptions[selectedFilter][index],
+                      filteredOptionsMen[selectedFilter][index],
                     ]);
                   } else if (selectedFilter === 3) {
                     setSelectedOption(
-                      filteredOptions[selectedFilter].indexOf(item)
+                      filteredOptionsMen[selectedFilter].indexOf(item)
                     );
                     setPriceLower([
                       ...priceLower,
-                      filteredOptions[selectedFilter][index].priceLower,
+                      filteredOptionsMen[selectedFilter][index].priceLower,
                     ]);
                     setPriceUpper([
                       ...priceUpper,
-                      filteredOptions[selectedFilter][index].priceUpper,
+                      filteredOptionsMen[selectedFilter][index].priceUpper,
                     ]);
                     setAllSelected([
                       ...allSelected,
-                      filteredOptions[selectedFilter][index],
+                      filteredOptionsMen[selectedFilter][index],
                     ]);
                   } else if (selectedFilter === 4) {
                     setSelectedOption(
-                      filteredOptions[selectedFilter].indexOf(item)
+                      filteredOptionsMen[selectedFilter].indexOf(item)
                     );
                   }
                 }}
@@ -163,31 +166,35 @@ const Filters = () => {
                       styles.eachFilterText,
                       {
                         color:
-                          filteredOptions[selectedFilter].indexOf(item) ===
+                          filteredOptionsMen[selectedFilter].indexOf(item) ===
                             selectedOption ||
-                          filteredOptions[selectedFilter][
-                            filteredOptions[selectedFilter].indexOf(item)
+                          filteredOptionsMen[selectedFilter][
+                            filteredOptionsMen[selectedFilter].indexOf(item)
                           ] ===
                             allSelected.find(
                               (i) =>
                                 i ===
-                                filteredOptions[selectedFilter][
-                                  filteredOptions[selectedFilter].indexOf(item)
+                                filteredOptionsMen[selectedFilter][
+                                  filteredOptionsMen[selectedFilter].indexOf(
+                                    item
+                                  )
                                 ]
                             )
                             ? "#000"
                             : "#777",
                         fontWeight:
-                          filteredOptions[selectedFilter].indexOf(item) ===
+                          filteredOptionsMen[selectedFilter].indexOf(item) ===
                             selectedOption ||
-                          filteredOptions[selectedFilter][
-                            filteredOptions[selectedFilter].indexOf(item)
+                          filteredOptionsMen[selectedFilter][
+                            filteredOptionsMen[selectedFilter].indexOf(item)
                           ] ===
                             allSelected.find(
                               (i) =>
                                 i ===
-                                filteredOptions[selectedFilter][
-                                  filteredOptions[selectedFilter].indexOf(item)
+                                filteredOptionsMen[selectedFilter][
+                                  filteredOptionsMen[selectedFilter].indexOf(
+                                    item
+                                  )
                                 ]
                             )
                             ? "600"
@@ -199,16 +206,16 @@ const Filters = () => {
                       ? item
                       : item.name}
                   </Text>
-                  {filteredOptions[selectedFilter].indexOf(item) ===
+                  {filteredOptionsMen[selectedFilter].indexOf(item) ===
                     selectedOption ||
-                  filteredOptions[selectedFilter][
-                    filteredOptions[selectedFilter].indexOf(item)
+                  filteredOptionsMen[selectedFilter][
+                    filteredOptionsMen[selectedFilter].indexOf(item)
                   ] ===
                     allSelected.find(
                       (i) =>
                         i ===
-                        filteredOptions[selectedFilter][
-                          filteredOptions[selectedFilter].indexOf(item)
+                        filteredOptionsMen[selectedFilter][
+                          filteredOptionsMen[selectedFilter].indexOf(item)
                         ]
                     ) ? (
                     <Feather name="check" size={24} color="#C2185B" />
@@ -251,4 +258,4 @@ const Filters = () => {
   );
 };
 
-export default Filters;
+export default FiltersMen;

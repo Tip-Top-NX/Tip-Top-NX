@@ -4,7 +4,7 @@ import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
 
-const ButtonBox = () => {
+const ButtonBox = (props) => {
   const navigation = useNavigation();
   return (
     <View style={styles.buttonBoxStyle}>
@@ -19,7 +19,9 @@ const ButtonBox = () => {
       <TouchableOpacity
         style={styles.buttonBox}
         onPress={() => {
-          navigation.navigate("Filters");
+          props.prodId === 2
+            ? navigation.navigate("FiltersMen")
+            : navigation.navigate("FiltersAcc");
         }}
       >
         <Text style={styles.buttonText}>FILTER</Text>

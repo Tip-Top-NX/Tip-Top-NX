@@ -53,8 +53,9 @@ const Categories = (props) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.innerBox}
-            // onPress={() => props.navigation.navigate("Catalogue")}
-            onPress={() => alert("Accessories is under development")}
+            onPress={() =>
+              props.navigation.navigate("Catalogue", { prodId: 50 })
+            }
           >
             <Image
               source={require("../../../assets/n.jpg")}
