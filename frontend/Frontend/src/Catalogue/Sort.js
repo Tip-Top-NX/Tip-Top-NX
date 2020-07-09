@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -13,11 +13,22 @@ import { useNavigation } from "@react-navigation/native";
 
 const width = Dimensions.get("window").width;
 
-const sortBy = ["Price High to Low", "Price Low to High", "Popularity"];
+const sortBy = [
+  { name: "Price High to Low", num: 1 },
+  { name: "Price Low to High", num: -1 },
+];
 
 const Sort = ({ route }) => {
   const [selected, setSelected] = useState();
   const navigation = useNavigation();
+
+  useEffect(() => {
+    if (route.params.order === -1) {
+      setSelected(1);
+    } else if (route.params.order === 1) {
+      setSelected(0);
+    }
+  }, []);
 
   return (
     <SafeAreaView style={styles.overAllContainer}>
@@ -30,7 +41,13 @@ const Sort = ({ route }) => {
             renderItem={({ item }) => (
               <TouchableOpacity
                 style={styles.eachFilter}
-                onPress={() => setSelected(sortBy.indexOf(item))}
+                onPress={() => {
+                  if (sortBy.indexOf(item) !== selected) {
+                    setSelected(sortBy.indexOf(item));
+                  } else {
+                    setSelected();
+                  }
+                }}
               >
                 <View
                   style={{
@@ -51,7 +68,7 @@ const Sort = ({ route }) => {
                       },
                     ]}
                   >
-                    {item}
+                    {item.name}
                   </Text>
                   {sortBy.indexOf(item) === selected ? (
                     <Feather name="check" size={24} color="#C2185B" />
@@ -79,7 +96,8 @@ const Sort = ({ route }) => {
           onPress={() => {
             navigation.navigate("Catalogue", {
               prodId: route.params.prodId,
-              sort: sortBy[selected],
+              sortCode: sortBy[selected].num,
+              sortBy: sortBy[selected].name.split(" ").splice(0)[0],
             });
           }}
         >

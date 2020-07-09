@@ -11,7 +11,10 @@ const ButtonBox = (props) => {
       <TouchableOpacity
         style={[styles.buttonBox, { backgroundColor: "#fff", borderWidth: 1 }]}
         onPress={() => {
-          navigation.navigate("Sort", { prodId: props.prodId });
+          navigation.navigate("Sort", {
+            prodId: props.prodId,
+            order: props.order,
+          });
         }}
       >
         <Text style={[styles.buttonText, { color: "#000" }]}>SORT</Text>
@@ -21,10 +24,10 @@ const ButtonBox = (props) => {
         onPress={() => {
           navigation.navigate("Filters", {
             prodId: props.prodId,
-            allSelected: props.allSelected,
-            priceLower: props.priceLower,
-            priceUpper: props.priceUpper,
-            catArr: props.catArr,
+            // allSelected: props.allSelected,
+            // priceLower: props.priceLower,
+            // priceUpper: props.priceUpper,
+            cat: props.cat,
           });
         }}
       >

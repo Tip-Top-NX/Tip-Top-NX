@@ -8,23 +8,40 @@ import { myAxios } from "../../../../axios";
 
 const filterTypes = ["categories", "price"];
 
-const Filters = ({ route }) => {
+const MultiFilters = ({ route }) => {
   const [selectedFilter, setSelectedFilter] = useState();
-  const [prodId, setProdId] = useState();
-  const [priceLower, setPriceLower] = useState(-1);
+  const [selectedOption, setSelectedOption] = useState();
+  const [prodId, setProdId] = useState(route.params.prodId);
+  const [priceLower, setPriceLower] = useState();
   const [priceUpper, setPriceUpper] = useState();
+  const [allSelected, setAllSelected] = useState([]);
   const [subcats, setSubcats] = useState();
-  const [cat, setcat] = useState(route.params.cat);
-  const prodIdMain = route.params.prodId;
+  const [catArr, setCatArr] = useState();
+
   useEffect(() => {
     let mounted = true;
-    myAxios.get("/category/" + prodIdMain + "/get-leaf").then((res) => {
+    myAxios.get("/category/4/get-subs").then((res) => {
       if (mounted) {
         setSubcats([...res.data]);
       }
     });
     return () => (mounted = false);
   });
+
+  useEffect(() => {
+    if (route.params.allSelected !== undefined) {
+      setAllSelected([allSelected, ...route.params.allSelected]);
+    }
+    if (route.params.priceLower !== undefined) {
+      setPriceLower([priceLower, ...route.params.priceLower]);
+    }
+    if (route.params.priceUpper !== undefined) {
+      setPriceUpper([priceUpper, ...route.params.priceUpper]);
+    }
+    if (route.params.catArr !== undefined) {
+      setCatArr([catArr, ...route.params.catArr]);
+    }
+  }, []);
 
   const filteredOptions = [
     // 0 -> Categories Men
@@ -59,7 +76,8 @@ const Filters = ({ route }) => {
                   },
                 ]}
                 onPress={() => {
-                  setSelectedFilter(filterTypes.indexOf(item));
+                  setSelectedFilter(filterTypes.indexOf(item)),
+                    setSelectedOption();
                 }}
               >
                 <Text
@@ -92,17 +110,37 @@ const Filters = ({ route }) => {
               <TouchableOpacity
                 style={styles.eachFilter}
                 onPress={() => {
-                  if (item.name === cat) {
-                    setcat();
-                  } else if (item.priceLower === priceLower) {
-                    setPriceLower(-1);
-                    setPriceUpper();
+                  if (
+                    allSelected.find((i) => i === item.name) ||
+                    item === filteredOptions[selectedFilter][selectedOption]
+                  ) {
+                    setSelectedOption(-1);
+                    var ind = allSelected.indexOf(item.name);
+                    if (ind !== -1) allSelected.splice(ind, 1);
+                    var ind3 = priceLower.indexOf(item.priceLower);
+                    if (ind3 !== -1) priceLower.splice(ind3, 1);
+                    var ind4 = priceUpper.indexOf(item.priceUpper);
+                    if (ind4 !== -1) priceUpper.splice(ind4, 1);
+                    var ind2 = catArr.indexOf(item.name);
+                    if (ind2 !== -1) catArr.splice(ind2, 1);
+                    setAllSelected([...allSelected]);
+                    setPriceLower([...priceLower]);
+                    setPriceUpper([...priceUpper]);
+                    setCatArr([...catArr]);
                   } else if (selectedFilter === 0) {
-                    setProdId(item._id);
-                    setcat(item.name);
+                    setSelectedOption(
+                      filteredOptions[selectedFilter].indexOf(item)
+                    ),
+                      setProdId(item._id);
+                    setAllSelected([...allSelected, item.name]);
+                    setCatArr([...catArr, item.name]);
                   } else if (selectedFilter === 1) {
-                    setPriceLower(item.priceLower);
-                    setPriceUpper(item.priceUpper);
+                    setSelectedOption(
+                      filteredOptions[selectedFilter].indexOf(item)
+                    );
+                    setPriceLower([...priceLower, item.priceLower]);
+                    setPriceUpper([...priceUpper, item.priceUpper]);
+                    setAllSelected([...allSelected, item.name]);
                   }
                 }}
               >
@@ -119,11 +157,13 @@ const Filters = ({ route }) => {
                       styles.eachFilterText,
                       {
                         color:
-                          cat === item.name || item.priceLower === priceLower
+                          filteredOptions[selectedFilter].indexOf(item) ===
+                            selectedOption || allSelected.includes(item.name)
                             ? "#000"
                             : "#777",
                         fontWeight:
-                          cat === item.name || item.priceLower === priceLower
+                          filteredOptions[selectedFilter].indexOf(item) ===
+                            selectedOption || allSelected.includes(item.name)
                             ? "600"
                             : "500",
                       },
@@ -133,7 +173,8 @@ const Filters = ({ route }) => {
                       ? item.name.split(" ").splice(-1)[0]
                       : item.name}
                   </Text>
-                  {cat === item.name || item.priceLower === priceLower ? (
+                  {filteredOptions[selectedFilter].indexOf(item) ===
+                    selectedOption || allSelected.includes(item.name) ? (
                     <Feather name="check" size={24} color="#C2185B" />
                   ) : null}
                 </View>
@@ -161,7 +202,8 @@ const Filters = ({ route }) => {
               prodId: prodId,
               priceLower: priceLower,
               priceUpper: priceUpper,
-              cat: cat,
+              allSelected: allSelected,
+              catArr: catArr,
             });
           }}
         >
@@ -172,4 +214,4 @@ const Filters = ({ route }) => {
   );
 };
 
-export default Filters;
+export default MultiFilters;

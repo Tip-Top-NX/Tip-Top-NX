@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import {
   View,
-  Text,
   StyleSheet,
   Dimensions,
   Image,
@@ -22,12 +21,13 @@ const Catalogue = ({ navigation, route }) => {
   const [checkHeight, setHeight] = useState();
   const [checkBox, setBox] = useState(true);
   const prodId = route.params.prodId;
-  const sort = route.params.sort;
-  const order = -1;
-  const priceLower = route.params.priceLower;
+  const sort = route.params.sortBy;
+  const order = route.params.sortCode;
+  const priceLower =
+    route.params.priceLower === -1 ? undefined : route.params.priceLower;
   const priceUpper = route.params.priceUpper;
-  const allSelected = route.params.allSelected;
-  const catArr = route.params.catArr;
+  const cat = route.params.cat;
+  // const allSelected = route.params.allSelected;
 
   useEffect(() => {
     let mounted = true;
@@ -37,6 +37,7 @@ const Catalogue = ({ navigation, route }) => {
       priceLower: priceLower,
       priceUpper: priceUpper,
     };
+    console.log(body);
     myAxios
       .get("/category/" + prodId + "/get-products", body)
       .then((res) => {
@@ -110,15 +111,16 @@ const Catalogue = ({ navigation, route }) => {
               />
             )}
           />
-          {checkBox ? (
-            <ButtonBox
-              prodId={prodId}
-              allSelected={allSelected}
-              priceLower={priceLower}
-              priceUpper={priceUpper}
-              catArr={catArr}
-            />
-          ) : null}
+          {/* {checkBox ? ( */}
+          <ButtonBox
+            prodId={prodId}
+            // allSelected={allSelected}
+            // priceLower={priceLower}
+            // priceUpper={priceUpper}
+            cat={cat}
+            order={order}
+          />
+          {/* ) : null} */}
         </View>
       )}
     </SafeAreaView>
