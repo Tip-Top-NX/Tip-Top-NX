@@ -8,15 +8,14 @@ import {
   TouchableWithoutFeedback,
   FlatList,
   Dimensions,
-  Image
+  Image,
 } from "react-native";
-import { myAxios } from '../../../axios';
-import ProductCard from '../ProductCard';
-import NoResultFound from '../../../assets/no_results_found.png';
-import Splash from '../Splash';
+import { myAxios } from "../../../axios";
+import ProductCard from "../ProductCard";
+import NoResultFound from "../../../assets/no_results_found.png";
+import Splash from "../Splash";
 
 const Search = (props) => {
-
   const [keyword, setKeyword] = useState("");
   const [products, setProducts] = useState([]);
   const [found, setFound] = useState(true);
@@ -24,14 +23,15 @@ const Search = (props) => {
 
   const submitHandler = () => {
     setIsFetching(true);
-    myAxios.post('/product/search', { keyword: keyword })
+    myAxios
+      .post("/product/search", { keyword: keyword })
       .then((res) => {
         setProducts([...res.data]);
         setIsFetching(false);
-        res.data.length==0 ? setFound(false): setFound(true);
+        res.data.length == 0 ? setFound(false) : setFound(true);
       })
       .catch((err) => console.log(err));
-  }
+  };
 
   return (
     <>
@@ -44,15 +44,18 @@ const Search = (props) => {
               autoFocus={true}
               onSubmitEditing={() => submitHandler()}
               placeholder="Type here to search"
+              placeholderTextColor="grey"
+              // selectionColor={"#000"}
             />
-            {isFetching ? <Splash/> : 
-              !found? 
-                <Image
-                style={{width: '100%', height: "100%",resizeMode : 'contain' }}
-                       source={NoResultFound}  
-                       /> 
-              :
-                <FlatList
+            {isFetching ? (
+              <Splash />
+            ) : !found ? (
+              <Image
+                style={{ width: "100%", height: "100%", resizeMode: "contain" }}
+                source={NoResultFound}
+              />
+            ) : (
+              <FlatList
                 data={products}
                 numColumns={2}
                 keyExtractor={(item) => item._id}
@@ -79,12 +82,10 @@ const Search = (props) => {
                   />
                 )}
               />
-              
-            }
+            )}
           </View>
         </TouchableWithoutFeedback>
       </SafeAreaView>
-
     </>
   );
 };
@@ -105,6 +106,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     height: 35,
     paddingHorizontal: 10,
+    borderColor: "#C2185B",
   },
   cardStyle: {
     width: Dimensions.get("window").width / 2 - 10,

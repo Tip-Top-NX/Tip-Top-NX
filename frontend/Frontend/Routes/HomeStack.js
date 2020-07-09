@@ -53,7 +53,7 @@ const HomeStack = () => {
       <Stack.Screen name="Size Chart" component={SizeChart} />
       <Stack.Screen
         options={{
-          headerTitle: "Search",
+          headerTitle: null,
         }}
         name="Search"
         component={Search}

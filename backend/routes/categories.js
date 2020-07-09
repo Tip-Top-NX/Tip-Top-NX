@@ -21,6 +21,15 @@ router.post("/", (req, res, next) => {
     .catch((err) => next(err));
 });
 
+router.get("/:catId/get-leaf", (req, res, next) => {
+  Category.find(
+    { ancestors: req.params.catId, isLeaf: true },
+    { _id: 1, name: 1, image: 1 }
+  ).then((cats) => {
+    res.send(cats);
+  });
+});
+
 // For getting sub-categories
 router.get("/:catId/get-subs", (req, res, next) => {
   Category.find({ parent: req.params.catId }, { _id: 1, name: 1, image: 1 })
