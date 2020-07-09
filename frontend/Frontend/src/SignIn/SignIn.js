@@ -150,9 +150,9 @@ const signIn = ({ navigation }) => {
                 ></TextInput>
               </View>
               <TouchableOpacity
-                onPress={() => navigation.navigate("Otp Mobile",{type:"forgotPwd"})}
+                onPress={() => navigation.navigate("Get Email")}
               >
-                <Text style={styles.forgotPwd}>Forgot Password?</Text>
+                <Text style={styles.forgotPwd}>FORGOT PASSWORD?</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.button}

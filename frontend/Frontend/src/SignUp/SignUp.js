@@ -50,7 +50,7 @@ const signUp = () => {
       checkName(0);
     } else if (!alph.test(name)) {
       checkName(0);
-      // alert("Please enter a valid name");
+      // alert("Please enter a valid name")
     } else {
       checkName(1);
     }
@@ -83,8 +83,7 @@ const signUp = () => {
         name:name,
         email:email,
         password:password,
-        contact:phone,
-        type:"verify"
+        contact:phone
       })
     }
   };
