@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
     width: width,
     // borderWidth: 1,
     minHeight: "100%",
+    height: "100%",
   },
   container: {
     width: width,
