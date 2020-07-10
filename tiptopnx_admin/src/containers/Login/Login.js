@@ -31,20 +31,19 @@ class Login extends React.Component {
         const emailregex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
         let errors = {}
         errors.email = !emailregex.test(this.state.email) ? "Invalid email id!":"";
-        errors.password = this.state.password.length==0 ? "Invalid password!":"";
+        errors.password = this.state.password.length===0 ? "Invalid password!":"";
         this.setState({
             ...this.state,
             errors: {...errors}
         });
 
-        if(!Object.values(errors).some((e) => e!="")){
+        if(!Object.values(errors).some((e) => e!=="")){
             axios.post("/users/login", this.state)
             .then((res) => {
                 if (res.data.success === true && res.data.user.admin) {
                     sessionStorage.setItem("token", res.data.token);
                     sessionStorage.setItem("isAdmin", true);
                     this.props.history.push('/admin');
-                    console.log(sessionStorage.getItem("isAdmin"));
                 }
                 else {
                     sessionStorage.clear();
@@ -64,7 +63,7 @@ class Login extends React.Component {
                 <AppBar className={classes.navbar} style={{ backgroundColor: "transparent" }} position="static">
                     <Toolbar>
                         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                            <img className={classes.logo} src={Logo} />
+                            <img alt="Logo" className={classes.logo} src={Logo} />
                         </IconButton>
                         <Typography variant="h6">
                             TIP-TOP NX
@@ -87,7 +86,7 @@ class Login extends React.Component {
                             required
                             label="Email"
                             variant="outlined"
-                            error={this.state.errors.email}
+                            error={this.state.errors.email.length>0}
                             onChange={this.changeHandler("email")} />
                         <TextField
                             fullWidth
@@ -95,10 +94,10 @@ class Login extends React.Component {
                             label="Password"
                             variant="outlined"
                             type="password"
-                            error={this.state.errors.password}
+                            error={this.state.errors.password.length>0}
                             onChange={this.changeHandler("password")}
                             style={{ marginTop: "1em" }} />
-                        <Button onClick={this.submitHandler} style={{ margin: "auto", margin: "5vh 0" }}
+                        <Button onClick={this.submitHandler} style={{ margin: "5vh auto" }}
                             variant="contained" color="secondary" size="large" >
                             Submit
                         </Button>

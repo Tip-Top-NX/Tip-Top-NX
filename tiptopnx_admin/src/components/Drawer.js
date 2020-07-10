@@ -1,8 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
@@ -14,11 +12,9 @@ import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SearchIcon from "@material-ui/icons/Search";
-import Home from '../containers/Home';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText } from '@material-ui/core';
+import { Button, Dialog, DialogActions, DialogTitle } from '@material-ui/core';
 import { withRouter } from 'react-router';
 
-const drawerWidth = "13vw";
 
 const handleItem = [
     {
@@ -45,10 +41,6 @@ function ClippedDrawer(props) {
     const classes = useStyles();
 
     const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
   const handleClose = () => {
     setOpen(false);
@@ -99,7 +91,7 @@ function ClippedDrawer(props) {
                 <aside className={classes.drawer}>
                     <List>
                         {handleItem.map((item, index) => (
-                            <ListItem button key={item.name} className={classes.tiles}>
+                            <ListItem button key={index} className={classes.tiles}>
                                 <ListItemIcon className={classes.iconStyle}>
                                     {item.icon}
                                 </ListItemIcon>
@@ -109,7 +101,7 @@ function ClippedDrawer(props) {
                     <Divider />
                     <List>
                         {handleOrder.map((item, index) => (
-                            <ListItem button key={item.name} className={classes.tiles}>
+                            <ListItem button key={index} className={classes.tiles}>
                                 <ListItemText className={classes.textStyle}>
                                     {item}
                                 </ListItemText>
