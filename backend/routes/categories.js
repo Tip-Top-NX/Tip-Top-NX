@@ -27,7 +27,8 @@ router.get("/:catId/get-leaf", (req, res, next) => {
     { _id: 1, name: 1, image: 1 }
   ).then((cats) => {
     res.send(cats);
-  });
+  })
+  .catch((err) => next(err));
 });
 
 // For getting sub-categories
@@ -59,13 +60,14 @@ createFilter = (body) => {
 };
 
 // For getting products of catId and ancestors of catId
-router.get("/:catId/get-products", (req, res, next) => {
+router.post("/:catId/get-products", (req, res, next) => {
   Category.find({ ancestors: req.params.catId })
     .distinct("_id")
     .then((cats) => {
       cats.push(Number(req.params.catId));
       filter = createFilter(req.body);
       filter.category = { $in: cats };
+      console.log(req.body)
       if (req.body.sort === "Price") {
         return Product.find(filter).sort({ price: req.body.order });
       } else {
