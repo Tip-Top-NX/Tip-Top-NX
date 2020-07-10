@@ -48,4 +48,18 @@ router.post("/sign-up", (req, res, next) => {
   });
 });
 
+router.post("/add-admin", (req,res,next) => {
+  User.register({...req.body,admin: true},req.body.password,(err, user) => {
+      if (!err) {
+          res.json({
+            user: user,
+            success: true,
+            token: authenticate.getToken({ _id: user._id }),
+          });
+        } else {
+          res.json({ err: err });
+        }
+  });
+})
+
 module.exports = router;

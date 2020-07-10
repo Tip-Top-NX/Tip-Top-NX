@@ -9,7 +9,6 @@ const userSchema = new Schema({
   },
   contact: {
     type: Number,
-    required: true,
   },
   address: {
     type: String,
@@ -57,6 +56,9 @@ const userSchema = new Schema({
     type:Number,
     default:0
   },
+  admin: {
+    type: Boolean,
+  }
 });
 userSchema.plugin(passportLocalMongoose, { usernameField: "email" });
 

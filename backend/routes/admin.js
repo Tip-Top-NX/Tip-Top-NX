@@ -11,6 +11,7 @@ router.get("/",(req,res,next) => {
     res.send({admin:true});
 })
 
+
 //all about orders
 router.get("/orders",(req,res,next) => {
         Order.find().sort({_id:-1})

@@ -35,7 +35,7 @@ mongoose_connections = [
 ];
 
 mongoose
-  .connect(mongoose_connections[3], {
+  .connect(mongoose_connections[1], {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -54,7 +54,7 @@ app.use(cookieParser());
 // Cors
 app.use(
   cors({
-    origin: "http:localhost:3000",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
