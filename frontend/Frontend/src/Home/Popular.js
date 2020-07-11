@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, Image, Dimensions } from "react-native";
 import { TouchableOpacity, FlatList } from "react-native-gesture-handler";
 import ProductCard from "../ProductCard";
-import { myAxios } from "../../../axios";
 
 const width = Dimensions.get("window").width;
 

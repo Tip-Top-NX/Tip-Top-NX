@@ -8,7 +8,6 @@ import IconButton from "@material-ui/core/IconButton";
 import ListItemText from "@material-ui/core/ListItemText";
 import GridList from "@material-ui/core/GridList";
 import ClearIcon from "@material-ui/icons/Clear";
-import Divider from "@material-ui/core/Divider";
 import axios from "../utils/axios";
 
 const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
@@ -23,6 +22,7 @@ const Add = () => {
   const [color, setColor] = useState([]);
   const [description, setDescription] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState([]);
+  const [category, setCategory] = useState("");
 
   let priceFinal = price - (price * disc) / 100;
 
@@ -35,6 +35,7 @@ const Add = () => {
     size: selectedSizes,
     color: color,
     description: description,
+    category: category,
   };
 
   const colorHandler = (event) => {
@@ -73,14 +74,30 @@ const Add = () => {
       <h1 style={{ textAlign: "center" }}>ADD A PRODUCT TO THE SYSTEM</h1>
       <div className={classes.topBox}>
         <div className={classes.fieldBoxTop}>
-          <TextField
-            required
-            label="Product ID"
-            variant="outlined"
-            value={id}
-            style={{ alignSelf: "flex-start" }}
-            onChange={(e) => setId(e.target.value)}
-          />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-evenly",
+              width: "100%",
+            }}
+          >
+            <TextField
+              required
+              label="Product ID"
+              variant="outlined"
+              value={id}
+              style={{ alignSelf: "flex-start" }}
+              onChange={(e) => setId(e.target.value)}
+            />
+            <TextField
+              required
+              label="Category"
+              variant="outlined"
+              value={category}
+              style={{ alignSelf: "flex-start" }}
+              onChange={(e) => setCategory(e.target.value)}
+            />
+          </div>
           <TextField
             fullWidth
             required
@@ -218,7 +235,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-evenly",
     alignItems: "center",
     width: "90%",
-    height: "40vh",
+    height: "50vh",
     marginTop: "40px",
     marginBottom: "20px",
   },
@@ -229,7 +246,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-evenly",
     alignItems: "center",
     width: "50%",
-    height: "40vh",
+    height: "50vh",
     padding: "0 10px 0 10px",
   },
   fieldBox: {

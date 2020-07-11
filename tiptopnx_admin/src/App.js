@@ -5,6 +5,7 @@ import Home from "./containers/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Drawer from "./components/Drawer";
 import Add from "./containers/Add";
+import ProductCard from "./components/ProductCard";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Drawer>
             <Route exact path="/admin" component={Home} />
             <Route exact path="/admin/add" component={Add} />
+            <Route exact path="/admin/product" component={ProductCard} />
           </Drawer>
         )}
       />
