@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+export const myUri = "http://localhost:5000";
+
 const instance = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: myUri,
     withCredentials: true,
 });
 

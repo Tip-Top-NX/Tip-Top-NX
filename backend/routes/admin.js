@@ -60,8 +60,10 @@ router.get("/orders/completed",(req,res,next) => {
 //all about products
 router.route("/products")
     .post((req,res,next) => {
+        console.log(req.body);
         Product.create({
-            ...req.body
+            ...req.body,
+            category: 7,
         })
         .then((prod) => {
             return Product.findById(prod._id)
@@ -78,6 +80,7 @@ router.route("/products/:productId")
         })
     })
     .put((req,res,next) => {
+        
         Product.findByIdAndUpdate(req.params.productId,
             { $set : req.body},
             { safe: true, upsert:true, new:true})

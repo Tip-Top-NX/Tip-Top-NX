@@ -10,6 +10,7 @@ import GridList from "@material-ui/core/GridList";
 import ClearIcon from "@material-ui/icons/Clear";
 import Divider from "@material-ui/core/Divider";
 import axios from "../utils/axios";
+import { getConfig } from '../utils/config';
 
 const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
@@ -20,7 +21,7 @@ const Add = () => {
   const [price, setPrice] = useState(0);
   const [disc, setDisc] = useState(0);
   const [name, setName] = useState("");
-  const [color, setColor] = useState([]);
+  const [colors, setColors] = useState([]);
   const [description, setDescription] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState([]);
 
@@ -33,13 +34,13 @@ const Add = () => {
     price: price,
     discountPercentage: disc,
     size: selectedSizes,
-    color: color,
+    colors: colors,
     description: description,
   };
 
-  const colorHandler = (event) => {
+  const colorsHandler = (event) => {
     if (event.key === "Enter") {
-      setColor([...color, event.target.value]);
+      setColors([...colors, event.target.value]);
       event.target.value = "";
     }
   };
@@ -60,11 +61,14 @@ const Add = () => {
   };
 
   const addProductHandler = () => {
+    console.log(getConfig(),body);
     axios
-      .post("/products", body)
-      .then((res) => alert("Product added " + res.data))
+      .post("/admin/products", body,getConfig())
+      .then((res) => {
+        console.log(res.data);
+      })
       .catch((err) => {
-        console.log(err.message);
+        console.log(err);
       });
   };
 
@@ -143,15 +147,15 @@ const Add = () => {
             label="Colors"
             variant="outlined"
             style={{ marginBottom: "20px" }}
-            onKeyDown={colorHandler}
+            onKeyDown={colorsHandler}
           />
           <GridList cellHeight="80px">
-            {color.map((item, index) => (
+            {colors.map((item, index) => (
               <ListItem key={index}>
                 <IconButton
                   onClick={() => {
-                    color.splice(index, 1);
-                    setColor([...color]);
+                    colors.splice(index, 1);
+                    setColors([...colors]);
                   }}
                 >
                   <ClearIcon />
@@ -191,7 +195,7 @@ const Add = () => {
         variant="contained"
         color="primary"
         size="Large"
-        onClick={() => addProductHandler}
+        onClick={() => addProductHandler()}
       >
         Add Product
       </Button>
