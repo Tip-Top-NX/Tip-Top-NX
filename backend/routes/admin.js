@@ -60,7 +60,6 @@ router.get("/orders/completed",(req,res,next) => {
 //all about products
 router.route("/products")
     .post((req,res,next) => {
-        console.log(req.body);
         Product.create({
             ...req.body,
             category: 7,

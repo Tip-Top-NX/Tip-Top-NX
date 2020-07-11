@@ -11,7 +11,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import AddIcon from "@material-ui/icons/Add";
 import AppsIcon from "@material-ui/icons/Apps";
 import SearchIcon from "@material-ui/icons/Search";
-import { Button, Dialog, DialogActions, DialogTitle,CssBaseline,Drawer } from "@material-ui/core";
+import { Paper, Button, Dialog, DialogActions, DialogTitle, CssBaseline, Drawer } from "@material-ui/core";
 import { withRouter } from "react-router";
 const drawerWidth = 150;
 
@@ -34,8 +34,8 @@ const handleItem = [
 ];
 
 const handleOrder = [
-  { name: "Pending Orders", routeName: "pendingOrders" },
-  { name: "Delivery Status", routeName: "deliveryStatus" },
+  { name: "Pending Orders", routeName: "pending-orders" },
+  { name: "Completed Orders", routeName: "completedOrders" },
 ];
 
 function ClippedDrawer(props) {
@@ -61,38 +61,38 @@ function ClippedDrawer(props) {
             Tip Top NX Admin App
           </Typography>
           <Button
-              onClick={() => setOpen(true)}
-              style={{
-                marginLeft: "auto",
-                backgroundColor: "white",
-                color: "black",
-              }}
-              variant="contained"
-            >
-              LOGOUT
+            onClick={() => setOpen(true)}
+            style={{
+              marginLeft: "auto",
+              backgroundColor: "white",
+              color: "black",
+            }}
+            variant="contained"
+          >
+            LOGOUT
             </Button>
         </Toolbar>
       </AppBar>
       {/* Alert Dialog */}
       <Dialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">
-            {"Are you sure you want to logout?"}
-          </DialogTitle>
-          <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              Cancel
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Are you sure you want to logout?"}
+        </DialogTitle>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
             </Button>
-            <Button onClick={logoutHandler} color="primary" autoFocus>
-              Yes
+          <Button onClick={logoutHandler} color="primary" autoFocus>
+            Yes
             </Button>
-          </DialogActions>
-        </Dialog>
-        {/* Drawer */}
+        </DialogActions>
+      </Dialog>
+      {/* Drawer */}
       <Drawer
         className={classes.drawer}
         variant="permanent"
@@ -101,9 +101,9 @@ function ClippedDrawer(props) {
         }}
         anchor="left"
       >
-        <Toolbar/>
+        <Toolbar />
         <div className={classes.drawerContainer}>
-        <List>
+          <List>
             {handleItem.map((item, index) => (
               <ListItem
                 button
@@ -135,8 +135,10 @@ function ClippedDrawer(props) {
         </div>
       </Drawer>
       <main className={classes.content}>
-        <Toolbar/>
-        {props.children}
+        <Toolbar />
+        {/* <Paper elevation={3} style={{margin:"auto",width:"75vw",padding:"30"}} variant="outlined"> */}
+          {props.children}
+        {/* </Paper> */}
       </main>
     </div>
   );
@@ -175,6 +177,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    '&:hover': {
+      background: "linear-gradient(45deg, #555 100%, #000 90%)"
+    }
   },
   iconStyle: {
     justifyContent: "center",

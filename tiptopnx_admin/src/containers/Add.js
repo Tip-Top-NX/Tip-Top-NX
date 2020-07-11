@@ -11,6 +11,8 @@ import ClearIcon from "@material-ui/icons/Clear";
 import Divider from "@material-ui/core/Divider";
 import axios from "../utils/axios";
 import { getConfig } from '../utils/config';
+import { Backdrop, CircularProgress } from '@material-ui/core';
+import Snackbar from '../components/Snackbar';
 
 const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
@@ -22,8 +24,14 @@ const Add = () => {
   const [disc, setDisc] = useState(0);
   const [name, setName] = useState("");
   const [colors, setColors] = useState([]);
-  const [description, setDescription] = useState([]);
+  const [description, setDescription] = useState("");
   const [selectedSizes, setSelectedSizes] = useState([]);
+  // Backdrop
+  const [open, setOpen] = React.useState(false);
+  // Snackbar
+  const [snackOpen, setSnackOpen] = React.useState(false);
+  const [message, setMessage] = React.useState("Error in adding the product!");
+  const [variant, setVariant] = React.useState("error");
 
   let priceFinal = price - (price * disc) / 100;
 
@@ -45,10 +53,7 @@ const Add = () => {
     }
   };
   const descHandler = (event) => {
-    if (event.key === "Enter") {
-      setDescription([...description, event.target.value]);
-      event.target.value = "";
-    }
+      setDescription(event.target.value);
   };
   const sizeHandler = (event) => {
     if (event.target.checked) {
@@ -61,19 +66,35 @@ const Add = () => {
   };
 
   const addProductHandler = () => {
-    console.log(getConfig(),body);
-    axios
+    setOpen(true);
+    setTimeout(() => {
+      axios
       .post("/admin/products", body,getConfig())
       .then((res) => {
-        console.log(res.data);
+        setOpen(false);
+        setMessage("Product added successfully!");
+        setVariant("success");
+        setSnackOpen(true);
       })
       .catch((err) => {
+        setOpen(false);
+        setMessage("Error in adding the product!");
+        setVariant("error");
+        setSnackOpen(true);
         console.log(err);
       });
+    }, 0);
   };
 
   return (
     <div className={classes.root}>
+      {/* Backdrop */}
+      <Backdrop className={classes.backdrop} open={open} onClick={()=>setOpen(false)}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
+      {/* Snackbar */}
+      <Snackbar close={() => setSnackOpen(false)} open={snackOpen} variant={variant} message={message} />
+
       <h1 style={{ textAlign: "center" }}>ADD A PRODUCT TO THE SYSTEM</h1>
       <div className={classes.topBox}>
         <div className={classes.fieldBoxTop}>
@@ -146,6 +167,7 @@ const Add = () => {
             required
             label="Colors"
             variant="outlined"
+            helperText="Press enter to add the color"
             style={{ marginBottom: "20px" }}
             onKeyDown={colorsHandler}
           />
@@ -170,24 +192,10 @@ const Add = () => {
             fullWidth
             label="Desciption"
             variant="outlined"
+            multiline
+            rows={4}
             style={{ marginBottom: "20px" }}
-            onKeyDown={descHandler}
           />
-          <GridList cellHeight="80px" cols={1}>
-            {description.map((item, index) => (
-              <ListItem key={index}>
-                <ListItemText>{item}</ListItemText>
-                <IconButton
-                  onClick={() => {
-                    description.splice(index, 1);
-                    setDescription([...description]);
-                  }}
-                >
-                  <ClearIcon />
-                </IconButton>
-              </ListItem>
-            ))}
-          </GridList>
         </div>
       </div>
       <Button
@@ -214,6 +222,10 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     marginBottom: "30px",
     paddingLeft: "35px",
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
   },
   topBox: {
     // border: "solid",
