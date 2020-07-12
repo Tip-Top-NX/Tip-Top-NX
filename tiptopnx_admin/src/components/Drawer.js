@@ -29,7 +29,8 @@ const handleItem = [
 
 const handleOrder = [
   { name: "Pending Orders", routeName: "pending-orders" },
-  { name: "Completed Orders", routeName: "completedOrders" },
+  { name: "Change delivery status", routeName: "confirmed-orders" },
+  { name: "Cancelled/ Delivered orders", routeName: "history" },
 ];
 
 function ClippedDrawer(props) {

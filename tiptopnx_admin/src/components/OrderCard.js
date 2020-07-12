@@ -34,7 +34,6 @@ const OrderCard = (props) => {
                 title={props.product.name}
             />
             <CardContent style={{borderTop: "1px solid grey",marginTop:"5px",height:"12vh"}}>
-            <Typography variant="body2"  align="center">
                 <table style={{width:"100%"}}>
                     <tbody>
                     <tr>
@@ -47,7 +46,6 @@ const OrderCard = (props) => {
                     </tr>
                     </tbody>
                 </table>
-            </Typography>
             </CardContent>
         </Card>
     )

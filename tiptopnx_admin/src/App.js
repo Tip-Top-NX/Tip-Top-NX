@@ -7,6 +7,8 @@ import Drawer from "./components/Drawer";
 import Add from "./containers/Add";
 import ProductCard from "./components/ProductCard";
 import PendingOrders from "./containers/PendingOrders";
+import ConfirmedOrders from './containers/ConfirmedOrders';
+import History from './containers/History';
 
 function App() {
   return (
@@ -18,11 +20,9 @@ function App() {
             <Route exact path="/admin" component={Home} />
             <Route exact path="/admin/add" component={Add} />
             <Route exact path="/admin/product" component={ProductCard} />
-            <Route
-              exact
-              path="/admin/pending-orders"
-              component={PendingOrders}
-            />
+            <Route exact path="/admin/pending-orders"component={PendingOrders}/>
+            <Route exact path="/admin/confirmed-orders"component={ConfirmedOrders}/>
+            <Route exact path="/admin/history"component={History}/>
           </Drawer>
         )}
       />

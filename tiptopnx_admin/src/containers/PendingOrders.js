@@ -98,6 +98,7 @@ const PendingOrders = () => {
                 {/* Table */}
                 <Table style={{ marginTop: "3vh" }} striped bordered>
                     <thead style={{ background: "#37474F", color: "white" }}>
+                        <tr>
                         <th>#Order ID</th>
                         <th>Amount</th>
                         <th>Address</th>
@@ -106,6 +107,7 @@ const PendingOrders = () => {
                         <th>Order Date</th>
                         <th>Delivery Charge </th>
                         <th>View Contents</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {orders.map((order, index) => (
