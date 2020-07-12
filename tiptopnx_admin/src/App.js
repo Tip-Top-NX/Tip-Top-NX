@@ -5,7 +5,8 @@ import Home from "./containers/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Drawer from "./components/Drawer";
 import Add from "./containers/Add";
-import PendingOrders from './containers/PendingOrders';
+import ProductCard from "./components/ProductCard";
+import PendingOrders from "./containers/PendingOrders";
 
 function App() {
   return (
@@ -16,7 +17,12 @@ function App() {
           <Drawer>
             <Route exact path="/admin" component={Home} />
             <Route exact path="/admin/add" component={Add} />
-            <Route exact path="/admin/pending-orders" component={PendingOrders} />
+            <Route exact path="/admin/product" component={ProductCard} />
+            <Route
+              exact
+              path="/admin/pending-orders"
+              component={PendingOrders}
+            />
           </Drawer>
         )}
       />

@@ -8,11 +8,10 @@ import IconButton from "@material-ui/core/IconButton";
 import ListItemText from "@material-ui/core/ListItemText";
 import GridList from "@material-ui/core/GridList";
 import ClearIcon from "@material-ui/icons/Clear";
-import Divider from "@material-ui/core/Divider";
 import axios from "../utils/axios";
-import { getConfig } from '../utils/config';
-import { Backdrop, CircularProgress } from '@material-ui/core';
-import Snackbar from '../components/Snackbar';
+import { getConfig } from "../utils/config";
+import { Backdrop, CircularProgress } from "@material-ui/core";
+import Snackbar from "../components/Snackbar";
 
 const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
@@ -26,6 +25,7 @@ const Add = () => {
   const [colors, setColors] = useState([]);
   const [description, setDescription] = useState("");
   const [selectedSizes, setSelectedSizes] = useState([]);
+  const [category, setCategory] = useState("");
   // Backdrop
   const [open, setOpen] = React.useState(false);
   // Snackbar
@@ -44,6 +44,7 @@ const Add = () => {
     size: selectedSizes,
     colors: colors,
     description: description,
+    category: category,
   };
 
   const colorsHandler = (event) => {
@@ -53,7 +54,7 @@ const Add = () => {
     }
   };
   const descHandler = (event) => {
-      setDescription(event.target.value);
+    setDescription(event.target.value);
   };
   const sizeHandler = (event) => {
     if (event.target.checked) {
@@ -69,43 +70,68 @@ const Add = () => {
     setOpen(true);
     setTimeout(() => {
       axios
-      .post("/admin/products", body,getConfig())
-      .then((res) => {
-        setOpen(false);
-        setMessage("Product added successfully!");
-        setVariant("success");
-        setSnackOpen(true);
-      })
-      .catch((err) => {
-        setOpen(false);
-        setMessage("Error in adding the product!");
-        setVariant("error");
-        setSnackOpen(true);
-        console.log(err);
-      });
+        .post("/admin/products", body, getConfig())
+        .then((res) => {
+          setOpen(false);
+          setMessage("Product added successfully!");
+          setVariant("success");
+          setSnackOpen(true);
+        })
+        .catch((err) => {
+          setOpen(false);
+          setMessage("Error in adding the product!");
+          setVariant("error");
+          setSnackOpen(true);
+          console.log(err);
+        });
     }, 0);
   };
 
   return (
     <div className={classes.root}>
       {/* Backdrop */}
-      <Backdrop className={classes.backdrop} open={open} onClick={()=>setOpen(false)}>
+      <Backdrop
+        className={classes.backdrop}
+        open={open}
+        onClick={() => setOpen(false)}
+      >
         <CircularProgress color="inherit" />
       </Backdrop>
       {/* Snackbar */}
-      <Snackbar close={() => setSnackOpen(false)} open={snackOpen} variant={variant} message={message} />
+      <Snackbar
+        close={() => setSnackOpen(false)}
+        open={snackOpen}
+        variant={variant}
+        message={message}
+      />
 
       <h1 style={{ textAlign: "center" }}>ADD A PRODUCT TO THE SYSTEM</h1>
       <div className={classes.topBox}>
         <div className={classes.fieldBoxTop}>
-          <TextField
-            required
-            label="Product ID"
-            variant="outlined"
-            value={id}
-            style={{ alignSelf: "flex-start" }}
-            onChange={(e) => setId(e.target.value)}
-          />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-evenly",
+              width: "100%",
+            }}
+          >
+            <TextField
+              required
+              label="Product ID"
+              variant="outlined"
+              value={id}
+              style={{ alignSelf: "flex-start" }}
+              onChange={(e) => setId(e.target.value)}
+            />
+            <TextField
+              required
+              label="Category"
+              variant="outlined"
+              value={category}
+              style={{ alignSelf: "flex-start" }}
+              onChange={(e) => setCategory(e.target.value)}
+            />
+          </div>
           <TextField
             fullWidth
             required
@@ -225,7 +251,7 @@ const useStyles = makeStyles((theme) => ({
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
-    color: '#fff',
+    color: "#fff",
   },
   topBox: {
     // border: "solid",
@@ -234,7 +260,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-evenly",
     alignItems: "center",
     width: "90%",
-    height: "40vh",
+    height: "50vh",
     marginTop: "40px",
     marginBottom: "20px",
   },
@@ -245,7 +271,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-evenly",
     alignItems: "center",
     width: "50%",
-    height: "40vh",
+    height: "50vh",
     padding: "0 10px 0 10px",
   },
   fieldBox: {

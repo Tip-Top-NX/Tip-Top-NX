@@ -9,18 +9,12 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import AddIcon from "@material-ui/icons/Add";
-import AppsIcon from "@material-ui/icons/Apps";
 import SearchIcon from "@material-ui/icons/Search";
 import { Paper, Button, Dialog, DialogActions, DialogTitle, CssBaseline, Drawer } from "@material-ui/core";
 import { withRouter } from "react-router";
 const drawerWidth = 150;
 
 const handleItem = [
-  {
-    name: "View All",
-    icon: <AppsIcon style={{ height: 50, width: 50, color: "silver" }} />,
-    routeName: "add",
-  },
   {
     name: "Add",
     icon: <AddIcon style={{ height: 50, width: 50, color: "silver" }} />,
@@ -29,7 +23,7 @@ const handleItem = [
   {
     name: "Search",
     icon: <SearchIcon style={{ height: 40, width: 40, color: "silver" }} />,
-    routeName: "search",
+    routeName: "product",
   },
 ];
 

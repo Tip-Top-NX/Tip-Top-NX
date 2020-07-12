@@ -21,7 +21,7 @@ router.get("/orders", (req, res, next) => {
         .catch((err) => next(err));
 })
 router.get("/orders/pending", (req, res, next) => {
-    Order.find({status:"Pending"}).sort({ _id: -1 })
+    Order.find({status:"Pending"}).sort({ _id: -1 }).populate("contents.product")
         .then((orders) => {
             res.send(orders);
         })
@@ -46,7 +46,7 @@ router.route("/orders/:orderId")
     })
     .put((req, res, next) => {
         Order.findByIdAndUpdate(req.params.orderId,
-            { $set: { status: req.body.status } },
+            { $set: { ...req.body } },
             { safe: true, upsert: true, new: true })
             .populate('contents.product')
             .then((order) => {
