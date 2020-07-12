@@ -7,11 +7,6 @@ const { upload } = require("../utils/upload");
 
 const router = express.Router();
 
-router.get("/test", (req, res, next) => {
-  // console.log("entered");
-  res.send("blah");
-});
-
 router
   .route("/")
   .get((req, res, next) => {

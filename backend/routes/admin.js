@@ -61,7 +61,8 @@ router.get("/orders/completed",(req,res,next) => {
 router.route("/products")
     .post((req,res,next) => {
         Product.create({
-            ...req.body
+            ...req.body,
+            category: 7,
         })
         .then((prod) => {
             return Product.findById(prod._id)
@@ -78,6 +79,7 @@ router.route("/products/:productId")
         })
     })
     .put((req,res,next) => {
+        
         Product.findByIdAndUpdate(req.params.productId,
             { $set : req.body},
             { safe: true, upsert:true, new:true})

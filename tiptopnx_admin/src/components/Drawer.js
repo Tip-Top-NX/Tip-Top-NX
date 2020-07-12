@@ -10,8 +10,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import AddIcon from "@material-ui/icons/Add";
 import SearchIcon from "@material-ui/icons/Search";
-import { Button, Dialog, DialogActions, DialogTitle } from "@material-ui/core";
+import { Paper, Button, Dialog, DialogActions, DialogTitle, CssBaseline, Drawer } from "@material-ui/core";
 import { withRouter } from "react-router";
+const drawerWidth = 150;
 
 const handleItem = [
   {
@@ -27,8 +28,8 @@ const handleItem = [
 ];
 
 const handleOrder = [
-  { name: "Pending Orders", routeName: "pendingOrders" },
-  { name: "Delivery Status", routeName: "deliveryStatus" },
+  { name: "Pending Orders", routeName: "pending-orders" },
+  { name: "Completed Orders", routeName: "completedOrders" },
 ];
 
 function ClippedDrawer(props) {
@@ -47,49 +48,55 @@ function ClippedDrawer(props) {
 
   return (
     <div className={classes.root}>
-      <div style={{ height: "10vh" }}>
-        {/* Navbar */}
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-            <Typography variant="h6" noWrap>
-              Tip-Top NX
-            </Typography>
-            <Button
-              onClick={() => setOpen(true)}
-              style={{
-                marginLeft: "auto",
-                backgroundColor: "white",
-                color: "black",
-              }}
-              variant="contained"
-            >
-              LOGOUT
+      <CssBaseline />
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          <Typography variant="h6" noWrap>
+            Tip Top NX Admin App
+          </Typography>
+          <Button
+            onClick={() => setOpen(true)}
+            style={{
+              marginLeft: "auto",
+              backgroundColor: "white",
+              color: "black",
+            }}
+            variant="contained"
+          >
+            LOGOUT
             </Button>
-          </Toolbar>
-        </AppBar>
-      </div>
-      <div className={classes.container}>
-        {/* Alert Dialog */}
-        <Dialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">
-            {"Are you sure you want to logout?"}
-          </DialogTitle>
-          <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              Cancel
+        </Toolbar>
+      </AppBar>
+      {/* Alert Dialog */}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Are you sure you want to logout?"}
+        </DialogTitle>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
             </Button>
-            <Button onClick={logoutHandler} color="primary" autoFocus>
-              Yes
+          <Button onClick={logoutHandler} color="primary" autoFocus>
+            Yes
             </Button>
-          </DialogActions>
-        </Dialog>
-        {/* drawer */}
-        <aside className={classes.drawer}>
+        </DialogActions>
+      </Dialog>
+      {/* Drawer */}
+      <Drawer
+        className={classes.drawer}
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        anchor="left"
+      >
+        <Toolbar />
+        <div className={classes.drawerContainer}>
           <List>
             {handleItem.map((item, index) => (
               <ListItem
@@ -119,41 +126,44 @@ function ClippedDrawer(props) {
               </ListItem>
             ))}
           </List>
-        </aside>
-        {/* content */}
-        <section className={classes.content}>{props.children}</section>
-      </div>
+        </div>
+      </Drawer>
+      <main className={classes.content}>
+        <Toolbar />
+        {/* <Paper elevation={3} style={{margin:"auto",width:"75vw",padding:"30"}} variant="outlined"> */}
+          {props.children}
+        {/* </Paper> */}
+      </main>
     </div>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    boxSizing: "border-box",
-    minHeight: "100vh",
+    display: "flex",
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     paddingLeft: "50px",
     background: "linear-gradient(45deg, #000 30%, #555 80%)",
   },
-  container: {
-    maxHeight: "90vh",
-    display: "flex",
-  },
   drawer: {
-    flex: 1,
-    width: "15vw",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  drawerContainer: {
+    overflow: "auto",
+    alignSelf: "center",
   },
   content: {
-    flex: 7,
+    flexGrow: 1,
     padding: theme.spacing(3),
   },
   tiles: {
-    height: "15vh",
+    height: 100,
     width: "90%",
     margin: "5px",
     flexDirection: "column",
@@ -161,6 +171,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    '&:hover': {
+      background: "linear-gradient(45deg, #555 100%, #000 90%)"
+    }
   },
   iconStyle: {
     justifyContent: "center",
