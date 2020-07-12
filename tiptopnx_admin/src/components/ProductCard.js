@@ -9,10 +9,11 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import axios from "../utils/axios";
 import Grid from "@material-ui/core/Grid";
+import ProductDetails from "./ProductDetails";
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 250,
+    maxWidth: 200,
   },
   container: {
     padding: "10px 0 10px 0",
@@ -22,7 +23,10 @@ const useStyles = makeStyles({
 export default function ImgMediaCard() {
   const classes = useStyles();
   // const [isLoading, setIsLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [products, setProducts] = useState([]);
+  const [editable, setEditable] = useState(false);
+  const myUri = "http://172.20.10.2:5000/";
 
   useEffect(() => {
     let mounted = true;
@@ -36,6 +40,7 @@ export default function ImgMediaCard() {
         }
       })
       .catch((err) => console.log(err));
+
     return () => (mounted = false);
   }, []);
 
@@ -45,15 +50,20 @@ export default function ImgMediaCard() {
         {products.map((item, index) => {
           return (
             <Grid key={index} item>
-              <Card className={classes.root} key={index}>
+              <Card
+                className={classes.root}
+                key={index}
+                onClick={() => {
+                  setEditable(false);
+                  setShowModal(true);
+                }}
+              >
                 <CardActionArea>
                   <CardMedia
                     component="img"
                     alt="Product Image"
-                    height="240"
-                    image={{
-                      uri: "http://172.20.10.2:5000/" + item.images[0],
-                    }}
+                    height="280"
+                    image={myUri + item.images[0]}
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
@@ -65,14 +75,44 @@ export default function ImgMediaCard() {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button size="small" color="primary" variant="contained">
+                  <Button
+                    size="small"
+                    color="primary"
+                    variant="contained"
+                    onClick={() => {
+                      setEditable(true);
+                      setShowModal(true);
+                    }}
+                  >
                     EDIT
                   </Button>
-                  <Button size="small" color="primary">
+                  <Button
+                    size="small"
+                    color="primary"
+                    onClick={() => {
+                      alert("Are you sure you want to remove this product");
+                    }}
+                  >
                     DELETE
                   </Button>
                 </CardActions>
               </Card>
+              <ProductDetails
+                open={showModal}
+                editable={editable}
+                onClose={() => setShowModal(false)}
+                brand={item.brand}
+                brand={item.brand}
+                description={item.description}
+                colors={item.colors}
+                images={item.images}
+                size={item.size}
+                discountPercentage={item.discountPercentage}
+                name={item.name}
+                price={item.price}
+                _id={item._id}
+                category={item.category}
+              />
             </Grid>
           );
         })}
