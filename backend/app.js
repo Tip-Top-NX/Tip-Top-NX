@@ -36,7 +36,7 @@ mongoose_connections = [
 ];
 
 mongoose
-  .connect(mongoose_connections[4], {
+  .connect(mongoose_connections[3], {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
