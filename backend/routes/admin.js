@@ -72,7 +72,6 @@ router.route("/products/:productId")
             .catch((err) => next(err));
     })
     .put((req, res, next) => {
-
         Product.findByIdAndUpdate(req.params.productId,
             { $set: req.body },
             { safe: true, upsert: true, new: true })
@@ -82,7 +81,9 @@ router.route("/products/:productId")
             .catch((err) => console.log(err));
     })
     .delete((req, res, next) => {
-        Product.findByIdAndDelete(req.params.productId)
+        Product.findByIdAndUpdate(req.params.productId,
+            { $set: {deleted: true} },
+            { safe: true, upsert: true, new: true })
             .then((product) => {
                 res.send(product)
             })

@@ -55,11 +55,13 @@ createFilter = (body) => {
   if (keys.includes("discountPercentage")) {
     filter.discountPercentage = { $gte: body.discountPercentage };
   }
+  filter.deleted = {$ne: true}
   return filter;
 };
 
 // For getting products of catId and ancestors of catId
 router.get("/:catId/get-products", (req, res, next) => {
+  console.log("object",req.params.catId);
   Category.find({ ancestors: req.params.catId })
     .distinct("_id")
     .then((cats) => {
