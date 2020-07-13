@@ -1,11 +1,18 @@
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import {
+  Grid,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+} from "@material-ui/core";
 
 import React, { useState } from "react";
 import InputGroup from "react-bootstrap/InputGroup";
 import { makeStyles } from "@material-ui/core/styles";
-import { TextField, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
 import ListItem from "@material-ui/core/ListItem";
 import IconButton from "@material-ui/core/IconButton";
@@ -13,6 +20,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import GridList from "@material-ui/core/GridList";
 import ClearIcon from "@material-ui/icons/Clear";
 import axios from "../utils/axios";
+import Button2 from "@material-ui/core/Button";
+import { getConfig } from "../utils/config";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -103,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
+const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
 export default function ProductDetails(props) {
   const classes = useStyles();
@@ -117,6 +126,7 @@ export default function ProductDetails(props) {
   const [description, setDescription] = useState(props.description);
   const [selectedSizes, setSelectedSizes] = useState(props.size);
   const [category, setCategory] = useState(props.category);
+  const [alertOpen, setAlertOpen] = useState(false);
 
   let priceFinal = price - (price * disc) / 100;
 
@@ -138,12 +148,6 @@ export default function ProductDetails(props) {
       event.target.value = "";
     }
   };
-  const descHandler = (event) => {
-    if (event.key === "Enter") {
-      setDescription([...description, event.target.value]);
-      event.target.value = "";
-    }
-  };
   const sizeHandler = (event) => {
     if (event.target.checked) {
       setSelectedSizes([...selectedSizes, event.target.name]);
@@ -154,10 +158,12 @@ export default function ProductDetails(props) {
     }
   };
 
-  const addProductHandler = () => {
+  const editProductHandler = () => {
+    setAlertOpen(false);
+    props.onClose(false);
     axios
-      .post("/products", body)
-      .then((res) => alert("Product added " + res.data))
+      .post("/admin/products/" + id, body, getConfig())
+      .then((res) => alert("Product edited " + res.data))
       .catch((err) => {
         console.log(err.message);
       });
@@ -165,6 +171,28 @@ export default function ProductDetails(props) {
 
   return (
     <div>
+      <Dialog
+        style={{ zIndex: 10000001 }}
+        open={alertOpen}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Are you sure you want to SAVE THESE CHANGES ?"}
+        </DialogTitle>
+        <DialogActions>
+          <Button2 onClick={() => setAlertOpen(false)} color="primary">
+            Cancel
+          </Button2>
+          <Button2
+            onClick={() => editProductHandler()}
+            color="primary"
+            autoFocus
+          >
+            Yes
+          </Button2>
+        </DialogActions>
+      </Dialog>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -266,19 +294,37 @@ export default function ProductDetails(props) {
                     Sizes
                   </h4>
                   <GridList cellHeight="80px">
-                    {selectedSizes.map((item, index) => (
-                      <ListItem key={index}>
-                        <Checkbox
-                          style={{ marginRight: "20px" }}
-                          color="primary"
-                          name={item}
-                          checked={true}
-                          inputProps={{ "aria-label": "secondary checkbox" }}
-                          onChange={props.editable ? sizeHandler : null}
-                        />
-                        <ListItemText>{item}</ListItemText>
-                      </ListItem>
-                    ))}
+                    {props.editable
+                      ? sizes.map((item, index) => (
+                          <ListItem key={index}>
+                            <Checkbox
+                              style={{ marginRight: "20px" }}
+                              color="primary"
+                              name={item}
+                              checked={selectedSizes.find((i) => i === item)}
+                              inputProps={{
+                                "aria-label": "secondary checkbox",
+                              }}
+                              onChange={sizeHandler}
+                            />
+                            <ListItemText>{item}</ListItemText>
+                          </ListItem>
+                        ))
+                      : selectedSizes.map((item, index) => (
+                          <ListItem key={index}>
+                            <Checkbox
+                              style={{ marginRight: "20px" }}
+                              color="primary"
+                              name={item}
+                              checked={true}
+                              inputProps={{
+                                "aria-label": "secondary checkbox",
+                              }}
+                              onChange={null}
+                            />
+                            <ListItemText>{item}</ListItemText>
+                          </ListItem>
+                        ))}
                   </GridList>
                 </div>
                 <div className={classes.colorBox}>
@@ -311,12 +357,13 @@ export default function ProductDetails(props) {
                 </div>
                 <div className={classes.colorBox}>
                   <TextField
-                    fullWidth
-                    label="Desciption"
+                    label="Description"
                     variant="outlined"
-                    style={{ marginBottom: "20px" }}
-                    onKeyDown={descHandler}
-                    disabled={!props.editable}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    InputProps={{
+                      readOnly: !props.editable,
+                    }}
                   />
                 </div>
               </div>
@@ -326,7 +373,7 @@ export default function ProductDetails(props) {
                   variant="contained"
                   color="primary"
                   size="large"
-                  onClick={() => addProductHandler}
+                  onClick={() => setAlertOpen(true)}
                 >
                   SAVE CHANGES
                 </Button>
@@ -336,6 +383,7 @@ export default function ProductDetails(props) {
                   variant="contained"
                   color="primary"
                   size="large"
+                  onClick={() => props.onClose(false)}
                 >
                   CLOSE
                 </Button>

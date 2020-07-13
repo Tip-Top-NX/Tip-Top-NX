@@ -221,6 +221,8 @@ const Add = () => {
             multiline
             rows={4}
             style={{ marginBottom: "20px" }}
+            value={description}
+            onChange={descHandler}
           />
         </div>
       </div>

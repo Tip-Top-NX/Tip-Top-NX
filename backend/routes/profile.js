@@ -159,7 +159,6 @@ router.post("/cart/placeOrder", (req, res, next) => {
       _id: counter.count,
       contents: conents,
       amount: req.user.cartTotal,
-      status: "Placed",
       payment: {
         method: req.body.method,
         transactionid: 123,
@@ -169,6 +168,7 @@ router.post("/cart/placeOrder", (req, res, next) => {
       deliveryCharge : req.user.cartTotal>1000? 0 : 50
     })
     .then((order) => {
+      console.log(order);
       User.findById(req.user._id)
       .then((user) => {
         user.orders.splice(0,0,order._id); //add to orders

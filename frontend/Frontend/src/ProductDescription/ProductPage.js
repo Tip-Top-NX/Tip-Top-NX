@@ -27,6 +27,7 @@ const ProductPage = ({ route }) => {
   const name = route.params.name;
   const price = route.params.price;
   const _id = route.params._id;
+  const category = route.params.category;
 
   const [chosenSize, setChosenSize] = useState("No");
   const [chosenColor, setChosenColor] = useState("No");
@@ -66,7 +67,12 @@ const ProductPage = ({ route }) => {
           chosenSize={chosenSize}
           chosenColor={chosenColor}
         />
-        <ProductDetails styles={styles} description={description} />
+        <ProductDetails
+          styles={styles}
+          description={description}
+          id={_id}
+          category={category}
+        />
       </ScrollView>
       {checkHeight < 285 ? (
         <ButtonBar

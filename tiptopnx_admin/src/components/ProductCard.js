@@ -9,10 +9,13 @@ import axios from "../utils/axios";
 import Grid from "@material-ui/core/Grid";
 import ProductDetails from "./ProductDetails";
 import { Button } from "@material-ui/core";
+import { Dialog, DialogActions, DialogTitle } from "@material-ui/core";
+import Button2 from "@material-ui/core/Button";
+import { getConfig } from "../utils/config";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 220,
+    width: 220,
     height: 400,
   },
   container: {
@@ -33,6 +36,8 @@ export default function ImgMediaCard() {
   const [showModal, setShowModal] = useState(false);
   const [products, setProducts] = useState([]);
   const [editable, setEditable] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [deleteThis, setDeleteThis] = useState();
   const myUri = "http://172.20.10.2:5000/";
 
   useEffect(() => {
@@ -51,8 +56,40 @@ export default function ImgMediaCard() {
     return () => (mounted = false);
   }, []);
 
+  const deleteProductHandler = () => {
+    setAlertOpen(false);
+    axios
+      .delete("/admin/products/" + deleteThis, getConfig())
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className={classes.container}>
+      <Dialog
+        style={{ zIndex: 10000001 }}
+        open={alertOpen}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Are you sure you want to DELETE this product ?"}
+        </DialogTitle>
+        <DialogActions>
+          <Button2 onClick={() => setAlertOpen(false)} color="primary">
+            Cancel
+          </Button2>
+          <Button2
+            onClick={() => deleteProductHandler()}
+            color="primary"
+            autoFocus
+          >
+            Yes
+          </Button2>
+        </DialogActions>
+      </Dialog>
       <Grid justify="space-evenly" container spacing={5}>
         {products.map((item, index) => {
           return (
@@ -100,6 +137,10 @@ export default function ImgMediaCard() {
                   color="secondary"
                   size="small"
                   style={{ outline: "none" }}
+                  onClick={() => {
+                    setAlertOpen(true);
+                    setDeleteThis(item._id);
+                  }}
                 >
                   DELETE
                 </Button>
