@@ -9,15 +9,16 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import AddIcon from "@material-ui/icons/Add";
+import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import SearchIcon from "@material-ui/icons/Search";
 import {
-  Paper,
   Button,
   Dialog,
   DialogActions,
   DialogTitle,
   CssBaseline,
   Drawer,
+  Badge,
 } from "@material-ui/core";
 import { withRouter } from "react-router";
 const drawerWidth = 150;
@@ -33,18 +34,33 @@ const handleItem = [
     icon: <SearchIcon style={{ height: 40, width: 40, color: "silver" }} />,
     routeName: "product",
   },
-];
-
-const handleOrder = [
-  { name: "Pending Orders", routeName: "pending-orders" },
-  { name: "Change delivery status", routeName: "confirmed-orders" },
-  { name: "Cancelled/ Delivered orders", routeName: "history" },
+  {
+    name: "Delete",
+    icon: (
+      <DeleteOutlineIcon style={{ height: 40, width: 40, color: "silver" }} />
+    ),
+    routeName: "deleted",
+  },
 ];
 
 function ClippedDrawer(props) {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
+
+  const handleOrder = [
+    { name: "Pending Orders", routeName: "pending-orders", no: props.pending },
+    {
+      name: "Change delivery status",
+      routeName: "confirmed-orders",
+      no: props.confirmed,
+    },
+    {
+      name: "Cancelled/ Delivered orders",
+      routeName: "history",
+      no: props.completed,
+    },
+  ];
 
   const handleClose = () => {
     setOpen(false);
@@ -130,7 +146,9 @@ function ClippedDrawer(props) {
                 onClick={() => props.history.push("/admin/" + item.routeName)}
               >
                 <ListItemText className={classes.textStyle}>
-                  {item.name}
+                  <Badge badgeContent={item.no} color="error">
+                    {item.name}
+                  </Badge>
                 </ListItemText>
               </ListItem>
             ))}
@@ -172,8 +190,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   tiles: {
-    height: 120,
-    width: "93%",
+    height: 100,
+    width: "90%",
     margin: "5px",
     flexDirection: "column",
     background: "linear-gradient(45deg, #555 30%, #000 90%)",

@@ -52,7 +52,7 @@ class Login extends React.Component {
           if (res.data.success === true && res.data.user.admin) {
             sessionStorage.setItem("token", res.data.token);
             sessionStorage.setItem("isAdmin", true);
-            this.props.history.push("/admin");
+            this.props.history.push("/admin/pending-orders");
           } else {
             sessionStorage.clear();
             this.setState({ ...this.state, invalid: true });

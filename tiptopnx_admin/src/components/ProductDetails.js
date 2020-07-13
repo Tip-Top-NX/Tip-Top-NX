@@ -2,7 +2,6 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import {
-  Grid,
   TextField,
   Dialog,
   DialogActions,
@@ -22,6 +21,7 @@ import ClearIcon from "@material-ui/icons/Clear";
 import axios from "../utils/axios";
 import Button2 from "@material-ui/core/Button";
 import { getConfig } from "../utils/config";
+import Carousel from "react-bootstrap/Carousel";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,8 +68,10 @@ const useStyles = makeStyles((theme) => ({
   imageBox: {
     width: "25%",
     height: "40vh",
-    border: "solid",
-    borderColor: "#ccc",
+  },
+  imageStyle: {
+    width: "100%",
+    height: "40vh",
   },
   colorBox: {
     width: "30%",
@@ -127,6 +129,7 @@ export default function ProductDetails(props) {
   const [selectedSizes, setSelectedSizes] = useState(props.size);
   const [category, setCategory] = useState(props.category);
   const [alertOpen, setAlertOpen] = useState(false);
+  const myUri = "http://172.20.10.2:5000/";
 
   let priceFinal = price - (price * disc) / 100;
 
@@ -286,7 +289,28 @@ export default function ProductDetails(props) {
                     <InputGroup.Text>= {priceFinal}</InputGroup.Text>
                   </div>
                 </div>
-                <div className={classes.imageBox}></div>
+                <div className={classes.imageBox}>
+                  <Carousel>
+                    <Carousel.Item>
+                      <img
+                        className={classes.imageStyle}
+                        src={myUri + props.images[0]}
+                      />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                      <img
+                        className={classes.imageStyle}
+                        src={myUri + props.images[1]}
+                      />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                      <img
+                        className={classes.imageStyle}
+                        src={myUri + props.images[2]}
+                      />
+                    </Carousel.Item>
+                  </Carousel>
+                </div>
               </div>
               <div className={classes.fieldBox}>
                 <div className={classes.bottomBox}>
@@ -360,6 +384,8 @@ export default function ProductDetails(props) {
                     label="Description"
                     variant="outlined"
                     value={description}
+                    multiline
+                    rows={4}
                     onChange={(e) => setDescription(e.target.value)}
                     InputProps={{
                       readOnly: !props.editable,

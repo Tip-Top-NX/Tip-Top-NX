@@ -12,7 +12,6 @@ import {
 import axios from "../utils/axios";
 import { getConfig } from "../utils/config";
 import { Table, Button, Modal } from "react-bootstrap";
-import OrderCard from "../components/OrderCard";
 import CardList from "../components/CardList";
 import Button2 from "@material-ui/core/Button";
 
@@ -28,9 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PendingOrders = () => {
-  const classes = useStyles();
-
+const PendingOrders = (props) => {
   const [orders, setOrders] = React.useState([]);
   const [show, setShow] = useState(false);
   const [selected, setSelected] = React.useState({});
@@ -42,13 +39,8 @@ const PendingOrders = () => {
   };
 
   useEffect(() => {
-    axios
-      .get("/admin/orders/pending", getConfig())
-      .then((res) => {
-        setOrders([...res.data]);
-      })
-      .catch((err) => console.log(err));
-  }, [alertOpen]);
+    setOrders([...props.orders]);
+  }, []);
 
   const getMyDate = (date) => {
     const d = new Date(date);
@@ -61,18 +53,20 @@ const PendingOrders = () => {
   };
 
   const statusUpdate = (status) => {
+    console.log(status);
     axios
       .put("/admin/orders/" + selected._id, { status: status }, getConfig())
       .then((res) => {
         setAlertOpen(false);
-        setShow(false);
+        props.fetchOrders();
       })
       .catch((err) => {
         console.log(err);
         setAlertOpen(false);
-        setShow(false);
       });
   };
+
+  const classes = useStyles();
 
   return (
     <>
@@ -114,12 +108,13 @@ const PendingOrders = () => {
             <tr>
               <th>#Order ID</th>
               <th>Amount</th>
-              <th>Address</th>
+              <th>Delivery Charge </th>
               <th>Contact Number</th>
               <th>Payment</th>
               <th>Order Date</th>
-              <th>Delivery Charge </th>
-              <th>View Contents</th>
+              <th>Confirm Order</th>
+              <th>Cancel Order</th>
+              <th>View Order</th>
             </tr>
           </thead>
           <tbody>
@@ -127,11 +122,34 @@ const PendingOrders = () => {
               <tr key={index}>
                 <th>{order._id}</th>
                 <td>{order.amount}</td>
-                <td>{order.address}</td>
+                <td>{order.deliveryCharge}</td>
                 <td>{order.contact}</td>
                 <td>{order.payment.method}</td>
                 <td>{getMyDate(order.createdAt)}</td>
-                <td>{order.deliveryCharge}</td>
+                <td>
+                  <Button
+                    variant="success"
+                    onClick={() => {
+                      setSelected(order);
+                      setAction("Confirmed");
+                      setAlertOpen(true);
+                    }}
+                  >
+                    Confirm
+                  </Button>
+                </td>
+                <td>
+                  <Button
+                    variant="danger"
+                    onClick={() => {
+                      setSelected(order);
+                      setAction("Cancelled");
+                      setAlertOpen(true);
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                </td>
                 <td>
                   <Button2
                     onClick={() => viewHandler(order)}
@@ -233,24 +251,6 @@ const PendingOrders = () => {
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShow(false)}>
             Close
-          </Button>
-          <Button
-            variant="success"
-            onClick={() => {
-              setAction("Confirmed");
-              setAlertOpen(true);
-            }}
-          >
-            Confirm
-          </Button>
-          <Button
-            variant="danger"
-            onClick={() => {
-              setAction("Cancelled");
-              setAlertOpen(true);
-            }}
-          >
-            Cancel
           </Button>
         </Modal.Footer>
       </Modal>

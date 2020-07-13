@@ -150,7 +150,6 @@ export default function ImgMediaCard() {
                 editable={editable}
                 onClose={() => setShowModal(false)}
                 brand={item.brand}
-                brand={item.brand}
                 description={item.description}
                 colors={item.colors}
                 images={item.images}
