@@ -14,7 +14,7 @@ router.get("/", (req, res, next) => {
 
 //all about orders
 router.get("/orders", (req, res, next) => {
-    Order.find().sort({ _id: -1 })
+    Order.find().sort({ _id: -1 }).populate('contents.product')
         .then((orders) => {
             res.send(orders);
         })
