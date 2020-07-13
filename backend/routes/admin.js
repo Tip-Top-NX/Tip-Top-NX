@@ -20,21 +20,6 @@ router.get("/orders", (req, res, next) => {
         })
         .catch((err) => next(err));
 })
-router.get("/orders/pending", (req, res, next) => {
-    Order.find({status:"Pending"}).sort({ _id: -1 }).populate("contents.product")
-        .then((orders) => {
-            res.send(orders);
-        })
-        .catch((err) => next(err));
-})
-
-router.get("/orders/completed", (req, res, next) => {
-    Order.find({ status: "Completed" }).sort({ _id: -1 })
-        .then((orders) => {
-            res.send(orders);
-        })
-        .catch((err) => next(err));
-})
 
 router.route("/orders/:orderId")
     .get((req, res, next) => {

@@ -4,7 +4,6 @@ import { Paper, Typography, Grid, TextField, Dialog, DialogActions, DialogTitle 
 import axios from '../utils/axios';
 import { getConfig } from '../utils/config';
 import { Table, Button, Modal } from 'react-bootstrap';
-import OrderCard from '../components/OrderCard';
 import CardList from '../components/CardList';
 import Button2 from '@material-ui/core/Button';
 
@@ -20,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const PendingOrders = () => {
+const PendingOrders = (props) => {
 
     const classes = useStyles();
 
@@ -35,12 +34,8 @@ const PendingOrders = () => {
     };
 
     useEffect(() => {
-        axios.get('/admin/orders/pending', getConfig())
-            .then((res) => {
-                setOrders([...res.data]);
-            })
-            .catch((err) => console.log(err));
-    }, [alertOpen])
+        setOrders([...props.orders]);
+    }, [])
 
     const getMyDate = (date) => {
         const d = new Date(date);
@@ -53,15 +48,15 @@ const PendingOrders = () => {
     }
 
     const statusUpdate = (status) => {
-        axios.put("/admin/orders/"+selected._id,{status: status},getConfig())
+        console.log(status);
+        axios.put("/admin/orders/" + selected._id, { status: status }, getConfig())
             .then((res) => {
                 setAlertOpen(false);
-                setShow(false);
+                props.fetchOrders();
             })
             .catch((err) => {
                 console.log(err);
                 setAlertOpen(false);
-                setShow(false);
             });
     }
 
@@ -69,15 +64,15 @@ const PendingOrders = () => {
         <>
             {/* Alert Dialog */}
             <Dialog
-                style={{zIndex: 10000001,}}
+                style={{ zIndex: 10000001, }}
                 open={alertOpen}
                 onClose={handleAlertClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {action=="Confirmed"?
-                        "Are you sure you want to CONFIRM the order?":
+                    {action == "Confirmed" ?
+                        "Are you sure you want to CONFIRM the order?" :
                         "Are you sure you want to CANCEL the order?"}
                 </DialogTitle>
                 <DialogActions>
@@ -99,14 +94,15 @@ const PendingOrders = () => {
                 <Table style={{ marginTop: "3vh" }} striped bordered>
                     <thead style={{ background: "#37474F", color: "white" }}>
                         <tr>
-                        <th>#Order ID</th>
-                        <th>Amount</th>
-                        <th>Address</th>
-                        <th>Contact Number</th>
-                        <th>Payment</th>
-                        <th>Order Date</th>
-                        <th>Delivery Charge </th>
-                        <th>View Contents</th>
+                            <th>#Order ID</th>
+                            <th>Amount</th>
+                            <th>Delivery Charge </th>
+                            <th>Contact Number</th>
+                            <th>Payment</th>
+                            <th>Order Date</th>
+                            <th>Confirm Order</th>
+                            <th>Cancel Order</th>
+                            <th>View Order</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -114,11 +110,20 @@ const PendingOrders = () => {
                             <tr key={index}>
                                 <th>{order._id}</th>
                                 <td>{order.amount}</td>
-                                <td>{order.address}</td>
+                                <td>{order.deliveryCharge}</td>
                                 <td>{order.contact}</td>
                                 <td>{order.payment.method}</td>
                                 <td>{getMyDate(order.createdAt)}</td>
-                                <td>{order.deliveryCharge}</td>
+                                <td>
+                                    <Button variant="success" onClick={() => { setSelected(order); setAction("Confirmed"); setAlertOpen(true) }}>
+                                        Confirm
+                                    </Button>
+                                </td>
+                                <td>
+                                    <Button variant="danger" onClick={() => { setSelected(order); setAction("Cancelled"); setAlertOpen(true) }}>
+                                        Cancel
+                                     </Button>
+                                </td>
                                 <td>
                                     <Button2 onClick={() => viewHandler(order)} variant="contained" color="primary">
                                         View
@@ -200,12 +205,6 @@ const PendingOrders = () => {
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShow(false)}>
                         Close
-                    </Button>
-                    <Button variant="success" onClick={() => {setAction("Confirmed");setAlertOpen(true)}}>
-                        Confirm
-                    </Button>
-                    <Button variant="danger" onClick={() => {setAction("Cancelled");setAlertOpen(true)}}>
-                        Cancel
                     </Button>
                 </Modal.Footer>
             </Modal>

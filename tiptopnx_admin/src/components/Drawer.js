@@ -10,7 +10,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import AddIcon from "@material-ui/icons/Add";
 import SearchIcon from "@material-ui/icons/Search";
-import { Paper, Button, Dialog, DialogActions, DialogTitle, CssBaseline, Drawer } from "@material-ui/core";
+import {  Button, Dialog, DialogActions, DialogTitle, CssBaseline, Drawer, Badge } from "@material-ui/core";
 import { withRouter } from "react-router";
 const drawerWidth = 150;
 
@@ -27,16 +27,17 @@ const handleItem = [
   },
 ];
 
-const handleOrder = [
-  { name: "Pending Orders", routeName: "pending-orders" },
-  { name: "Change delivery status", routeName: "confirmed-orders" },
-  { name: "Cancelled/ Delivered orders", routeName: "history" },
-];
-
 function ClippedDrawer(props) {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
+
+  const handleOrder = [
+    { name: "Pending Orders", routeName: "pending-orders",no: props.pending  },
+    { name: "Change delivery status", routeName: "confirmed-orders", no:props.confirmed },
+    { name: "Cancelled/ Delivered orders", routeName: "history", no:props.completed },
+  ];
+  
 
   const handleClose = () => {
     setOpen(false);
@@ -122,7 +123,9 @@ function ClippedDrawer(props) {
                 onClick={() => props.history.push("/admin/" + item.routeName)}
               >
                 <ListItemText className={classes.textStyle}>
-                  {item.name}
+                  <Badge badgeContent={item.no} color="error">
+                    {item.name}
+                  </Badge>
                 </ListItemText>
               </ListItem>
             ))}
@@ -132,7 +135,7 @@ function ClippedDrawer(props) {
       <main className={classes.content}>
         <Toolbar />
         {/* <Paper elevation={3} style={{margin:"auto",width:"75vw",padding:"30"}} variant="outlined"> */}
-          {props.children}
+        {props.children}
         {/* </Paper> */}
       </main>
     </div>
