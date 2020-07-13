@@ -10,7 +10,15 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import AddIcon from "@material-ui/icons/Add";
 import SearchIcon from "@material-ui/icons/Search";
-import { Paper, Button, Dialog, DialogActions, DialogTitle, CssBaseline, Drawer } from "@material-ui/core";
+import {
+  Paper,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  CssBaseline,
+  Drawer,
+} from "@material-ui/core";
 import { withRouter } from "react-router";
 const drawerWidth = 150;
 
@@ -52,7 +60,7 @@ function ClippedDrawer(props) {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" noWrap>
-            Tip Top NX Admin App
+            Tip-Top NX
           </Typography>
           <Button
             onClick={() => setOpen(true)}
@@ -64,7 +72,7 @@ function ClippedDrawer(props) {
             variant="contained"
           >
             LOGOUT
-            </Button>
+          </Button>
         </Toolbar>
       </AppBar>
       {/* Alert Dialog */}
@@ -80,10 +88,10 @@ function ClippedDrawer(props) {
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
-            </Button>
+          </Button>
           <Button onClick={logoutHandler} color="primary" autoFocus>
             Yes
-            </Button>
+          </Button>
         </DialogActions>
       </Dialog>
       {/* Drawer */}
@@ -131,7 +139,7 @@ function ClippedDrawer(props) {
       <main className={classes.content}>
         <Toolbar />
         {/* <Paper elevation={3} style={{margin:"auto",width:"75vw",padding:"30"}} variant="outlined"> */}
-          {props.children}
+        {props.children}
         {/* </Paper> */}
       </main>
     </div>
@@ -163,17 +171,17 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   tiles: {
-    height: 100,
-    width: "90%",
+    height: 120,
+    width: "93%",
     margin: "5px",
     flexDirection: "column",
     background: "linear-gradient(45deg, #555 30%, #000 90%)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    '&:hover': {
-      background: "linear-gradient(45deg, #555 100%, #000 90%)"
-    }
+    "&:hover": {
+      background: "linear-gradient(45deg, #555 100%, #000 90%)",
+    },
   },
   iconStyle: {
     justifyContent: "center",

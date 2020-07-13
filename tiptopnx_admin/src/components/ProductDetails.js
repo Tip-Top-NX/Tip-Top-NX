@@ -18,11 +18,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     justifyContent: "center",
-    // alignItems: "center",
+    alignItems: "center",
     // border: "solid",
     flexDirection: "column",
     marginBottom: "30px",
-    paddingLeft: "35px",
+    // paddingLeft: "35px",
   },
   topBox: {
     // border: "solid",
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "space-evenly",
     alignItems: "center",
-    width: "50%",
+    width: "65%",
     height: "50vh",
     padding: "0 10px 0 10px",
   },
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
-    width: "90%",
+    width: "100%",
     padding: "0 10px 0 10px",
     marginTop: "60px",
     marginBottom: "40px",
@@ -274,7 +274,7 @@ export default function ProductDetails(props) {
                           name={item}
                           checked={true}
                           inputProps={{ "aria-label": "secondary checkbox" }}
-                          onChange={sizeHandler}
+                          onChange={props.editable ? sizeHandler : null}
                         />
                         <ListItemText>{item}</ListItemText>
                       </ListItem>
@@ -294,14 +294,16 @@ export default function ProductDetails(props) {
                   <GridList cellHeight="80px">
                     {color.map((item, index) => (
                       <ListItem key={index}>
-                        <IconButton
-                          onClick={() => {
-                            color.splice(index, 1);
-                            setColor([...color]);
-                          }}
-                        >
-                          <ClearIcon />
-                        </IconButton>
+                        {props.editable ? (
+                          <IconButton
+                            onClick={() => {
+                              color.splice(index, 1);
+                              setColor([...color]);
+                            }}
+                          >
+                            <ClearIcon />
+                          </IconButton>
+                        ) : null}
                         <ListItemText>{item}</ListItemText>
                       </ListItem>
                     ))}
@@ -318,15 +320,26 @@ export default function ProductDetails(props) {
                   />
                 </div>
               </div>
-              <Button
-                style={{ margin: "5vh auto" }}
-                variant="contained"
-                color="primary"
-                size="large"
-                onClick={() => addProductHandler}
-              >
-                SAVE CHANGES
-              </Button>
+              {props.editable ? (
+                <Button
+                  style={{ margin: "5vh auto" }}
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  onClick={() => addProductHandler}
+                >
+                  SAVE CHANGES
+                </Button>
+              ) : (
+                <Button
+                  style={{ margin: "5vh auto" }}
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                >
+                  CLOSE
+                </Button>
+              )}
             </div>
           </div>
         </Fade>

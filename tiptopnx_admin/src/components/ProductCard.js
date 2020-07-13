@@ -2,21 +2,28 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import axios from "../utils/axios";
 import Grid from "@material-ui/core/Grid";
 import ProductDetails from "./ProductDetails";
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 200,
+    maxWidth: 220,
+    height: 400,
   },
   container: {
     padding: "10px 0 10px 0",
+  },
+  buttonBox: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    backgroundColor: "#fff",
+    padding: "5px 0 5px 0",
   },
 });
 
@@ -66,37 +73,37 @@ export default function ImgMediaCard() {
                     image={myUri + item.images[0]}
                   />
                   <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
+                    <Typography gutterBottom variant="subtitle2" component="h2">
                       {item.brand}
                     </Typography>
-                    <Typography gutterBottom variant="h6" component="h6">
+                    <Typography gutterBottom variant="subtitle1" component="h7">
                       {item.name}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
-                <CardActions>
-                  <Button
-                    size="small"
-                    color="primary"
-                    variant="contained"
-                    onClick={() => {
-                      setEditable(true);
-                      setShowModal(true);
-                    }}
-                  >
-                    EDIT
-                  </Button>
-                  <Button
-                    size="small"
-                    color="primary"
-                    onClick={() => {
-                      alert("Are you sure you want to remove this product");
-                    }}
-                  >
-                    DELETE
-                  </Button>
-                </CardActions>
               </Card>
+              <div className={classes.buttonBox}>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  size="small"
+                  style={{ outline: "none" }}
+                  onClick={() => {
+                    setEditable(true);
+                    setShowModal(true);
+                  }}
+                >
+                  EDIT
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  size="small"
+                  style={{ outline: "none" }}
+                >
+                  DELETE
+                </Button>
+              </div>
               <ProductDetails
                 open={showModal}
                 editable={editable}

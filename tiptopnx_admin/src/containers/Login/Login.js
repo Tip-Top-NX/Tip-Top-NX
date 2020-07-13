@@ -123,7 +123,7 @@ class Login extends React.Component {
               onClick={this.submitHandler}
               style={{ margin: "5vh auto" }}
               variant="contained"
-              color="secondary"
+              color="primary"
               size="large"
             >
               Submit
