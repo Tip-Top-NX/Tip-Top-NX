@@ -25,10 +25,11 @@ router.get("/:catId/get-leaf", (req, res, next) => {
   Category.find(
     { ancestors: req.params.catId, isLeaf: true },
     { _id: 1, name: 1, image: 1 }
-  ).then((cats) => {
-    res.send(cats);
-  })
-  .catch((err) => next(err));
+  )
+    .then((cats) => {
+      res.send(cats);
+    })
+    .catch((err) => next(err));
 });
 
 // For getting sub-categories
@@ -56,18 +57,20 @@ createFilter = (body) => {
   if (keys.includes("discountPercentage")) {
     filter.discountPercentage = { $gte: body.discountPercentage };
   }
+  filter.deleted = { $ne: true };
   return filter;
 };
 
 // For getting products of catId and ancestors of catId
-router.post("/:catId/get-products", (req, res, next) => {
+router.get("/:catId/get-products", (req, res, next) => {
+  console.log("object", req.params.catId);
   Category.find({ ancestors: req.params.catId })
     .distinct("_id")
     .then((cats) => {
       cats.push(Number(req.params.catId));
       filter = createFilter(req.body);
       filter.category = { $in: cats };
-      console.log(req.body)
+      console.log(req.body);
       if (req.body.sort === "Price") {
         return Product.find(filter).sort({ price: req.body.order });
       } else {

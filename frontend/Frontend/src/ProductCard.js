@@ -57,6 +57,7 @@ const ProductCard = (props) => {
         onPress={() =>
           props.navigation.navigate("Product", {
             brand: props.brand,
+            category: props.category,
             description: props.description,
             colors: props.colors,
             images: props.images,

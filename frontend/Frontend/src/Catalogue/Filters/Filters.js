@@ -24,7 +24,7 @@ const Filters = ({ route }) => {
       }
     });
     return () => (mounted = false);
-  });
+  }, [prodIdMain]);
 
   const filteredOptions = [
     // 0 -> Categories Men

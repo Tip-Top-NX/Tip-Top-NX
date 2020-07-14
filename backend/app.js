@@ -32,11 +32,12 @@ mongoose_connections = [
   "mongodb+srv://vidhi:pass@cluster0.70qps.mongodb.net/ttnx?retryWrites=true&w=majority", //1
   "mongodb+srv://mihirdb:mihirdb@cluster0-auvdn.mongodb.net/ttnx?retryWrites=true&w=majority", //2
   "mongodb+srv://admin:admin@cluster0-zzmbm.mongodb.net/ttnx?retryWrites=true&w=majority", //3
+  "mongodb://vidhi:pass@cluster0-shard-00-00.70qps.mongodb.net:27017,cluster0-shard-00-01.70qps.mongodb.net:27017,cluster0-shard-00-02.70qps.mongodb.net:27017/ttnx?ssl=true&replicaSet=atlas-z7976o-shard-0&authSource=admin&retryWrites=true&w=majority",
   "mongodb://admin:admin@cluster0-shard-00-00-zzmbm.mongodb.net:27017,cluster0-shard-00-01-zzmbm.mongodb.net:27017,cluster0-shard-00-02-zzmbm.mongodb.net:27017/ttnx?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority",
 ];
-
+mongoose.set("useFindAndModify", false);
 mongoose
-  .connect(mongoose_connections[4], {
+  .connect(mongoose_connections[5], {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -55,7 +56,7 @@ app.use(cookieParser());
 // Cors
 app.use(
   cors({
-    origin: "http:localhost:3000",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
