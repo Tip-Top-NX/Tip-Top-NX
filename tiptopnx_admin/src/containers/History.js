@@ -42,6 +42,7 @@ const History = (props) => {
 
     const viewHandler = (order) => {
         setSelected(order);
+        console.log(selected);
         setShow(true);
     }
 
@@ -59,10 +60,10 @@ const History = (props) => {
                             <th>#Order ID</th>
                             <th>Amount</th>
                             <th>Delivery Charge </th>
-                            <th>Address</th>
                             <th>Contact Number</th>
                             <th>Payment</th>
                             <th>Order Date</th>
+                            <th>Delivery Date</th>
                             <th>Status</th>
                             <th>View Contents</th>
                         </tr>
@@ -73,10 +74,10 @@ const History = (props) => {
                                 <th>{order._id}</th>
                                 <td>{order.amount}</td>
                                 <td>{order.deliveryCharge}</td>
-                                <td>{order.address}</td>
                                 <td>{order.contact}</td>
                                 <td>{order.payment.method}</td>
                                 <td>{getMyDate(order.createdAt)}</td>
+                                <td align="center">{order.status=="Delivered"?getMyDate(order.deliveryDate):"--"}</td>
                                 <td>{getChip(order.status)}</td>
                                 <td>
                                     <Button2 onClick={() => viewHandler(order)} variant="contained" color="primary">

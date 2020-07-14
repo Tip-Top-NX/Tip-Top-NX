@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     width: "17vw",
   },
   media: {
-    height: "32vh",
+    height: "33vh",
     paddingTop: "56.25%", // 16:9,
     // border: "1px grey solid"
     margin: "10px 0",
@@ -17,6 +17,8 @@ const useStyles = makeStyles((theme) => ({
 
 const OrderCard = (props) => {
   const classes = useStyles();
+
+  console.log(props.product);
 
   return (
     <Card variant="outlined" className={classes.root}>
@@ -34,12 +36,20 @@ const OrderCard = (props) => {
       <CardContent
         style={{
           borderTop: "1px solid grey",
-          marginTop: "5px",
+          marginTop: "2px",
+          marginBottom: "10px",
           height: "12vh",
         }}
       >
         <table style={{ width: "100%" }}>
           <tbody>
+            {props.product.deleted === true && (
+              <tr>
+                <td style={{ padding: "2px" }}>
+                  <b>OUT OF STOCK</b>
+                </td>
+              </tr>
+            )}
             <tr>
               <td style={{ padding: "2px" }}>
                 <b>PRICE:</b>&nbsp;{props.price}
@@ -50,10 +60,10 @@ const OrderCard = (props) => {
             </tr>
             <tr>
               <td style={{ padding: "2px" }}>
-                <b>SIZE:</b>&nbsp;{props.size}
+                <b>QUANTITY:</b>&nbsp;{props.quantity}
               </td>
               <td style={{ padding: "2px" }}>
-                <b>QUANTITY:</b>&nbsp;{props.quantity}
+                <b>SIZE:</b>&nbsp;{props.size}
               </td>
             </tr>
           </tbody>

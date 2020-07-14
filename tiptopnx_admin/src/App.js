@@ -12,6 +12,7 @@ import History from "./containers/History";
 import axios from "./utils/axios";
 import { getConfig } from "./utils/config";
 import DeletedProducts from "./components/Deleted";
+import Signup from "./containers/Login/Signup";
 
 function App() {
   const [change, setChange] = React.useState(false);

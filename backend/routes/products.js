@@ -27,7 +27,7 @@ router.get('/:prodId', (req, res, next) => {
 })
 
 router.post('/search',(req, res, next) => {
-    Product.find({$text: {$search: req.body.keyword}},{score: {$meta: "textScore"}}).sort({score: {$meta: "textScore"}})
+    Product.find({deleted:{$ne:true},$text: {$search: req.body.keyword}},{score: {$meta: "textScore"}}).sort({score: {$meta: "textScore"}})
         .then((prods) => res.send(prods))
         .catch((err) => next(err));
 })
