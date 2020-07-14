@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import {
   View,
-  Text,
   StyleSheet,
   Dimensions,
   Image,
@@ -20,13 +19,27 @@ const Catalogue = ({ navigation, route }) => {
   // const [show, setShow] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [checkHeight, setHeight] = useState();
+  const [checkBox, setBox] = useState(true);
   const prodId = route.params.prodId;
+  const sort = route.params.sortBy;
+  const order = route.params.sortCode;
+  const priceLower =
+    route.params.priceLower === -1 ? undefined : route.params.priceLower;
+  const priceUpper = route.params.priceUpper;
+  const cat = route.params.cat;
+  // const allSelected = route.params.allSelected;
 
   useEffect(() => {
     let mounted = true;
-    console.log(prodId);
+    const body = {
+      sort: sort,
+      order: order,
+      priceLower: priceLower,
+      priceUpper: priceUpper,
+    };
+    console.log(body);
     myAxios
-      .get("/category/" + prodId + "/get-products")
+      .post("/category/" + prodId + "/get-products", body)
       .then((res) => {
         if (mounted) {
           setIsLoading(false);
@@ -34,14 +47,14 @@ const Catalogue = ({ navigation, route }) => {
         }
       })
       .catch((err) => console.log(err));
-
-    // setTimeout(() => {
-    //   setShow(false);
-    // }, 3000);
     return () => (mounted = false);
-  }, [prodId]);
+  }, [prodId, sort, order, priceLower, priceUpper]);
 
   const handleScroll = (event) => {
+    var currentHeight = event.nativeEvent.contentOffset.y;
+    currentHeight > checkHeight && currentHeight > 0
+      ? setBox(false)
+      : setBox(true);
     setHeight(event.nativeEvent.contentOffset.y);
   };
 
@@ -66,7 +79,7 @@ const Catalogue = ({ navigation, route }) => {
       ) : (
         <View
           style={{
-            alignSelf: "center",
+            // alignSelf: "center",
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -98,7 +111,16 @@ const Catalogue = ({ navigation, route }) => {
               />
             )}
           />
-          {checkHeight > 1000 ? null : <ButtonBox />}
+          {/* {checkBox ? ( */}
+          <ButtonBox
+            prodId={prodId}
+            // allSelected={allSelected}
+            // priceLower={priceLower}
+            // priceUpper={priceUpper}
+            cat={cat}
+            order={order}
+          />
+          {/* ) : null} */}
         </View>
       )}
     </SafeAreaView>

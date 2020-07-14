@@ -12,13 +12,27 @@ import {
   ImageBackground,
   Alert
 } from "react-native";
+import { connect } from 'react-redux';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { signup, signinFailed } from "../../../redux/ActionCreators";
 import { myAxios } from "../../../axios";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-class OtpEmail extends Component{
+const mapStateToProps = state => {
+    return{
+        user : state.user
+    };
+}
+
+const mapDispatchToProps = dispatch => { 
+    return{ 
+        signup: (name,email,password,contact) => dispatch(signup({name,email,password,contact}))
+    };
+}
+
+class OtpVerify extends Component{
     constructor(props){
         super(props)
         this.state={
@@ -30,28 +44,29 @@ class OtpEmail extends Component{
             flag2:0,
             flag3:0,
             flag4:0,
-            isDisable:true,
-            email:props.route.params.email
+            isDisable:true
         }
     }
 
     componentDidMount=()=>{
         this.refs.ref1.focus();
+        if(this.props.user.isValid)
+            this.props.navigation.navigate("Home");
     }
 
     checkOtp=()=>{
         let otp=this.state.pin1*1000+this.state.pin2*100+this.state.pin3*10+this.state.pin4*1;
-
         const bodyPart = {
             otp:otp,
-            email:this.state.email
+            email:this.props.route.params.email
         };
         myAxios
             .post("/users/verify-otp",bodyPart)
             .then((res) => {
-                if (res.success) {
-                    Alert.alert("Success","You can change your password successfully!");
-                    this.props.navigation.navigate("Reset Password");
+                if (res.data.success) {
+                    AsyncStorage.setItem("token", res.data.token);
+                    Alert.alert("Success","Mobile number verified successfully!");
+                    this.props.signup(this.props.route.params.name,this.props.route.params.email,this.props.route.params.password,this.props.route.params.contact);
                 }
                 else{
                     Alert.alert("Error","Invalid OTP!",[{text:"Try again"}]);
@@ -78,8 +93,8 @@ class OtpEmail extends Component{
                             }}
                             blurRadius={0}
                             >
-                                <View style={{marginTop:-250}}>
-                                    <Text style={styles.text}>Enter OTP sent to your Email : </Text>
+                                <View>
+                                    <Text style={styles.text}>Enter OTP sent to your mobile number : </Text>
                                     <View style={styles.otpBox}>
                                         <TextInput
                                             ref={"ref1"}
@@ -177,7 +192,7 @@ class OtpEmail extends Component{
     }
 }
 
-export default OtpEmail;
+export default connect(mapStateToProps, mapDispatchToProps)(OtpVerify);
 
 const styles = StyleSheet.create({
     container: {
@@ -193,13 +208,13 @@ const styles = StyleSheet.create({
         flex:1,
         justifyContent:"space-evenly",
         flexDirection:"row",
-        marginTop:40
+        marginTop:18
     },
     text:{
-        marginLeft:29,
+        marginLeft:28,
         color: "#000",
         fontSize: 18,
-        marginTop:0
+        marginTop:-200
     },
     box:{
         backgroundColor:"#f5f4f2",
@@ -240,7 +255,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignSelf: "center",
         padding: 5,
-        marginTop:50
+        marginTop:25
     },
     buttonDisabled: {
         marginVertical: 10,
@@ -251,7 +266,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignSelf: "center",
         padding: 5,
-        marginTop:50
+        marginTop:25
     },
     buttonText: {
         color: "#fff",

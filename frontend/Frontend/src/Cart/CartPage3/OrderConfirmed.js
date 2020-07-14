@@ -15,7 +15,7 @@ const OrderConfirmed = ({ navigation }) => {
   useEffect(() => {
     setTimeout(() => {
       setShowButtons(true);
-    }, 4000);
+    }, 5500);
   });
 
   return (

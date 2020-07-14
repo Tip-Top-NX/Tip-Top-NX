@@ -10,8 +10,9 @@ import {
   Keyboard,
   Dimensions,
   ImageBackground,
+  Alert
 } from "react-native";
-import { myAxios } from "../../../axios";
+import { myAxios,getConfig } from "../../../axios";
 import { useNavigation } from "@react-navigation/native";
 
 const width = Dimensions.get("window").width;
@@ -35,20 +36,22 @@ const ResetPassword = () => {
     else {
       console.log("dispatching");
       const bodyPart = {
-            newPassword:newPassword
+            password:newPassword
         };
-      myAxios
-          .post("/users/set-password",bodyPart)
+      getConfig().then((config) => {
+        myAxios
+          .post("/users/set-password",bodyPart,config)
           .then((res) => {
-              if (res.success) {
-                  Alert.alert("Success","Password changed successfully");
-                  this.props.navigation.navigate("Sign In");
+              if (res.data.success) {
+                Alert.alert("Success","Password changed successfully");
+                navigation.navigate("Sign In");
               }
               else{
-                  Alert.alert("Error","Cannot change password",[{text:"Try again"}]);
+                Alert.alert("Error","Cannot change password",[{text:"Try again"}]);
               }
           })
           .catch((err) => console.log(err));
+      });
     }
   };
 

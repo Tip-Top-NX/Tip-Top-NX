@@ -2,16 +2,19 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
 
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useLinkProps } from "@react-navigation/native";
 
-const ButtonBox = () => {
+const ButtonBox = (props) => {
   const navigation = useNavigation();
   return (
     <View style={styles.buttonBoxStyle}>
       <TouchableOpacity
         style={[styles.buttonBox, { backgroundColor: "#fff", borderWidth: 1 }]}
         onPress={() => {
-          navigation.navigate("Sort");
+          navigation.navigate("Sort", {
+            prodId: props.prodId,
+            order: props.order,
+          });
         }}
       >
         <Text style={[styles.buttonText, { color: "#000" }]}>SORT</Text>
@@ -19,7 +22,13 @@ const ButtonBox = () => {
       <TouchableOpacity
         style={styles.buttonBox}
         onPress={() => {
-          navigation.navigate("Filters");
+          navigation.navigate("Filters", {
+            prodId: props.prodId,
+            // allSelected: props.allSelected,
+            // priceLower: props.priceLower,
+            // priceUpper: props.priceUpper,
+            cat: props.cat,
+          });
         }}
       >
         <Text style={styles.buttonText}>FILTER</Text>
@@ -48,6 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#C2185B",
+    borderColor: "#C2185B",
   },
   buttonText: {
     color: "#fff",

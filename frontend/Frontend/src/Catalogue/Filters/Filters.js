@@ -1,17 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./FilterStyles";
-import filteredOptions from "./FilterOptions";
+import { myAxios } from "../../../../axios";
 
-const filterTypes = ["size", "color", "categories", "price", "discount"];
+const filterTypes = ["categories", "price"];
 
-const Filters = () => {
+const Filters = ({ route }) => {
   const [selectedFilter, setSelectedFilter] = useState();
-  const [selectedOption, setSelectedOption] = useState();
   const [prodId, setProdId] = useState();
+  const [priceLower, setPriceLower] = useState(-1);
+  const [priceUpper, setPriceUpper] = useState();
+  const [subcats, setSubcats] = useState();
+  const [cat, setcat] = useState(route.params.cat);
+  const prodIdMain = route.params.prodId;
+  useEffect(() => {
+    let mounted = true;
+    myAxios.get("/category/" + prodIdMain + "/get-leaf").then((res) => {
+      if (mounted) {
+        setSubcats([...res.data]);
+      }
+    });
+    return () => (mounted = false);
+  });
+
+  const filteredOptions = [
+    // 0 -> Categories Men
+    subcats,
+    //1 -> Price
+    [
+      { name: "₹0 - ₹199", priceLower: 0, priceUpper: 199 },
+      { name: "₹200 - ₹499", priceLower: 200, priceUpper: 499 },
+      { name: "₹500 - ₹999", priceLower: 500, priceUpper: 999 },
+      { name: "Above ₹1000", priceLower: 1000, priceUpper: 10000 },
+    ],
+  ];
 
   const navigation = useNavigation();
   return (
@@ -22,7 +47,7 @@ const Filters = () => {
             data={filterTypes}
             keyExtractor={(item, index) => index.toString()}
             showsVerticalScrollIndicator={false}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
               <TouchableOpacity
                 style={[
                   styles.eachFilter,
@@ -34,8 +59,7 @@ const Filters = () => {
                   },
                 ]}
                 onPress={() => {
-                  setSelectedFilter(filterTypes.indexOf(item)),
-                    setSelectedOption();
+                  setSelectedFilter(filterTypes.indexOf(item));
                 }}
               >
                 <Text
@@ -68,14 +92,18 @@ const Filters = () => {
               <TouchableOpacity
                 style={styles.eachFilter}
                 onPress={() => {
-                  selectedFilter !== 2
-                    ? setSelectedOption(
-                        filteredOptions[selectedFilter].indexOf(item)
-                      )
-                    : (setSelectedOption(
-                        filteredOptions[selectedFilter].indexOf(item)
-                      ),
-                      setProdId(item.id));
+                  if (item.name === cat) {
+                    setcat();
+                  } else if (item.priceLower === priceLower) {
+                    setPriceLower(-1);
+                    setPriceUpper();
+                  } else if (selectedFilter === 0) {
+                    setProdId(item._id);
+                    setcat(item.name);
+                  } else if (selectedFilter === 1) {
+                    setPriceLower(item.priceLower);
+                    setPriceUpper(item.priceUpper);
+                  }
                 }}
               >
                 <View
@@ -91,22 +119,21 @@ const Filters = () => {
                       styles.eachFilterText,
                       {
                         color:
-                          filteredOptions[selectedFilter].indexOf(item) ===
-                          selectedOption
+                          cat === item.name || item.priceLower === priceLower
                             ? "#000"
                             : "#777",
                         fontWeight:
-                          filteredOptions[selectedFilter].indexOf(item) ===
-                          selectedOption
+                          cat === item.name || item.priceLower === priceLower
                             ? "600"
                             : "500",
                       },
                     ]}
                   >
-                    {selectedFilter !== 2 ? item : item.name}
+                    {selectedFilter === 0
+                      ? item.name.split(" ").splice(-1)[0]
+                      : item.name}
                   </Text>
-                  {filteredOptions[selectedFilter].indexOf(item) ===
-                  selectedOption ? (
+                  {cat === item.name || item.priceLower === priceLower ? (
                     <Feather name="check" size={24} color="#C2185B" />
                   ) : null}
                 </View>
@@ -119,7 +146,7 @@ const Filters = () => {
         <TouchableOpacity
           style={[
             styles.buttonBox,
-            { backgroundColor: "#fff", borderWidth: 1 },
+            { backgroundColor: "#fff", borderWidth: 1, borderColor: "#C2185B" },
           ]}
           onPress={() => {
             navigation.goBack();
@@ -130,7 +157,12 @@ const Filters = () => {
         <TouchableOpacity
           style={styles.buttonBox}
           onPress={() => {
-            navigation.navigate("Catalogue", { prodId: prodId });
+            navigation.navigate("Catalogue", {
+              prodId: prodId,
+              priceLower: priceLower,
+              priceUpper: priceUpper,
+              cat: cat,
+            });
           }}
         >
           <Text style={styles.buttonText}>APPLY</Text>

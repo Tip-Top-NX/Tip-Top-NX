@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import {
     View,
@@ -35,8 +34,9 @@ const GetEmail = () => {
         myAxios
             .post("/users/forgot",bodyPart)
             .then((res) => {
-                if (res.success) {
-                    navigation.navigate("Otp Email",{email:email});
+                //console.log(res)
+                if (res.data.success) {
+                    navigation.navigate("Otp Forgot",{email:email});
                 }
                 else{
                     Alert.alert("Error","Entered email not registered!",[{text:"Try again"}]);

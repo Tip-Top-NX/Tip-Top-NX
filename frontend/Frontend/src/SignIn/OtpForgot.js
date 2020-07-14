@@ -12,26 +12,14 @@ import {
   ImageBackground,
   Alert
 } from "react-native";
-import { connect } from 'react-redux';
+import { AsyncStorage } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { signup, signinFailed } from "../../../redux/ActionCreators";
+import { myAxios } from "../../../axios";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-const mapStateToProps = state => {
-    return{
-        user : state.user
-    };
-}
-
-const mapDispatchToProps = dispatch => { 
-    return{ 
-        signup: (name,email,password,contact) => dispatch(signup({name,email,password,contact}))
-    };
-}
-
-class OtpMobile extends Component{
+class OtpForgot extends Component{
     constructor(props){
         super(props)
         this.state={
@@ -43,27 +31,35 @@ class OtpMobile extends Component{
             flag2:0,
             flag3:0,
             flag4:0,
-            isDisable:true
+            isDisable:true,
+            email:props.route.params.email
         }
     }
 
     componentDidMount=()=>{
         this.refs.ref1.focus();
-        if(this.props.user.isValid)
-            this.props.navigation.navigate("Home");
     }
 
     checkOtp=()=>{
         let otp=this.state.pin1*1000+this.state.pin2*100+this.state.pin3*10+this.state.pin4*1;
-        if(otp==1234)
-        {
-            Alert.alert("Success","Mobile number verified successfully!");
-            this.props.signup(this.props.route.params.name,this.props.route.params.email,this.props.route.params.password,this.props.route.params.contact);
-        }
-        else
-        {
-            Alert.alert("Error","Invalid OTP!",[{text:"Try again"}]);
-        }
+
+        const bodyPart = {
+            otp:otp,
+            email:this.state.email
+        };
+        myAxios
+            .post("/users/verify-otp",bodyPart)
+            .then((res) => {
+                if (res.data.success) {
+                    Alert.alert("Success","You can change your password successfully!");
+                    AsyncStorage.setItem("token", res.data.token);
+                    this.props.navigation.navigate("Reset Password");
+                }
+                else{
+                    Alert.alert("Error","Invalid OTP!",[{text:"Try again"}]);
+                }
+            })
+            .catch((err) => console.log(err));
     }
 
     render(){
@@ -84,8 +80,8 @@ class OtpMobile extends Component{
                             }}
                             blurRadius={0}
                             >
-                                <View>
-                                    <Text style={styles.text}>Enter OTP sent to your mobile number : </Text>
+                                <View style={{marginTop:-250}}>
+                                    <Text style={styles.text}>Enter OTP sent to your Email : </Text>
                                     <View style={styles.otpBox}>
                                         <TextInput
                                             ref={"ref1"}
@@ -183,7 +179,7 @@ class OtpMobile extends Component{
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OtpMobile);
+export default OtpForgot;
 
 const styles = StyleSheet.create({
     container: {
@@ -199,13 +195,13 @@ const styles = StyleSheet.create({
         flex:1,
         justifyContent:"space-evenly",
         flexDirection:"row",
-        marginTop:18
+        marginTop:40
     },
     text:{
-        marginLeft:28,
+        marginLeft:29,
         color: "#000",
         fontSize: 18,
-        marginTop:-200
+        marginTop:0
     },
     box:{
         backgroundColor:"#f5f4f2",
@@ -246,7 +242,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignSelf: "center",
         padding: 5,
-        marginTop:25
+        marginTop:50
     },
     buttonDisabled: {
         marginVertical: 10,
@@ -257,7 +253,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignSelf: "center",
         padding: 5,
-        marginTop:25
+        marginTop:50
     },
     buttonText: {
         color: "#fff",

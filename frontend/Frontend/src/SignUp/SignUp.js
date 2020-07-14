@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   ImageBackground,
+  Alert
 } from "react-native";
 import styles from "./SignUpStyles";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -18,6 +19,7 @@ import { signinFailed } from "../../../redux/ActionCreators";
 
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { myAxios } from "../../../axios";
 
 const signUp = () => {
   const navigation = useNavigation();
@@ -44,6 +46,9 @@ const signUp = () => {
   const validation = () => {
     const emailregex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     const alph = /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/;
+    const bodyPart = {
+        email:email
+    };
 
     // name check
     if (name == "") {
@@ -79,12 +84,23 @@ const signUp = () => {
     }
 
     if (validEmail==1 && validName==1 && validPassword==1 && validPhone==1) {
-      navigation.navigate("Otp Mobile",{
-        name:name,
-        email:email,
-        password:password,
-        contact:phone
-      })
+      myAxios
+          .post("/users/forgot",bodyPart)
+          .then((res) => {
+              //console.log(res)
+              if (res.data.success) {
+                   navigation.navigate("Otp Verify",{
+                    name:name,
+                    email:email,
+                    password:password,
+                    contact:phone
+                  })
+              }
+              else{
+                  Alert.alert("Error","Problem in signing up!",[{text:"Try again"}]);
+              }
+          })
+          .catch((err) => console.log(err));
     }
   };
 

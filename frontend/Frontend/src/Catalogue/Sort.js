@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -14,15 +14,21 @@ import { useNavigation } from "@react-navigation/native";
 const width = Dimensions.get("window").width;
 
 const sortBy = [
-  "Alphabetical Order",
-  "Price High to Low",
-  "Price Low to High",
-  "Popularity",
+  { name: "Price High to Low", num: 1 },
+  { name: "Price Low to High", num: -1 },
 ];
 
-const Sort = () => {
+const Sort = ({ route }) => {
   const [selected, setSelected] = useState();
   const navigation = useNavigation();
+
+  useEffect(() => {
+    if (route.params.order === -1) {
+      setSelected(1);
+    } else if (route.params.order === 1) {
+      setSelected(0);
+    }
+  }, []);
 
   return (
     <SafeAreaView style={styles.overAllContainer}>
@@ -35,7 +41,13 @@ const Sort = () => {
             renderItem={({ item }) => (
               <TouchableOpacity
                 style={styles.eachFilter}
-                onPress={() => setSelected(sortBy.indexOf(item))}
+                onPress={() => {
+                  if (sortBy.indexOf(item) !== selected) {
+                    setSelected(sortBy.indexOf(item));
+                  } else {
+                    setSelected();
+                  }
+                }}
               >
                 <View
                   style={{
@@ -56,7 +68,7 @@ const Sort = () => {
                       },
                     ]}
                   >
-                    {item}
+                    {item.name}
                   </Text>
                   {sortBy.indexOf(item) === selected ? (
                     <Feather name="check" size={24} color="#C2185B" />
@@ -71,7 +83,7 @@ const Sort = () => {
         <TouchableOpacity
           style={[
             styles.buttonBox,
-            { backgroundColor: "#fff", borderWidth: 1 },
+            { backgroundColor: "#fff", borderWidth: 1, borderColor: "#C2185B" },
           ]}
           onPress={() => {
             navigation.goBack();
@@ -82,9 +94,11 @@ const Sort = () => {
         <TouchableOpacity
           style={styles.buttonBox}
           onPress={() => {
-            alert(
-              "This function will not work as the dependent work is yet to be completed"
-            );
+            navigation.navigate("Catalogue", {
+              prodId: route.params.prodId,
+              sortCode: sortBy[selected].num,
+              sortBy: sortBy[selected].name.split(" ").splice(0)[0],
+            });
           }}
         >
           <Text style={styles.buttonText}>APPLY</Text>
@@ -141,7 +155,7 @@ const styles = StyleSheet.create({
   },
   buttonBox: {
     width: 170,
-    height: 50,
+    height: 40,
     // borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
