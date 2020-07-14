@@ -12,7 +12,7 @@ import History from "./containers/History";
 import axios from "./utils/axios";
 import { getConfig } from "./utils/config";
 import DeletedProducts from "./components/Deleted";
-import Signup from "./containers/Login/Signup";
+import Signup from "./containers/Signup";
 
 function App() {
   const [change, setChange] = React.useState(false);
@@ -50,7 +50,8 @@ function App() {
             confirmed={confirmed.length}
             completed={completed.length}
           >
-            <Route exact path="/admin" component={Home} />
+          <Route exact path="/admin" component={Home} />
+            <Route exact path="/admin/add-admin" component={Signup} />
             <Route exact path="/admin/add" component={Add} />
             <Route exact path="/admin/deleted" component={DeletedProducts} />
             <Route exact path="/admin/product" component={ProductCard} />

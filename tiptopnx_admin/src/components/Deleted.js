@@ -5,7 +5,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import axios from "../utils/axios";
+import axios,{myUri} from "../utils/axios";
 import Grid from "@material-ui/core/Grid";
 import ProductDetails from "./ProductDetails";
 import { Button } from "@material-ui/core";
@@ -38,19 +38,16 @@ export default function ImgMediaCard() {
   const [editable, setEditable] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
   const [deleteThis, setDeleteThis] = useState();
-  const myUri = "http://172.20.10.2:5000/";
 
   useEffect(() => {
     let mounted = true;
     axios
-      .get("/category/5/get-products")
+      .get("/admin/products/deleted",getConfig())
       .then((res) => {
         if (mounted) {
           // setIsLoading(false);
-          console.log(res.data.filter((item) => item.deleted === true));
           setProducts([
-            ...products,
-            res.data.filter((item) => item.deleted === true),
+            ...res.data
           ]);
         }
       })
@@ -93,7 +90,10 @@ export default function ImgMediaCard() {
           </Button2>
         </DialogActions>
       </Dialog>
-      <Grid justify="space-evenly" container spacing={5}>
+      <Typography align="center" variant="h3">
+        <u>Deleted Products</u>
+      </Typography>
+      <Grid justify="space-evenly" style={{marginTop:"5vh"}} container spacing={5}>
         {products.map((item, index) => {
           return (
             <Grid key={index} item>

@@ -60,6 +60,11 @@ function ClippedDrawer(props) {
       routeName: "history",
       no: props.completed,
     },
+    {
+      name: "Add new admin",
+      routeName: "add-admin",
+      no: 0,
+    },
   ];
 
   const handleClose = () => {

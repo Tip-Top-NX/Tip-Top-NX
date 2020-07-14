@@ -5,15 +5,16 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import axios from "../utils/axios";
+import axios,{myUri} from "../utils/axios";
 import Grid from "@material-ui/core/Grid";
 import ProductDetails from "./ProductDetails";
 import { Button } from "@material-ui/core";
-import { Dialog, DialogActions, DialogTitle } from "@material-ui/core";
+import { Dialog, DialogActions, DialogTitle, TextField,Paper, InputBase,Divider,IconButton } from "@material-ui/core";
 import Button2 from "@material-ui/core/Button";
 import { getConfig } from "../utils/config";
+import {Search} from '@material-ui/icons';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: 220,
     height: 400,
@@ -28,7 +29,29 @@ const useStyles = makeStyles({
     backgroundColor: "#fff",
     padding: "5px 0 5px 0",
   },
-});
+  paper: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    padding: theme.spacing(2),
+    boxSizing: "border-box",
+    width: "75vw",
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+  paperSearch: {
+    padding: '2px 4px',
+    display: 'flex',
+    alignItems: 'center',
+    width: 400,
+  },
+  input: {
+    marginLeft: theme.spacing(1),
+    flex: 1,
+  },
+  iconButton: {
+    padding: 10,
+  },
+}));
 
 export default function ImgMediaCard() {
   const classes = useStyles();
@@ -38,7 +61,7 @@ export default function ImgMediaCard() {
   const [editable, setEditable] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
   const [deleteThis, setDeleteThis] = useState();
-  const myUri = "http://172.20.10.2:5000/";
+  const [keyword,setKeyword] = useState("");
 
   useEffect(() => {
     let mounted = true;
@@ -48,7 +71,7 @@ export default function ImgMediaCard() {
         if (mounted) {
           // setIsLoading(false);
           setProducts([...res.data]);
-          console.log(res.data);
+          // console.log(res.data);
         }
       })
       .catch((err) => console.log(err));
@@ -65,6 +88,12 @@ export default function ImgMediaCard() {
       })
       .catch((err) => console.log(err));
   };
+
+  const searchHandler = () => {
+    axios.post('/product/search',{keyword},getConfig())
+      .then((res) => setProducts([...res.data]))
+      .catch((err) => console.log(err));
+  }
 
   return (
     <div className={classes.container}>
@@ -90,7 +119,16 @@ export default function ImgMediaCard() {
           </Button2>
         </DialogActions>
       </Dialog>
-      <Grid justify="space-evenly" container spacing={5}>
+      {/* <Paper className={classes.paper}> */}
+      
+      <Paper className={classes.paperSearch}>
+        <InputBase value={keyword} onKeyPress={(e) => {if(e.key=="Enter"){searchHandler()}}} onChange={(event)=>setKeyword(event.target.value)} className={classes.input} placeholder="Type here to search"/>
+        <IconButton onClick={searchHandler} className={classes.iconButton}>
+            <Search />
+        </IconButton>
+      </Paper>
+
+      <Grid style={{marginTop:"5vh"}} justify="space-evenly" container spacing={5}>
         {products.map((item, index) => {
           return (
             <Grid key={index} item>
@@ -164,6 +202,8 @@ export default function ImgMediaCard() {
           );
         })}
       </Grid>
+      {/* </Paper> */}
+
     </div>
   );
 }

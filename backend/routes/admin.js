@@ -63,6 +63,19 @@ router.route("/products")
             .catch((err) => next(err));
     })
 
+router.route('/products/deleted')
+    .get((req,res,next) => {
+        Product.find({deleted:true})
+            .then((products) => res.send(products))
+            .catch((err) => next(err));
+    })
+    .put((req,res,next) => { 
+        Product.findByIdAndUpdate(req.body.id, {$set: {deleted: false}},
+            { safe: true, upsert: true, new: true })
+            .then((obj) => res.send(obj))
+            .catch((err) => console.log(err));
+    })
+
 router.route("/products/:productId")
     .get((req, res, next) => {
         Product.findById(req.params.productId)
