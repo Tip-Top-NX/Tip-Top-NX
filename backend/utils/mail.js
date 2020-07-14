@@ -18,9 +18,9 @@ function getOTP(){
 
 exports.sendOTP = (tomail) =>{
     mailoptions.to = tomail
-    mailoptions.subject = "OTP Verification for Password Reset"
+    mailoptions.subject = "OTP Verification Email"
     otp = getOTP()
-    mailoptions.text = "Use OTP " + otp + " for password rest."
+    mailoptions.text = "Use OTP " + otp + " for Email Verification"
     transporter.sendMail(mailoptions,(err,info) => {
         if(err){
             console.log(err)
