@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -11,8 +11,47 @@ import {
   Dimensions,
   ImageBackground,
 } from "react-native";
+import { myAxios } from "../../../axios";
+import { useNavigation } from "@react-navigation/native";
+
 const width = Dimensions.get("window").width;
-const ChangePassword = () => {
+const ResetPassword = () => {
+  const [newPassword, setNewPassword] = useState();
+  const [confirmPass, setConfirmPass] = useState();
+  const [message, setMessage] = useState("");
+
+  const navigation = useNavigation();
+
+  const validation = () => {
+    // password check
+    console.log(newPassword + " " + confirmPass);
+    setMessage("");
+    if ( newPassword === "" || newPassword.length < 6 ){
+      setMessage("The password should be atleast 6 characters long");
+    }
+    else if ( newPassword !== confirmPass ){
+      setMessage("The passwords dont match");
+    } 
+    else {
+      console.log("dispatching");
+      const bodyPart = {
+            newPassword:newPassword
+        };
+      myAxios
+          .post("/users/set-password",bodyPart)
+          .then((res) => {
+              if (res.success) {
+                  Alert.alert("Success","Password changed successfully");
+                  this.props.navigation.navigate("Sign In");
+              }
+              else{
+                  Alert.alert("Error","Cannot change password",[{text:"Try again"}]);
+              }
+          })
+          .catch((err) => console.log(err));
+    }
+  };
+
   return (
     <SafeAreaView>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -30,17 +69,11 @@ const ChangePassword = () => {
             <View style={styles.inputContainer}>
               <TextInput
                 style={styles.inputText}
-                placeholder="CURRENT PASSWORD"
-                placeholderTextColor="#666"
-                secureTextEntry={true}
-              ></TextInput>
-            </View>
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.inputText}
                 placeholder="NEW PASSWORD"
                 placeholderTextColor="#666"
                 secureTextEntry={true}
+                onChangeText={(text) => setNewPassword(text)}
+                value={newPassword}
               ></TextInput>
             </View>
             <View style={styles.inputContainer}>
@@ -49,10 +82,26 @@ const ChangePassword = () => {
                 placeholder="CONFIRM NEW PASSWORD"
                 placeholderTextColor="#666"
                 secureTextEntry={true}
+                onChangeText={(text) => setConfirmPass(text)}
+                value={confirmPass}
               ></TextInput>
             </View>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>SAVE</Text>
+            <Text
+              style={{
+                marginTop: 80,
+                textAlign: "center",
+                marginBottom: 10,
+                color: "red",
+                letterSpacing: 0.2,
+              }}
+            >
+              {message}
+            </Text>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => validation()}
+            >
+              <Text style={styles.buttonText}>RESET PASSWORD</Text>
             </TouchableOpacity>
           </ImageBackground>
         </View>
@@ -61,7 +110,7 @@ const ChangePassword = () => {
   );
 };
 
-export default ChangePassword;
+export default ResetPassword;
 
 const styles = StyleSheet.create({
   container: {
@@ -85,7 +134,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   button: {
-    marginTop: 80,
     width: width - 75,
     height: 50,
     borderWidth: 1,

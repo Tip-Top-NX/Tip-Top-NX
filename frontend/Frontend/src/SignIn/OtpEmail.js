@@ -13,6 +13,10 @@ import {
   Alert
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { myAxios } from "../../../axios";
+
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
 class OtpEmail extends Component{
     constructor(props){
@@ -26,7 +30,8 @@ class OtpEmail extends Component{
             flag2:0,
             flag3:0,
             flag4:0,
-            isDisable:true
+            isDisable:true,
+            email:props.route.params.email
         }
     }
 
@@ -36,15 +41,23 @@ class OtpEmail extends Component{
 
     checkOtp=()=>{
         let otp=this.state.pin1*1000+this.state.pin2*100+this.state.pin3*10+this.state.pin4*1;
-        if(otp==1234)
-        {
-            Alert.alert("Success","You can change your password successfully!");
-            this.props.navigation.navigate("Change Password");
-        }
-        else
-        {
-            Alert.alert("Error","Invalid OTP!",[{text:"Try again"}]);
-        }
+
+        const bodyPart = {
+            otp:otp,
+            email:this.state.email
+        };
+        myAxios
+            .post("/users/verify-otp",bodyPart)
+            .then((res) => {
+                if (res.success) {
+                    Alert.alert("Success","You can change your password successfully!");
+                    this.props.navigation.navigate("Reset Password");
+                }
+                else{
+                    Alert.alert("Error","Invalid OTP!",[{text:"Try again"}]);
+                }
+            })
+            .catch((err) => console.log(err));
     }
 
     render(){
@@ -169,8 +182,8 @@ export default OtpEmail;
 const styles = StyleSheet.create({
     container: {
         borderWidth: 1,
-        height: 600,
-        width: "100%",
+        height: height,
+        width: width,
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "center",

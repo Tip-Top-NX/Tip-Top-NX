@@ -16,6 +16,9 @@ import { connect } from 'react-redux';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { signup, signinFailed } from "../../../redux/ActionCreators";
 
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
+
 const mapStateToProps = state => {
     return{
         user : state.user
@@ -40,7 +43,7 @@ class OtpMobile extends Component{
             flag2:0,
             flag3:0,
             flag4:0,
-            isDisable:true,
+            isDisable:true
         }
     }
 
@@ -185,8 +188,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(OtpMobile);
 const styles = StyleSheet.create({
     container: {
         borderWidth: 1,
-        height: 600,
-        width: "100%",
+        height: height,
+        width: width,
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "center",

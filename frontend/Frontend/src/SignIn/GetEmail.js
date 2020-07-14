@@ -10,10 +10,16 @@ import {
     ImageBackground,
     Image,
     SafeAreaView,
-    StyleSheet
+    StyleSheet,
+    Dimensions,
+    Alert
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/native";
+import { myAxios } from "../../../axios";
+
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
 const GetEmail = () => {
 
@@ -23,7 +29,20 @@ const GetEmail = () => {
     const [valid, setValid] = useState(-1);
 
     const sendOtp = () => {
-        navigation.navigate("Otp Email");
+        const bodyPart = {
+            email:email
+        };
+        myAxios
+            .post("/users/forgot",bodyPart)
+            .then((res) => {
+                if (res.success) {
+                    navigation.navigate("Otp Email",{email:email});
+                }
+                else{
+                    Alert.alert("Error","Entered email not registered!",[{text:"Try again"}]);
+                }
+            })
+            .catch((err) => console.log(err));
     };
 
     const validation = () => {
@@ -92,8 +111,8 @@ export default GetEmail;
 const styles = StyleSheet.create({
     container: {
         borderWidth: 1,
-        height: 600,
-        width: "100%",
+        height: height,
+        width: width,
         backgroundColor: "#fff",
     },
     text:{
