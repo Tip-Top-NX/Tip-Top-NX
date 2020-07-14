@@ -83,17 +83,6 @@ class Login extends React.Component {
               <img alt="Logo" className={classes.logo} src={Logo} />
             </IconButton>
             <Typography variant="h6">TIP-TOP NX</Typography>
-            <Button
-              onClick={() => this.props.history.push("/admin/pending-orders")}
-              style={{
-                marginLeft: "auto",
-                backgroundColor: "white",
-                color: "black",
-              }}
-              variant="contained"
-            >
-              SIGN UP
-            </Button>
           </Toolbar>
         </AppBar>
         <div className={classes.content}>

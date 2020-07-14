@@ -5,14 +5,23 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import axios,{myUri} from "../utils/axios";
+import axios, { myUri } from "../utils/axios";
 import Grid from "@material-ui/core/Grid";
 import ProductDetails from "./ProductDetails";
 import { Button } from "@material-ui/core";
-import { Dialog, DialogActions, DialogTitle, TextField,Paper, InputBase,Divider,IconButton } from "@material-ui/core";
+import {
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  TextField,
+  Paper,
+  InputBase,
+  Divider,
+  IconButton,
+} from "@material-ui/core";
 import Button2 from "@material-ui/core/Button";
 import { getConfig } from "../utils/config";
-import {Search} from '@material-ui/icons';
+import { Search } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,10 +48,11 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "auto",
   },
   paperSearch: {
-    padding: '2px 4px',
-    display: 'flex',
-    alignItems: 'center',
+    padding: "2px 4px",
+    display: "flex",
+    alignItems: "center",
     width: 400,
+    marginLeft: "20px",
   },
   input: {
     marginLeft: theme.spacing(1),
@@ -61,12 +71,12 @@ export default function ImgMediaCard() {
   const [editable, setEditable] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
   const [deleteThis, setDeleteThis] = useState();
-  const [keyword,setKeyword] = useState("");
+  const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
     let mounted = true;
     axios
-      .get("/category/5/get-products")
+      .get("/category/1/get-products")
       .then((res) => {
         if (mounted) {
           // setIsLoading(false);
@@ -90,10 +100,11 @@ export default function ImgMediaCard() {
   };
 
   const searchHandler = () => {
-    axios.post('/product/search',{keyword},getConfig())
+    axios
+      .post("/product/search", { keyword }, getConfig())
       .then((res) => setProducts([...res.data]))
       .catch((err) => console.log(err));
-  }
+  };
 
   return (
     <div className={classes.container}>
@@ -120,15 +131,30 @@ export default function ImgMediaCard() {
         </DialogActions>
       </Dialog>
       {/* <Paper className={classes.paper}> */}
-      
+
       <Paper className={classes.paperSearch}>
-        <InputBase value={keyword} onKeyPress={(e) => {if(e.key=="Enter"){searchHandler()}}} onChange={(event)=>setKeyword(event.target.value)} className={classes.input} placeholder="Type here to search"/>
+        <InputBase
+          value={keyword}
+          onKeyPress={(e) => {
+            if (e.key == "Enter") {
+              searchHandler();
+            }
+          }}
+          onChange={(event) => setKeyword(event.target.value)}
+          className={classes.input}
+          placeholder="Type here to search"
+        />
         <IconButton onClick={searchHandler} className={classes.iconButton}>
-            <Search />
+          <Search />
         </IconButton>
       </Paper>
 
-      <Grid style={{marginTop:"5vh"}} justify="space-evenly" container spacing={5}>
+      <Grid
+        style={{ marginTop: "5vh" }}
+        justify="space-evenly"
+        container
+        spacing={5}
+      >
         {products.map((item, index) => {
           return (
             <Grid key={index} item>
@@ -145,7 +171,7 @@ export default function ImgMediaCard() {
                     component="img"
                     alt="Product Image"
                     height="280"
-                    image={myUri + item.images[0]}
+                    image={myUri + "/" + item.images[0]}
                   />
                   <CardContent>
                     <Typography gutterBottom variant="subtitle2" component="h2">
@@ -203,7 +229,6 @@ export default function ImgMediaCard() {
         })}
       </Grid>
       {/* </Paper> */}
-
     </div>
   );
 }

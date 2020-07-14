@@ -165,8 +165,8 @@ export default function ProductDetails(props) {
     setAlertOpen(false);
     props.onClose(false);
     axios
-      .post("/admin/products/" + id, body, getConfig())
-      .then((res) => alert("Product edited " + res.data))
+      .put("/admin/products/" + id, body, getConfig())
+      .then((res) => console.log(res.data))
       .catch((err) => {
         console.log(err.message);
       });

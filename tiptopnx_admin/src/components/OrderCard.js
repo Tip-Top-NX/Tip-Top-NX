@@ -2,6 +2,7 @@ import React from "react";
 import { Card, CardHeader, CardMedia, CardContent } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import logo from "../assets/logo192.png";
+import { myUri } from "../utils/axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,8 +30,8 @@ const OrderCard = (props) => {
       />
       <CardMedia
         className={classes.media}
-        image={logo}
-        // image={getURL(props.product.images[0])}
+        // image={logo}
+        image={myUri + "/" + props.product.images[0]}
         title={props.product.name}
       />
       <CardContent

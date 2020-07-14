@@ -23,7 +23,7 @@ const Categories = (props) => {
             }
           >
             <Image
-              source={require("../../../assets/v.gif")}
+              source={require("../../../assets/men.png")}
               style={styles.imageStyle}
             />
           </TouchableOpacity>
@@ -33,7 +33,7 @@ const Categories = (props) => {
             onPress={() => alert("Women's section is under development")}
           >
             <Image
-              source={require("../../../assets/t.gif")}
+              source={require("../../../assets/women.png")}
               style={styles.imageStyle}
             />
           </TouchableOpacity>
@@ -47,7 +47,7 @@ const Categories = (props) => {
             onPress={() => alert("Kids Section is under development")}
           >
             <Image
-              source={require("../../../assets/g.gif")}
+              source={require("../../../assets/kids.png")}
               style={styles.imageStyle}
             />
           </TouchableOpacity>
@@ -58,7 +58,7 @@ const Categories = (props) => {
             }
           >
             <Image
-              source={require("../../../assets/n.jpg")}
+              source={require("../../../assets/accessories.jpg")}
               style={styles.imageStyle}
             />
           </TouchableOpacity>
@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: "silver",
     marginTop: 10,
-    backgroundColor: "#fff",
     marginBottom: 10,
     justifyContent: "center",
   },

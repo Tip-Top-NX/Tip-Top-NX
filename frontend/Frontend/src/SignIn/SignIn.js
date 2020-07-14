@@ -94,7 +94,7 @@ const signIn = ({ navigation }) => {
             </View>
           ) : (
             <ImageBackground
-              source={require("../../../assets/b1.jpg")}
+              source={require("../../../assets/background.jpg")}
               style={{
                 flex: 1,
                 resizeMode: "cover",

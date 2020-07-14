@@ -5,7 +5,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import axios,{myUri} from "../utils/axios";
+import axios, { myUri } from "../utils/axios";
 import Grid from "@material-ui/core/Grid";
 import ProductDetails from "./ProductDetails";
 import { Button } from "@material-ui/core";
@@ -37,18 +37,16 @@ export default function ImgMediaCard() {
   const [products, setProducts] = useState([]);
   const [editable, setEditable] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
-  const [deleteThis, setDeleteThis] = useState();
+  const [body, setBody] = useState({});
 
   useEffect(() => {
     let mounted = true;
     axios
-      .get("/admin/products/deleted",getConfig())
+      .get("/admin/products/deleted", getConfig())
       .then((res) => {
         if (mounted) {
           // setIsLoading(false);
-          setProducts([
-            ...res.data
-          ]);
+          setProducts([...res.data]);
         }
       })
       .catch((err) => console.log(err));
@@ -56,10 +54,10 @@ export default function ImgMediaCard() {
     return () => (mounted = false);
   }, []);
 
-  const deleteProductHandler = () => {
+  const restoreProductHandler = () => {
     setAlertOpen(false);
     axios
-      .delete("/admin/products/" + deleteThis, getConfig())
+      .put("/admin/products/deleted", body, getConfig())
       .then((res) => {
         console.log(res.data);
       })
@@ -75,14 +73,14 @@ export default function ImgMediaCard() {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Are you sure you want to DELETE this product ?"}
+          {"Are you sure you want to RESTORE this product ?"}
         </DialogTitle>
         <DialogActions>
           <Button2 onClick={() => setAlertOpen(false)} color="primary">
             Cancel
           </Button2>
           <Button2
-            onClick={() => deleteProductHandler()}
+            onClick={() => restoreProductHandler()}
             color="primary"
             autoFocus
           >
@@ -93,7 +91,12 @@ export default function ImgMediaCard() {
       <Typography align="center" variant="h3">
         <u>Deleted Products</u>
       </Typography>
-      <Grid justify="space-evenly" style={{marginTop:"5vh"}} container spacing={5}>
+      <Grid
+        justify="space-evenly"
+        style={{ marginTop: "5vh" }}
+        container
+        spacing={5}
+      >
         {products.map((item, index) => {
           return (
             <Grid key={index} item>
@@ -110,7 +113,7 @@ export default function ImgMediaCard() {
                     component="img"
                     alt="Product Image"
                     height="280"
-                    image={myUri + item.images[0]}
+                    image={myUri + "/" + item.images[0]}
                   />
                   <CardContent>
                     <Typography gutterBottom variant="subtitle2" component="h2">
@@ -141,11 +144,11 @@ export default function ImgMediaCard() {
                   size="small"
                   style={{ outline: "none" }}
                   onClick={() => {
+                    setBody({ id: item._id });
                     setAlertOpen(true);
-                    setDeleteThis(item._id);
                   }}
                 >
-                  DELETE
+                  RESTORE
                 </Button>
               </div>
               <ProductDetails
