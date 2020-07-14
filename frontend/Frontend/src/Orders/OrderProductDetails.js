@@ -58,7 +58,8 @@ const OrderProductDetails = ({ route, navigation }) => {
         </View>
       </View>
     </View>
-  );
+  )
+  
 };
 
 const styles = StyleSheet.create({

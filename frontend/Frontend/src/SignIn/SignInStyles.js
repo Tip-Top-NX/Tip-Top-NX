@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
   signUpBox: {
-    marginTop: 40,
-    // borderWidth: 1,
+    marginTop: 20,
+    //borderWidth: 1,
     borderColor: "#000",
     height: 90,
     width: 300,
@@ -69,13 +69,20 @@ const styles = StyleSheet.create({
   signUpText: {
     color: "#000",
     textAlign: "center",
-    letterSpacing: 1,
+    letterSpacing: 0.6,
     fontWeight: "bold",
   },
   error: {
     borderWidth: 3,
     borderColor: "red",
   },
+  forgotPwd:{
+    textDecorationLine:"underline",
+    color: "#000",
+    textAlign: "center",
+    letterSpacing: 0.6,
+    fontWeight: "bold",
+  }
 });
 
 export default styles;

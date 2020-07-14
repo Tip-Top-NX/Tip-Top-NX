@@ -38,6 +38,6 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "white"
   },
 });
