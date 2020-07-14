@@ -39,7 +39,7 @@ const Catalogue = ({ navigation, route }) => {
     };
     console.log(body);
     myAxios
-      .get("/category/" + prodId + "/get-products", body)
+      .post("/category/" + prodId + "/get-products", body)
       .then((res) => {
         if (mounted) {
           setIsLoading(false);

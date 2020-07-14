@@ -25,7 +25,7 @@ const Home = ({ navigation }) => {
   useEffect(() => {
     let mounted = true;
     myAxios
-      .get("/category/5/get-products")
+      .post("/category/5/get-products")
       .then((res) => {
         if (mounted) {
           setIsLoading(false);
