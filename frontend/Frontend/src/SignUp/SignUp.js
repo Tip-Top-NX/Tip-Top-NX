@@ -14,7 +14,7 @@ import styles from "./SignUpStyles";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { useSelector, useDispatch } from "react-redux";
-import { signup, signinFailed } from "../../../redux/ActionCreators";
+import { signinFailed } from "../../../redux/ActionCreators";
 
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -27,24 +27,19 @@ const signUp = () => {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   // states for style change if not valid
-  const [validName, checkName] = useState(true);
-  const [validEmail, checkEmail] = useState(true);
-  const [validPassword, checkPassword] = useState(true);
-  const [validPhone, checkPhone] = useState(true);
+  const [validName, checkName] = useState(-1);
+  const [validEmail, checkEmail] = useState(-1);
+  const [validPassword, checkPassword] = useState(-1);
+  const [validPhone, checkPhone] = useState(-1);
 
   // redux
+
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(signinFailed());
+        dispatch(signinFailed());
   }, []);
-
-  useEffect(() => {
-    if (user.isValid) {
-      navigation.navigate("Home");
-    }
-  }, [user.isValid]);
 
   const validation = () => {
     const emailregex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
@@ -52,46 +47,44 @@ const signUp = () => {
 
     // name check
     if (name == "") {
-      checkName(false);
+      checkName(0);
     } else if (!alph.test(name)) {
-      checkName(false);
-      // alert("Please enter a valid name");
+      checkName(0);
+      // alert("Please enter a valid name")
     } else {
-      checkName(true);
+      checkName(1);
     }
     // email check
     if (email == "") {
-      checkEmail(false);
+      checkEmail(0);
     } else if (!emailregex.test(email)) {
-      checkEmail(false);
+      checkEmail(0);
       // alert("Please enter a valid email address");
     } else {
-      checkEmail(true);
+      checkEmail(1);
     }
     // password check
     if (password == "" || password.length < 6) {
-      checkPassword(false);
+      checkPassword(0);
       // alert("The length of the password should be atleast 6");
       setPassword("");
     } else {
-      checkPassword(true);
+      checkPassword(1);
     }
     // phone number check
     if (phone == "" || phone.length !== 10 || phone.charAt(0) < 7) {
-      checkPhone(false);
+      checkPhone(0);
     } else {
-      checkPhone(true);
+      checkPhone(1);
     }
 
-    if (validEmail && validName && validPassword && validPhone) {
-      dispatch(
-        signup({
-          name,
-          email,
-          password,
-          contact: phone,
-        })
-      );
+    if (validEmail==1 && validName==1 && validPassword==1 && validPhone==1) {
+      navigation.navigate("Otp Mobile",{
+        name:name,
+        email:email,
+        password:password,
+        contact:phone
+      })
     }
   };
 
@@ -118,7 +111,7 @@ const signUp = () => {
               <View
                 style={[
                   styles.inputContainer,
-                  !validName ? styles.error : null,
+                  validName==0 ? styles.error : null,
                 ]}
               >
                 <TextInput
@@ -132,7 +125,7 @@ const signUp = () => {
               <View
                 style={[
                   styles.inputContainer,
-                  !validEmail ? styles.error : null,
+                  validEmail==0 ? styles.error : null,
                 ]}
               >
                 <TextInput
@@ -146,7 +139,7 @@ const signUp = () => {
               <View
                 style={[
                   styles.inputContainer,
-                  !validPassword ? styles.error : null,
+                  validPassword==0 ? styles.error : null,
                 ]}
               >
                 <TextInput
@@ -161,7 +154,7 @@ const signUp = () => {
               <View
                 style={[
                   styles.inputContainer,
-                  !validPhone ? styles.error : null,
+                  validPhone==0 ? styles.error : null,
                 ]}
               >
                 <TextInput

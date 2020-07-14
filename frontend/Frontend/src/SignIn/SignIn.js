@@ -150,6 +150,11 @@ const signIn = ({ navigation }) => {
                 ></TextInput>
               </View>
               <TouchableOpacity
+                onPress={() => navigation.navigate("Get Email")}
+              >
+                <Text style={styles.forgotPwd}>FORGOT PASSWORD?</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
                 style={styles.button}
                 onPress={() => validation()}
               >

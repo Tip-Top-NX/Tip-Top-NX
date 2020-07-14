@@ -8,10 +8,12 @@ import CustomBack from "../src/BackButton";
 
 import Header from "../src/Header";
 
+
 const Stack = createStackNavigator();
 
 const CartStack = () => {
   return (
+
     <Stack.Navigator
       screenOptions={{
         headerStyle: { height: 60 },
