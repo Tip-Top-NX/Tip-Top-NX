@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import {
   View,
   StyleSheet,
@@ -6,11 +6,68 @@ import {
   Dimensions,
   FlatList,
   TouchableOpacity,
+  Alert
 } from "react-native";
+import { myAxios, getConfig } from "../../../axios";
 import OrderProductCard from "./OrderProductCard";
+import { useSelector, useDispatch } from 'react-redux';
+import {cancelOrder2} from '../../../redux/ActionCreators';
+
 const width = Dimensions.get("window").width;
+
 const OrderCard = (props) => {
   let padding = 132 - props._id.toString().length * 9;
+
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
+  const cancelOrder = () => {
+    const bodyPart = {
+      status: "Cancelled"
+    };
+    Alert.alert(
+      "Cancel order",
+      "Are you sure you want to cancel this order?",
+      [
+        {
+          text: "Yes",
+          onPress: () => {
+            getConfig().then(config => {
+              myAxios
+                .put("/profile/order/"+props._id, bodyPart, config)
+                .then((res) => {
+                  if (res.data._id==props._id) {
+                    dispatch(cancelOrder2(props._id));
+                  }
+                  else {
+                    Alert.alert("Alert", "Order cannot be cancelled!", [{ text: "Ok" }]);
+                  }
+                })
+                .catch((err) => console.log(err));
+            })
+          },
+        },
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
+  const displayCancelOrder = () => {
+    return (
+      <View>
+        <TouchableOpacity
+          onPress={() => cancelOrder()}
+        >
+          <Text style={styles.cancelOrder}>Cancel Order</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   return (
     <View
       style={[
@@ -18,8 +75,8 @@ const OrderCard = (props) => {
         props.status == "Cancelled"
           ? { borderColor: "#e27070" }
           : props.status == "Completed"
-          ? { borderColor: "#627dcb" }
-          : { borderColor: "#4fc2a6" },
+            ? { borderColor: "#627dcb" }
+            : { borderColor: "#4fc2a6" },
       ]}
     >
       <View style={styles.orderRow}>
@@ -72,12 +129,13 @@ const OrderCard = (props) => {
             props.status == "Cancelled"
               ? styles.red
               : props.status == "Completed"
-              ? styles.blue
-              : styles.green
+                ? styles.blue
+                : styles.green
           }
         >
           {props.status}
         </Text>
+        {props.status == "Placed" ? displayCancelOrder() : null}
       </View>
     </View>
   );
@@ -142,6 +200,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingBottom: 5,
     letterSpacing: 0.7,
+  },
+  cancelOrder: {
+    color: "#e27070",
+    fontSize: 15.5,
+    marginTop: -1,
+    marginLeft: 105,
+    fontWeight: "bold",
+    //paddingRight: 8,
+    //textAlign: "right"
   },
 });
 export default OrderCard;

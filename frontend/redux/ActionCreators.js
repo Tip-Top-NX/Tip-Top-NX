@@ -37,6 +37,14 @@ export const setOrder = (orders, cart, cartTotal, points) => {
   };
 };
 
+export const cancelOrder2 = (orderId) => {
+  console.log(orderId);
+  return {
+    type: ActionTypes.CANCEL_ORDER,
+    payload: orderId,
+  }
+}
+
 export const postCart = (prodId, color, size, quantity) => {
   const bodyPart = {
     color: color,
