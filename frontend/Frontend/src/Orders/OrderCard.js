@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Alert
 } from "react-native";
-import { myAxios, } from "../../../axios";
+import { myAxios } from "../../../axios";
 import OrderProductCard from "./OrderProductCard";
 
 const width = Dimensions.get("window").width;

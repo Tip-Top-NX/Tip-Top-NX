@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, Image, Dimensions } from "react-native";
 import { TouchableOpacity, FlatList } from "react-native-gesture-handler";
 import ProductCard from "../ProductCard";
-import { myAxios } from "../../../axios";
 
 const width = Dimensions.get("window").width;
 
@@ -20,7 +19,7 @@ const popular = (props) => {
             width: 80,
             justifyContent: "center",
           }}
-          onPress={() => props.navigation.navigate("Catalogue", { prodId: 5 })}
+          onPress={() => props.navigation.navigate("Catalogue", { prodId: 1 })}
         >
           <Text
             style={{

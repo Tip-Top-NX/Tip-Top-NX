@@ -60,11 +60,11 @@ const Home = ({ navigation }) => {
           <Categories navigation={navigation} />
           <TouchableOpacity
             style={styles.innerBox}
-            onPress={() => navigation.navigate("Catalogue", { prodId: 5 })}
+            onPress={() => navigation.navigate("Catalogue", { prodId: 1 })}
           >
             <View>
               <ImageBackground
-                source={require("../../../assets/e.jpg")}
+                source={require("../../../assets/viewAll.jpg")}
                 style={styles.innerBox}
                 blurRadius={4}
               >

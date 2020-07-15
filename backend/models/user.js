@@ -9,7 +9,6 @@ const userSchema = new Schema({
   },
   contact: {
     type: Number,
-    required: true,
   },
   address: {
     type: String,
@@ -50,14 +49,17 @@ const userSchema = new Schema({
       size: String,
       color: String,
       quantity: Number,
-      price:Number
+      price: Number,
     },
   ],
   cartTotal: {
-    type:Number,
-    default:0
+    type: Number,
+    default: 0,
   },
-  otptoken:String
+  otptoken: String,
+  admin: {
+    type: Boolean,
+  },
 });
 userSchema.plugin(passportLocalMongoose, { usernameField: "email" });
 

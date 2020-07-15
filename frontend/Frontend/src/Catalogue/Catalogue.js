@@ -93,6 +93,7 @@ const Catalogue = ({ navigation, route }) => {
             renderItem={({ item }) => (
               <ProductCard
                 brand={item.brand}
+                category={item.category}
                 description={item.description}
                 colors={item.colors}
                 images={item.images}

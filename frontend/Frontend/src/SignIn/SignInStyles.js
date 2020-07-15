@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   title: {
     // marginTop: 10,
     padding: 10,
-    height: 150,
+    // height: 150,
     width: 300,
     // borderWidth: 1,
     justifyContent: "flex-end",
@@ -76,13 +76,17 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: "red",
   },
-  forgotPwd:{
-    textDecorationLine:"underline",
+  forgotPwd: {
+    textDecorationLine: "underline",
     color: "#000",
     textAlign: "center",
     letterSpacing: 0.6,
     fontWeight: "bold",
-  }
+    marginTop: 15,
+    // borderWidth: 1,
+    width: 300,
+    alignSelf: "center",
+  },
 });
 
 export default styles;

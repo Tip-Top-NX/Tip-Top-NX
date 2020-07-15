@@ -9,7 +9,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   ImageBackground,
-  Alert
+  Alert,
 } from "react-native";
 import styles from "./SignUpStyles";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -34,20 +34,22 @@ const signUp = () => {
   const [validPassword, checkPassword] = useState(-1);
   const [validPhone, checkPhone] = useState(-1);
 
+  const [isAlreadyRegistered, setIsAlreadyRegistered] = useState(-1);
+
   // redux
 
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
-        dispatch(signinFailed());
+    dispatch(signinFailed());
   }, []);
 
   const validation = () => {
     const emailregex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     const alph = /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/;
     const bodyPart = {
-        email:email
+      email: email,
     };
 
     // name check
@@ -83,30 +85,55 @@ const signUp = () => {
       checkPhone(1);
     }
 
-    if (validEmail==1 && validName==1 && validPassword==1 && validPhone==1) {
+    if (validEmail == 1) {
+      const bodyPart = {
+        email: email,
+        type: 0,
+      };
       myAxios
-          .post("/users/verify-email",bodyPart)
-          .then((res) => {
-              if (res.data.success) {
-                   navigation.navigate("Otp Verify",{
-                    name:name,
-                    email:email,
-                    password:password,
-                    contact:phone
-                  })
-              }
-              else{
-                  Alert.alert("Alert","Email already registered!",[{text:"Sign In"}]);
-                  navigation.navigate("Sign In");
-              }
-          })
-          .catch((err) => console.log(err));
+        .post("/users/forgot", bodyPart)
+        .then((res) => {
+          //console.log(res)
+          if (res.data.success) {
+            Alert.alert("Error", "Entered email already registered!", [
+              { text: "Try Signing in" },
+            ]);
+            setIsAlreadyRegistered(1);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+
+    if (
+      validEmail == 1 &&
+      validName == 1 &&
+      validPassword == 1 &&
+      validPhone == 1 &&
+      isAlreadyRegistered == 0
+    ) {
+      myAxios
+        .post("/users/verify-email", bodyPart)
+        .then((res) => {
+          if (res.data.success) {
+            navigation.navigate("Otp Verify", {
+              name: name,
+              email: email,
+              password: password,
+              contact: phone,
+            });
+          } else {
+            Alert.alert("Error", "Problem in signing up!", [
+              { text: "Try again" },
+            ]);
+          }
+        })
+        .catch((err) => console.log(err));
     }
   };
 
   return (
     <SafeAreaView>
-      <KeyboardAwareScrollView scrollEnabled={true}>
+      <KeyboardAwareScrollView scrollEnabled={false}>
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.container}>
             <ImageBackground
@@ -127,7 +154,7 @@ const signUp = () => {
               <View
                 style={[
                   styles.inputContainer,
-                  validName==0 ? styles.error : null,
+                  validName == 0 ? styles.error : null,
                 ]}
               >
                 <TextInput
@@ -141,7 +168,7 @@ const signUp = () => {
               <View
                 style={[
                   styles.inputContainer,
-                  validEmail==0 ? styles.error : null,
+                  validEmail == 0 ? styles.error : null,
                 ]}
               >
                 <TextInput
@@ -155,7 +182,7 @@ const signUp = () => {
               <View
                 style={[
                   styles.inputContainer,
-                  validPassword==0 ? styles.error : null,
+                  validPassword == 0 ? styles.error : null,
                 ]}
               >
                 <TextInput
@@ -170,7 +197,7 @@ const signUp = () => {
               <View
                 style={[
                   styles.inputContainer,
-                  validPhone==0 ? styles.error : null,
+                  validPhone == 0 ? styles.error : null,
                 ]}
               >
                 <TextInput
