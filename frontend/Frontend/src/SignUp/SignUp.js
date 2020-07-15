@@ -96,7 +96,8 @@ const signUp = () => {
                   })
               }
               else{
-                  Alert.alert("Error","Problem in signing up!",[{text:"Try again"}]);
+                  Alert.alert("Alert","Email already registered!",[{text:"Sign In"}]);
+                  navigation.navigate("Sign In");
               }
           })
           .catch((err) => console.log(err));

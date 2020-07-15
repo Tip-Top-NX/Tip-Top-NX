@@ -74,15 +74,23 @@ router.post("/set-password",authenticate.verifyUser,(req,res,next) => {
 })
 
 router.post("/verify-email",(req,res,next) => {
-  let otp = mailer.sendOTP(req.body.email)
-  Verification.create({
-    email:req.body.email,
-    otpToken:otp
+  User.findOne({email : req.body.email})
+  .then((user) => {
+    if(!user){
+      let otp = mailer.sendOTP(req.body.email)
+      Verification.create({
+        email:req.body.email,
+        otpToken:otp
+      })
+      .then((verification) => {
+        res.send({success:true});
+      })
+      .catch((err) => next(err))
+    }
+    else{
+      res.send({success:false});
+    }
   })
-  .then((verification) => {
-    res.send({success:true});
-  })
-  .catch((err) => next(err))
 })
 
 router.post("/verify-user",(req,res,next) => {
