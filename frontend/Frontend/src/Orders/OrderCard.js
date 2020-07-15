@@ -6,11 +6,61 @@ import {
   Dimensions,
   FlatList,
   TouchableOpacity,
+  Alert
 } from "react-native";
+import { myAxios, } from "../../../axios";
 import OrderProductCard from "./OrderProductCard";
+
 const width = Dimensions.get("window").width;
+
 const OrderCard = (props) => {
   let padding = 132 - props._id.toString().length * 9;
+
+  const cancelOrder = () => {
+    const bodyPart={
+      status:"Cancelled"
+    };
+    Alert.alert(
+      "Cancel order",
+      "Are you sure you want to cancel this order?",
+      [
+        {
+          text: "Yes",
+          onPress: () => {
+            myAxios
+              .put("/profile/order/props._id",bodyPart)
+              .then((res) => {
+                  if (res.data.order) {
+                      console.log("This is pending");
+                  }
+                  else{
+                      Alert.alert("Alert","Order cannot be cancelled!",[{text:"Ok"}]);
+                  }
+              })
+              .catch((err) => console.log(err));
+          },
+        },
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+  
+  const displayCancelOrder = () => {
+    return (
+      <View>
+        <TouchableOpacity
+          onPress={() => cancelOrder()}
+        >
+          <Text style={styles.cancelOrder}>Cancel Order</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   return (
     <View
       style={[
@@ -78,6 +128,7 @@ const OrderCard = (props) => {
         >
           {props.status}
         </Text>
+        {props.status == "Placed" ? displayCancelOrder() : null}
       </View>
     </View>
   );
@@ -126,22 +177,34 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#4fc2a6",
     fontSize: 16,
-    paddingBottom: 5,
+    paddingBottom: 3,
     letterSpacing: 0.7,
+    marginBottom:2
   },
   red: {
     fontWeight: "bold",
     color: "#e27070",
     fontSize: 16,
-    paddingBottom: 5,
+    paddingBottom: 3,
     letterSpacing: 0.7,
+    marginBottom:2
   },
   blue: {
     fontWeight: "bold",
     color: "#627dcb",
     fontSize: 16,
-    paddingBottom: 5,
+    paddingBottom: 3,
     letterSpacing: 0.7,
+    marginBottom:2
+  },
+  cancelOrder: {
+    color: "#e27070",
+    fontSize: 15.5,
+    marginTop: -1,
+    marginLeft: 105,
+    fontWeight: "bold",
+    //paddingRight: 8,
+    //textAlign: "right"
   },
 });
 export default OrderCard;
