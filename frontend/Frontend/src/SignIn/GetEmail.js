@@ -29,7 +29,8 @@ const GetEmail = () => {
 
     const sendOtp = () => {
         const bodyPart = {
-            email:email
+            email:email,
+            type:true
         };
         myAxios
             .post("/users/forgot",bodyPart)

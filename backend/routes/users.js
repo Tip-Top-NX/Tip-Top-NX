@@ -3,6 +3,7 @@ var router = express.Router();
 var authenticate = require("../utils/authenticate");
 var mailer = require("../utils/mail");
 const User = require("../models/user");
+const Verification = require("../models/verification");
 
 /* GET users listing. */
 router.get("/", function (req, res, next) {
@@ -70,6 +71,33 @@ router.post("/set-password",authenticate.verifyUser,(req,res,next) => {
     })
     .catch((err) => next(err));
   })
+})
+
+router.post("/verify-email",(req,res,next) => {
+  let otp = mailer.sendOTP(req.body.email)
+  Verification.create({
+    email:req.body.email,
+    otpToken:otp
+  })
+  .then((verification) => {
+    res.send({success:true});
+  })
+  .catch((err) => next(err))
+})
+
+router.post("/verify-user",(req,res,next) => {
+  console.log(req.body)
+  Verification.findOne({email:req.body.email , otpToken:req.body.otp})
+  .then((verification) => {
+    if(verification){
+      console.log("hi")
+      res.send({success:true})
+    }
+    else{
+      res.send({success:false})
+    }
+  })
+  .catch((err) => next(err));
 })
 
 router.post("/sign-up", (req, res, next) => {

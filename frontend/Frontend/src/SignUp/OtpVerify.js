@@ -61,10 +61,9 @@ class OtpVerify extends Component{
             email:this.props.route.params.email
         };
         myAxios
-            .post("/users/verify-otp",bodyPart)
+            .post("/users/verify-user",bodyPart)
             .then((res) => {
                 if (res.data.success) {
-                    AsyncStorage.setItem("token", res.data.token);
                     Alert.alert("Success","Mobile number verified successfully!");
                     this.props.signup(this.props.route.params.name,this.props.route.params.email,this.props.route.params.password,this.props.route.params.contact);
                 }

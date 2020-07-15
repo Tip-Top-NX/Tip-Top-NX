@@ -85,9 +85,8 @@ const signUp = () => {
 
     if (validEmail==1 && validName==1 && validPassword==1 && validPhone==1) {
       myAxios
-          .post("/users/forgot",bodyPart)
+          .post("/users/verify-email",bodyPart)
           .then((res) => {
-              //console.log(res)
               if (res.data.success) {
                    navigation.navigate("Otp Verify",{
                     name:name,
