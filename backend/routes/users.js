@@ -122,9 +122,6 @@ router.post("/sign-up", (req, res, next) => {
   });
 });
 
-<<<<<<< HEAD
-module.exports = router;
-=======
 router.post("/add-admin", (req,res,next) => {
   User.register({...req.body,admin: true},req.body.password,(err, user) => {
       if (!err) {
@@ -140,4 +137,3 @@ router.post("/add-admin", (req,res,next) => {
 })
 
 module.exports = router;
->>>>>>> 876102dbafc37c23698efca0d9bfee3f6b08446d

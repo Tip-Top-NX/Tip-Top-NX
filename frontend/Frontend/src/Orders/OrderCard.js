@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import {
   View,
   StyleSheet,
@@ -8,17 +8,22 @@ import {
   TouchableOpacity,
   Alert
 } from "react-native";
-import { myAxios } from "../../../axios";
+import { myAxios, getConfig } from "../../../axios";
 import OrderProductCard from "./OrderProductCard";
+import { useSelector, useDispatch } from 'react-redux';
+import {cancelOrder2} from '../../../redux/ActionCreators';
 
 const width = Dimensions.get("window").width;
 
 const OrderCard = (props) => {
   let padding = 132 - props._id.toString().length * 9;
 
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
   const cancelOrder = () => {
-    const bodyPart={
-      status:"Cancelled"
+    const bodyPart = {
+      status: "Cancelled"
     };
     Alert.alert(
       "Cancel order",
@@ -27,17 +32,19 @@ const OrderCard = (props) => {
         {
           text: "Yes",
           onPress: () => {
-            myAxios
-              .put("/profile/order/props._id",bodyPart)
-              .then((res) => {
-                  if (res.data.order) {
-                      console.log("This is pending");
+            getConfig().then(config => {
+              myAxios
+                .put("/profile/order/"+props._id, bodyPart, config)
+                .then((res) => {
+                  if (res.data._id==props._id) {
+                    dispatch(cancelOrder2(props._id));
                   }
-                  else{
-                      Alert.alert("Alert","Order cannot be cancelled!",[{text:"Ok"}]);
+                  else {
+                    Alert.alert("Alert", "Order cannot be cancelled!", [{ text: "Ok" }]);
                   }
-              })
-              .catch((err) => console.log(err));
+                })
+                .catch((err) => console.log(err));
+            })
           },
         },
         {
@@ -48,7 +55,7 @@ const OrderCard = (props) => {
       { cancelable: false }
     );
   };
-  
+
   const displayCancelOrder = () => {
     return (
       <View>
@@ -67,8 +74,6 @@ const OrderCard = (props) => {
         styles.orderBox,
         props.status == "Cancelled"
           ? { borderColor: "#e27070" }
-          : props.status == "Completed"
-          ? { borderColor: "#627dcb" }
           : { borderColor: "#4fc2a6" },
       ]}
     >
@@ -121,14 +126,12 @@ const OrderCard = (props) => {
           style={
             props.status == "Cancelled"
               ? styles.red
-              : props.status == "Completed"
-              ? styles.blue
               : styles.green
           }
         >
-          {props.status}
+        {props.status}
         </Text>
-        {props.status == "Placed" ? displayCancelOrder() : null}
+        {props.status == "Pending" ? displayCancelOrder() : null}
       </View>
     </View>
   );
