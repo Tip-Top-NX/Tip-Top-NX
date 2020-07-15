@@ -73,6 +73,7 @@ const Address = (props) => {
                 onChangeText={(text) => setAddress(text)}
                 value={address}
                 multiline={true}
+                autoFocus={true}
               ></TextInput>
               <View
                 style={{ flexDirection: "row", justifyContent: "space-evenly" }}

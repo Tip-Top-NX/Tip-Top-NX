@@ -22,14 +22,32 @@ const Home = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [popularProducts, setPopularProducts] = useState();
 
+  function shuffle(array) {
+    var currentIndex = array.length,
+      temporaryValue,
+      randomIndex;
+
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
+
   useEffect(() => {
     let mounted = true;
     myAxios
-      .post("/category/5/get-products")
+      .post("/category/1/get-products")
       .then((res) => {
         if (mounted) {
           setIsLoading(false);
-          setPopularProducts([...res.data]);
+          shuffle(res.data);
+          setPopularProducts([...res.data.splice(0, 10)]);
         }
       })
       .catch((err) => console.log(err));

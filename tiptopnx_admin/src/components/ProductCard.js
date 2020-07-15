@@ -76,7 +76,7 @@ export default function ImgMediaCard() {
   useEffect(() => {
     let mounted = true;
     axios
-      .get("/category/1/get-products")
+      .get("/category/4/get-products")
       .then((res) => {
         if (mounted) {
           // setIsLoading(false);

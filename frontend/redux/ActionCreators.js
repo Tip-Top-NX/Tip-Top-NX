@@ -179,7 +179,10 @@ export const signin = (user) => {
           dispatch(signinFailed());
         }
       })
-      .catch((err) => dispatch(signinFailed()));
+      .catch((err) => {
+        dispatch(signinFailed()),
+          alert("The password you have entered is INCORRECT");
+      });
   };
 };
 

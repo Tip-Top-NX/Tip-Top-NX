@@ -14,8 +14,8 @@ import { useNavigation } from "@react-navigation/native";
 const width = Dimensions.get("window").width;
 
 const sortBy = [
-  { name: "Price High to Low", num: 1 },
-  { name: "Price Low to High", num: -1 },
+  { name: "Price High to Low", num: -1 },
+  { name: "Price Low to High", num: 1 },
 ];
 
 const Sort = ({ route }) => {
@@ -24,9 +24,9 @@ const Sort = ({ route }) => {
 
   useEffect(() => {
     if (route.params.order === -1) {
-      setSelected(1);
-    } else if (route.params.order === 1) {
       setSelected(0);
+    } else if (route.params.order === 1) {
+      setSelected(1);
     }
   }, []);
 
@@ -45,7 +45,7 @@ const Sort = ({ route }) => {
                   if (sortBy.indexOf(item) !== selected) {
                     setSelected(sortBy.indexOf(item));
                   } else {
-                    setSelected();
+                    setSelected(-1);
                   }
                 }}
               >
@@ -96,8 +96,11 @@ const Sort = ({ route }) => {
           onPress={() => {
             navigation.navigate("Catalogue", {
               prodId: route.params.prodId,
-              sortCode: sortBy[selected].num,
-              sortBy: sortBy[selected].name.split(" ").splice(0)[0],
+              sortCode: selected !== -1 ? sortBy[selected].num : -1,
+              sortBy:
+                selected !== -1
+                  ? sortBy[selected].name.split(" ").splice(0)[0]
+                  : "",
             });
           }}
         >

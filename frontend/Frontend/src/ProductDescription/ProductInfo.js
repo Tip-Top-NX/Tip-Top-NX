@@ -1,8 +1,18 @@
 /* eslint-disable */
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useEffect } from "react";
+import { View, Text, StyleSheet, Alert } from "react-native";
 
 const ProductInfo = (props) => {
+  useEffect(() => {
+    if (props.price === 0) {
+      Alert.alert(
+        "Product Price",
+        "The price of this product is yet to be confirmed, you can contact us through email or contact number for further details",
+        [{ text: "Okay" }]
+      );
+    }
+  }, []);
+
   let SP = props.price - (props.price * props.discountPercentage) / 100;
   return (
     <View style={styles.container}>

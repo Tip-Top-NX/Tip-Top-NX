@@ -50,6 +50,14 @@ const ButtonBar = (props) => {
       if (props.chosenColor === undefined || props.chosenSize === undefined) {
         alert("Please select SIZE and COLOR to continue");
       } else {
+        // if (props.price === 0) {
+        //   Alert.alert(
+        //     "Product Price",
+        //     "The price of this product is yet to be confirmed, you can contact us through email or contact number for further details",
+        //     ["Okay"]
+        //   );
+        // }
+        // alert(props.price);
         setButtonText("GO TO CART");
         dispatch(postCart(props._id, props.chosenColor, props.chosenSize, 1));
       }

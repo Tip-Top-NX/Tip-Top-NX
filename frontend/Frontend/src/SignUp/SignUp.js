@@ -85,31 +85,11 @@ const signUp = () => {
       checkPhone(1);
     }
 
-    if (validEmail == 1) {
-      const bodyPart = {
-        email: email,
-        type: 0,
-      };
-      myAxios
-        .post("/users/forgot", bodyPart)
-        .then((res) => {
-          //console.log(res)
-          if (res.data.success) {
-            Alert.alert("Error", "Entered email already registered!", [
-              { text: "Try Signing in" },
-            ]);
-            setIsAlreadyRegistered(1);
-          }
-        })
-        .catch((err) => console.log(err));
-    }
-
     if (
       validEmail == 1 &&
       validName == 1 &&
       validPassword == 1 &&
-      validPhone == 1 &&
-      isAlreadyRegistered == 0
+      validPhone == 1
     ) {
       myAxios
         .post("/users/verify-email", bodyPart)
@@ -122,9 +102,10 @@ const signUp = () => {
               contact: phone,
             });
           } else {
-            Alert.alert("Error", "Problem in signing up!", [
-              { text: "Try again" },
+            Alert.alert("Alert", "Email Already Registered", [
+              { text: "Sign In" },
             ]);
+            navigation.navigate("Sign In");
           }
         })
         .catch((err) => console.log(err));
@@ -137,7 +118,7 @@ const signUp = () => {
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.container}>
             <ImageBackground
-              source={require("../../../assets/b1.jpg")}
+              source={require("../../../assets/background.jpg")}
               style={{
                 flex: 1,
                 resizeMode: "cover",

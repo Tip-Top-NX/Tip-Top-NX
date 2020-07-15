@@ -73,7 +73,7 @@ class OtpForgot extends Component {
           <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.container}>
               <ImageBackground
-                source={require("../../../assets/b1.jpg")}
+                source={require("../../../assets/background.jpg")}
                 style={{
                   flex: 1,
                   resizeMode: "cover",

@@ -33,10 +33,8 @@ router.post("/forgot", (req, res, next) => {
   User.findOne({ email: req.body.email })
     .then((user) => {
       if (user) {
-        if (req.body.type === 1) {
-          let otp = mailer.sendOTP(user.email);
-          user.otptoken = otp;
-        }
+        let otp = mailer.sendOTP(user.email);
+        user.otptoken = otp;
         user.save();
         res.send({ success: true });
       } else {
@@ -77,15 +75,21 @@ router.post("/set-password", authenticate.verifyUser, (req, res, next) => {
 });
 
 router.post("/verify-email", (req, res, next) => {
-  let otp = mailer.sendOTP(req.body.email);
-  Verification.create({
-    email: req.body.email,
-    otpToken: otp,
-  })
-    .then((verification) => {
-      res.send({ success: true });
-    })
-    .catch((err) => next(err));
+  User.findOne({ email: req.body.email }).then((user) => {
+    if (!user) {
+      let otp = mailer.sendOTP(req.body.email);
+      Verification.create({
+        email: req.body.email,
+        otpToken: otp,
+      })
+        .then((verification) => {
+          res.send({ success: true });
+        })
+        .catch((err) => next(err));
+    } else {
+      res.send({ success: false });
+    }
+  });
 });
 
 router.post("/verify-user", (req, res, next) => {
@@ -122,18 +126,22 @@ router.post("/sign-up", (req, res, next) => {
   });
 });
 
-router.post("/add-admin", (req,res,next) => {
-  User.register({...req.body,admin: true},req.body.password,(err, user) => {
+router.post("/add-admin", (req, res, next) => {
+  User.register(
+    { ...req.body, admin: true },
+    req.body.password,
+    (err, user) => {
       if (!err) {
-          res.json({
-            user: user,
-            success: true,
-            token: authenticate.getToken({ _id: user._id }),
-          });
-        } else {
-          res.json({ err: err });
-        }
-  });
-})
+        res.json({
+          user: user,
+          success: true,
+          token: authenticate.getToken({ _id: user._id }),
+        });
+      } else {
+        res.json({ err: err });
+      }
+    }
+  );
+});
 
 module.exports = router;

@@ -10,9 +10,9 @@ import {
   Keyboard,
   Dimensions,
   ImageBackground,
-  Alert
+  Alert,
 } from "react-native";
-import { myAxios,getConfig } from "../../../axios";
+import { myAxios, getConfig } from "../../../axios";
 import { useNavigation } from "@react-navigation/native";
 
 const width = Dimensions.get("window").width;
@@ -27,28 +27,27 @@ const ResetPassword = () => {
     // password check
     console.log(newPassword + " " + confirmPass);
     setMessage("");
-    if ( newPassword === "" || newPassword.length < 6 ){
+    if (newPassword === "" || newPassword.length < 6) {
       setMessage("The password should be atleast 6 characters long");
-    }
-    else if ( newPassword !== confirmPass ){
+    } else if (newPassword !== confirmPass) {
       setMessage("The passwords dont match");
-    } 
-    else {
+    } else {
       console.log("dispatching");
       const bodyPart = {
-            password:newPassword
-        };
+        password: newPassword,
+      };
       getConfig().then((config) => {
         myAxios
-          .post("/users/set-password",bodyPart,config)
+          .post("/users/set-password", bodyPart, config)
           .then((res) => {
-              if (res.data.success) {
-                Alert.alert("Success","Password changed successfully");
-                navigation.navigate("Sign In");
-              }
-              else{
-                Alert.alert("Error","Cannot change password",[{text:"Try again"}]);
-              }
+            if (res.data.success) {
+              Alert.alert("Success", "Password changed successfully");
+              navigation.navigate("Sign In");
+            } else {
+              Alert.alert("Error", "Cannot change password", [
+                { text: "Try again" },
+              ]);
+            }
           })
           .catch((err) => console.log(err));
       });
@@ -60,7 +59,7 @@ const ResetPassword = () => {
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.container}>
           <ImageBackground
-            source={require("../../../assets/b1.jpg")}
+            source={require("../../../assets/background.jpg")}
             style={{
               flex: 1,
               resizeMode: "cover",

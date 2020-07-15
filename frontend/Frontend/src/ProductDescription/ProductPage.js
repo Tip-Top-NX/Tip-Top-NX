@@ -29,6 +29,10 @@ const ProductPage = ({ route }) => {
   const _id = route.params._id;
   const category = route.params.category;
 
+  const [chosenSize, setChosenSize] = useState();
+  const [chosenColor, setChosenColor] = useState();
+  const [checkHeight, setHeight] = useState();
+
   const handleScroll = (event) => {
     setHeight(event.nativeEvent.contentOffset.y);
   };
@@ -41,7 +45,7 @@ const ProductPage = ({ route }) => {
         scrollEventThrottle={1}
         style={{ height: height - 100 }}
       >
-        <ImageCarousel images={images} />
+        <ImageCarousel images={images.slice(0, 2)} />
         <ProductInfo
           brand={brand}
           name={name}
@@ -75,6 +79,7 @@ const ProductPage = ({ route }) => {
           _id={_id}
           chosenSize={chosenSize}
           chosenColor={chosenColor}
+          price={price}
         />
       ) : null}
     </SafeAreaView>
