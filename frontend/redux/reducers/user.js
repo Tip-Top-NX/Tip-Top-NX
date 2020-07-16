@@ -54,6 +54,19 @@ const reducer = (state = initialState, action) => {
         ...state,
         ...action.payload,
       };
+    case ActionTypes.CANCEL_ORDER:
+      const orders = [...state.orders];
+      for(var i=0;i<orders.length;i++){
+        if(orders[i]._id==action.payload){
+          orders[i].status = "CANCELLED";
+          console.log(orders[i]);
+          break;
+        }
+      }
+      return {
+        ...state,
+        orders: [...orders]
+      };
     default:
       return state;
   }

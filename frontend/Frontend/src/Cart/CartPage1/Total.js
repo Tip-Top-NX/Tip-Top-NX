@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { View, StyleSheet, Text, Alert } from "react-native";
+import React from "react";
+import { View, StyleSheet, Text } from "react-native";
 
 import { useSelector } from "react-redux";
 
@@ -9,16 +9,6 @@ const Total = () => {
   user.cartTotal >= 1000 ? (deliveryCharges = 0) : (deliveryCharges = 50);
   let grandTotal = user.cartTotal + deliveryCharges;
   // console.log(user);
-
-  useEffect(() => {
-    if (user.cartTotal === 0) {
-      Alert.alert(
-        "Price Issue",
-        "The price of some of the products in your cart is yet to be confirmed, we will notify you about it if you place the order of such a product",
-        [{ text: "Continue" }]
-      );
-    }
-  }, []);
 
   return (
     <View style={styles.container}>

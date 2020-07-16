@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -6,19 +6,72 @@ import {
   Dimensions,
   FlatList,
   TouchableOpacity,
+  Alert,
 } from "react-native";
+import { myAxios, getConfig } from "../../../axios";
 import OrderProductCard from "./OrderProductCard";
+import { useSelector, useDispatch } from "react-redux";
+import { cancelOrder2 } from "../../../redux/ActionCreators";
+
 const width = Dimensions.get("window").width;
+
 const OrderCard = (props) => {
   let padding = 132 - props._id.toString().length * 9;
+
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const cancelOrder = () => {
+    const bodyPart = {
+      status: "Cancelled",
+    };
+    Alert.alert(
+      "Cancel order",
+      "Are you sure you want to cancel this order?",
+      [
+        {
+          text: "Yes",
+          onPress: () => {
+            getConfig().then((config) => {
+              myAxios
+                .put("/profile/order/" + props._id, bodyPart, config)
+                .then((res) => {
+                  if (res.data._id == props._id) {
+                    dispatch(cancelOrder2(props._id));
+                  } else {
+                    Alert.alert("Alert", "Order cannot be cancelled!", [
+                      { text: "Ok" },
+                    ]);
+                  }
+                })
+                .catch((err) => console.log(err));
+            });
+          },
+        },
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+  const displayCancelOrder = () => {
+    return (
+      <View>
+        <TouchableOpacity onPress={() => cancelOrder()}>
+          <Text style={styles.cancelOrder}>Cancel Order</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   return (
     <View
       style={[
         styles.orderBox,
         props.status == "Cancelled"
           ? { borderColor: "#e27070" }
-          : props.status == "Completed"
-          ? { borderColor: "#627dcb" }
           : { borderColor: "#4fc2a6" },
       ]}
     >
@@ -63,21 +116,25 @@ const OrderCard = (props) => {
           />
         )}
       />
-      <View style={{ flexDirection: "row", paddingVertical: 1 }}>
+      <View
+        style={{
+          flexDirection: "row",
+          paddingVertical: 1,
+          justifyContent: "space-between",
+          paddingHorizontal: 5,
+          paddingRight: 10,
+        }}
+      >
         <Text style={{ paddingLeft: 10, fontSize: 15, color: "#7b7b7b" }}>
           Status :{" "}
+          <Text
+            style={props.status === "Cancelled" ? styles.red : styles.green}
+          >
+            {props.status === "Pending" ? "Confirming" : props.status}
+          </Text>
         </Text>
-        <Text
-          style={
-            props.status == "Cancelled"
-              ? styles.red
-              : props.status == "Completed"
-              ? styles.blue
-              : styles.green
-          }
-        >
-          {props.status}
-        </Text>
+
+        {props.status == "Pending" ? displayCancelOrder() : null}
       </View>
     </View>
   );
@@ -126,22 +183,34 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#4fc2a6",
     fontSize: 16,
-    paddingBottom: 5,
+    paddingBottom: 3,
     letterSpacing: 0.7,
+    marginBottom: 2,
   },
   red: {
     fontWeight: "bold",
     color: "#e27070",
     fontSize: 16,
-    paddingBottom: 5,
+    paddingBottom: 3,
     letterSpacing: 0.7,
+    marginBottom: 2,
   },
   blue: {
     fontWeight: "bold",
     color: "#627dcb",
     fontSize: 16,
-    paddingBottom: 5,
+    paddingBottom: 3,
     letterSpacing: 0.7,
+    marginBottom: 2,
+  },
+  cancelOrder: {
+    color: "#e27070",
+    fontSize: 15.5,
+    // marginTop: -1,
+    // marginLeft: 105,
+    fontWeight: "bold",
+    //paddingRight: 8,
+    //textAlign: "right"
   },
 });
 export default OrderCard;

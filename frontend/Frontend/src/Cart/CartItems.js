@@ -28,7 +28,7 @@ const CartItems = (props) => {
               name={item.product.name}
               brand={item.product.brand}
               price={item.product.price}
-              discountPercentage={item.discountPercentage}
+              discountPercentage={item.product.discountPercentage}
               size={item.size}
               color={item.color}
               quantity={item.quantity}
