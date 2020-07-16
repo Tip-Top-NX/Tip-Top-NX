@@ -102,7 +102,7 @@ class OtpVerify extends Component {
               >
                 <View>
                   <Text style={styles.text}>
-                    Enter OTP sent to your mobile number :{" "}
+                    Enter OTP sent to your email address :{" "}
                   </Text>
                   <View style={styles.otpBox}>
                     <TextInput

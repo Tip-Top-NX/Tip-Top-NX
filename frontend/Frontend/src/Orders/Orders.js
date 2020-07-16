@@ -11,11 +11,11 @@ const Orders = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       {user.orders.length === 0 ? (
         <Empty
-          title="YOU DONT HAVE ANY ORDERS YET!"
-          desc="TO SELECT PRODUCTS TO ORDER"
-          navigation={props.navigation}
+          navigation={navigation}
+          title={"NO ORDERS FOUND"}
+          desc={"YOU CAN PLACE AN ORDER BY ADDING ITEMS TO YOUR CART"}
         />
-        ) : (
+      ) : (
         <FlatList
           data={user.orders}
           vertical={true}
@@ -47,6 +47,6 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     flex: 1,
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
 });

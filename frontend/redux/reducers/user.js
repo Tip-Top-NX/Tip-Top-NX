@@ -58,7 +58,7 @@ const reducer = (state = initialState, action) => {
       const orders = [...state.orders];
       for(var i=0;i<orders.length;i++){
         if(orders[i]._id==action.payload){
-          orders[i].status = "CANCELLED";
+          orders[i].status = "Cancelled";
           console.log(orders[i]);
           break;
         }

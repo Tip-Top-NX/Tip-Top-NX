@@ -18,8 +18,6 @@ const Catalogue = ({ navigation, route }) => {
   const [products, setProducts] = useState();
   // const [show, setShow] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
-  const [checkHeight, setHeight] = useState();
-  const [checkBox, setBox] = useState(true);
   const prodId = route.params.prodId;
   const sort = route.params.sortBy;
   const order = route.params.sortCode;
@@ -43,20 +41,33 @@ const Catalogue = ({ navigation, route }) => {
       .then((res) => {
         if (mounted) {
           setIsLoading(false);
-          setProducts([...res.data]);
+          if (sort !== "Price") {
+            setProducts(shuffle([...res.data]));
+          } else {
+            setProducts([...res.data]);
+          }
         }
       })
       .catch((err) => console.log(err));
     return () => (mounted = false);
   }, [prodId, sort, order, priceLower, priceUpper]);
 
-  const handleScroll = (event) => {
-    var currentHeight = event.nativeEvent.contentOffset.y;
-    currentHeight > checkHeight && currentHeight > 0
-      ? setBox(false)
-      : setBox(true);
-    setHeight(event.nativeEvent.contentOffset.y);
-  };
+  function shuffle(array) {
+    var currentIndex = array.length,
+      temporaryValue,
+      randomIndex;
+
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -88,8 +99,6 @@ const Catalogue = ({ navigation, route }) => {
             data={products}
             numColumns={2}
             keyExtractor={(item) => item._id}
-            showsVerticalScrollIndicator={false}
-            onScroll={handleScroll}
             renderItem={({ item }) => (
               <ProductCard
                 brand={item.brand}
@@ -112,7 +121,6 @@ const Catalogue = ({ navigation, route }) => {
               />
             )}
           />
-          {/* {checkBox ? ( */}
           <ButtonBox
             prodId={prodId}
             // allSelected={allSelected}
@@ -121,7 +129,6 @@ const Catalogue = ({ navigation, route }) => {
             cat={cat}
             order={order}
           />
-          {/* ) : null} */}
         </View>
       )}
     </SafeAreaView>

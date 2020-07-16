@@ -81,4 +81,23 @@ router.get("/:catId/get-products", (req, res, next) => {
     .catch((err) => next(err));
 });
 
+router.post("/:catId/get-products", (req, res, next) => {
+  console.log("object", req.params.catId);
+  Category.find({ ancestors: req.params.catId })
+    .distinct("_id")
+    .then((cats) => {
+      cats.push(Number(req.params.catId));
+      filter = createFilter(req.body);
+      filter.category = { $in: cats };
+      console.log(req.body);
+      if (req.body.sort === "Price") {
+        return Product.find(filter).sort({ price: req.body.order });
+      } else {
+        return Product.find(filter);
+      }
+    })
+    .then((prods) => res.send(prods))
+    .catch((err) => next(err));
+});
+
 module.exports = router;

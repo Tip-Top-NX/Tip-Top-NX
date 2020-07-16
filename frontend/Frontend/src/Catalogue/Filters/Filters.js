@@ -129,9 +129,7 @@ const Filters = ({ route }) => {
                       },
                     ]}
                   >
-                    {selectedFilter === 0
-                      ? item.name.split(" ").splice(-1)[0]
-                      : item.name}
+                    {item.name}
                   </Text>
                   {cat === item.name || item.priceLower === priceLower ? (
                     <Feather name="check" size={24} color="#C2185B" />

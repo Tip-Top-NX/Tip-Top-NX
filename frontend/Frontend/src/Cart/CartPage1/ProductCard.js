@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity, Alert } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import styles from "./ProductCardStyles";
@@ -17,7 +17,7 @@ const ProductCard = (props) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   let SP = props.price - (props.price * props.discountPercentage) / 100;
-  let totalItemPrice = props.price * props.quantity;
+  let totalItemPrice = SP * props.quantity;
   const [show, setShow] = useState(true);
 
   const onQuantityDec = () => {
@@ -28,6 +28,20 @@ const ProductCard = (props) => {
       dispatch(delCart(props._id, props.color, props.size));
     }
   };
+
+  useEffect(() => {
+    let mounted = true;
+    if (mounted) {
+      if (props.price === 0) {
+        Alert.alert(
+          "Price Issue",
+          "The price of some of the products in your cart is yet to be confirmed, we will notify you about it if you place the order of such a product",
+          [{ text: "Continue" }]
+        );
+      }
+    }
+    return () => (mounted = false);
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {

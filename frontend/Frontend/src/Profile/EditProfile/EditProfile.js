@@ -140,7 +140,7 @@ const EditProfile = ({ navigation }) => {
                     keyboardType={"numeric"}
                     onChangeText={(text) => setAge(text)}
                     maxLength={3}
-                    value={age}
+                    value={age.toString()}
                   ></TextInput>
                 </View>
 
