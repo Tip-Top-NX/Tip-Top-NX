@@ -114,22 +114,22 @@ const signUp = () => {
 
   return (
     <SafeAreaView>
-      <KeyboardAwareScrollView
-        scrollEnabled={true}
-        showsVerticalScrollIndicator={false}
-      >
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <View style={styles.container}>
-            <ImageBackground
-              source={require("../../../assets/background.jpg")}
-              style={{
-                flex: 1,
-                resizeMode: "cover",
-                justifyContent: "center",
-                width: "100%",
-                height: "100%",
-              }}
-              blurRadius={0}
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View style={styles.container}>
+          <ImageBackground
+            source={require("../../../assets/background.jpg")}
+            style={{
+              flex: 1,
+              resizeMode: "cover",
+              justifyContent: "center",
+              width: "100%",
+              height: "100%",
+            }}
+            blurRadius={0}
+          >
+            <KeyboardAwareScrollView
+              scrollEnabled={true}
+              showsVerticalScrollIndicator={false}
             >
               <View style={styles.title}>
                 <Text style={styles.textStyle}>SIGN UP</Text>
@@ -213,10 +213,10 @@ const signUp = () => {
                   <Text style={styles.buttonText}>SIGN IN</Text>
                 </TouchableOpacity>
               </View>
-            </ImageBackground>
-          </View>
-        </TouchableWithoutFeedback>
-      </KeyboardAwareScrollView>
+            </KeyboardAwareScrollView>
+          </ImageBackground>
+        </View>
+      </TouchableWithoutFeedback>
     </SafeAreaView>
   );
 };

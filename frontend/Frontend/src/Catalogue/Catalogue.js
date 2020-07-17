@@ -92,6 +92,8 @@ const Catalogue = ({ navigation, route }) => {
               setProducts(products.concat([...res.data]));
             }
             setFetcher(false);
+          } else {
+            setFetcher(false);
           }
         })
         .catch((err) => console.log(err));

@@ -2,8 +2,8 @@
 import React from "react";
 import { SafeAreaView, StyleSheet, FlatList } from "react-native";
 import { useSelector } from "react-redux";
-import OrderCard from "./OrderCard";
 import Empty from "../Empty";
+import OrderCard from "./OrderCard";
 
 const Orders = ({ navigation }) => {
   const user = useSelector((state) => state.user);

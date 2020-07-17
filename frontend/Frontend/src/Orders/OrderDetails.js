@@ -98,7 +98,7 @@ const OrderProductDetails = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
   orderCard: {
-    height: 410,
+    height: 480,
     paddingLeft: 10,
     backgroundColor: "#ffffff",
     marginTop: 10,

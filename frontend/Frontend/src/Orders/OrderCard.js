@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -7,19 +7,28 @@ import {
   FlatList,
   TouchableOpacity,
   Alert,
+  Platform,
 } from "react-native";
 import { myAxios, getConfig } from "../../../axios";
 import OrderProductCard from "./OrderProductCard";
 import { useSelector, useDispatch } from "react-redux";
 import { cancelOrder2 } from "../../../redux/ActionCreators";
+import Splash from "../Splash";
 
 const width = Dimensions.get("window").width;
 
 const OrderCard = (props) => {
-  let padding = 132 - props._id.toString().length * 9;
+  let padding = 92 - props._id.toString().length * 9;
+  const [show, setShow] = useState(true);
 
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShow(false);
+    }, 1200);
+  });
 
   const cancelOrder = () => {
     const bodyPart = {
@@ -32,6 +41,7 @@ const OrderCard = (props) => {
         {
           text: "Yes",
           onPress: () => {
+            setShow(true);
             getConfig().then((config) => {
               myAxios
                 .put("/profile/order/" + props._id, bodyPart, config)
@@ -67,75 +77,82 @@ const OrderCard = (props) => {
   };
 
   return (
-    <View
-      style={[
-        styles.orderBox,
-        props.status == "Cancelled"
-          ? { borderColor: "#e27070" }
-          : { borderColor: "#4fc2a6" },
-      ]}
-    >
-      <View style={styles.orderRow}>
-        <Text style={[styles.orderNumber, { paddingRight: padding }]}>
-          ORDER NUMBER :<Text style={styles.orderNumberText}> {props._id}</Text>
-        </Text>
-        <TouchableOpacity
-          onPress={() =>
-            props.navigation.navigate("Order Details", {
-              _id: props._id,
-              amount: props.amount,
-              deliveryCharge: props.deliveryCharge,
-              status: props.status,
-              method: props.method,
-              orderDate: props.orderDate,
-              name: props.name,
-              address: props.address,
-            })
-          }
+    <View>
+      {show ? (
+        <Splash />
+      ) : (
+        <View
+          style={[
+            styles.orderBox,
+            props.status == "Cancelled"
+              ? { borderColor: "#e27070" }
+              : { borderColor: "#4fc2a6" },
+          ]}
         >
-          <Text style={styles.orderDetails}>Order Details</Text>
-        </TouchableOpacity>
-      </View>
-      <FlatList
-        data={props.contents}
-        vertical={true}
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={(item) => item.product._id.toString()}
-        renderItem={({ item }) => (
-          <OrderProductCard
-            brand={item.product.brand}
-            name={item.product.name}
-            desc={item.product.description}
-            discountPercentage={item.product.discountPercentage}
-            image={item.product.images[0]}
-            size={item.size}
-            price={item.price}
-            quantity={item.quantity}
-            color={item.color}
-            navigation={props.navigation}
+          <View style={styles.orderRow}>
+            <Text style={[styles.orderNumber, { paddingRight: 50 }]}>
+              ORDER NUMBER :
+              <Text style={styles.orderNumberText}> {props._id}</Text>
+            </Text>
+            <TouchableOpacity
+              onPress={() =>
+                props.navigation.navigate("Order Details", {
+                  _id: props._id,
+                  amount: props.amount,
+                  deliveryCharge: props.deliveryCharge,
+                  status: props.status,
+                  method: props.method,
+                  orderDate: props.orderDate,
+                  name: props.name,
+                  address: props.address,
+                })
+              }
+            >
+              <Text style={styles.orderDetails}>Order Details</Text>
+            </TouchableOpacity>
+          </View>
+          <FlatList
+            data={props.contents}
+            vertical={true}
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(item) => item.product._id.toString()}
+            renderItem={({ item }) => (
+              <OrderProductCard
+                brand={item.product.brand}
+                name={item.product.name}
+                desc={item.product.description}
+                discountPercentage={item.product.discountPercentage}
+                image={item.product.images[0]}
+                size={item.size}
+                price={item.price}
+                quantity={item.quantity}
+                color={item.color}
+                navigation={props.navigation}
+              />
+            )}
           />
-        )}
-      />
-      <View
-        style={{
-          flexDirection: "row",
-          paddingVertical: 1,
-          justifyContent: "space-between",
-          paddingHorizontal: 5,
-          paddingRight: 10,
-        }}
-      >
-        <Text style={{ paddingLeft: 10, fontSize: 15, color: "#7b7b7b" }}>
-          Status :{" "}
-          <Text
-            style={props.status === "Cancelled" ? styles.red : styles.green}
+          <View
+            style={{
+              flexDirection: "row",
+              paddingVertical: 1,
+              justifyContent: "space-between",
+              height: 25,
+              paddingHorizontal: 10,
+            }}
           >
-            {props.status === "Pending" ? "Confirming" : props.status}
-          </Text>
-        </Text>
+            <Text style={{ fontSize: 15, color: "#7b7b7b" }}>
+              Status :{" "}
+              <Text
+                style={props.status === "Cancelled" ? styles.red : styles.green}
+              >
+                {props.status === "Pending" ? "Confirming" : props.status}
+              </Text>
+            </Text>
 
-        {props.status == "Pending" ? displayCancelOrder() : null}
-      </View>
+            {props.status == "Pending" ? displayCancelOrder() : null}
+          </View>
+        </View>
+      )}
     </View>
   );
 };
@@ -144,18 +161,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderWidth: 1,
     width: width,
-    paddingTop: 15,
     marginTop: 10,
     marginBottom: 5,
     backgroundColor: "#f5f5f5",
   },
   orderRow: {
     flexDirection: "row",
-    justifyContent: "flex-end",
-    marginTop: -6,
+    justifyContent: "space-between",
+    alignItems: "center",
+    height: 25,
+    paddingHorizontal: 5,
   },
   orderNumber: {
-    paddingBottom: 2,
     fontSize: 14,
     color: "#7b7b7b",
   },
@@ -174,10 +191,7 @@ const styles = StyleSheet.create({
   orderDetails: {
     color: "#777777",
     fontSize: 15.5,
-    marginTop: -1,
-    marginRight: 3,
     fontWeight: "bold",
-    paddingRight: 8,
   },
   green: {
     fontWeight: "bold",
