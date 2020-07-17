@@ -25,7 +25,7 @@ const EditProfile = ({ navigation }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const email = user.email;
-  const contact=user.contact.toString();
+  const contact = user.contact.toString();
 
   // states for handling the input
   const [name, setName] = useState(user.name);
@@ -34,9 +34,8 @@ const EditProfile = ({ navigation }) => {
   const [age, setAge] = useState(user.age);
   const [gender, setGender] = useState(user.gender);
 
-  let init=0;
-  if(user.gender=="Female")
-    init=1;
+  let init = 0;
+  if (user.gender == "Female") init = 1;
 
   // states for style change if not valid
   const [validName, checkName] = useState(-1);
@@ -78,7 +77,7 @@ const EditProfile = ({ navigation }) => {
     } else {
       checkName(1);
     }
-    
+
     // age check
     if (age === "" || age.length >= 3) {
       checkAge(0);
@@ -86,19 +85,18 @@ const EditProfile = ({ navigation }) => {
       checkAge(1);
     }
 
-    if (validName==1 && validAge==1) {
+    if (validName == 1 && validAge == 1) {
       dispatch(
         putProfile({
           name,
           address,
           age,
-          gender
+          gender,
         })
       );
       navigation.goBack();
     }
   };
-
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -119,7 +117,10 @@ const EditProfile = ({ navigation }) => {
               <View style={styles.inputContainer}>
                 <Text style={styles.heading}>FULL NAME</Text>
                 <TextInput
-                  style={[styles.inputText, validName==0 ? styles.error : null]}
+                  style={[
+                    styles.inputText,
+                    validName == 0 ? styles.error : null,
+                  ]}
                   onChangeText={(text) => setName(text)}
                   value={name}
                 ></TextInput>
@@ -136,11 +137,14 @@ const EditProfile = ({ navigation }) => {
                 <View style={styles.ageContainer}>
                   <Text style={styles.heading}>AGE</Text>
                   <TextInput
-                    style={[styles.inputText, validAge==0 ? styles.error : null]}
+                    style={[
+                      styles.inputText,
+                      validAge == 0 ? styles.error : null,
+                    ]}
                     keyboardType={"numeric"}
                     onChangeText={(text) => setAge(text)}
                     maxLength={3}
-                    value={age}
+                    value={age.toString()}
                   ></TextInput>
                 </View>
 
@@ -177,11 +181,11 @@ const EditProfile = ({ navigation }) => {
               </View>
               <View style={styles.inputContainer}>
                 <Text style={styles.heading}>CONTACT</Text>
-                  <TextInput
-                    style={styles.emailText}
-                    value={contact}
-                    editable={false}
-                  ></TextInput>
+                <TextInput
+                  style={styles.emailText}
+                  value={contact}
+                  editable={false}
+                ></TextInput>
               </View>
               <TouchableOpacity
                 style={{
@@ -208,6 +212,5 @@ const EditProfile = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-
 
 export default EditProfile;

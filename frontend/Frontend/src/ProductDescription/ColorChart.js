@@ -3,13 +3,13 @@ import React from "react";
 import { View, StyleSheet, Image } from "react-native";
 import { getURL } from "../../../axios";
 
-const SizeChart = ({ route }) => {
+const ColorChart = ({ route }) => {
   return (
     <View style={styles.container}>
       {
         <View style={styles.imageContainer}>
           <Image
-            source={{ uri: getURL(route.params.sizeChart[2]) }}
+            source={{ uri: getURL(route.params.sizeChart[1]) }}
             style={styles.imageStyle}
           />
         </View>
@@ -18,7 +18,7 @@ const SizeChart = ({ route }) => {
   );
 };
 
-export default SizeChart;
+export default ColorChart;
 
 const styles = StyleSheet.create({
   container: {

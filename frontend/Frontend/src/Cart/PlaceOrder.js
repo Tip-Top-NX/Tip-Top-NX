@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   buttonBox: {
     width: 170,
-    height: 50,
+    height: 40,
     // borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",

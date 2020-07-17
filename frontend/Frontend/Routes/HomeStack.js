@@ -11,6 +11,7 @@ import Filters from "../src/Catalogue/Filters/Filters";
 import Sort from "../src/Catalogue/Sort";
 import CustomBack from "../src/BackButton";
 import RightHeaderButton from "../src/RightHeaderButton";
+import ColorChart from "../src/ProductDescription/ColorChart";
 
 const Stack = createStackNavigator();
 
@@ -51,6 +52,7 @@ const HomeStack = () => {
       <Stack.Screen name="Filters" component={Filters} />
       <Stack.Screen name="Sort" component={Sort} />
       <Stack.Screen name="Size Chart" component={SizeChart} />
+      <Stack.Screen name="Color Chart" component={ColorChart} />
       <Stack.Screen
         options={{
           headerTitle: null,

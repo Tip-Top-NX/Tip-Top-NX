@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   },
   buttonBox: {
     width: (width - 20) / 2 - 25,
-    height: 50,
+    height: 40,
     borderWidth: 1,
     paddingHorizontal: 15,
     justifyContent: "space-evenly",

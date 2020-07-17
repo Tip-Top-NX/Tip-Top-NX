@@ -6,6 +6,7 @@ import {
   Dimensions,
   Image,
   SafeAreaView,
+  ActivityIndicator,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import ProductCard from "../ProductCard";
@@ -18,6 +19,9 @@ const Catalogue = ({ navigation, route }) => {
   const [products, setProducts] = useState();
   // const [show, setShow] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [fetcher, setFetcher] = useState(false);
+  const [counter, setCounter] = useState(1);
+  const forFilters = route.params.forFilters;
   const prodId = route.params.prodId;
   const sort = route.params.sortBy;
   const order = route.params.sortCode;
@@ -35,9 +39,8 @@ const Catalogue = ({ navigation, route }) => {
       priceLower: priceLower,
       priceUpper: priceUpper,
     };
-    console.log(body);
     myAxios
-      .post("/category/" + prodId + "/get-products", body)
+      .post("/category/" + prodId + "/get-products/1", body)
       .then((res) => {
         if (mounted) {
           setIsLoading(false);
@@ -69,6 +72,40 @@ const Catalogue = ({ navigation, route }) => {
     return array;
   }
 
+  const nextItems = async () => {
+    if (products.length >= 10) {
+      await setCounter(counter + 1);
+      setFetcher(true);
+      const body = {
+        sort: sort,
+        order: order,
+        priceLower: priceLower,
+        priceUpper: priceUpper,
+      };
+      myAxios
+        .post("/category/" + prodId + "/get-products/" + counter, body)
+        .then((res) => {
+          if (!res.data.end) {
+            if (sort !== "Price") {
+              setProducts(products.concat(shuffle([...res.data])));
+            } else {
+              setProducts(products.concat([...res.data]));
+            }
+            setFetcher(false);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  const showFooter = () => {
+    return fetcher ? (
+      <View style={{ marginVertical: 10 }}>
+        <ActivityIndicator size="large" />
+      </View>
+    ) : null;
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       {isLoading ? (
@@ -98,7 +135,10 @@ const Catalogue = ({ navigation, route }) => {
           <FlatList
             data={products}
             numColumns={2}
-            keyExtractor={(item) => item._id}
+            keyExtractor={(item, index) => index}
+            onEndReached={nextItems}
+            onEndReachedThreshold={0}
+            ListFooterComponent={showFooter}
             renderItem={({ item }) => (
               <ProductCard
                 brand={item.brand}
@@ -122,7 +162,7 @@ const Catalogue = ({ navigation, route }) => {
             )}
           />
           <ButtonBox
-            prodId={prodId}
+            prodId={forFilters}
             // allSelected={allSelected}
             // priceLower={priceLower}
             // priceUpper={priceUpper}

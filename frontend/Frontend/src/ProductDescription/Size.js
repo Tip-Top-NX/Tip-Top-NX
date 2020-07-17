@@ -24,9 +24,13 @@ const Size = (props) => {
         <Text style={styles.headerText}>SELECT SIZE</Text>
         <TouchableOpacity
           style={styles.sizeChartButton}
-          onPress={() =>
-            navigation.navigate("Size Chart", { sizeChart: props.images })
-          }
+          onPress={() => {
+            props.length > 2
+              ? navigation.navigate("Size Chart", {
+                  sizeChart: props.images,
+                })
+              : alert("The size chart of this product is unavailable");
+          }}
         >
           <Text style={styles.sizeChartButtonText}>SIZE CHART</Text>
         </TouchableOpacity>

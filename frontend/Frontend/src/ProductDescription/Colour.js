@@ -7,10 +7,12 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const Colours = (props) => {
   const [selected, setSelected] = useState();
   const colors = [...props.colors];
+  const navigation = useNavigation();
 
   useEffect(() => {
     props.onColorChange(colors[selected]);
@@ -19,9 +21,19 @@ const Colours = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerStyle}>
-        <View>
-          <Text style={styles.headerText}>COLOURS</Text>
-        </View>
+        <Text style={styles.headerText}>COLOURS</Text>
+        {props.length <= 2 ? (
+          <TouchableOpacity
+            style={styles.sizeChartButton}
+            onPress={() => {
+              navigation.navigate("Color Chart", {
+                sizeChart: props.images,
+              });
+            }}
+          >
+            <Text style={styles.sizeChartButtonText}>COLORS</Text>
+          </TouchableOpacity>
+        ) : null}
       </View>
       <View
         style={{
@@ -76,18 +88,31 @@ const styles = StyleSheet.create({
     height: 80,
     marginHorizontal: 5,
   },
+  sizeChartButton: {
+    height: 50,
+    width: 80,
+    justifyContent: "center",
+  },
+  sizeChartButtonText: {
+    fontSize: 12,
+    textDecorationLine: "underline",
+    textAlign: "center",
+    color: "#00868B",
+  },
   colorTextStyle: {
     fontWeight: "500",
     fontSize: 15,
   },
   headerStyle: {
     height: 50,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     borderBottomWidth: 1,
+    paddingHorizontal: 15,
+    marginBottom: 10,
     borderColor: "#ccc",
     width: "100%",
-    paddingLeft: 15,
-    marginBottom: 10,
-    justifyContent: "center",
   },
   headerText: {
     color: "grey",

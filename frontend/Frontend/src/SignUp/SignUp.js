@@ -114,7 +114,10 @@ const signUp = () => {
 
   return (
     <SafeAreaView>
-      <KeyboardAwareScrollView scrollEnabled={false}>
+      <KeyboardAwareScrollView
+        scrollEnabled={true}
+        showsVerticalScrollIndicator={false}
+      >
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.container}>
             <ImageBackground

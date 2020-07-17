@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
   overAllContainer: {
     // borderWidth: 1,
     width: "100%",
-    minHeight: "100%",
+    // minHeight: "100%",
+    height: "100%",
   },
   tipStyle: {
     borderWidth: 1,

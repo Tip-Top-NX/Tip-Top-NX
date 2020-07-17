@@ -19,7 +19,10 @@ const Categories = (props) => {
           <TouchableOpacity
             style={styles.innerBox}
             onPress={() =>
-              props.navigation.navigate("Catalogue", { prodId: 2 })
+              props.navigation.navigate("Catalogue", {
+                prodId: 2,
+                forFilters: 2,
+              })
             }
           >
             <Image
@@ -44,7 +47,10 @@ const Categories = (props) => {
           <TouchableOpacity
             style={styles.innerBox}
             onPress={() =>
-              props.navigation.navigate("Catalogue", { prodId: 100 })
+              props.navigation.navigate("Catalogue", {
+                prodId: 100,
+                forFilters: 100,
+              })
             }
           >
             <Image
@@ -56,7 +62,10 @@ const Categories = (props) => {
             style={styles.innerBox}
             onPress={() => {
               alert("Some products are yet to be added in ACCESSORIES section"),
-                props.navigation.navigate("Catalogue", { prodId: 50 });
+                props.navigation.navigate("Catalogue", {
+                  prodId: 50,
+                  forFilters: 50,
+                });
             }}
           >
             <Image

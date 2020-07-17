@@ -18,7 +18,11 @@ const ValidDrawer = () => {
       drawerContent={(props) => <CustomDrawer {...props} />}
     >
       <Drawer.Screen name="Home" component={HomeStack} />
-      <Drawer.Screen name="Cart" component={CartStack} />
+      <Drawer.Screen
+        name="Cart"
+        component={CartStack}
+        options={{ gestureEnabled: false }}
+      />
       <Drawer.Screen name="Profile" component={ProfileStack} />
       <Drawer.Screen name="Wishlist" component={WishlistStack} />
       <Drawer.Screen name="Orders" component={OrderStack} />

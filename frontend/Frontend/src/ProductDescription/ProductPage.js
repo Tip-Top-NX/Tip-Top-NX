@@ -45,7 +45,19 @@ const ProductPage = ({ route }) => {
         scrollEventThrottle={1}
         style={{ height: height - 100 }}
       >
-        <ImageCarousel images={images.slice(0, 2)} />
+        <ImageCarousel
+          images={
+            category === 11 ||
+            category === 12 ||
+            category === 13 ||
+            category === 14 ||
+            category === 33 ||
+            category === 32 ||
+            category === 31
+              ? [...images.slice(0, 1)]
+              : [...images.slice(0, 2)]
+          }
+        />
         <ProductInfo
           brand={brand}
           name={name}
@@ -55,11 +67,14 @@ const ProductPage = ({ route }) => {
         <Colours
           colors={colors}
           onColorChange={(colorValue) => setChosenColor(colorValue)}
+          images={images}
+          length={images.length}
         />
         <Size
           size={size}
           onSizeChange={(sizeValue) => setChosenSize(sizeValue)}
-          images={images[images.length - 1]}
+          images={images}
+          length={images.length}
         />
 
         <ButtonBar

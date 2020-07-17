@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   overAllContainer: {
     width: width,
     // borderWidth: 1,
-    minHeight: "100%",
+    // minHeight: "100%",
     height: "100%",
   },
   container: {
