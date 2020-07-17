@@ -53,10 +53,18 @@ const ProductPage = ({ route }) => {
             category === 14 ||
             category === 33 ||
             category === 32 ||
-            category === 31
+            category === 31 ||
+            category === 52 ||
+            category === 53 ||
+            category === 54 ||
+            category === 55 ||
+            category === 57 ||
+            category === 58 ||
+            category === 59
               ? [...images.slice(0, 1)]
               : [...images.slice(0, 2)]
           }
+          length={images.length}
         />
         <ProductInfo
           brand={brand}

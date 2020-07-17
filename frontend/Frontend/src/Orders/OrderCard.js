@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     height: 25,
-    paddingHorizontal: 5,
+    paddingHorizontal: 10,
   },
   orderNumber: {
     fontSize: 14,

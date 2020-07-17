@@ -29,12 +29,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageStyle: {
-    height: 220,
+    aspectRatio: 2.8,
     width: 600,
   },
   imageContainer: {
     justifyContent: "center",
     alignItems: "center",
     marginTop: 10,
+    paddingHorizontal: 10,
   },
 });

@@ -139,7 +139,7 @@ const Catalogue = ({ navigation, route }) => {
             numColumns={2}
             keyExtractor={(item, index) => index}
             onEndReached={nextItems}
-            onEndReachedThreshold={0}
+            onEndReachedThreshold={0.2}
             ListFooterComponent={showFooter}
             renderItem={({ item }) => (
               <ProductCard

@@ -84,9 +84,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 8,
-    width: 80,
+    minWidth: 80,
     height: 80,
     marginHorizontal: 5,
+    paddingHorizontal: 5,
   },
   sizeChartButton: {
     height: 50,

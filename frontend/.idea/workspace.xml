@@ -3,15 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="caa81cd7-9022-4852-a538-a89dbe34f90b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/Catalogue/Catalogue.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Catalogue/Catalogue.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Home/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/Cart/CartPage1/ProductCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Cart/CartPage1/ProductCard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/src/Orders/OrderCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Orders/OrderCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/Orders/OrderDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Orders/OrderDetails.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/Orders/Orders.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Orders/Orders.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/src/ProductDescription/ColorChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/ProductDescription/ColorChart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/ProductDescription/Colour.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/ProductDescription/Colour.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/ProductDescription/ImageCarousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/ProductDescription/ImageCarousel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/ProductDescription/ProductPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/ProductDescription/ProductPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/src/SignUp/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/SignUp/SignUp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/SignUp/SignUpStyles.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/SignUp/SignUpStyles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/reducers/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/reducers/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/axios.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,9 +36,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -51,6 +48,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">

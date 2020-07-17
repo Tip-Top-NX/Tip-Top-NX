@@ -103,9 +103,15 @@ const signUp = () => {
             });
           } else {
             Alert.alert("Alert", "Email Already Registered", [
-              { text: "Sign In" },
+              {
+                text: "Cancel",
+              },
+              {
+                text: "Sign In",
+                style: "destructive",
+                onPress: () => navigation.navigate("Sign In"),
+              },
             ]);
-            navigation.navigate("Sign In");
           }
         })
         .catch((err) => console.log(err));

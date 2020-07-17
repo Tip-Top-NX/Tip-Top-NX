@@ -28,7 +28,10 @@ const ImageCarousel = (props) => {
                 style={[
                   styles.imageStyle,
                   {
-                    aspectRatio: images.indexOf(item) === 0 ? 79 / 137 : 1,
+                    aspectRatio:
+                      images.indexOf(item) === 0 && props.length > 2
+                        ? 79 / 137
+                        : 1,
                   },
                 ]}
               />

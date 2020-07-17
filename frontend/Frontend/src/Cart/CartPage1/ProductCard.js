@@ -79,29 +79,17 @@ const ProductCard = (props) => {
                 <Text style={{ fontSize: 12 }}>{props.name}</Text>
               </View>
               <View style={styles.subBox}>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderBottomWidth: 1,
-                    borderColor: "#ccc",
-                  }}
-                >
-                  <View style={styles.smallBox}>
-                    <Text style={{ color: "#888", fontSize: 12 }}>SIZE : </Text>
-                    <Text style={{ fontWeight: "500", fontSize: 12 }}>
-                      {props.size}
-                    </Text>
-                  </View>
-                  <View style={styles.smallBox}>
-                    <Text style={{ color: "#888", fontSize: 12 }}>
-                      COLOR :{" "}
-                    </Text>
-                    <Text style={{ fontWeight: "500", fontSize: 12 }}>
-                      {props.color}
-                    </Text>
-                  </View>
+                <View style={styles.smallBox}>
+                  <Text style={{ color: "#888", fontSize: 12 }}>SIZE : </Text>
+                  <Text style={{ fontWeight: "500", fontSize: 12 }}>
+                    {props.size}
+                  </Text>
+                </View>
+                <View style={styles.smallBox}>
+                  <Text style={{ color: "#888", fontSize: 12 }}>COLOR : </Text>
+                  <Text style={{ fontWeight: "500", fontSize: 12 }}>
+                    {props.color}
+                  </Text>
                 </View>
                 <View style={styles.smallBox}>
                   <Text style={{ color: "#888", fontSize: 12 }}>QTY :</Text>
