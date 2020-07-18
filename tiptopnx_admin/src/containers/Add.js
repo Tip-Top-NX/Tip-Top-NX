@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ListItemText from "@material-ui/core/ListItemText";
 import GridList from "@material-ui/core/GridList";
 import ClearIcon from "@material-ui/icons/Clear";
-import axios from "../utils/axios";
+import axios,{myUri} from "../utils/axios";
 import { getConfig } from "../utils/config";
 import { Backdrop, CircularProgress } from "@material-ui/core";
 import Snackbar from "../components/Snackbar";
@@ -50,7 +50,7 @@ const Add = () => {
     // images: images,
   };
 
-  const myUri = "http://localhost:5000";
+  // const myUri = "http://localhost:5000";
 
   const colorsHandler = (event) => {
     if (event.key === "Enter") {
