@@ -22,12 +22,37 @@ const Colours = (props) => {
     <View style={styles.container}>
       <View style={styles.headerStyle}>
         <Text style={styles.headerText}>COLOURS</Text>
-        {props.length <= 2 ? (
+        {props.length <= 2 ||
+        props.length >= 4 ||
+        props.category === 103 ||
+        props.category === 104 ||
+        props.category === 105 ||
+        props.category === 106 ||
+        props.category === 108 ||
+        props.category === 109 ||
+        props.category === 110 ||
+        props.category === 111 ||
+        props.category === 112 ||
+        props.category === 122 ||
+        props.category === 123 ||
+        props.category === 124 ||
+        props.category === 125 ||
+        props.category === 126 ||
+        props.category === 128 ||
+        props.category === 129 ||
+        props.category === 130 ||
+        props.category === 131 ||
+        props.category === 132 ||
+        props.category === 133 ||
+        props.category === 134 ||
+        props.category === 135 ? (
           <TouchableOpacity
             style={styles.sizeChartButton}
             onPress={() => {
               navigation.navigate("Color Chart", {
-                sizeChart: props.images,
+                images: props.images,
+                length: props.length,
+                category: props.category,
               });
             }}
           >

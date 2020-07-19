@@ -64,9 +64,31 @@ const ProductPage = ({ route }) => {
             category === 34 ||
             category === 35 ||
             category === 36 ||
-            category === 37
+            category === 37 ||
+            category === 103 ||
+            category === 104 ||
+            category === 105 ||
+            category === 106 ||
+            category === 108 ||
+            category === 109 ||
+            category === 110 ||
+            category === 111 ||
+            category === 112 ||
+            category === 122 ||
+            category === 123 ||
+            category === 124 ||
+            category === 125 ||
+            category === 126 ||
+            category === 128 ||
+            category === 129 ||
+            category === 130 ||
+            category === 131 ||
+            category === 132 ||
+            category === 133 ||
+            category === 134 ||
+            category === 135
               ? [...images.slice(0, 1)]
-              : [...images.slice(0, 2)]
+              : [...images.slice(0, images.length - 1)]
           }
           length={images.length}
         />
@@ -80,13 +102,14 @@ const ProductPage = ({ route }) => {
           colors={colors}
           onColorChange={(colorValue) => setChosenColor(colorValue)}
           images={images}
+          category={category}
           length={images.length}
         />
         <Size
           size={size}
           onSizeChange={(sizeValue) => setChosenSize(sizeValue)}
           images={images}
-          length={images.length}
+          category={category}
         />
 
         <ButtonBar

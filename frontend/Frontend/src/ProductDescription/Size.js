@@ -25,11 +25,10 @@ const Size = (props) => {
         <TouchableOpacity
           style={styles.sizeChartButton}
           onPress={() => {
-            props.length > 2
-              ? navigation.navigate("Size Chart", {
-                  sizeChart: props.images,
-                })
-              : alert("The size chart of this product is unavailable");
+            navigation.navigate("Size Chart", {
+              images: props.images,
+              category: props.category,
+            });
           }}
         >
           <Text style={styles.sizeChartButtonText}>SIZE CHART</Text>
