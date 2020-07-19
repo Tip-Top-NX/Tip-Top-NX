@@ -71,6 +71,7 @@ export default function ImgMediaCard() {
   const [editable, setEditable] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
   const [deleteThis, setDeleteThis] = useState();
+  const [selected, setSelected] = useState();
   const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
@@ -164,6 +165,7 @@ export default function ImgMediaCard() {
                 onClick={() => {
                   setEditable(false);
                   setShowModal(true);
+                  setSelected(item);
                 }}
               >
                 <CardActionArea>
@@ -192,6 +194,7 @@ export default function ImgMediaCard() {
                   onClick={() => {
                     setEditable(true);
                     setShowModal(true);
+                    setSelected(item);
                   }}
                 >
                   EDIT
@@ -204,26 +207,29 @@ export default function ImgMediaCard() {
                   onClick={() => {
                     setAlertOpen(true);
                     setDeleteThis(item._id);
+                    setSelected(item);
                   }}
                 >
                   DELETE
                 </Button>
               </div>
-              <ProductDetails
-                open={showModal}
-                editable={editable}
-                onClose={() => setShowModal(false)}
-                brand={item.brand}
-                description={item.description}
-                colors={item.colors}
-                images={item.images}
-                size={item.size}
-                discountPercentage={item.discountPercentage}
-                name={item.name}
-                price={item.price}
-                _id={item._id}
-                category={item.category}
-              />
+              {selected === item ? (
+                <ProductDetails
+                  open={showModal}
+                  editable={editable}
+                  onClose={() => setShowModal(false)}
+                  brand={item.brand}
+                  description={item.description}
+                  colors={item.colors}
+                  images={item.images}
+                  size={item.size}
+                  discountPercentage={item.discountPercentage}
+                  name={item.name}
+                  price={item.price}
+                  _id={item._id}
+                  category={item.category}
+                />
+              ) : null}
             </Grid>
           );
         })}
