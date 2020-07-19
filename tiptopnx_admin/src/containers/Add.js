@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ListItemText from "@material-ui/core/ListItemText";
 import GridList from "@material-ui/core/GridList";
 import ClearIcon from "@material-ui/icons/Clear";
-import axios,{myUri} from "../utils/axios";
+import axios, { myUri } from "../utils/axios";
 import { getConfig } from "../utils/config";
 import { Backdrop, CircularProgress } from "@material-ui/core";
 import Snackbar from "../components/Snackbar";
@@ -47,10 +47,8 @@ const Add = () => {
     colors: colors,
     description: description,
     category: category,
-    // images: images,
   };
 
-  // const myUri = "http://localhost:5000";
 
   const colorsHandler = (event) => {
     if (event.key === "Enter") {
@@ -73,28 +71,36 @@ const Add = () => {
 
   const addProductHandler = () => {
     setOpen(true);
-    setTimeout(() => {
-      axios
-        .post("/admin/products", body, getConfig())
-        .then((res) => {
-          setOpen(false);
-          setMessage("Product added successfully!");
-          setVariant("success");
-          setSnackOpen(true);
-        })
-        .catch((err) => {
-          setOpen(false);
-          setMessage("Error in adding the product!");
-          setVariant("error");
-          setSnackOpen(true);
-          console.log(err);
-        });
-    }, 0);
+    let data = new FormData();
+    for (let i = 0; i < images.length; i++) {
+      data.append('myImages', images[i]);
+    }
+    for (let name in body) {
+      data.append(name, body[name]);
+    }
+    axios.post('/admin/products', data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token"),
+        "content-type": "multipart/form-data",
+      },
+    })
+      .then((res) => {
+        setOpen(false);
+        setMessage("Product added successfully!");
+        setVariant("success");
+        setSnackOpen(true);
+      })
+      .catch((err) => {
+        setOpen(false);
+        setMessage("Error in adding the product!");
+        setVariant("error");
+        setSnackOpen(true);
+        console.log(err);
+      });
   };
 
   const addImages = (event) => {
-    setImages([...images, URL.createObjectURL(event.target.files[0])]);
-    console.log(URL.createObjectURL(event.target.files[0]));
+    setImages([...images, ...event.target.files]);
   };
 
   return (
@@ -187,12 +193,12 @@ const Add = () => {
             <Carousel>
               {images.map((item, index) => (
                 <Carousel.Item key={index}>
-                  <img className={classes.imageStyle} src={item} />
+                  <img className={classes.imageStyle} src={URL.createObjectURL(item)} />
                 </Carousel.Item>
               ))}
             </Carousel>
           </div>
-          <input type="file" onChange={addImages} />
+          <input multiple type="file" onChange={addImages} />
         </div>
       </div>
       <div className={classes.fieldBox}>

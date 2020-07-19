@@ -18,7 +18,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ListItemText from "@material-ui/core/ListItemText";
 import GridList from "@material-ui/core/GridList";
 import ClearIcon from "@material-ui/icons/Clear";
-import axios,{myUri} from "../utils/axios";
+import axios from "../utils/axios";
 import Button2 from "@material-ui/core/Button";
 import { getConfig } from "../utils/config";
 import Carousel from "react-bootstrap/Carousel";
@@ -129,6 +129,7 @@ export default function ProductDetails(props) {
   const [selectedSizes, setSelectedSizes] = useState(props.size);
   const [category, setCategory] = useState(props.category);
   const [alertOpen, setAlertOpen] = useState(false);
+  const myUri = "http://172.20.10.2:5000/";
 
   let priceFinal = price - (price * disc) / 100;
 
