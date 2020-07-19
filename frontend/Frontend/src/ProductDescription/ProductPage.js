@@ -60,7 +60,11 @@ const ProductPage = ({ route }) => {
             category === 55 ||
             category === 57 ||
             category === 58 ||
-            category === 59
+            category === 59 ||
+            category === 34 ||
+            category === 35 ||
+            category === 36 ||
+            category === 37
               ? [...images.slice(0, 1)]
               : [...images.slice(0, 2)]
           }

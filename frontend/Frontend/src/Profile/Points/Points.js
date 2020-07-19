@@ -59,8 +59,7 @@ const Points = () => {
             </View>
             <View style={[styles.textBox, { borderBottomWidth: 0 }]}>
               <Text style={styles.textStyle}>
-                1] On every purchase, 10% of your cart total will be awarded you
-                as Points
+                1] Get a 10% of bonus points on every purchase you make.
               </Text>
             </View>
             <View style={styles.textBox}>

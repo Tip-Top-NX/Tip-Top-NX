@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
   avatarPlaceholder: {
     marginVertical: 10,
-    marginTop: 100,
+    marginTop: 70,
     width: 160,
     height: 160,
     backgroundColor: "#E1E2E6",
@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
   },
   emailText: {
     height: 50,
-    color: "#777",
-    fontSize: 18,
+    color: "#555",
+    fontSize: 15,
     borderWidth: 1,
     paddingLeft: 15,
   },

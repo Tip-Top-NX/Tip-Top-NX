@@ -42,8 +42,8 @@ export const cancelOrder2 = (orderId) => {
   return {
     type: ActionTypes.CANCEL_ORDER,
     payload: orderId,
-  }
-}
+  };
+};
 
 export const postCart = (prodId, color, size, quantity) => {
   const bodyPart = {
@@ -164,6 +164,7 @@ export const signup = (user) => {
     myAxios
       .post("/users/sign-up", { ...user })
       .then((res) => {
+        console.log(res);
         if (res.data.success === true) {
           dispatch(setUser(res.data.user, res.data.token));
         } else {

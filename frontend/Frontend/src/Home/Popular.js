@@ -45,6 +45,7 @@ const popular = (props) => {
             colors={item.colors}
             images={item.images}
             size={item.size}
+            category={item.category}
             style={item.style}
             discountPercentage={item.discountPercentage}
             name={item.name}
