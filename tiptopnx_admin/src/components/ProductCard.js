@@ -95,7 +95,7 @@ export default function ImgMediaCard() {
     axios
       .delete("/admin/products/" + deleteThis, getConfig())
       .then((res) => {
-        console.log(res.data);
+        searchHandler();
       })
       .catch((err) => console.log(err));
   };

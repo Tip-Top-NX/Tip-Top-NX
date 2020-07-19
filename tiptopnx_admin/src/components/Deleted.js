@@ -38,6 +38,7 @@ export default function ImgMediaCard() {
   const [editable, setEditable] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
   const [body, setBody] = useState({});
+  const [deleted,setDeleted] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -52,14 +53,14 @@ export default function ImgMediaCard() {
       .catch((err) => console.log(err));
 
     return () => (mounted = false);
-  }, []);
+  }, [deleted]);
 
   const restoreProductHandler = () => {
     setAlertOpen(false);
     axios
       .put("/admin/products/deleted", body, getConfig())
       .then((res) => {
-        console.log(res.data);
+        setDeleted(!deleted);
       })
       .catch((err) => console.log(err));
   };
@@ -113,7 +114,7 @@ export default function ImgMediaCard() {
                     component="img"
                     alt="Product Image"
                     height="280"
-                    image={myUri + "/" + item.images[0]}
+                    image={myUri + item.images[0]}
                   />
                   <CardContent>
                     <Typography gutterBottom variant="subtitle2" component="h2">
