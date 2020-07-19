@@ -3,7 +3,7 @@ const Product = require("../models/product");
 const User = require("../models/user");
 const Order = require("../models/order");
 const authenticate = require("../utils/authenticate");
-const { upload } = require("../utils/upload");
+const { upload, getURLSingle } = require("../utils/upload");
 
 const router = express.Router();
 
