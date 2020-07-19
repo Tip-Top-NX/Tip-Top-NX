@@ -95,12 +95,26 @@ const signUp = () => {
         .post("/users/verify-email", bodyPart)
         .then((res) => {
           if (res.data.success) {
-            navigation.navigate("Otp Verify", {
-              name: name,
-              email: email,
-              password: password,
-              contact: phone,
-            });
+            Alert.alert(
+              "Alert",
+              "An OTP will be sent to your email, make sure you have entered the email correctly",
+              [
+                {
+                  text: "Cancel",
+                  style: "destructive",
+                },
+                {
+                  text: "Enter OTP",
+                  onPress: () =>
+                    navigation.navigate("Otp Verify", {
+                      name: name,
+                      email: email,
+                      password: password,
+                      contact: phone,
+                    }),
+                },
+              ]
+            );
           } else {
             Alert.alert("Alert", "Email Already Registered", [
               {

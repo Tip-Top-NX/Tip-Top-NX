@@ -8,7 +8,7 @@ import {
   DialogTitle,
 } from "@material-ui/core";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InputGroup from "react-bootstrap/InputGroup";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
@@ -18,7 +18,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ListItemText from "@material-ui/core/ListItemText";
 import GridList from "@material-ui/core/GridList";
 import ClearIcon from "@material-ui/icons/Clear";
-import axios from "../utils/axios";
+import axios, { myUri } from "../utils/axios";
 import Button2 from "@material-ui/core/Button";
 import { getConfig } from "../utils/config";
 import Carousel from "react-bootstrap/Carousel";
@@ -132,6 +132,28 @@ export default function ProductDetails(props) {
   const myUri = "http://172.20.10.2:5000/";
 
   let priceFinal = price - (price * disc) / 100;
+
+  useEffect(() => {
+    setBrand(props.brand);
+    setName(props.name);
+    setId(props._id);
+    setPrice(props.price);
+    setDescription(props.description);
+    setDisc(props.discountPercentage);
+    setCategory(props.category);
+    setSelectedSizes(props.size);
+    setColor(props.colors);
+  }, [
+    props._id,
+    props.brand,
+    props.category,
+    props.colors,
+    props.description,
+    props.discountPercentage,
+    props.name,
+    props.price,
+    props.size,
+  ]);
 
   const body = {
     _id: id,
@@ -295,18 +317,21 @@ export default function ProductDetails(props) {
                       <img
                         className={classes.imageStyle}
                         src={myUri + props.images[0]}
+                        alt="Product"
                       />
                     </Carousel.Item>
                     <Carousel.Item>
                       <img
                         className={classes.imageStyle}
                         src={myUri + props.images[1]}
+                        alt="Colors"
                       />
                     </Carousel.Item>
                     <Carousel.Item>
                       <img
                         className={classes.imageStyle}
                         src={myUri + props.images[2]}
+                        alt="Sizes"
                       />
                     </Carousel.Item>
                   </Carousel>

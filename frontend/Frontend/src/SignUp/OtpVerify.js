@@ -68,7 +68,6 @@ class OtpVerify extends Component {
       .post("/users/verify-user", bodyPart)
       .then((res) => {
         if (res.data.success) {
-          Alert.alert("Success", "Email address verified successfully!");
           this.props.signup(
             this.props.route.params.name,
             this.props.route.params.email,

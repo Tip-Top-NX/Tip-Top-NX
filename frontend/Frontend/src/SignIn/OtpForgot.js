@@ -55,7 +55,7 @@ class OtpForgot extends Component {
       .post("/users/verify-otp", bodyPart)
       .then((res) => {
         if (res.data.success) {
-          Alert.alert("Success", "You can change your password successfully!");
+          Alert.alert("Success", "You can now change your password!");
           AsyncStorage.setItem("token", res.data.token);
           this.props.navigation.navigate("Reset Password");
         } else {

@@ -103,7 +103,7 @@ const EditProfile = ({ navigation }) => {
       <ImageBackground
         source={require("../../../../assets/r.jpg")}
         style={{ flex: 1, resizeMode: "cover", justifyContent: "center" }}
-        blurRadius={0}
+        blurRadius={2}
       >
         <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
           <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -144,7 +144,7 @@ const EditProfile = ({ navigation }) => {
                     keyboardType={"numeric"}
                     onChangeText={(text) => setAge(text)}
                     maxLength={3}
-                    value={age.toString()}
+                    value={age === undefined ? "" : age.toString()}
                   ></TextInput>
                 </View>
 
