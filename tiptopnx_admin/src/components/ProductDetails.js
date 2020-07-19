@@ -129,6 +129,7 @@ export default function ProductDetails(props) {
   const [selectedSizes, setSelectedSizes] = useState(props.size);
   const [category, setCategory] = useState(props.category);
   const [alertOpen, setAlertOpen] = useState(false);
+  const myUri = "http://172.20.10.2:5000/";
 
   let priceFinal = price - (price * disc) / 100;
 
