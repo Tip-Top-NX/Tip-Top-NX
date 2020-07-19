@@ -40,7 +40,7 @@ const PendingOrders = (props) => {
 
   useEffect(() => {
     setOrders([...props.orders]);
-  }, []);
+  }, [props.orders]);
 
   const getMyDate = (date) => {
     const d = new Date(date);
@@ -108,7 +108,8 @@ const PendingOrders = (props) => {
             <tr>
               <th>#Order ID</th>
               <th>Amount</th>
-              <th>Delivery Charge </th>
+              <th style={{ width: "20px" }}>Delivery Charge </th>
+              <th>Total</th>
               <th>Contact Number</th>
               <th>Payment</th>
               <th>Order Date</th>
@@ -123,6 +124,7 @@ const PendingOrders = (props) => {
                 <th>{order._id}</th>
                 <td>{order.amount}</td>
                 <td>{order.deliveryCharge}</td>
+                <td>{order.amount + order.deliveryCharge}</td>
                 <td>{order.contact}</td>
                 <td>{order.payment.method}</td>
                 <td>{getMyDate(order.createdAt)}</td>
