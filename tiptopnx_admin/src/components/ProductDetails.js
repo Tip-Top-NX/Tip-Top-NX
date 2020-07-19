@@ -68,6 +68,8 @@ const useStyles = makeStyles((theme) => ({
   imageBox: {
     width: "25%",
     height: "40vh",
+    border: "solid",
+    borderColor: "#ccc",
   },
   imageStyle: {
     width: "100%",

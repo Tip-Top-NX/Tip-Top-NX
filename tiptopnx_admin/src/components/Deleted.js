@@ -113,7 +113,7 @@ export default function ImgMediaCard() {
                     component="img"
                     alt="Product Image"
                     height="280"
-                    image={myUri + "/" + item.images[0]}
+                    image={myUri + item.images[0]}
                   />
                   <CardContent>
                     <Typography gutterBottom variant="subtitle2" component="h2">
