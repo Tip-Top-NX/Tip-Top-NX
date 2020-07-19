@@ -30,9 +30,11 @@ const History = (props) => {
     const [orders, setOrders] = React.useState([]);
     const [show, setShow] = useState(false);
     const [selected, setSelected] = React.useState({});
+    const [searchData, setSearchData] = React.useState([]);
 
     useEffect(() => {
         setOrders([...props.orders]);
+        setSearchData([...props.orders]);
     }, [])
 
     const getMyDate = (date) => {
@@ -46,8 +48,19 @@ const History = (props) => {
         setShow(true);
     }
 
+    const changeHandler = (event) => {
+        const reg = new RegExp(event.target.value);
+        const data = orders.filter(order => reg.test(order._id));
+        setSearchData([...data]);
+    }
+
     return (
         <>
+            <TextField 
+                variant="outlined" 
+                placeholder="Type order-id to search" 
+                style={{marginLeft:"6vw",marginBottom:"5vh",width:"30vw"}}
+                onChange={changeHandler}/>
             {/* Paper */}
             <Paper className={classes.paper}>
                 <Typography variant="h4" align="center" >
@@ -69,7 +82,7 @@ const History = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {orders.map((order, index) => (
+                        {searchData.map((order, index) => (
                             <tr key={index}>
                                 <th>{order._id}</th>
                                 <td>{order.amount}</td>

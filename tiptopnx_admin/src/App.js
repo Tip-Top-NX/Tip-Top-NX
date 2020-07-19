@@ -21,12 +21,14 @@ function App() {
   const [completed, setCompleted] = React.useState([]);
 
   useEffect(() => {
-    axios
+    if(sessionStorage.getItem("token")){
+      axios
       .get("/admin/orders/", getConfig())
       .then((res) => {
         filterProducts(res.data);
       })
       .catch((err) => console.log(err));
+    }
   }, [change]);
 
   const filterProducts = (data) => {
@@ -88,7 +90,9 @@ function App() {
           </Drawer>
         )}
       />
-      <Route path="/" component={Login} />
+      <Route path="/" component={() => 
+        <Login filterProducts={(data) => filterProducts(data)} />
+      } />
     </Switch>
   );
 }
