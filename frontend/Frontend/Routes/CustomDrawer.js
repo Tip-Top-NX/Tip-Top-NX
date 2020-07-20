@@ -22,8 +22,8 @@ function CustomDrawerContent(props) {
 
   const logoutHandler = () => {
     Alert.alert(
-      "Log Out",
-      "Are you sure you want to log out?",
+      "Sign Out",
+      "Are you sure you want to sign out?",
       [
         {
           text: "Yes",
@@ -144,8 +144,8 @@ function CustomDrawerContent(props) {
         </View>
         <DrawerItem
           // style={{ marginTop: 50 }}
-          label="Logout"
-          focused={selected === "Logout" ? true : false}
+          label="Sign Out"
+          focused={selected === "Sign Out" ? true : false}
           onPress={() => {
             logoutHandler(), setSelected("Logout");
           }}

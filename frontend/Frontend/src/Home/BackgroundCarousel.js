@@ -1,6 +1,7 @@
 /* eslint-disable */
 import * as React from "react";
-import { StyleSheet, View, ScrollView, Dimensions, Image } from "react-native";
+import { StyleSheet, View, ScrollView, Dimensions } from "react-native";
+import Image from "react-native-scalable-image";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
 const AUTO_SWIPE_INTERVAL = 3000;
@@ -8,46 +9,46 @@ const AUTO_SWIPE_INTERVAL = 3000;
 const height = DEVICE_WIDTH * 0.6; //60%
 
 class BackgroundCarousel extends React.Component {
-  _isMounted=false;
+  _isMounted = false;
 
   scrollRef = React.createRef();
   constructor(props) {
     super(props);
 
     this.state = {
-      selectedIndex: 0
-    }
+      selectedIndex: 0,
+    };
     this.scrollRef = React.createRef();
   }
 
   componentDidMount = () => {
-    this._isMounted=true;
+    this._isMounted = true;
 
-      setInterval(() => {
-        if(this._isMounted){
-          this.setState(
-            (prev) => ({
-              selectedIndex:
-                prev.selectedIndex === this.props.images.length - 1
-                  ? 0
-                  : prev.selectedIndex + 1,
-            }),
-            () => {
-              this.scrollRef.current.scrollTo({
-                animated: true,
-                x: DEVICE_WIDTH * this.state.selectedIndex,
-                y: 0,
-              });
-            }
-          );
-        }
-      }, AUTO_SWIPE_INTERVAL);
+    setInterval(() => {
+      if (this._isMounted) {
+        this.setState(
+          (prev) => ({
+            selectedIndex:
+              prev.selectedIndex === this.props.images.length - 1
+                ? 0
+                : prev.selectedIndex + 1,
+          }),
+          () => {
+            this.scrollRef.current.scrollTo({
+              animated: true,
+              x: DEVICE_WIDTH * this.state.selectedIndex,
+              y: 0,
+            });
+          }
+        );
+      }
+    }, AUTO_SWIPE_INTERVAL);
   };
 
   componentWillUnmount() {
     this._isMounted = false;
   }
-  
+
   nextImage = () =>
     this.setState((prev) => ({
       selectedIndex:
@@ -79,7 +80,8 @@ class BackgroundCarousel extends React.Component {
         >
           {images.map((image) => (
             <Image
-              style={styles.backgroundImage}
+              // style={styles.backgroundImage}
+              width={Dimensions.get("window").width}
               source={{ uri: image }}
               key={image}
             />

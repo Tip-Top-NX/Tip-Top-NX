@@ -13,7 +13,6 @@ const ValidDrawer = () => {
   return (
     <Drawer.Navigator
       initialRouteName="HomeStack"
-      hideStatusBar={true}
       statusBarAnimation={"slide"}
       drawerContent={(props) => <CustomDrawer {...props} />}
     >

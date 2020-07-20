@@ -34,7 +34,6 @@ const GetEmail = () => {
     myAxios
       .post("/users/forgot", bodyPart)
       .then((res) => {
-        //console.log(res)
         if (res.data.success) {
           navigation.navigate("Otp Forgot", { email: email });
         } else {

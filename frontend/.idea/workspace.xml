@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="caa81cd7-9022-4852-a538-a89dbe34f90b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/ProductDescription/Size.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/ProductDescription/Size.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/ProductDescription/SizeChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/ProductDescription/SizeChart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sizeErr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tiptopnx_admin/src/components/Deleted.js" beforeDir="false" afterPath="$PROJECT_DIR$/../tiptopnx_admin/src/components/Deleted.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tiptopnx_admin/src/components/ProductDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/../tiptopnx_admin/src/components/ProductDetails.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tiptopnx_admin/src/utils/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/../tiptopnx_admin/src/utils/axios.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +29,6 @@
     </navigator>
     <panes>
       <pane id="ProjectPane" />
-      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -49,6 +41,7 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">

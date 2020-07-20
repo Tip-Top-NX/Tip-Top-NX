@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -11,6 +11,7 @@ import {
   Dimensions,
   ImageBackground,
   Alert,
+  BackHandler,
 } from "react-native";
 import { myAxios, getConfig } from "../../../axios";
 import { useNavigation } from "@react-navigation/native";
@@ -25,16 +26,28 @@ const ResetPassword = () => {
 
   const navigation = useNavigation();
 
+  const backAction = () => {
+    Alert.alert("Hold on!", "You need to reset your password first", [
+      { text: "Okay" },
+    ]);
+    return true;
+  };
+
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", backAction);
+
+    return () =>
+      BackHandler.removeEventListener("hardwareBackPress", backAction);
+  }, []);
+
   const validation = () => {
     // password check
-    console.log(newPassword + " " + confirmPass);
     setMessage("");
     if (newPassword === "" || newPassword.length < 6) {
       setMessage("The password should be atleast 6 characters long");
     } else if (newPassword !== confirmPass) {
       setMessage("The passwords dont match");
     } else {
-      console.log("dispatching");
       const bodyPart = {
         password: newPassword,
       };
@@ -147,7 +160,7 @@ const styles = StyleSheet.create({
   },
   inputContainerPass: {
     width: width - 75,
-    marginVertical: 5,
+    marginVertical: 10,
     height: 50,
     borderWidth: 1,
     borderColor: "#000",

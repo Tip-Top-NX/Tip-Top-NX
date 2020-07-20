@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  SafeAreaView,
+  Dimensions,
+} from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./FilterStyles";
 import { myAxios } from "../../../../axios";
+import Image from "react-native-scalable-image";
 
 const filterTypes = ["categories", "price"];
 
@@ -15,11 +22,13 @@ const Filters = ({ route }) => {
   const [priceUpper, setPriceUpper] = useState();
   const [subcats, setSubcats] = useState();
   const [cat, setcat] = useState(route.params.cat);
+  const [isLoading, setIsLoading] = useState(true);
   const prodIdMain = route.params.prodId;
   useEffect(() => {
     let mounted = true;
     myAxios.get("/category/" + prodIdMain + "/get-leaf").then((res) => {
       if (mounted) {
+        setIsLoading(false);
         setSubcats([...res.data]);
       }
     });
@@ -39,7 +48,24 @@ const Filters = ({ route }) => {
   ];
 
   const navigation = useNavigation();
-  return (
+  return isLoading ? (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        height: "100%",
+        backgroundColor: "#FFD845",
+        // backgroundColor: "#fff",
+      }}
+    >
+      <Image
+        source={require("../../../../assets/loader1.gif")}
+        width={Dimensions.get("window").width}
+      />
+    </View>
+  ) : (
     <SafeAreaView style={styles.overAllContainer}>
       <View style={styles.container}>
         <View style={styles.filterType}>
@@ -47,7 +73,7 @@ const Filters = ({ route }) => {
             data={filterTypes}
             keyExtractor={(item, index) => index.toString()}
             showsVerticalScrollIndicator={false}
-            renderItem={({ item, index }) => (
+            renderItem={({ item }) => (
               <TouchableOpacity
                 style={[
                   styles.eachFilter,

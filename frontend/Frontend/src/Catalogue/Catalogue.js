@@ -4,15 +4,16 @@ import {
   View,
   StyleSheet,
   Dimensions,
-  Image,
   SafeAreaView,
   ActivityIndicator,
   Platform,
+  Alert,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import ProductCard from "../ProductCard";
 import { myAxios } from "../../../axios";
 import ButtonBox from "./ButtonBox";
+import Image from "react-native-scalable-image";
 
 const width = Dimensions.get("window").width;
 
@@ -40,38 +41,23 @@ const Catalogue = ({ navigation, route }) => {
       priceLower: priceLower,
       priceUpper: priceUpper,
     };
+    setIsLoading(true);
     myAxios
       .post("/category/" + prodId + "/get-products/1", body)
       .then((res) => {
         if (mounted) {
           setIsLoading(false);
-          if (sort !== "Price") {
-            setProducts(shuffle([...res.data]));
-          } else {
-            setProducts([...res.data]);
-          }
+          setProducts([...res.data]);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        // console.log(err);
+        Alert.alert("Sorry!", "Couldn't load your request", [
+          { text: "Okay", onPress: () => navigation.goBack() },
+        ]);
+      });
     return () => (mounted = false);
   }, [prodId, sort, order, priceLower, priceUpper]);
-
-  function shuffle(array) {
-    var currentIndex = array.length,
-      temporaryValue,
-      randomIndex;
-
-    while (0 !== currentIndex) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-  }
 
   const nextItems = async () => {
     if (products.length >= 10) {
@@ -87,11 +73,7 @@ const Catalogue = ({ navigation, route }) => {
         .post("/category/" + prodId + "/get-products/" + counter, body)
         .then((res) => {
           if (!res.data.end) {
-            if (sort !== "Price") {
-              setProducts(products.concat(shuffle([...res.data])));
-            } else {
-              setProducts(products.concat([...res.data]));
-            }
+            setProducts(products.concat([...res.data]));
             setFetcher(false);
           } else {
             setFetcher(false);
@@ -119,12 +101,13 @@ const Catalogue = ({ navigation, route }) => {
             alignItems: "center",
             width: "100%",
             height: "100%",
+            // backgroundColor: "#FFD845",
             backgroundColor: "#fff",
           }}
         >
           <Image
-            source={require("../../../assets/i.gif")}
-            style={{ height: 100, width: 100 }}
+            source={require("../../../assets/loader.gif")}
+            width={Dimensions.get("window").width}
           />
         </View>
       ) : (

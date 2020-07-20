@@ -17,7 +17,11 @@ const SignUpStack = () => {
       <Stack.Screen name="Otp Verify" component={OtpVerify} />
       <Stack.Screen name="Otp Forgot" component={OtpForgot} />
       <Stack.Screen name="Get Email" component={GetEmail} />
-      <Stack.Screen name="Reset Password" component={ResetPassword} options={{ headerShown: true }}/>
+      <Stack.Screen
+        name="Reset Password"
+        component={ResetPassword}
+        options={{ headerShown: true, headerLeft: null }}
+      />
     </Stack.Navigator>
   );
 };

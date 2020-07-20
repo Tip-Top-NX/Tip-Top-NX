@@ -8,12 +8,11 @@ import {
   TouchableWithoutFeedback,
   FlatList,
   Dimensions,
-  Image,
 } from "react-native";
 import { myAxios } from "../../../axios";
 import ProductCard from "../ProductCard";
-import NoResultFound from "../../../assets/no_results_found.png";
 import Splash from "../Splash";
+import Image from "react-native-scalable-image";
 
 const Search = (props) => {
   const [keyword, setKeyword] = useState("");
@@ -50,10 +49,17 @@ const Search = (props) => {
             {isFetching ? (
               <Splash />
             ) : !found ? (
-              <Image
-                style={{ width: "100%", height: "100%", resizeMode: "contain" }}
-                source={NoResultFound}
-              />
+              <View
+                style={{
+                  height: "100%",
+                  justifyContent: "center",
+                }}
+              >
+                <Image
+                  width={Dimensions.get("window").width}
+                  source={require("../../../assets/not.png")}
+                />
+              </View>
             ) : (
               <FlatList
                 data={products}
