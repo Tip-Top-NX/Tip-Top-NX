@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import styles from "./SignUpStyles";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Feather } from "@expo/vector-icons";
 
 import { useSelector, useDispatch } from "react-redux";
 import { signinFailed } from "../../../redux/ActionCreators";
@@ -28,6 +29,7 @@ const signUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
+  const [showPassword, setShowPassword] = useState(true);
   // states for style change if not valid
   const [validName, checkName] = useState(-1);
   const [validEmail, checkEmail] = useState(-1);
@@ -132,6 +134,26 @@ const signUp = () => {
     }
   };
 
+  const HandlePasswordField = () => {
+    return showPassword ? (
+      <Feather
+        name="eye-off"
+        size={24}
+        color="black"
+        style={{ alignSelf: "center" }}
+        onPress={() => setShowPassword(false)}
+      />
+    ) : (
+      <Feather
+        name="eye"
+        size={24}
+        color="black"
+        style={{ alignSelf: "center" }}
+        onPress={() => setShowPassword(true)}
+      />
+    );
+  };
+
   return (
     <SafeAreaView>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -185,18 +207,19 @@ const signUp = () => {
               </View>
               <View
                 style={[
-                  styles.inputContainer,
-                  validPassword == 0 ? styles.error : null,
+                  styles.inputContainerPass,
+                  !validPassword ? styles.error : null,
                 ]}
               >
                 <TextInput
-                  style={styles.inputText}
+                  style={styles.inputTextPass}
                   placeholder="PASSWORD"
                   placeholderTextColor="#666"
-                  secureTextEntry={true}
+                  secureTextEntry={showPassword}
                   onChangeText={(text) => setPassword(text)}
                   value={password}
                 ></TextInput>
+                <HandlePasswordField />
               </View>
               <View
                 style={[

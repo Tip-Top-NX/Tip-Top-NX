@@ -21,7 +21,7 @@ const Colours = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerStyle}>
-        <Text style={styles.headerText}>COLOURS</Text>
+        <Text style={styles.headerText}>COLORS</Text>
         {props.length <= 2 ||
         props.length >= 4 ||
         props.category === 103 ||
@@ -56,7 +56,7 @@ const Colours = (props) => {
               });
             }}
           >
-            <Text style={styles.sizeChartButtonText}>COLORS</Text>
+            <Text style={styles.sizeChartButtonText}>COLOR CHART</Text>
           </TouchableOpacity>
         ) : null}
       </View>
@@ -116,13 +116,14 @@ const styles = StyleSheet.create({
   },
   sizeChartButton: {
     height: 50,
-    width: 80,
+    // width: 80,
     justifyContent: "center",
   },
   sizeChartButtonText: {
     fontSize: 12,
     textDecorationLine: "underline",
     textAlign: "center",
+    fontWeight: "500",
     color: "#00868B",
   },
   colorTextStyle: {

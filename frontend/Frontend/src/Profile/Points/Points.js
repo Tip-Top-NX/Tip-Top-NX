@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: 15,
-    fontWeight: "400",
+    fontWeight: "500",
   },
   exampleText: {
     fontSize: 14,

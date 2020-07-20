@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import styles from "./SignInStyles";
 import PropTypes from "prop-types";
+import { Feather } from "@expo/vector-icons";
 
 import { useSelector, useDispatch } from "react-redux";
 import { signin, signinFailed } from "../../../redux/ActionCreators";
@@ -21,6 +22,7 @@ const signIn = ({ navigation }) => {
   // states for handling the input
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(true);
   // states for style change if not valid
   const [validEmail, checkEmail] = useState(true);
   const [validPassword, checkPassword] = useState(true);
@@ -70,6 +72,26 @@ const signIn = ({ navigation }) => {
         })
       );
     }
+  };
+
+  const HandlePasswordField = () => {
+    return showPassword ? (
+      <Feather
+        name="eye-off"
+        size={24}
+        color="black"
+        style={{ alignSelf: "center" }}
+        onPress={() => setShowPassword(false)}
+      />
+    ) : (
+      <Feather
+        name="eye"
+        size={24}
+        color="black"
+        style={{ alignSelf: "center" }}
+        onPress={() => setShowPassword(true)}
+      />
+    );
   };
 
   return (
@@ -136,18 +158,19 @@ const signIn = ({ navigation }) => {
               </View>
               <View
                 style={[
-                  styles.inputContainer,
+                  styles.inputContainerPass,
                   !validPassword ? styles.error : null,
                 ]}
               >
                 <TextInput
-                  style={styles.inputText}
+                  style={styles.inputTextPass}
                   placeholder="PASSWORD"
                   placeholderTextColor="#666"
-                  secureTextEntry={true}
+                  secureTextEntry={showPassword}
                   onChangeText={(text) => setPassword(text)}
                   value={password}
                 ></TextInput>
+                <HandlePasswordField />
               </View>
               <TouchableOpacity
                 onPress={() => navigation.navigate("Get Email")}

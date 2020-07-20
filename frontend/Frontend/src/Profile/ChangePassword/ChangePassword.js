@@ -13,27 +13,26 @@ import {
 } from "react-native";
 import { myAxios, getConfig } from "../../../../axios";
 import { useNavigation } from "@react-navigation/native";
+import { Feather } from "@expo/vector-icons";
 
 const width = Dimensions.get("window").width;
 const ChangePassword = () => {
-  const [oldPassword, setOldPassword] = useState();
-  const [newPassword, setNewPassword] = useState();
-  const [confirmPass, setConfirmPass] = useState();
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
   const [message, setMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(true);
 
   const navigation = useNavigation();
 
   const validation = () => {
     // password check
-    console.log(oldPassword + " " + newPassword + " " + confirmPass);
     setMessage("");
-    if ( newPassword === "" || newPassword.length < 6 ){
+    if (newPassword === "" || newPassword.length < 6) {
       setMessage("The password should be atleast 6 characters long");
-    }
-    else if ( newPassword !== confirmPass ){
+    } else if (newPassword !== confirmPass) {
       setMessage("The passwords dont match");
-    } 
-    else {
+    } else {
       console.log("dispatching");
       const bodyPart = {
         oldPassword: oldPassword,
@@ -44,7 +43,7 @@ const ChangePassword = () => {
           .put("/profile/changePassword", bodyPart, config)
           .then((res) => {
             if (res.status === 200) {
-              alert("Your Password has been changed");
+              alert("Your Password has been changed successfully");
               console.log(res.status);
               navigation.navigate("Profile");
             }
@@ -54,6 +53,26 @@ const ChangePassword = () => {
           });
       });
     }
+  };
+
+  const HandlePasswordField = () => {
+    return showPassword ? (
+      <Feather
+        name="eye-off"
+        size={24}
+        color="black"
+        style={{ alignSelf: "center" }}
+        onPress={() => setShowPassword(false)}
+      />
+    ) : (
+      <Feather
+        name="eye"
+        size={24}
+        color="black"
+        style={{ alignSelf: "center" }}
+        onPress={() => setShowPassword(true)}
+      />
+    );
   };
 
   return (
@@ -75,30 +94,33 @@ const ChangePassword = () => {
                 style={styles.inputText}
                 placeholder="CURRENT PASSWORD"
                 placeholderTextColor="#666"
-                secureTextEntry={true}
+                secureTextEntry={showPassword}
                 onChangeText={(text) => setOldPassword(text)}
                 value={oldPassword}
               ></TextInput>
+              <HandlePasswordField />
             </View>
             <View style={styles.inputContainer}>
               <TextInput
                 style={styles.inputText}
                 placeholder="NEW PASSWORD"
                 placeholderTextColor="#666"
-                secureTextEntry={true}
+                secureTextEntry={showPassword}
                 onChangeText={(text) => setNewPassword(text)}
                 value={newPassword}
               ></TextInput>
+              <HandlePasswordField />
             </View>
             <View style={styles.inputContainer}>
               <TextInput
                 style={styles.inputText}
                 placeholder="CONFIRM NEW PASSWORD"
                 placeholderTextColor="#666"
-                secureTextEntry={true}
+                secureTextEntry={showPassword}
                 onChangeText={(text) => setConfirmPass(text)}
                 value={confirmPass}
               ></TextInput>
+              <HandlePasswordField />
             </View>
             <Text
               style={{
@@ -137,15 +159,18 @@ const styles = StyleSheet.create({
     width: width - 75,
     marginVertical: 5,
     height: 50,
-    borderWidth: 1.5,
+    borderWidth: 1,
     borderColor: "#000",
     paddingLeft: 12,
-    justifyContent: "center",
+    paddingRight: 10,
+    justifyContent: "space-between",
     alignSelf: "center",
+    flexDirection: "row",
   },
   inputText: {
     color: "#000",
     fontSize: 15,
+    width: width - 150,
   },
   button: {
     width: width - 75,

@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
     textAlign: "center",
     color: "#00868B",
+    fontWeight: "500",
   },
   optionsBox: {
     // borderWidth: 1,

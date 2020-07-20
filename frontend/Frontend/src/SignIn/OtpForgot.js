@@ -55,11 +55,11 @@ class OtpForgot extends Component {
       .post("/users/verify-otp", bodyPart)
       .then((res) => {
         if (res.data.success) {
-          Alert.alert("Success", "You can now change your password!");
+          // Alert.alert("Success", "You can now change your password!");
           AsyncStorage.setItem("token", res.data.token);
           this.props.navigation.navigate("Reset Password");
         } else {
-          Alert.alert("Error1212", "Invalid OTP!", [{ text: "Try again" }]);
+          Alert.alert("ERROR", "Invalid OTP!", [{ text: "Try again" }]);
         }
       })
       .catch((err) => console.log(err));

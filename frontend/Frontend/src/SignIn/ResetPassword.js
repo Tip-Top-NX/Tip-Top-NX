@@ -14,12 +14,14 @@ import {
 } from "react-native";
 import { myAxios, getConfig } from "../../../axios";
 import { useNavigation } from "@react-navigation/native";
+import { Feather } from "@expo/vector-icons";
 
 const width = Dimensions.get("window").width;
 const ResetPassword = () => {
-  const [newPassword, setNewPassword] = useState();
-  const [confirmPass, setConfirmPass] = useState();
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
   const [message, setMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(true);
 
   const navigation = useNavigation();
 
@@ -54,6 +56,26 @@ const ResetPassword = () => {
     }
   };
 
+  const HandlePasswordField = () => {
+    return showPassword ? (
+      <Feather
+        name="eye-off"
+        size={24}
+        color="black"
+        style={{ alignSelf: "center" }}
+        onPress={() => setShowPassword(false)}
+      />
+    ) : (
+      <Feather
+        name="eye"
+        size={24}
+        color="black"
+        style={{ alignSelf: "center" }}
+        onPress={() => setShowPassword(true)}
+      />
+    );
+  };
+
   return (
     <SafeAreaView>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -68,25 +90,27 @@ const ResetPassword = () => {
             }}
             blurRadius={0}
           >
-            <View style={styles.inputContainer}>
+            <View style={styles.inputContainerPass}>
               <TextInput
-                style={styles.inputText}
+                style={styles.inputTextPass}
                 placeholder="NEW PASSWORD"
                 placeholderTextColor="#666"
-                secureTextEntry={true}
+                secureTextEntry={showPassword}
                 onChangeText={(text) => setNewPassword(text)}
                 value={newPassword}
               ></TextInput>
+              <HandlePasswordField />
             </View>
-            <View style={styles.inputContainer}>
+            <View style={styles.inputContainerPass}>
               <TextInput
-                style={styles.inputText}
-                placeholder="CONFIRM NEW PASSWORD"
+                style={styles.inputTextPass}
+                placeholder="CONFIRM PASSWORD"
                 placeholderTextColor="#666"
-                secureTextEntry={true}
+                secureTextEntry={showPassword}
                 onChangeText={(text) => setConfirmPass(text)}
                 value={confirmPass}
               ></TextInput>
+              <HandlePasswordField />
             </View>
             <Text
               style={{
@@ -121,19 +145,23 @@ const styles = StyleSheet.create({
     width: width,
     height: "100%",
   },
-  inputContainer: {
+  inputContainerPass: {
     width: width - 75,
     marginVertical: 5,
     height: 50,
-    borderWidth: 1.5,
+    borderWidth: 1,
     borderColor: "#000",
-    paddingLeft: 12,
-    justifyContent: "center",
+    paddingLeft: 15,
+    paddingRight: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignSelf: "center",
   },
-  inputText: {
+  inputTextPass: {
+    height: 50,
     color: "#000",
-    fontSize: 15,
+    fontSize: 18,
+    width: width - 150,
   },
   button: {
     width: width - 75,
