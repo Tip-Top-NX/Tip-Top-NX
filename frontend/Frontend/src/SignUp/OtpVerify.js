@@ -10,6 +10,7 @@ import {
   Keyboard,
   Dimensions,
   ImageBackground,
+  Image,
   Alert,
 } from "react-native";
 import { connect } from "react-redux";
@@ -46,15 +47,20 @@ class OtpVerify extends Component {
       flag3: 0,
       flag4: 0,
       isDisable: true,
+      showLoader:false
     };
   }
 
   componentDidMount = () => {
     this.refs.ref1.focus();
-    if (this.props.user.isValid) this.props.navigation.navigate("Home");
+    if (this.props.user.isValid){
+      this.setState({showLoader:false})
+      this.props.navigation.navigate("Home");
+    }
   };
 
   checkOtp = () => {
+    this.setState({showLoader:true});
     let otp =
       this.state.pin1 * 1000 +
       this.state.pin2 * 100 +
@@ -75,6 +81,7 @@ class OtpVerify extends Component {
             this.props.route.params.contact
           );
         } else {
+          this.setState({showLoader:false});
           Alert.alert("Error", "Invalid OTP!", [{ text: "Try again" }]);
         }
       })
@@ -88,6 +95,22 @@ class OtpVerify extends Component {
         <KeyboardAwareScrollView scrollEnabled={false}>
           <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.container}>
+              {this.state.showLoader ? (
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                >
+                  <Image
+                    source={require("../../../assets/q.gif")}
+                    style={{ height: 100, width: 100 }}
+                  />
+                </View>
+              ) : (
               <ImageBackground
                 source={require("../../../assets/background.jpg")}
                 style={{
@@ -202,6 +225,7 @@ class OtpVerify extends Component {
                   </TouchableOpacity>
                 </View>
               </ImageBackground>
+              )}
             </View>
           </TouchableWithoutFeedback>
         </KeyboardAwareScrollView>

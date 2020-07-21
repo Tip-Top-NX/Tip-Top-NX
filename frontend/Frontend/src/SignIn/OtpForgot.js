@@ -10,6 +10,7 @@ import {
   Keyboard,
   Dimensions,
   ImageBackground,
+  Image,
   Alert,
 } from "react-native";
 import { AsyncStorage } from "react-native";
@@ -33,6 +34,7 @@ class OtpForgot extends Component {
       flag4: 0,
       isDisable: true,
       email: props.route.params.email,
+      showLoader: false
     };
   }
 
@@ -41,6 +43,7 @@ class OtpForgot extends Component {
   };
 
   checkOtp = () => {
+    this.setState({showLoader:true});
     let otp =
       this.state.pin1 * 1000 +
       this.state.pin2 * 100 +
@@ -57,8 +60,10 @@ class OtpForgot extends Component {
         if (res.data.success) {
           // Alert.alert("Success", "You can now change your password!");
           AsyncStorage.setItem("token", res.data.token);
+          this.setState({showLoader:false});
           this.props.navigation.navigate("Reset Password");
         } else {
+          this.setState({showLoader:false});
           Alert.alert("ERROR", "Invalid OTP!", [{ text: "Try again" }]);
         }
       })
@@ -72,6 +77,22 @@ class OtpForgot extends Component {
         <KeyboardAwareScrollView scrollEnabled={false}>
           <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.container}>
+            {this.state.showLoader ? (
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                >
+                  <Image
+                    source={require("../../../assets/q.gif")}
+                    style={{ height: 100, width: 100 }}
+                  />
+                </View>
+              ) : (
               <ImageBackground
                 source={require("../../../assets/background.jpg")}
                 style={{
@@ -186,6 +207,7 @@ class OtpForgot extends Component {
                   </TouchableOpacity>
                 </View>
               </ImageBackground>
+              )}
             </View>
           </TouchableWithoutFeedback>
         </KeyboardAwareScrollView>

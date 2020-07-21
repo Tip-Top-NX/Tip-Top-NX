@@ -98,15 +98,15 @@ const signUp = () => {
         .then((res) => {
           if (res.data.success) {
             Alert.alert(
-              "Alert",
-              "An OTP will be sent to your email, make sure you have entered the email correctly",
+              "Note",
+              "An OTP will be sent to your email, make sure you have entered the email correctly!",
               [
                 {
                   text: "Cancel",
                   style: "destructive",
                 },
                 {
-                  text: "Enter OTP",
+                  text: "Send OTP",
                   onPress: () =>
                     navigation.navigate("Otp Verify", {
                       name: name,

@@ -26,6 +26,7 @@ const GetEmail = () => {
 
   const [email, setEmail] = useState("");
   const [valid, setValid] = useState(-1);
+  const [showLoader, setLoader] = useState(false);
 
   const sendOtp = () => {
     const bodyPart = {
@@ -35,8 +36,10 @@ const GetEmail = () => {
       .post("/users/forgot", bodyPart)
       .then((res) => {
         if (res.data.success) {
+          setLoader(false);
           navigation.navigate("Otp Forgot", { email: email });
         } else {
+          setLoader(false);
           Alert.alert("Error", "Entered email not registered!", [
             { text: "Try again" },
           ]);
@@ -57,6 +60,7 @@ const GetEmail = () => {
     }
 
     if (valid == 1) {
+      setLoader(true);
       sendOtp();
     }
   };
@@ -66,6 +70,22 @@ const GetEmail = () => {
       <KeyboardAwareScrollView scrollEnabled={false}>
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.container}>
+          {showLoader ? (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "100%",
+              }}
+            >
+              <Image
+                source={require("../../../assets/q.gif")}
+                style={{ height: 100, width: 100 }}
+              />
+            </View>
+          ) : (
             <ImageBackground
               source={require("../../../assets/background.jpg")}
               style={{
@@ -103,6 +123,7 @@ const GetEmail = () => {
                 <Text style={styles.buttonText}>SEND OTP</Text>
               </TouchableOpacity>
             </ImageBackground>
+          )}
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAwareScrollView>

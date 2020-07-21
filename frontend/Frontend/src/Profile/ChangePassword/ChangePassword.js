@@ -10,6 +10,7 @@ import {
   Keyboard,
   Dimensions,
   ImageBackground,
+  Image
 } from "react-native";
 import { myAxios, getConfig } from "../../../../axios";
 import { useNavigation } from "@react-navigation/native";
@@ -22,6 +23,7 @@ const ChangePassword = () => {
   const [confirmPass, setConfirmPass] = useState("");
   const [message, setMessage] = useState("");
   const [showPassword, setShowPassword] = useState(true);
+  const [showLoader, setLoader] = useState(false);
 
   const navigation = useNavigation();
 
@@ -33,7 +35,7 @@ const ChangePassword = () => {
     } else if (newPassword !== confirmPass) {
       setMessage("The passwords dont match");
     } else {
-      console.log("dispatching");
+      setLoader(true);
       const bodyPart = {
         oldPassword: oldPassword,
         newPassword: newPassword,
@@ -43,13 +45,14 @@ const ChangePassword = () => {
           .put("/profile/changePassword", bodyPart, config)
           .then((res) => {
             if (res.status === 200) {
+              setLoader(false);
               alert("Your Password has been changed successfully");
-              console.log(res.status);
               navigation.navigate("Profile");
             }
           })
           .catch((err) => {
-            console.log(err), setMessage("Incorrect current password");
+              setLoader(false);
+              setMessage("Incorrect current password");
           });
       });
     }
@@ -79,6 +82,22 @@ const ChangePassword = () => {
     <SafeAreaView>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.container}>
+        {showLoader ? (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "100%",
+              }}
+            >
+              <Image
+                source={require("../../../../assets/q.gif")}
+                style={{ height: 100, width: 100 }}
+              />
+            </View>
+          ) : (
           <ImageBackground
             source={require("../../../../assets/background.jpg")}
             style={{
@@ -140,6 +159,7 @@ const ChangePassword = () => {
               <Text style={styles.buttonText}>SAVE</Text>
             </TouchableOpacity>
           </ImageBackground>
+          )}
         </View>
       </TouchableWithoutFeedback>
     </SafeAreaView>

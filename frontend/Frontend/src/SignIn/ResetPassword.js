@@ -11,6 +11,7 @@ import {
   Dimensions,
   ImageBackground,
   Alert,
+  Image,
   BackHandler,
 } from "react-native";
 import { myAxios, getConfig } from "../../../axios";
@@ -23,6 +24,7 @@ const ResetPassword = () => {
   const [confirmPass, setConfirmPass] = useState("");
   const [message, setMessage] = useState("");
   const [showPassword, setShowPassword] = useState(true);
+  const [showLoader, setLoader] = useState(false);
 
   const navigation = useNavigation();
 
@@ -48,6 +50,7 @@ const ResetPassword = () => {
     } else if (newPassword !== confirmPass) {
       setMessage("The passwords dont match");
     } else {
+      setLoader(true);
       const bodyPart = {
         password: newPassword,
       };
@@ -56,9 +59,11 @@ const ResetPassword = () => {
           .post("/users/set-password", bodyPart, config)
           .then((res) => {
             if (res.data.success) {
+              setLoader(false);
               Alert.alert("Success", "Password changed successfully");
               navigation.navigate("Sign In");
             } else {
+              setLoader(false);
               Alert.alert("Error", "Cannot change password", [
                 { text: "Try again" },
               ]);
@@ -93,6 +98,22 @@ const ResetPassword = () => {
     <SafeAreaView>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.container}>
+        {showLoader ? (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "100%",
+              }}
+            >
+              <Image
+                source={require("../../../assets/q.gif")}
+                style={{ height: 100, width: 100 }}
+              />
+            </View>
+          ) : (
           <ImageBackground
             source={require("../../../assets/background.jpg")}
             style={{
@@ -143,6 +164,7 @@ const ResetPassword = () => {
               <Text style={styles.buttonText}>RESET PASSWORD</Text>
             </TouchableOpacity>
           </ImageBackground>
+          )}
         </View>
       </TouchableWithoutFeedback>
     </SafeAreaView>
@@ -153,7 +175,6 @@ export default ResetPassword;
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
     alignSelf: "center",
     width: width,
     height: "100%",
