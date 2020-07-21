@@ -1,7 +1,8 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+const width = Dimensions.get("window").width;
 const styles = StyleSheet.create({
   container: {
-    width: 350,
+    width: width - 25,
     borderBottomWidth: 1,
     marginVertical: 10,
     alignItems: "center",
@@ -11,8 +12,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   imageContainer: {
-    height: 160,
-    width: 120,
+    width: (width - 15) / 3,
+    aspectRatio: 3 / 4,
     borderWidth: 1,
     alignSelf: "center",
     marginRight: 10,
@@ -20,8 +21,8 @@ const styles = StyleSheet.create({
   },
   detailBox: {
     // borderWidth: 1,
-    height: 190,
-    width: 200,
+    // height: 190,
+    width: (width + 25) / 2,
     alignItems: "center",
     paddingVertical: 5,
   },
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
     paddingHorizontal: 5,
     flexDirection: "row",
+    justifyContent: "center",
   },
   priceBox: {
     flexDirection: "row",
@@ -59,6 +61,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 5,
     paddingTop: 10,
+    // borderWidth: 1,
   },
   discountedPriceText: {
     fontSize: 17,
@@ -67,17 +70,18 @@ const styles = StyleSheet.create({
     color: "#444",
   },
   buttonContainer: {
-    width: 350,
+    width: width - 20,
     borderTopWidth: 1,
     borderColor: "#ccc",
     flexDirection: "row",
     justifyContent: "space-evenly",
     paddingTop: 10,
     paddingBottom: 10,
+    // marginTop: 5,
   },
   buttonBox: {
-    width: 150,
-    height: 50,
+    width: (width - 20) / 2 - 25,
+    height: 40,
     borderWidth: 1,
     paddingHorizontal: 15,
     justifyContent: "space-evenly",
@@ -88,15 +92,20 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: 22,
     height: 22,
-    marginHorizontal: 5,
+    marginLeft: 8,
     borderRadius: 11,
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "grey",
   },
   plusBox: {
     borderWidth: 1,
     width: 22,
     height: 22,
-    marginHorizontal: 5,
     borderRadius: 11,
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "grey",
   },
 });
 

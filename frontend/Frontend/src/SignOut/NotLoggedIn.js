@@ -6,17 +6,18 @@ import {
   Text,
   TouchableOpacity,
   ImageBackground,
+  SafeAreaView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Entypo } from "@expo/vector-icons";
 
-const NotLoggedIn = () => {
+const NotLoggedIn = (props) => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ImageBackground
-        source={require("../../../assets/b1.jpg")}
+        source={require("../../../assets/background.jpg")}
         style={{
           flex: 1,
           resizeMode: "cover",
@@ -46,7 +47,7 @@ const NotLoggedIn = () => {
 
         <View style={styles.buttonContainer}>
           <Text style={{ textAlign: "center", marginTop: 60 }}>
-            YOU NEED TO LOGIN IN ORDER TO VIEW YOUR PROFILE
+            {props.message}
           </Text>
           <TouchableOpacity
             style={styles.button}
@@ -56,7 +57,7 @@ const NotLoggedIn = () => {
           </TouchableOpacity>
         </View>
       </ImageBackground>
-    </View>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({

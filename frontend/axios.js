@@ -1,11 +1,18 @@
 import axios from "axios";
 import { AsyncStorage } from "react-native";
 
-export const myIP = "172.20.10.2";
+// export const myUri = "http://172.20.10.2:5000/";
+export const myUri = "https://tiptop-nx.herokuapp.com/";
+
 export const port = "5000";
 
+// export const myAxios = axios.create({
+//   baseURL: "http://" + myIP + ":" + port,
+//   withCredentials: true,
+// });
+
 export const myAxios = axios.create({
-  baseURL: "http://" + myIP + ":" + port,
+  baseURL: myUri,
   withCredentials: true,
 });
 
@@ -23,6 +30,6 @@ export const getConfig = () => {
 };
 
 export const getURL = (path) => {
-  uri = "http://" + myIP + ":" + port + "/" + path;
+  const uri = myUri + path;
   return uri;
 };

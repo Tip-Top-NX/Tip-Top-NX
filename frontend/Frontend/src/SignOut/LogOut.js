@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   ImageBackground,
+  SafeAreaView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Entypo } from "@expo/vector-icons";
@@ -23,9 +24,9 @@ const LogOut = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ImageBackground
-        source={require("../../../assets/b1.jpg")}
+        source={require("../../../assets/background.jpg")}
         style={{
           flex: 1,
           resizeMode: "cover",
@@ -61,7 +62,7 @@ const LogOut = () => {
           </TouchableOpacity>
         </View>
       </ImageBackground>
-    </View>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({

@@ -24,9 +24,12 @@ const Size = (props) => {
         <Text style={styles.headerText}>SELECT SIZE</Text>
         <TouchableOpacity
           style={styles.sizeChartButton}
-          onPress={() =>
-            navigation.navigate("SizeChart", { sizeChart: props.images })
-          }
+          onPress={() => {
+            navigation.navigate("Size Chart", {
+              images: props.images,
+              category: props.category,
+            });
+          }}
         >
           <Text style={styles.sizeChartButtonText}>SIZE CHART</Text>
         </TouchableOpacity>
@@ -68,6 +71,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderColor: "#ccc",
     marginTop: 10,
+    marginBottom: 10,
   },
   headerStyle: {
     height: 50,
@@ -94,6 +98,7 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
     textAlign: "center",
     color: "#00868B",
+    fontWeight: "500",
   },
   optionsBox: {
     // borderWidth: 1,

@@ -4,8 +4,6 @@ const Schema = mongoose.Schema;
 const productSchema = new Schema({
     _id:{
         type:String,
-        unique:true,
-        required:true
     },
     name:{
         type:String,
@@ -34,6 +32,10 @@ const productSchema = new Schema({
     images:[String],
     colors:[String],
     size:[String],
+    deleted: {
+        type: Boolean,
+        default: false,
+    }
 });
 
 const Product = mongoose.model('Product',productSchema);

@@ -5,6 +5,7 @@ import {
   Text,
   ScrollView,
   ImageBackground,
+  SafeAreaView,
 } from "react-native";
 import { useSelector } from "react-redux";
 
@@ -12,7 +13,7 @@ const Points = () => {
   const user = useSelector((state) => state.user);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ImageBackground
         source={require("../../../../assets/p.jpg")}
         style={{
@@ -58,8 +59,7 @@ const Points = () => {
             </View>
             <View style={[styles.textBox, { borderBottomWidth: 0 }]}>
               <Text style={styles.textStyle}>
-                1] On every purchase, 10% of your cart total will be awarded you
-                as Points
+                1] Get a 10% of bonus points on every purchase you make.
               </Text>
             </View>
             <View style={styles.textBox}>
@@ -92,7 +92,7 @@ const Points = () => {
           </View>
         </ScrollView>
       </ImageBackground>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: 15,
-    fontWeight: "400",
+    fontWeight: "500",
   },
   exampleText: {
     fontSize: 14,

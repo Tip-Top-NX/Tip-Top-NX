@@ -1,7 +1,9 @@
 /* eslint-disable */
 import React from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, Text, View, FlatList, Dimensions } from "react-native";
 import ProductCard from "../../ProductCard";
+
+const width = Dimensions.get("window").width;
 
 const DisplayWishlist = (props) => {
   return (
@@ -10,7 +12,7 @@ const DisplayWishlist = (props) => {
         data={props.wishlist}
         numColumns={2}
         showsVerticalScrollIndicator={false}
-        keyExtractor={(item,index) => String(index)}
+        keyExtractor={(item, index) => String(index)}
         renderItem={({ item }) => (
           <ProductCard
             _id={item._id}
@@ -26,6 +28,7 @@ const DisplayWishlist = (props) => {
             cardStyle={styles.cardStyle}
             imageView={styles.imageView}
             details={styles.details}
+            imageContainer={styles.imageContainer}
             textStyle={styles.textStyle}
           />
         )}
@@ -38,36 +41,49 @@ export default DisplayWishlist;
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
-    width: "100%",
     height: "100%",
+    // borderWidth: 1,
     flex: 1,
+    backgroundColor: "#fff",
+    // alignItems: "center",
+    justifyContent: "center",
   },
   cardStyle: {
-    width: 180,
+    width: width / 2 - 10,
+    height: 320,
     alignItems: "center",
-    borderStyle: "dotted",
-    borderColor: "#FFB6C1",
-    borderWidth: 1,
-    marginHorizontal: 4,
-    marginVertical: 5,
+    marginHorizontal: 3,
+    marginVertical: 7,
+    borderColor: "#ccc",
+    backgroundColor: "white",
+    borderWidth: 0.5,
   },
   imageView: {
-    width: 170,
-    height: 250,
+    height: 230,
+    aspectRatio: 5 / 8,
     alignSelf: "center",
     marginTop: 2,
   },
   details: {
     marginTop: 5,
     // borderWidth: 1,
-    width: 170,
-    height: 60,
+    borderColor: "grey",
+    width: width / 2 - 20,
+    height: 80,
     justifyContent: "space-evenly",
     paddingLeft: 10,
+    paddingVertical: 3,
+    paddingRight: 5,
   },
   textStyle: {
-    fontSize: 15,
+    fontSize: 13,
+    // borderWidth: 1,
     fontWeight: "500",
+  },
+  imageContainer: {
+    width: "100%",
+    backgroundColor: "#E6E4E4",
+    borderWidth: 1,
+    borderColor: "silver",
   },
 });

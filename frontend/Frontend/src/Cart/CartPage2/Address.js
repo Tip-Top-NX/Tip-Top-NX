@@ -21,7 +21,11 @@ const Address = (props) => {
   const [address, setAddress] = useState("");
 
   useEffect(() => {
-    props.onAddressChange(selected);
+    if (user.address === "") {
+      props.onAddressChange(false);
+    } else {
+      props.onAddressChange(selected);
+    }
   }, [selected]);
 
   const handleSubmit = () => {
@@ -69,6 +73,7 @@ const Address = (props) => {
                 onChangeText={(text) => setAddress(text)}
                 value={address}
                 multiline={true}
+                autoFocus={true}
               ></TextInput>
               <View
                 style={{ flexDirection: "row", justifyContent: "space-evenly" }}
@@ -122,7 +127,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     shadowRadius: 8,
     elevation: 5,
-    marginTop: 10,
+    marginTop: 20,
   },
   addressPart: {
     width: "95%",

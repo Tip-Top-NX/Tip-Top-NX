@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
+    // borderWidth: 1,
     height: "100%",
     width: "100%",
     flexDirection: "column",
@@ -38,6 +38,24 @@ const styles = StyleSheet.create({
     height: 50,
     color: "#000",
     fontSize: 18,
+  },
+  inputContainerPass: {
+    width: 300,
+    marginVertical: 10,
+    height: 50,
+    borderWidth: 1,
+    borderColor: "#000",
+    paddingLeft: 15,
+    paddingRight: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignSelf: "center",
+  },
+  inputTextPass: {
+    height: 50,
+    color: "#000",
+    fontSize: 18,
+    width: 230,
   },
   button: {
     marginVertical: 10,

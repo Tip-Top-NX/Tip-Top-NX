@@ -1,29 +1,48 @@
 /* eslint-disable */
 import * as ActionTypes from "./ActionTypes";
 import { myAxios, getConfig } from "../axios";
+import { Alert } from "react-native";
 
 export const placeOrder = (method) => {
   const bodyPart = {
-    method:method
+    method: method,
   };
   return (dispatch) => {
     getConfig().then((config) => {
       myAxios
         .post("/profile/cart/placeOrder", bodyPart, config)
-        .then((res) => dispatch(setOrder(res.data)))
+        .then((res) =>
+          dispatch(
+            setOrder(
+              res.data.orders,
+              res.data.cart,
+              res.data.cartTotal,
+              res.data.points
+            )
+          )
+        )
         .catch((err) => console.log(err));
     });
-  }
-}
+  };
+};
 
-export const setOrder = (orders) => {
+export const setOrder = (orders, cart, cartTotal, points) => {
   return {
     type: ActionTypes.PLACE_ORDER,
-    payload:{
-      orders:orders,
-      cart: [],
-      cartTotal: 0
-    }
+    payload: {
+      orders: orders,
+      cart: cart,
+      cartTotal: cartTotal,
+      points: points,
+    },
+  };
+};
+
+export const cancelOrder2 = (orderId) => {
+  console.log(orderId);
+  return {
+    type: ActionTypes.CANCEL_ORDER,
+    payload: orderId,
   };
 };
 
@@ -37,7 +56,7 @@ export const postCart = (prodId, color, size, quantity) => {
     getConfig().then((config) => {
       myAxios
         .post("/product/" + prodId + "/cart", bodyPart, config)
-        .then((res) => dispatch(setCart(res.data.cart,res.data.cartTotal)))
+        .then((res) => dispatch(setCart(res.data.cart, res.data.cartTotal)))
         .catch((err) => console.log(err));
     });
   };
@@ -46,24 +65,24 @@ export const postCart = (prodId, color, size, quantity) => {
 export const delCart = (prodId, color, size) => {
   const bodyPart = {
     color: color,
-    size: size
+    size: size,
   };
   return (dispatch) => {
     getConfig().then((config) => {
-      config.data = bodyPart
+      config.data = bodyPart;
       myAxios
-        .delete("/product/" + prodId + "/cart",config)
-        .then((res) => dispatch(setCart(res.data.cart,res.data.cartTotal)))
+        .delete("/product/" + prodId + "/cart", config)
+        .then((res) => dispatch(setCart(res.data.cart, res.data.cartTotal)))
         .catch((err) => console.log(err));
     });
   };
 };
 
-export const setCart = (cart,cartTotal) => {
+export const setCart = (cart, cartTotal) => {
   return {
     type: ActionTypes.SET_CART,
     payload: cart,
-    cartTotal:cartTotal
+    cartTotal: cartTotal,
   };
 };
 
@@ -146,6 +165,7 @@ export const signup = (user) => {
     myAxios
       .post("/users/sign-up", { ...user })
       .then((res) => {
+        console.log(res);
         if (res.data.success === true) {
           dispatch(setUser(res.data.user, res.data.token));
         } else {
@@ -159,19 +179,22 @@ export const signup = (user) => {
 export const signin = (user) => {
   return (dispatch) => {
     dispatch(isFetching(true));
-    setTimeout(() => {
-      myAxios
-        .post("/users/login", { ...user })
-        .then((res) => {
-          if (res.data.success === true) {
-            dispatch(setUser(res.data.user, res.data.token));
-            dispatch(isFetching(false));
-          } else {
-            dispatch(signinFailed());
-          }
-        })
-        .catch((err) => dispatch(signinFailed()));
-    }, 5000);
+    myAxios
+      .post("/users/login", { ...user })
+      .then((res) => {
+        if (res.data.success === true) {
+          dispatch(setUser(res.data.user, res.data.token));
+          dispatch(isFetching(false));
+        } else {
+          dispatch(signinFailed());
+        }
+      })
+      .catch((err) => {
+        dispatch(signinFailed()),
+          Alert.alert("Sorry!", "Your email address and password dont match", [
+            { text: "Try Again" },
+          ]);
+      });
   };
 };
 
@@ -192,7 +215,7 @@ export const setUser = (user, token) => {
       token: token,
       gender: user.gender,
       age: user.age,
-      cartTotal:user.cartTotal
+      cartTotal: user.cartTotal,
     },
   };
 };

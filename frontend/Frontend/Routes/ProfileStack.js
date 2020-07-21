@@ -6,6 +6,8 @@ import EditProfile from "../src/Profile/EditProfile/EditProfile";
 import Points from "../src/Profile/Points/Points";
 import Wishlist from "../src/Profile/Wishlist/Wishlist";
 import OrderStack from "./OrderStack";
+import CustomBack from "../src/BackButton";
+import ChangePassword from "../src/Profile/ChangePassword/ChangePassword";
 
 const Stack = createStackNavigator();
 
@@ -14,11 +16,15 @@ const ProfileStack = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
+        headerStyle: { height: 60 },
+        headerBackTitle: null,
+        headerTruncatedBackTitle: "",
+        headerBackImage: () => <CustomBack />,
       }}
     >
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen
-        name="EditProfile"
+        name="Edit Profile"
         component={EditProfile}
         options={{ headerShown: true }}
       />
@@ -36,6 +42,11 @@ const ProfileStack = () => {
         name="My Orders"
         component={OrderStack}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Change Password"
+        component={ChangePassword}
+        options={{ headerShown: true }}
       />
     </Stack.Navigator>
   );

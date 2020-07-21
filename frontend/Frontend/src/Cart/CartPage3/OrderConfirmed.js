@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { useNavigation } from "@react-navigation/native";
 
-const OrderConfirmed = () => {
-  const [show, setShow] = useState("");
-  const navigation = useNavigation();
+const OrderConfirmed = ({ navigation }) => {
+  const [showText, setShowText] = useState("");
+  const [showButtons, setShowButtons] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
-      setShow("ORDER PLACED SUCCESSFULLY!");
-    }, 2000);
+      setShowText("ORDER PLACED SUCCESSFULLY!");
+    }, 3000);
+  });
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowButtons(true);
+    }, 5500);
   });
 
   return (
@@ -25,52 +30,63 @@ const OrderConfirmed = () => {
       }}
     >
       <Image
-        source={require("../../../../assets/u.gif")}
+        source={require("../../../../assets/x.gif")}
         style={{ height: 300, width: 300 }}
       />
       <Text style={{ marginVertical: 20, fontWeight: "bold", fontSize: 18 }}>
-        {show}
+        {showText}
       </Text>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-evenly",
-          alignItems: "center",
-          marginTop: 10,
-          width: "100%",
-        }}
-      >
-        <TouchableOpacity
+      {showButtons === true ? (
+        <View
           style={{
-            backgroundColor: "#888cc0",
-            width: 150,
-            height: 50,
-            justifyContent: "center",
+            flexDirection: "row",
+            justifyContent: "space-evenly",
             alignItems: "center",
+            marginTop: 10,
+            width: "100%",
           }}
-<<<<<<< HEAD
-          onPress={() => navigation.navigate("Home")}
-=======
-          onPress={() => navigation.navigate("Categories")}
->>>>>>> b4ecba67547c6e0ef28d8560e8a5fa6e4ce08510
         >
-          <Text style={{ color: "white", fontWeight: "bold" }}>
-            BROWSE MORE
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "#888cc0",
-            width: 150,
-            height: 50,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          onPress={() => navigation.navigate("My Orders")}
-        >
-          <Text style={{ color: "white", fontWeight: "bold" }}>SHOW ORDER</Text>
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#888cc0",
+              width: 150,
+              height: 50,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            onPress={() =>
+              navigation.reset({
+                index: 0,
+                routes: [{ name: "Home" }],
+              })
+            }
+          >
+            <Text style={{ color: "white", fontWeight: "bold" }}>
+              BROWSE MORE
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#888cc0",
+              width: 150,
+              height: 50,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            onPress={() => {
+              navigation.navigate("Orders", { screen: "My Orders" }),
+                navigation.reset({
+                  index: 0,
+                  routes: [{ name: "Cart" }],
+                });
+            }}
+          >
+            <Text style={{ color: "white", fontWeight: "bold" }}>
+              SHOW ORDER
+            </Text>
+          </TouchableOpacity>
+        </View>
+      ) : null}
     </View>
   );
 };

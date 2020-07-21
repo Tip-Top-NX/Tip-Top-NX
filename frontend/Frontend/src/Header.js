@@ -8,7 +8,7 @@ import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 
-const header = () => {
+const header = (props) => {
   const navigation = useNavigation();
   const user = useSelector((state) => state.user);
 
@@ -17,45 +17,58 @@ const header = () => {
       <View style={styles.sideImage}>
         <MaterialIcons
           name="menu"
-          size={30}
+          size={26}
           style={[styles.materialIcon, { alignSelf: "center" }]}
           onPress={() => {
             navigation.openDrawer();
           }}
         />
       </View>
+      <View style={styles.sideImage} />
       <View style={styles.headingStyle}>
-        <Text style={styles.textStyle}>TIP TOP NX</Text>
+        <Text style={styles.textStyle}>{props.title}</Text>
       </View>
 
       <View style={styles.sideImage}>
-        <Feather
-          name="search"
-          style={styles.materialIcon}
-          size={30}
-          color="black"
-          onPress={() => {
-            navigation.navigate("Search");
-          }}
-        />
+        {props.showRight ? (
+          <Feather
+            name="search"
+            style={[styles.materialIcon, { alignSelf: "flex-end" }]}
+            size={24}
+            color="black"
+            onPress={() => {
+              navigation.navigate("Search");
+            }}
+          />
+        ) : null}
       </View>
 
       <View style={styles.sideImage}>
-        <AntDesign
-          name="shoppingcart"
-          size={30}
-          style={styles.materialIcon}
-          onPress={() => navigation.navigate("Cart")}
-        />
-        {user.isValid ? (
-          <TouchableOpacity
-            style={styles.counterStyle}
-            onPress={() => navigation.navigate("Cart")}
-          >
-            <Text style={{ color: "#fff", fontWeight: "500" }}>
-              {user.cart.length}
-            </Text>
-          </TouchableOpacity>
+        {props.showRight ? (
+          <View>
+            <AntDesign
+              name="shoppingcart"
+              size={24}
+              style={styles.materialIcon}
+              onPress={() => navigation.navigate("Cart")}
+            />
+            {user.isValid ? (
+              <TouchableOpacity
+                style={styles.counterStyle}
+                onPress={() => navigation.navigate("Cart")}
+              >
+                <Text
+                  style={{
+                    color: "#fff",
+                    fontWeight: "500",
+                    textAlign: "center",
+                  }}
+                >
+                  {user.cart.length}
+                </Text>
+              </TouchableOpacity>
+            ) : null}
+          </View>
         ) : null}
       </View>
     </View>
@@ -64,7 +77,6 @@ const header = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 5,
     width: "100%",
     height: "100%",
     flexDirection: "row",
@@ -79,7 +91,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
   headingStyle: {
-    width: "60%",
+    width: "45%",
     height: "100%",
     // borderWidth: 1,
     justifyContent: "center",
@@ -90,20 +102,20 @@ const styles = StyleSheet.create({
     color: "#000",
   },
   textStyle: {
-    fontWeight: "500",
-    fontSize: 20,
+    fontWeight: "600",
+    fontSize: 17,
     color: "#000",
     textAlign: "center",
   },
   counterStyle: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
+    width: 18,
+    height: 18,
+    borderRadius: 9,
     borderWidth: 1,
     backgroundColor: "rgba(0, 0, 0, 0.6)",
     position: "absolute",
-    top: 0,
-    right: 0,
+    top: -3,
+    right: 2,
     justifyContent: "center",
     alignItems: "center",
   },

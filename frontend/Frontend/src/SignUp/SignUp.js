@@ -9,15 +9,19 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   ImageBackground,
+  Alert,
+  Image,
 } from "react-native";
 import styles from "./SignUpStyles";
-import PropTypes from "prop-types";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Feather } from "@expo/vector-icons";
 
 import { useSelector, useDispatch } from "react-redux";
-import { signup, signinFailed } from "../../../redux/ActionCreators";
+import { signinFailed } from "../../../redux/ActionCreators";
 
 import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { myAxios } from "../../../axios";
 
 const signUp = () => {
   const navigation = useNavigation();
@@ -26,13 +30,18 @@ const signUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
+  const [showPassword, setShowPassword] = useState(true);
+  const [showLoader, setLoader] = useState(false);
   // states for style change if not valid
-  const [validName, checkName] = useState(true);
-  const [validEmail, checkEmail] = useState(true);
-  const [validPassword, checkPassword] = useState(true);
-  const [validPhone, checkPhone] = useState(true);
+  const [validName, checkName] = useState(-1);
+  const [validEmail, checkEmail] = useState(-1);
+  const [validPassword, checkPassword] = useState(-1);
+  const [validPhone, checkPhone] = useState(-1);
+
+  const [isAlreadyRegistered, setIsAlreadyRegistered] = useState(-1);
 
   // redux
+
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -40,152 +49,239 @@ const signUp = () => {
     dispatch(signinFailed());
   }, []);
 
-  useEffect(() => {
-    if (user.isValid) {
-      navigation.navigate("Home");
-    }
-  }, [user.isValid]);
-
   const validation = () => {
     const emailregex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     const alph = /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/;
+    const bodyPart = {
+      email: email,
+    };
 
     // name check
     if (name == "") {
-      checkName(false);
+      checkName(0);
     } else if (!alph.test(name)) {
-      checkName(false);
-      // alert("Please enter a valid name");
+      checkName(0);
+      // alert("Please enter a valid name")
     } else {
-      checkName(true);
+      checkName(1);
     }
     // email check
     if (email == "") {
-      checkEmail(false);
+      checkEmail(0);
     } else if (!emailregex.test(email)) {
-      checkEmail(false);
+      checkEmail(0);
       // alert("Please enter a valid email address");
     } else {
-      checkEmail(true);
+      checkEmail(1);
     }
     // password check
     if (password == "" || password.length < 6) {
-      checkPassword(false);
+      checkPassword(0);
       // alert("The length of the password should be atleast 6");
       setPassword("");
     } else {
-      checkPassword(true);
+      checkPassword(1);
     }
     // phone number check
     if (phone == "" || phone.length !== 10 || phone.charAt(0) < 7) {
-      checkPhone(false);
+      checkPhone(0);
     } else {
-      checkPhone(true);
+      checkPhone(1);
     }
 
-    if (validEmail && validName && validPassword && validPhone) {
-      dispatch(
-        signup({
-          name,
-          email,
-          password,
-          contact: phone,
+    if (
+      validEmail == 1 &&
+      validName == 1 &&
+      validPassword == 1 &&
+      validPhone == 1
+    ) {
+      setLoader(true);
+      myAxios
+        .post("/users/verify-email", bodyPart)
+        .then((res) => {
+          setLoader(false);
+          if (res.data.success) {
+            Alert.alert(
+              "Note",
+              "An OTP will be sent to your email, make sure you have entered the email correctly!",
+              [
+                {
+                  text: "Cancel",
+                  style: "destructive",
+                },
+                {
+                  text: "Proceed",
+                  onPress: () =>
+                    navigation.navigate("Otp Verify", {
+                      name: name,
+                      email: email,
+                      password: password,
+                      contact: phone,
+                    }),
+                },
+              ]
+            );
+          } else {
+            Alert.alert("Alert", "Email Already Registered", [
+              {
+                text: "Cancel",
+              },
+              {
+                text: "Sign In",
+                style: "destructive",
+                onPress: () => navigation.navigate("Sign In"),
+              },
+            ]);
+          }
         })
-      );
+        .catch((err) => console.log(err));
     }
   };
 
+  const HandlePasswordField = () => {
+    return showPassword ? (
+      <Feather
+        name="eye-off"
+        size={24}
+        color="black"
+        style={{ alignSelf: "center" }}
+        onPress={() => setShowPassword(false)}
+      />
+    ) : (
+      <Feather
+        name="eye"
+        size={24}
+        color="black"
+        style={{ alignSelf: "center" }}
+        onPress={() => setShowPassword(true)}
+      />
+    );
+  };
+
   return (
-    <KeyboardAwareScrollView scrollEnabled={true}>
+    <SafeAreaView>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.container}>
-          <ImageBackground
-            source={require("../../../assets/b1.jpg")}
-            style={{
-              flex: 1,
-              resizeMode: "cover",
-              justifyContent: "center",
-              width: "100%",
-            }}
-            blurRadius={0}
-          >
-            <View style={styles.title}>
-              <Text style={styles.textStyle}>SIGN UP</Text>
-              <Text style={styles.textStyle}>TO CONTINUE</Text>
-            </View>
+          {showLoader ? (
             <View
-              style={[styles.inputContainer, !validName ? styles.error : null]}
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "100%",
+              }}
             >
-              <TextInput
-                style={styles.inputText}
-                placeholder="FULL NAME"
-                placeholderTextColor="#666"
-                onChangeText={(text) => setName(text)}
-                value={name}
-              ></TextInput>
+              <Image
+                source={require("../../../assets/q.gif")}
+                style={{ height: 100, width: 100 }}
+              />
             </View>
-            <View
-              style={[styles.inputContainer, !validEmail ? styles.error : null]}
+          ) : (
+            <ImageBackground
+              source={require("../../../assets/background.jpg")}
+              style={{
+                flex: 1,
+                resizeMode: "cover",
+                justifyContent: "center",
+                width: "100%",
+                height: "100%",
+              }}
+              blurRadius={0}
             >
-              <TextInput
-                style={styles.inputText}
-                placeholder="EMAIL ADDRESS"
-                placeholderTextColor="#666"
-                onChangeText={(text) => setEmail(text)}
-                value={email}
-              ></TextInput>
-            </View>
-            <View
-              style={[
-                styles.inputContainer,
-                !validPassword ? styles.error : null,
-              ]}
-            >
-              <TextInput
-                style={styles.inputText}
-                placeholder="PASSWORD"
-                placeholderTextColor="#666"
-                secureTextEntry={true}
-                onChangeText={(text) => setPassword(text)}
-                value={password}
-              ></TextInput>
-            </View>
-            <View
-              style={[styles.inputContainer, !validPhone ? styles.error : null]}
-            >
-              <TextInput
-                style={styles.inputText}
-                placeholder="PHONE NUMBER"
-                placeholderTextColor="#666"
-                keyboardType={"numeric"}
-                onChangeText={(text) => setPhone(text)}
-                value={phone}
-              ></TextInput>
-            </View>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => validation()}
-            >
-              <Text style={styles.buttonText}>JOIN US</Text>
-            </TouchableOpacity>
-            <View style={styles.signInBox}>
-              <Text style={styles.signInText}>ALREADY A MEMBER ?</Text>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() =>
-                  navigation.reset({
-                    index: 0,
-                    routes: [{ name: "Sign In" }],
-                  })
-                }
+              <KeyboardAwareScrollView
+                scrollEnabled={true}
+                showsVerticalScrollIndicator={false}
               >
-                <Text style={styles.buttonText}>SIGN IN</Text>
-              </TouchableOpacity>
-            </View>
-          </ImageBackground>
+                <View style={styles.title}>
+                  <Text style={styles.textStyle}>SIGN UP</Text>
+                  <Text style={styles.textStyle}>TO CONTINUE</Text>
+                </View>
+                <View
+                  style={[
+                    styles.inputContainer,
+                    validName == 0 ? styles.error : null,
+                  ]}
+                >
+                  <TextInput
+                    style={styles.inputText}
+                    placeholder="FULL NAME"
+                    placeholderTextColor="#666"
+                    onChangeText={(text) => setName(text)}
+                    value={name}
+                  ></TextInput>
+                </View>
+                <View
+                  style={[
+                    styles.inputContainer,
+                    validEmail == 0 ? styles.error : null,
+                  ]}
+                >
+                  <TextInput
+                    style={styles.inputText}
+                    placeholder="EMAIL ADDRESS"
+                    placeholderTextColor="#666"
+                    onChangeText={(text) => setEmail(text)}
+                    value={email}
+                  ></TextInput>
+                </View>
+                <View
+                  style={[
+                    styles.inputContainerPass,
+                    !validPassword ? styles.error : null,
+                  ]}
+                >
+                  <TextInput
+                    style={styles.inputTextPass}
+                    placeholder="PASSWORD"
+                    placeholderTextColor="#666"
+                    secureTextEntry={showPassword}
+                    onChangeText={(text) => setPassword(text)}
+                    value={password}
+                  ></TextInput>
+                  <HandlePasswordField />
+                </View>
+                <View
+                  style={[
+                    styles.inputContainer,
+                    validPhone == 0 ? styles.error : null,
+                  ]}
+                >
+                  <TextInput
+                    style={styles.inputText}
+                    placeholder="PHONE NUMBER"
+                    placeholderTextColor="#666"
+                    keyboardType={"numeric"}
+                    onChangeText={(text) => setPhone(text)}
+                    value={phone}
+                  ></TextInput>
+                </View>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => validation()}
+                >
+                  <Text style={styles.buttonText}>JOIN US</Text>
+                </TouchableOpacity>
+                <View style={styles.signInBox}>
+                  <Text style={styles.signInText}>ALREADY A MEMBER ?</Text>
+                  <TouchableOpacity
+                    style={styles.button}
+                    onPress={() =>
+                      navigation.reset({
+                        index: 0,
+                        routes: [{ name: "Sign In" }],
+                      })
+                    }
+                  >
+                    <Text style={styles.buttonText}>SIGN IN</Text>
+                  </TouchableOpacity>
+                </View>
+              </KeyboardAwareScrollView>
+            </ImageBackground>
+          )}
         </View>
       </TouchableWithoutFeedback>
-    </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
 };
 

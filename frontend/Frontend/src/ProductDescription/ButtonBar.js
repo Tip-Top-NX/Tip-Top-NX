@@ -25,9 +25,23 @@ const ButtonBar = (props) => {
   }, []);
 
   const wishlistHandler = () => {
-    if (itemStatus === "WISHLIST") {
-      dispatch(postWishlist(props._id));
-      setItemStatus("ADDED");
+    if (user.isValid) {
+      if (itemStatus === "WISHLIST") {
+        dispatch(postWishlist(props._id));
+        setItemStatus("ADDED");
+      }
+    } else {
+      Alert.alert(
+        "Cannot Add To Wishlist",
+        "You need to login first in order to add items to the wishlist",
+        [
+          {
+            text: "Okay",
+            style: "okay",
+          },
+        ],
+        { cancelable: true }
+      );
     }
   };
 
@@ -70,7 +84,9 @@ const ButtonBar = (props) => {
           style={styles.addToCartButton}
           onPress={
             buttonText === "GO TO CART"
-              ? () => navigation.navigate("Cart")
+              ? () => {
+                  navigation.navigate("Cart"), setButtonText("ADD TO CART");
+                }
               : addToCartHandler
           }
         >
@@ -86,10 +102,9 @@ export default ButtonBar;
 
 const styles = StyleSheet.create({
   container: {
-    borderBottomWidth: 1,
-    borderTopWidth: 1,
-    height: 80,
-    marginTop: 10,
+    // borderBottomWidth: 1,
+    // borderTopWidth: 1,
+    height: 60,
     borderColor: "#ccc",
     // backgroundColor: "#FFF",
     flexDirection: "row",

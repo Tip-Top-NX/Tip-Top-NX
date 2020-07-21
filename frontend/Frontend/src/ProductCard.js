@@ -33,18 +33,18 @@ const ProductCard = (props) => {
   const Icon = () => {
     return itemStatus ? (
       <FontAwesome
-        style={{ position: "absolute", top: 20, right: 15 }}
+        // style={{ position: "absolute", top: 20, right: 10 }}
         name="bookmark"
-        size={20}
+        size={24}
         color="black"
         onPress={() => handleWishlist()}
       />
     ) : (
       <FontAwesome
-        style={{ position: "absolute", top: 20, right: 15 }}
+        // style={{ position: "absolute", top: 20, right: 10 }}
         name="bookmark-o"
         color="black"
-        size={20}
+        size={24}
         onPress={() => handleWishlist()}
       />
     );
@@ -52,34 +52,53 @@ const ProductCard = (props) => {
 
   return (
     <View>
-      <View style={props.cardStyle}>
-        <Image
-          source={{ uri: getURL(props.images[0]) }}
-          style={props.imageView}
-        ></Image>
-        {user.isValid ? <Icon /> : null}
-        <TouchableOpacity
-          onPress={() =>
-            props.navigation.navigate("Product", {
-              brand: props.brand,
-              description: props.description,
-              colors: props.colors,
-              images: props.images,
-              size: props.size,
-              style: props.style,
-              discountPercentage: props.discountPercentage,
-              name: props.name,
-              price: props.price,
-              _id: props._id,
-            })
-          }
-        >
-          <View style={props.details}>
-            <Text style={props.textStyle}>{props.name}</Text>
-            <Text style={props.textStyle}>Price : ₹ {props.price}</Text>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() =>
+          props.navigation.navigate("Product", {
+            brand: props.brand,
+            category: props.category,
+            description: props.description,
+            colors: props.colors,
+            images: props.images,
+            size: props.size,
+            style: props.style,
+            discountPercentage: props.discountPercentage,
+            name: props.name,
+            price: props.price,
+            _id: props._id,
+          })
+        }
+      >
+        <View style={props.cardStyle}>
+          <View style={props.imageContainer}>
+            <Image
+              source={{ uri: getURL(props.images[0]) }}
+              style={props.imageView}
+            ></Image>
           </View>
-        </TouchableOpacity>
-      </View>
+
+          <View style={props.details}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ fontWeight: "700" }}>{props.brand}</Text>
+              {user.isValid ? <Icon /> : null}
+            </View>
+
+            <Text style={[props.textStyle, { color: "grey", fontSize: 11 }]}>
+              {props.name}
+            </Text>
+            <Text style={[props.textStyle, { fontWeight: "600" }]}>
+              Price : ₹ {props.price}
+            </Text>
+          </View>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };

@@ -8,13 +8,14 @@ import {
   TouchableOpacity,
   ImageBackground,
   Image,
+  SafeAreaView,
 } from "react-native";
 
 const Empty = (props) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ImageBackground
-        source={require("../../assets/b1.jpg")}
+        source={require("../../assets/background.jpg")}
         style={{
           flex: 1,
           resizeMode: "cover",
@@ -32,7 +33,7 @@ const Empty = (props) => {
           <Text>Browse</Text>
         </TouchableOpacity>
       </ImageBackground>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
   textStyle: {
     textAlign: "center",
     marginTop: 50,
+    paddingHorizontal: 25,
   },
   buttonStyle: {
     width: 200,

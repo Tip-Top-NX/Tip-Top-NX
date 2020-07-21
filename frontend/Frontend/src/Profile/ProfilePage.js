@@ -6,6 +6,7 @@ import {
   Dimensions,
   ImageBackground,
   Text,
+  SafeAreaView,
 } from "react-native";
 import Picture from "./ProfilePage/Picture";
 import Options from "./ProfilePage/Options";
@@ -16,21 +17,21 @@ const Profile = () => {
   const user = useSelector((state) => state.user);
   if (user.isValid) {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <ImageBackground
-          source={require("../../../assets/back.jpg")}
+          source={require("../../../assets/pro.jpg")}
           style={{ flex: 1, resizeMode: "cover", justifyContent: "center" }}
           blurRadius={0}
         >
           <Picture />
           <Options />
         </ImageBackground>
-      </View>
+      </SafeAreaView>
     );
   } else {
     return (
       <View style={styles.container}>
-        <NotLoggedIn />
+        <NotLoggedIn message="SORRY, YOU NEED TO LOG IN, IN ORDER TO VIEW YOUR PROFILE" />
       </View>
     );
   }

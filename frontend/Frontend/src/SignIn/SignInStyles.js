@@ -11,9 +11,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   title: {
-    marginTop: 10,
+    // marginTop: 10,
     padding: 10,
-    height: 150,
+    // height: 150,
     width: 300,
     // borderWidth: 1,
     justifyContent: "flex-end",
@@ -34,6 +34,24 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     justifyContent: "center",
     alignSelf: "center",
+  },
+  inputContainerPass: {
+    width: 300,
+    marginVertical: 10,
+    height: 50,
+    borderWidth: 1,
+    borderColor: "#000",
+    paddingLeft: 15,
+    paddingRight: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignSelf: "center",
+  },
+  inputTextPass: {
+    height: 50,
+    color: "#000",
+    fontSize: 18,
+    width: 230,
   },
   inputText: {
     height: 50,
@@ -58,8 +76,8 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
   signUpBox: {
-    marginTop: 40,
-    // borderWidth: 1,
+    marginTop: 20,
+    //borderWidth: 1,
     borderColor: "#000",
     height: 90,
     width: 300,
@@ -69,12 +87,23 @@ const styles = StyleSheet.create({
   signUpText: {
     color: "#000",
     textAlign: "center",
-    letterSpacing: 1,
+    letterSpacing: 0.6,
     fontWeight: "bold",
   },
   error: {
     borderWidth: 3,
     borderColor: "red",
+  },
+  forgotPwd: {
+    textDecorationLine: "underline",
+    color: "#000",
+    textAlign: "center",
+    letterSpacing: 0.6,
+    fontWeight: "bold",
+    marginTop: 15,
+    // borderWidth: 1,
+    width: 300,
+    alignSelf: "center",
   },
 });
 

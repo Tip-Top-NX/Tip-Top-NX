@@ -7,10 +7,12 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const Colours = (props) => {
   const [selected, setSelected] = useState();
   const colors = [...props.colors];
+  const navigation = useNavigation();
 
   useEffect(() => {
     props.onColorChange(colors[selected]);
@@ -19,9 +21,44 @@ const Colours = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerStyle}>
-        <View>
-          <Text style={styles.headerText}>COLOURS</Text>
-        </View>
+        <Text style={styles.headerText}>COLORS</Text>
+        {props.length <= 2 ||
+        props.length >= 4 ||
+        props.category === 103 ||
+        props.category === 104 ||
+        props.category === 105 ||
+        props.category === 106 ||
+        props.category === 108 ||
+        props.category === 109 ||
+        props.category === 110 ||
+        props.category === 111 ||
+        props.category === 112 ||
+        props.category === 122 ||
+        props.category === 123 ||
+        props.category === 124 ||
+        props.category === 125 ||
+        props.category === 126 ||
+        props.category === 128 ||
+        props.category === 129 ||
+        props.category === 130 ||
+        props.category === 131 ||
+        props.category === 132 ||
+        props.category === 133 ||
+        props.category === 134 ||
+        props.category === 135 ? (
+          <TouchableOpacity
+            style={styles.sizeChartButton}
+            onPress={() => {
+              navigation.navigate("Color Chart", {
+                images: props.images,
+                length: props.length,
+                category: props.category,
+              });
+            }}
+          >
+            <Text style={styles.sizeChartButtonText}>COLOR CHART</Text>
+          </TouchableOpacity>
+        ) : null}
       </View>
       <View
         style={{
@@ -72,9 +109,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 8,
-    width: 80,
+    minWidth: 80,
     height: 80,
     marginHorizontal: 5,
+    paddingHorizontal: 5,
+  },
+  sizeChartButton: {
+    height: 50,
+    // width: 80,
+    justifyContent: "center",
+  },
+  sizeChartButtonText: {
+    fontSize: 12,
+    textDecorationLine: "underline",
+    textAlign: "center",
+    fontWeight: "500",
+    color: "#00868B",
   },
   colorTextStyle: {
     fontWeight: "500",
@@ -82,12 +132,14 @@ const styles = StyleSheet.create({
   },
   headerStyle: {
     height: 50,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     borderBottomWidth: 1,
+    paddingHorizontal: 15,
+    marginBottom: 10,
     borderColor: "#ccc",
     width: "100%",
-    paddingLeft: 15,
-    marginBottom: 10,
-    justifyContent: "center",
   },
   headerText: {
     color: "grey",

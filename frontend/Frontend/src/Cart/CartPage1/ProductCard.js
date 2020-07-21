@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity, Alert } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import styles from "./ProductCardStyles";
@@ -17,7 +17,7 @@ const ProductCard = (props) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   let SP = props.price - (props.price * props.discountPercentage) / 100;
-  let totalItemPrice = props.price * props.quantity;
+  let totalItemPrice = SP * props.quantity;
   const [show, setShow] = useState(true);
 
   const onQuantityDec = () => {
@@ -28,6 +28,20 @@ const ProductCard = (props) => {
       dispatch(delCart(props._id, props.color, props.size));
     }
   };
+
+  useEffect(() => {
+    let mounted = true;
+    if (mounted) {
+      if (props.price === 0) {
+        Alert.alert(
+          "Price Issue",
+          "The price of some of the products in your cart is yet to be confirmed, we will notify you about it if you place the order of such a product",
+          [{ text: "Continue" }]
+        );
+      }
+    }
+    return () => (mounted = false);
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
@@ -65,46 +79,32 @@ const ProductCard = (props) => {
                 <Text style={{ fontSize: 12 }}>{props.name}</Text>
               </View>
               <View style={styles.subBox}>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderBottomWidth: 1,
-                    borderColor: "#ccc",
-                  }}
-                >
-                  <View style={styles.smallBox}>
-                    <Text style={{ color: "#888", fontSize: 12 }}>SIZE : </Text>
-                    <Text style={{ fontWeight: "500", fontSize: 12 }}>
-                      {props.size}
-                    </Text>
-                  </View>
-                  <View style={styles.smallBox}>
-                    <Text style={{ color: "#888", fontSize: 12 }}>
-                      COLOR :{" "}
-                    </Text>
-                    <Text style={{ fontWeight: "500", fontSize: 12 }}>
-                      {props.color}
-                    </Text>
-                  </View>
+                <View style={styles.smallBox}>
+                  <Text style={{ color: "#888", fontSize: 12 }}>SIZE : </Text>
+                  <Text style={{ fontWeight: "500", fontSize: 12 }}>
+                    {props.size}
+                  </Text>
                 </View>
                 <View style={styles.smallBox}>
-                  <Text style={{ color: "#888", fontSize: 12, paddingLeft: 3 }}>
-                    QTY :
+                  <Text style={{ color: "#888", fontSize: 12 }}>COLOR : </Text>
+                  <Text style={{ fontWeight: "500", fontSize: 12 }}>
+                    {props.color}
                   </Text>
+                </View>
+                <View style={styles.smallBox}>
+                  <Text style={{ color: "#888", fontSize: 12 }}>QTY :</Text>
                   <View style={{ flexDirection: "row" }}>
                     <View style={styles.minusBox}>
                       <AntDesign
                         name="minus"
                         size={20}
-                        color="grey"
+                        color="#000"
                         onPress={() => onQuantityDec()}
                       />
                     </View>
                     <Text
                       style={{
-                        marginHorizontal: 12,
+                        marginHorizontal: 10,
                         fontSize: 18,
                       }}
                     >
@@ -114,12 +114,11 @@ const ProductCard = (props) => {
                       <MaterialIcons
                         name="add"
                         size={20}
-                        color="grey"
+                        color="#000"
                         onPress={() => {
                           dispatch(
                             postCart(props._id, props.color, props.size, 1)
                           );
-
                           setShow(true);
                         }}
                       />
