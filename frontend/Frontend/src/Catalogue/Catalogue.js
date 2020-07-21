@@ -24,7 +24,8 @@ const Catalogue = ({ navigation, route }) => {
   const [fetcher, setFetcher] = useState(false);
   const [counter, setCounter] = useState(1);
   const forFilters = route.params.forFilters;
-  const prodId = route.params.prodId;
+  const prodId =
+    route.params.prodId === undefined ? forFilters : route.params.prodId;
   const sort = route.params.sortBy;
   const order = route.params.sortCode;
   const priceLower =
@@ -52,9 +53,7 @@ const Catalogue = ({ navigation, route }) => {
       })
       .catch((err) => {
         // console.log(err);
-        Alert.alert("Sorry!", "Couldn't load your request", [
-          { text: "Okay", onPress: () => navigation.goBack() },
-        ]);
+        Alert.alert("Sorry!", "No such products available", [{ text: "Okay" }]);
       });
     return () => (mounted = false);
   }, [prodId, sort, order, priceLower, priceUpper]);
