@@ -34,7 +34,7 @@ class OtpForgot extends Component {
       flag4: 0,
       isDisable: true,
       email: props.route.params.email,
-      showLoader: false
+      showLoader: false,
     };
   }
 
@@ -43,31 +43,31 @@ class OtpForgot extends Component {
   };
 
   checkOtp = () => {
-    this.setState({showLoader:true});
-    let otp =
-      this.state.pin1 * 1000 +
-      this.state.pin2 * 100 +
-      this.state.pin3 * 10 +
-      this.state.pin4 * 1;
+    requestAnimationFrame(() => {
+      this.setState({ showLoader: true });
+      let otp =
+        this.state.pin1 * 1000 +
+        this.state.pin2 * 100 +
+        this.state.pin3 * 10 +
+        this.state.pin4 * 1;
 
-    const bodyPart = {
-      otp: otp,
-      email: this.state.email,
-    };
-    myAxios
-      .post("/users/verify-otp", bodyPart)
-      .then((res) => {
+      const bodyPart = {
+        otp: otp,
+        email: this.state.email,
+      };
+      myAxios.post("/users/verify-otp", bodyPart).then((res) => {
         if (res.data.success) {
           // Alert.alert("Success", "You can now change your password!");
           AsyncStorage.setItem("token", res.data.token);
-          this.setState({showLoader:false});
+          this.setState({ showLoader: false });
           this.props.navigation.navigate("Reset Password");
         } else {
-          this.setState({showLoader:false});
+          this.setState({ showLoader: false });
           Alert.alert("ERROR", "Invalid OTP!", [{ text: "Try again" }]);
         }
-      })
-      .catch((err) => console.log(err));
+      });
+      // .catch((err) => console.log(err));
+    });
   };
 
   render() {
@@ -77,7 +77,7 @@ class OtpForgot extends Component {
         <KeyboardAwareScrollView scrollEnabled={false}>
           <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.container}>
-            {this.state.showLoader ? (
+              {this.state.showLoader ? (
                 <View
                   style={{
                     flex: 1,
@@ -93,120 +93,120 @@ class OtpForgot extends Component {
                   />
                 </View>
               ) : (
-              <ImageBackground
-                source={require("../../../assets/background.jpg")}
-                style={{
-                  flex: 1,
-                  resizeMode: "cover",
-                  justifyContent: "center",
-                  width: "100%",
-                  height: "100%",
-                }}
-                blurRadius={0}
-              >
-                <View style={{ marginTop: -250 }}>
-                  <Text style={styles.text}>
-                    Enter OTP sent to your Email :{" "}
-                  </Text>
-                  <View style={styles.otpBox}>
-                    <TextInput
-                      ref={"ref1"}
-                      keyboardType={"numeric"}
-                      placeholder={"__"}
-                      onChangeText={(pin1) => {
-                        this.setState({ pin1: pin1 });
-                        if (pin1 != "") {
-                          this.setState({ flag1: 1 });
-                          this.refs.ref2.focus();
+                <ImageBackground
+                  source={require("../../../assets/background.jpg")}
+                  style={{
+                    flex: 1,
+                    resizeMode: "cover",
+                    justifyContent: "center",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                  blurRadius={0}
+                >
+                  <View style={{ marginTop: -250 }}>
+                    <Text style={styles.text}>
+                      Enter OTP sent to your Email :{" "}
+                    </Text>
+                    <View style={styles.otpBox}>
+                      <TextInput
+                        ref={"ref1"}
+                        keyboardType={"numeric"}
+                        placeholder={"__"}
+                        onChangeText={(pin1) => {
+                          this.setState({ pin1: pin1 });
+                          if (pin1 != "") {
+                            this.setState({ flag1: 1 });
+                            this.refs.ref2.focus();
+                          }
+                          if (pin1 == "" && this.state.flag1 == 1) {
+                            this.setState({ isDisable: true });
+                            this.refs.ref1.focus();
+                          }
+                        }}
+                        value={pin1}
+                        maxLength={1}
+                        style={
+                          this.state.pin1 != "" ? styles.boxFilled : styles.box
                         }
-                        if (pin1 == "" && this.state.flag1 == 1) {
-                          this.setState({ isDisable: true });
-                          this.refs.ref1.focus();
+                      />
+                      <TextInput
+                        ref={"ref2"}
+                        keyboardType={"numeric"}
+                        placeholder={"__"}
+                        onChangeText={(pin2) => {
+                          this.setState({ pin2: pin2 });
+                          if (pin2 != "") {
+                            this.setState({ flag2: 1 });
+                            this.refs.ref3.focus();
+                          }
+                          if (pin2 == "" && this.state.flag2 == 1) {
+                            this.setState({ isDisable: true });
+                            this.refs.ref1.focus();
+                          }
+                        }}
+                        value={pin2}
+                        maxLength={1}
+                        style={
+                          this.state.pin2 != "" ? styles.boxFilled : styles.box
                         }
-                      }}
-                      value={pin1}
-                      maxLength={1}
+                      />
+                      <TextInput
+                        ref={"ref3"}
+                        keyboardType={"numeric"}
+                        placeholder={"__"}
+                        onChangeText={(pin3) => {
+                          this.setState({ pin3: pin3 });
+                          if (pin3 != "") {
+                            this.setState({ flag3: 1 });
+                            this.refs.ref4.focus();
+                          }
+                          if (pin3 == "" && this.state.flag3 == 1) {
+                            this.setState({ isDisable: true });
+                            this.refs.ref2.focus();
+                          }
+                        }}
+                        value={pin3}
+                        maxLength={1}
+                        style={
+                          this.state.pin3 != "" ? styles.boxFilled : styles.box
+                        }
+                      />
+                      <TextInput
+                        ref={"ref4"}
+                        keyboardType={"numeric"}
+                        placeholder={"__"}
+                        onChangeText={(pin4) => {
+                          this.setState({ pin4: pin4 });
+                          if (pin4 != "") {
+                            this.setState({ flag4: 1 });
+                            this.setState({ isDisable: false });
+                          }
+                          if (pin4 == "" && this.state.flag4 == 1) {
+                            this.setState({ isDisable: true });
+                            this.refs.ref3.focus();
+                          }
+                        }}
+                        value={pin4}
+                        maxLength={1}
+                        style={
+                          this.state.pin4 != "" ? styles.boxFilled : styles.box
+                        }
+                      />
+                    </View>
+                    <TouchableOpacity
                       style={
-                        this.state.pin1 != "" ? styles.boxFilled : styles.box
+                        this.state.isDisable
+                          ? styles.buttonDisabled
+                          : styles.button
                       }
-                    />
-                    <TextInput
-                      ref={"ref2"}
-                      keyboardType={"numeric"}
-                      placeholder={"__"}
-                      onChangeText={(pin2) => {
-                        this.setState({ pin2: pin2 });
-                        if (pin2 != "") {
-                          this.setState({ flag2: 1 });
-                          this.refs.ref3.focus();
-                        }
-                        if (pin2 == "" && this.state.flag2 == 1) {
-                          this.setState({ isDisable: true });
-                          this.refs.ref1.focus();
-                        }
-                      }}
-                      value={pin2}
-                      maxLength={1}
-                      style={
-                        this.state.pin2 != "" ? styles.boxFilled : styles.box
-                      }
-                    />
-                    <TextInput
-                      ref={"ref3"}
-                      keyboardType={"numeric"}
-                      placeholder={"__"}
-                      onChangeText={(pin3) => {
-                        this.setState({ pin3: pin3 });
-                        if (pin3 != "") {
-                          this.setState({ flag3: 1 });
-                          this.refs.ref4.focus();
-                        }
-                        if (pin3 == "" && this.state.flag3 == 1) {
-                          this.setState({ isDisable: true });
-                          this.refs.ref2.focus();
-                        }
-                      }}
-                      value={pin3}
-                      maxLength={1}
-                      style={
-                        this.state.pin3 != "" ? styles.boxFilled : styles.box
-                      }
-                    />
-                    <TextInput
-                      ref={"ref4"}
-                      keyboardType={"numeric"}
-                      placeholder={"__"}
-                      onChangeText={(pin4) => {
-                        this.setState({ pin4: pin4 });
-                        if (pin4 != "") {
-                          this.setState({ flag4: 1 });
-                          this.setState({ isDisable: false });
-                        }
-                        if (pin4 == "" && this.state.flag4 == 1) {
-                          this.setState({ isDisable: true });
-                          this.refs.ref3.focus();
-                        }
-                      }}
-                      value={pin4}
-                      maxLength={1}
-                      style={
-                        this.state.pin4 != "" ? styles.boxFilled : styles.box
-                      }
-                    />
+                      onPress={() => this.checkOtp()}
+                      disabled={this.state.isDisable}
+                    >
+                      <Text style={styles.buttonText}>SUBMIT</Text>
+                    </TouchableOpacity>
                   </View>
-                  <TouchableOpacity
-                    style={
-                      this.state.isDisable
-                        ? styles.buttonDisabled
-                        : styles.button
-                    }
-                    onPress={() => this.checkOtp()}
-                    disabled={this.state.isDisable}
-                  >
-                    <Text style={styles.buttonText}>SUBMIT</Text>
-                  </TouchableOpacity>
-                </View>
-              </ImageBackground>
+                </ImageBackground>
               )}
             </View>
           </TouchableWithoutFeedback>

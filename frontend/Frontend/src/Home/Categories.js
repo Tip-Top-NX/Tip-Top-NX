@@ -72,7 +72,7 @@ const Categories = (props) => {
             }
           >
             <Image
-              source={require("../../../assets/accessories.jpg")}
+              source={require("../../../assets/accessories.png")}
               style={styles.imageStyle}
             />
           </TouchableOpacity>

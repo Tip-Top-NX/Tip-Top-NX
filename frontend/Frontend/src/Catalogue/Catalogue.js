@@ -78,7 +78,12 @@ const Catalogue = ({ navigation, route }) => {
             setFetcher(false);
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          // console.log(err);
+          Alert.alert("Sorry!", "No such products available", [
+            { text: "Okay" },
+          ]);
+        });
     }
   };
 
@@ -121,6 +126,11 @@ const Catalogue = ({ navigation, route }) => {
             data={products}
             numColumns={2}
             keyExtractor={(item, index) => index}
+            getItemLayout={(item, index) => ({
+              length: 300,
+              offset: 300 * index,
+              index,
+            })}
             onEndReached={nextItems}
             onEndReachedThreshold={Platform.ios ? 0 : 0.2}
             ListFooterComponent={showFooter}

@@ -72,6 +72,11 @@ const Filters = ({ route }) => {
           <FlatList
             data={filterTypes}
             keyExtractor={(item, index) => index.toString()}
+            getItemLayout={(item, index) => ({
+              length: 50,
+              offset: 50 * index,
+              index,
+            })}
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <TouchableOpacity
@@ -113,6 +118,11 @@ const Filters = ({ route }) => {
           <FlatList
             data={filteredOptions[selectedFilter]}
             keyExtractor={(item, index) => index.toString()}
+            getItemLayout={(item, index) => ({
+              length: 50,
+              offset: 50 * index,
+              index,
+            })}
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <TouchableOpacity

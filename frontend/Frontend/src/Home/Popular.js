@@ -36,6 +36,11 @@ const popular = (props) => {
       <FlatList
         data={props.popularProducts}
         horizontal={true}
+        getItemLayout={(item, index) => ({
+          length: 300,
+          offset: 300 * index,
+          index,
+        })}
         showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => item._id.toString()}
         renderItem={({ item }) => (
@@ -66,7 +71,7 @@ const popular = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 380,
+    height: 360,
     marginVertical: 20,
     justifyContent: "center",
     borderTopWidth: 1,
@@ -85,7 +90,7 @@ const styles = StyleSheet.create({
   },
   cardStyle: {
     width: 180,
-    height: "100%",
+    height: 300,
     alignItems: "center",
     marginHorizontal: 4,
     // borderStyle: "dotted",
@@ -93,7 +98,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
   },
   imageView: {
-    height: 230,
+    height: 210,
     aspectRatio: 5 / 8,
     alignSelf: "center",
     marginTop: 2,
