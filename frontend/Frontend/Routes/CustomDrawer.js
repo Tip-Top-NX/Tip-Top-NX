@@ -31,6 +31,7 @@ function CustomDrawerContent(props) {
             dispatch(signinFailed());
             props.navigation.navigate("Home");
           },
+          style: "destructive",
         },
         {
           text: "Cancel",

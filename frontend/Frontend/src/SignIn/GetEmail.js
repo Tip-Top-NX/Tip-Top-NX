@@ -40,7 +40,7 @@ const GetEmail = () => {
           navigation.navigate("Otp Forgot", { email: email });
         } else {
           setLoader(false);
-          Alert.alert("Error", "Entered email not registered!", [
+          Alert.alert("Oops!", "Entered email address is not registered!", [
             { text: "Try again" },
           ]);
         }
@@ -70,60 +70,60 @@ const GetEmail = () => {
       <KeyboardAwareScrollView scrollEnabled={false}>
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.container}>
-          {showLoader ? (
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-                height: "100%",
-              }}
-            >
-              <Image
-                source={require("../../../assets/q.gif")}
-                style={{ height: 100, width: 100 }}
-              />
-            </View>
-          ) : (
-            <ImageBackground
-              source={require("../../../assets/background.jpg")}
-              style={{
-                flex: 1,
-                resizeMode: "cover",
-                justifyContent: "center",
-                width: "100%",
-                height: "100%",
-              }}
-              blurRadius={0}
-            >
-              <View>
-                <Text style={styles.text}>
-                  Please enter your registered email address :{" "}
-                </Text>
-              </View>
+            {showLoader ? (
               <View
-                style={[
-                  styles.inputContainer,
-                  valid == 0 ? styles.error : null,
-                ]}
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                  height: "100%",
+                }}
               >
-                <TextInput
-                  style={styles.inputText}
-                  placeholder="EMAIL ADDRESS"
-                  placeholderTextColor="#666"
-                  onChangeText={(text) => setEmail(text)}
-                  value={email}
-                ></TextInput>
+                <Image
+                  source={require("../../../assets/q.gif")}
+                  style={{ height: 100, width: 100 }}
+                />
               </View>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => validation()}
+            ) : (
+              <ImageBackground
+                source={require("../../../assets/background.jpg")}
+                style={{
+                  flex: 1,
+                  resizeMode: "cover",
+                  justifyContent: "center",
+                  width: "100%",
+                  height: "100%",
+                }}
+                blurRadius={0}
               >
-                <Text style={styles.buttonText}>SEND OTP</Text>
-              </TouchableOpacity>
-            </ImageBackground>
-          )}
+                <View>
+                  <Text style={styles.text}>
+                    Please enter your registered email address :{" "}
+                  </Text>
+                </View>
+                <View
+                  style={[
+                    styles.inputContainer,
+                    valid == 0 ? styles.error : null,
+                  ]}
+                >
+                  <TextInput
+                    style={styles.inputText}
+                    placeholder="EMAIL ADDRESS"
+                    placeholderTextColor="#666"
+                    onChangeText={(text) => setEmail(text)}
+                    value={email}
+                  ></TextInput>
+                </View>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => validation()}
+                >
+                  <Text style={styles.buttonText}>SEND OTP</Text>
+                </TouchableOpacity>
+              </ImageBackground>
+            )}
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAwareScrollView>

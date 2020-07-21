@@ -98,7 +98,7 @@ const ResetPassword = () => {
     <SafeAreaView>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.container}>
-        {showLoader ? (
+          {showLoader ? (
             <View
               style={{
                 flex: 1,
@@ -106,6 +106,7 @@ const ResetPassword = () => {
                 alignItems: "center",
                 width: "100%",
                 height: "100%",
+                backgroundColor: "#fff",
               }}
             >
               <Image
@@ -114,56 +115,56 @@ const ResetPassword = () => {
               />
             </View>
           ) : (
-          <ImageBackground
-            source={require("../../../assets/background.jpg")}
-            style={{
-              flex: 1,
-              resizeMode: "cover",
-              paddingTop: 25,
-              width: "100%",
-            }}
-            blurRadius={0}
-          >
-            <View style={styles.inputContainerPass}>
-              <TextInput
-                style={styles.inputTextPass}
-                placeholder="NEW PASSWORD"
-                placeholderTextColor="#666"
-                secureTextEntry={showPassword}
-                onChangeText={(text) => setNewPassword(text)}
-                value={newPassword}
-              ></TextInput>
-              <HandlePasswordField />
-            </View>
-            <View style={styles.inputContainerPass}>
-              <TextInput
-                style={styles.inputTextPass}
-                placeholder="CONFIRM PASSWORD"
-                placeholderTextColor="#666"
-                secureTextEntry={showPassword}
-                onChangeText={(text) => setConfirmPass(text)}
-                value={confirmPass}
-              ></TextInput>
-              <HandlePasswordField />
-            </View>
-            <Text
+            <ImageBackground
+              source={require("../../../assets/background.jpg")}
               style={{
-                marginTop: 80,
-                textAlign: "center",
-                marginBottom: 10,
-                color: "red",
-                letterSpacing: 0.2,
+                flex: 1,
+                resizeMode: "cover",
+                paddingTop: 25,
+                width: "100%",
               }}
+              blurRadius={0}
             >
-              {message}
-            </Text>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => validation()}
-            >
-              <Text style={styles.buttonText}>RESET PASSWORD</Text>
-            </TouchableOpacity>
-          </ImageBackground>
+              <View style={styles.inputContainerPass}>
+                <TextInput
+                  style={styles.inputTextPass}
+                  placeholder="NEW PASSWORD"
+                  placeholderTextColor="#666"
+                  secureTextEntry={showPassword}
+                  onChangeText={(text) => setNewPassword(text)}
+                  value={newPassword}
+                ></TextInput>
+                <HandlePasswordField />
+              </View>
+              <View style={styles.inputContainerPass}>
+                <TextInput
+                  style={styles.inputTextPass}
+                  placeholder="CONFIRM PASSWORD"
+                  placeholderTextColor="#666"
+                  secureTextEntry={showPassword}
+                  onChangeText={(text) => setConfirmPass(text)}
+                  value={confirmPass}
+                ></TextInput>
+                <HandlePasswordField />
+              </View>
+              <Text
+                style={{
+                  marginTop: 80,
+                  textAlign: "center",
+                  marginBottom: 10,
+                  color: "red",
+                  letterSpacing: 0.2,
+                }}
+              >
+                {message}
+              </Text>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => validation()}
+              >
+                <Text style={styles.buttonText}>RESET PASSWORD</Text>
+              </TouchableOpacity>
+            </ImageBackground>
           )}
         </View>
       </TouchableWithoutFeedback>

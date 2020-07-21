@@ -1,6 +1,7 @@
 /* eslint-disable */
 import * as ActionTypes from "./ActionTypes";
 import { myAxios, getConfig } from "../axios";
+import { Alert } from "react-native";
 
 export const placeOrder = (method) => {
   const bodyPart = {
@@ -190,7 +191,9 @@ export const signin = (user) => {
       })
       .catch((err) => {
         dispatch(signinFailed()),
-          alert("The password you have entered is INCORRECT");
+          Alert.alert("Sorry!", "Your email address and password dont match", [
+            { text: "Try Again" },
+          ]);
       });
   };
 };
