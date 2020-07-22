@@ -9,10 +9,12 @@ const useStyles = makeStyles((theme) => ({
     width: "17vw",
   },
   media: {
-    height: "33vh",
+    width: "70%",
+    height: "40vh",
     paddingTop: "56.25%", // 16:9,
     // border: "1px grey solid"
     margin: "10px 0",
+    margin: "auto",
   },
 }));
 
@@ -31,7 +33,7 @@ const OrderCard = (props) => {
       <CardMedia
         className={classes.media}
         // image={logo}
-        image={myUri + "/" + props.product.images[0]}
+        image={myUri + props.product.images[0]}
         title={props.product.name}
       />
       <CardContent
