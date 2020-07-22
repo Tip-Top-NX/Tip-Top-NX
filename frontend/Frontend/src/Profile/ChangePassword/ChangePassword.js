@@ -10,7 +10,7 @@ import {
   Keyboard,
   Dimensions,
   ImageBackground,
-  Image
+  Image,
 } from "react-native";
 import { myAxios, getConfig } from "../../../../axios";
 import { useNavigation } from "@react-navigation/native";
@@ -51,8 +51,8 @@ const ChangePassword = () => {
             }
           })
           .catch((err) => {
-              setLoader(false);
-              setMessage("Incorrect current password");
+            setLoader(false);
+            setMessage("Incorrect current password");
           });
       });
     }
@@ -82,7 +82,7 @@ const ChangePassword = () => {
     <SafeAreaView>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.container}>
-        {showLoader ? (
+          {showLoader ? (
             <View
               style={{
                 flex: 1,
@@ -98,67 +98,67 @@ const ChangePassword = () => {
               />
             </View>
           ) : (
-          <ImageBackground
-            source={require("../../../../assets/background.jpg")}
-            style={{
-              flex: 1,
-              resizeMode: "cover",
-              paddingTop: 25,
-              width: "100%",
-            }}
-            blurRadius={0}
-          >
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.inputText}
-                placeholder="CURRENT PASSWORD"
-                placeholderTextColor="#666"
-                secureTextEntry={showPassword}
-                onChangeText={(text) => setOldPassword(text)}
-                value={oldPassword}
-              ></TextInput>
-              <HandlePasswordField />
-            </View>
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.inputText}
-                placeholder="NEW PASSWORD"
-                placeholderTextColor="#666"
-                secureTextEntry={showPassword}
-                onChangeText={(text) => setNewPassword(text)}
-                value={newPassword}
-              ></TextInput>
-              <HandlePasswordField />
-            </View>
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.inputText}
-                placeholder="CONFIRM NEW PASSWORD"
-                placeholderTextColor="#666"
-                secureTextEntry={showPassword}
-                onChangeText={(text) => setConfirmPass(text)}
-                value={confirmPass}
-              ></TextInput>
-              <HandlePasswordField />
-            </View>
-            <Text
+            <ImageBackground
+              source={require("../../../../assets/background.png")}
               style={{
-                marginTop: 80,
-                textAlign: "center",
-                marginBottom: 10,
-                color: "red",
-                letterSpacing: 0.2,
+                flex: 1,
+                resizeMode: "cover",
+                paddingTop: 25,
+                width: "100%",
               }}
+              blurRadius={0}
             >
-              {message}
-            </Text>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => validation()}
-            >
-              <Text style={styles.buttonText}>SAVE</Text>
-            </TouchableOpacity>
-          </ImageBackground>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  style={styles.inputText}
+                  placeholder="CURRENT PASSWORD"
+                  placeholderTextColor="#666"
+                  secureTextEntry={showPassword}
+                  onChangeText={(text) => setOldPassword(text)}
+                  value={oldPassword}
+                ></TextInput>
+                <HandlePasswordField />
+              </View>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  style={styles.inputText}
+                  placeholder="NEW PASSWORD"
+                  placeholderTextColor="#666"
+                  secureTextEntry={showPassword}
+                  onChangeText={(text) => setNewPassword(text)}
+                  value={newPassword}
+                ></TextInput>
+                <HandlePasswordField />
+              </View>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  style={styles.inputText}
+                  placeholder="CONFIRM NEW PASSWORD"
+                  placeholderTextColor="#666"
+                  secureTextEntry={showPassword}
+                  onChangeText={(text) => setConfirmPass(text)}
+                  value={confirmPass}
+                ></TextInput>
+                <HandlePasswordField />
+              </View>
+              <Text
+                style={{
+                  marginTop: 80,
+                  textAlign: "center",
+                  marginBottom: 10,
+                  color: "red",
+                  letterSpacing: 0.2,
+                }}
+              >
+                {message}
+              </Text>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => validation()}
+              >
+                <Text style={styles.buttonText}>SAVE</Text>
+              </TouchableOpacity>
+            </ImageBackground>
           )}
         </View>
       </TouchableWithoutFeedback>

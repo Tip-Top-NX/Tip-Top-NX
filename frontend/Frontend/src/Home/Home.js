@@ -64,7 +64,7 @@ const Home = ({ navigation }) => {
           >
             <View>
               <ImageBackground
-                source={require("../../../assets/viewAll.jpg")}
+                source={require("../../../assets/viewAll.png")}
                 style={styles.innerBox}
                 blurRadius={3}
               >

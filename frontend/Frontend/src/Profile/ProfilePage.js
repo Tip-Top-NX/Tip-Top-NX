@@ -19,7 +19,7 @@ const Profile = () => {
     return (
       <SafeAreaView style={styles.container}>
         <ImageBackground
-          source={require("../../../assets/pro.jpg")}
+          source={require("../../../assets/pro.png")}
           style={{ flex: 1, resizeMode: "cover", justifyContent: "center" }}
           blurRadius={0}
         >

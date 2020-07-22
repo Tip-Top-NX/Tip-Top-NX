@@ -31,7 +31,7 @@ const Orders = ({ navigation }) => {
               orderDate={item.orderDate}
               contents={item.contents}
               name={user.name}
-              address={user.address}
+              address={item.address}
               navigation={navigation}
             />
           )}

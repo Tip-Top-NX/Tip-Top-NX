@@ -18,7 +18,7 @@ import Splash from "../Splash";
 const width = Dimensions.get("window").width;
 
 const OrderCard = (props) => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   const dispatch = useDispatch();
 

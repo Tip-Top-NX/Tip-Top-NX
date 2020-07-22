@@ -23,6 +23,7 @@ const Catalogue = ({ navigation, route }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [fetcher, setFetcher] = useState(false);
   const [counter, setCounter] = useState(1);
+  const [endReached, setEndReached] = useState(false);
   const forFilters = route.params.forFilters;
   const prodId =
     route.params.prodId === undefined ? forFilters : route.params.prodId;
@@ -59,7 +60,7 @@ const Catalogue = ({ navigation, route }) => {
   }, [prodId, sort, order, priceLower, priceUpper]);
 
   const nextItems = async () => {
-    if (products.length >= 10) {
+    if (products.length >= 10 && products.length % 2 === 0 && !endReached) {
       await setCounter(counter + 1);
       setFetcher(true);
       const body = {
@@ -74,6 +75,8 @@ const Catalogue = ({ navigation, route }) => {
           if (!res.data.end) {
             setProducts(products.concat([...res.data]));
             setFetcher(false);
+          } else if (res.data.end) {
+            setEndReached(true);
           } else {
             setFetcher(false);
           }
@@ -161,6 +164,7 @@ const Catalogue = ({ navigation, route }) => {
             // allSelected={allSelected}
             // priceLower={priceLower}
             // priceUpper={priceUpper}
+            forSort={prodId}
             cat={cat}
             order={order}
           />

@@ -12,8 +12,8 @@ const ButtonBox = (props) => {
         style={[styles.buttonBox, { backgroundColor: "#fff", borderWidth: 1 }]}
         onPress={() => {
           navigation.navigate("Sort", {
-            prodId: props.prodId,
             order: props.order,
+            forSort: props.forSort,
           });
         }}
       >
@@ -28,6 +28,7 @@ const ButtonBox = (props) => {
             // priceLower: props.priceLower,
             // priceUpper: props.priceUpper,
             cat: props.cat,
+            forSort: props.forSort,
           });
         }}
       >

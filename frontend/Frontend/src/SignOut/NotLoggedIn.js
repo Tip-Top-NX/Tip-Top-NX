@@ -17,7 +17,7 @@ const NotLoggedIn = (props) => {
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
-        source={require("../../../assets/background.jpg")}
+        source={require("../../../assets/background.png")}
         style={{
           flex: 1,
           resizeMode: "cover",
