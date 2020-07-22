@@ -1,13 +1,6 @@
 /* eslint-disable */
 import React from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  FlatList,
-  View,
-  Text,
-  SafeAreaView,
-} from "react-native";
+import { ScrollView, StyleSheet, View, Text, SafeAreaView } from "react-native";
 import ProductCard from "./CartPage1/ProductCard";
 import Total from "./CartPage1/Total";
 import PlaceOrderTab from "./PlaceOrder";

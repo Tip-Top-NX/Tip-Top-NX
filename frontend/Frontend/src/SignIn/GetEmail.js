@@ -32,37 +32,37 @@ const GetEmail = () => {
     const bodyPart = {
       email: email,
     };
-    myAxios
-      .post("/users/forgot", bodyPart)
-      .then((res) => {
-        if (res.data.success) {
-          setLoader(false);
-          navigation.navigate("Otp Forgot", { email: email });
-        } else {
-          setLoader(false);
-          Alert.alert("Oops!", "Entered email address is not registered!", [
-            { text: "Try again" },
-          ]);
-        }
-      })
-      .catch((err) => console.log(err));
+    myAxios.post("/users/forgot", bodyPart).then((res) => {
+      if (res.data.success) {
+        setLoader(false);
+        navigation.navigate("Otp Forgot", { email: email });
+      } else {
+        setLoader(false);
+        Alert.alert("Oops!", "Entered email address is not registered!", [
+          { text: "Try again" },
+        ]);
+      }
+    });
+    // .catch((err) => console.log(err));
   };
 
   const validation = () => {
-    const emailregex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    requestAnimationFrame(() => {
+      const emailregex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
-    if (email == "") {
-      setValid(0);
-    } else if (!emailregex.test(email)) {
-      setValid(0);
-    } else {
-      setValid(1);
-    }
+      if (email == "") {
+        setValid(0);
+      } else if (!emailregex.test(email)) {
+        setValid(0);
+      } else {
+        setValid(1);
+      }
 
-    if (valid == 1) {
-      setLoader(true);
-      sendOtp();
-    }
+      if (valid == 1) {
+        setLoader(true);
+        sendOtp();
+      }
+    });
   };
 
   return (

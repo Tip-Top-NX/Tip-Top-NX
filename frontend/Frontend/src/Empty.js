@@ -3,11 +3,8 @@ import React from "react";
 import {
   StyleSheet,
   Text,
-  View,
-  FlatList,
   TouchableOpacity,
   ImageBackground,
-  Image,
   SafeAreaView,
 } from "react-native";
 

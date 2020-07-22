@@ -50,55 +50,54 @@ const signUp = () => {
   }, []);
 
   const validation = () => {
-    const emailregex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-    const alph = /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/;
-    const bodyPart = {
-      email: email,
-    };
+    requestAnimationFrame(() => {
+      const emailregex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+      const alph = /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/;
+      const bodyPart = {
+        email: email,
+      };
 
-    // name check
-    if (name == "") {
-      checkName(0);
-    } else if (!alph.test(name)) {
-      checkName(0);
-      // alert("Please enter a valid name")
-    } else {
-      checkName(1);
-    }
-    // email check
-    if (email == "") {
-      checkEmail(0);
-    } else if (!emailregex.test(email)) {
-      checkEmail(0);
-      // alert("Please enter a valid email address");
-    } else {
-      checkEmail(1);
-    }
-    // password check
-    if (password == "" || password.length < 6) {
-      checkPassword(0);
-      // alert("The length of the password should be atleast 6");
-      setPassword("");
-    } else {
-      checkPassword(1);
-    }
-    // phone number check
-    if (phone == "" || phone.length !== 10 || phone.charAt(0) < 7) {
-      checkPhone(0);
-    } else {
-      checkPhone(1);
-    }
+      // name check
+      if (name == "") {
+        checkName(0);
+      } else if (!alph.test(name)) {
+        checkName(0);
+        // alert("Please enter a valid name")
+      } else {
+        checkName(1);
+      }
+      // email check
+      if (email == "") {
+        checkEmail(0);
+      } else if (!emailregex.test(email)) {
+        checkEmail(0);
+        // alert("Please enter a valid email address");
+      } else {
+        checkEmail(1);
+      }
+      // password check
+      if (password == "" || password.length < 6) {
+        checkPassword(0);
+        // alert("The length of the password should be atleast 6");
+        setPassword("");
+      } else {
+        checkPassword(1);
+      }
+      // phone number check
+      if (phone == "" || phone.length !== 10 || phone.charAt(0) < 7) {
+        checkPhone(0);
+      } else {
+        checkPhone(1);
+      }
 
-    if (
-      validEmail == 1 &&
-      validName == 1 &&
-      validPassword == 1 &&
-      validPhone == 1
-    ) {
-      setLoader(true);
-      myAxios
-        .post("/users/verify-email", bodyPart)
-        .then((res) => {
+      if (
+        validEmail == 1 &&
+        validName == 1 &&
+        validPassword == 1 &&
+        validPhone == 1
+      ) {
+        setLoader(true);
+        myAxios.post("/users/verify-email", bodyPart).then((res) => {
           setLoader(false);
           if (res.data.success) {
             Alert.alert(
@@ -133,9 +132,10 @@ const signUp = () => {
               },
             ]);
           }
-        })
-        .catch((err) => console.log(err));
-    }
+        });
+        // .catch((err) => console.log(err));
+      }
+    });
   };
 
   const HandlePasswordField = () => {

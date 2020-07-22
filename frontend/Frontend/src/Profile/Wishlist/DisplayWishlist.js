@@ -12,6 +12,11 @@ const DisplayWishlist = (props) => {
         data={props.wishlist}
         numColumns={2}
         showsVerticalScrollIndicator={false}
+        getItemLayout={(item, index) => ({
+          length: 300,
+          offset: 300 * index,
+          index,
+        })}
         keyExtractor={(item, index) => String(index)}
         renderItem={({ item }) => (
           <ProductCard

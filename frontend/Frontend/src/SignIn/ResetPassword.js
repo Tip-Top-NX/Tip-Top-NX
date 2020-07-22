@@ -43,21 +43,20 @@ const ResetPassword = () => {
   }, []);
 
   const validation = () => {
-    // password check
-    setMessage("");
-    if (newPassword === "" || newPassword.length < 6) {
-      setMessage("The password should be atleast 6 characters long");
-    } else if (newPassword !== confirmPass) {
-      setMessage("The passwords dont match");
-    } else {
-      setLoader(true);
-      const bodyPart = {
-        password: newPassword,
-      };
-      getConfig().then((config) => {
-        myAxios
-          .post("/users/set-password", bodyPart, config)
-          .then((res) => {
+    requestAnimationFrame(() => {
+      // password check
+      setMessage("");
+      if (newPassword === "" || newPassword.length < 6) {
+        setMessage("The password should be atleast 6 characters long");
+      } else if (newPassword !== confirmPass) {
+        setMessage("The passwords dont match");
+      } else {
+        setLoader(true);
+        const bodyPart = {
+          password: newPassword,
+        };
+        getConfig().then((config) => {
+          myAxios.post("/users/set-password", bodyPart, config).then((res) => {
             if (res.data.success) {
               setLoader(false);
               Alert.alert("Success", "Password changed successfully");
@@ -68,10 +67,11 @@ const ResetPassword = () => {
                 { text: "Try again" },
               ]);
             }
-          })
-          .catch((err) => console.log(err));
-      });
-    }
+          });
+          // .catch((err) => console.log(err));
+        });
+      }
+    });
   };
 
   const HandlePasswordField = () => {

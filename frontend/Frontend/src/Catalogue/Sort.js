@@ -38,6 +38,11 @@ const Sort = ({ route }) => {
             data={sortBy}
             keyExtractor={(item, index) => index.toString()}
             showsVerticalScrollIndicator={false}
+            getItemLayout={(item, index) => ({
+              length: 50,
+              offset: 50 * index,
+              index,
+            })}
             renderItem={({ item }) => (
               <TouchableOpacity
                 style={styles.eachFilter}

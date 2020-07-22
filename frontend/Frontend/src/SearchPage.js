@@ -127,8 +127,8 @@ class SearchPage extends React.Component {
   fetchHandler = () => {
     myAxios
       .post("/product/search", { keyword: this.state.keyword })
-      .then((res) => this.setState({ ...this.state, products: res.data }))
-      .catch((err) => console.log(err));
+      .then((res) => this.setState({ ...this.state, products: res.data }));
+    // .catch((err) => console.log(err));
   };
 
   render() {
