@@ -23,10 +23,10 @@ exports.sendOTP = (tomail) =>{
     mailoptions.text = "Use OTP " + otp + " for Email Verification"
     transporter.sendMail(mailoptions,(err,info) => {
         if(err){
-            console.log(err)
+            // console.log(err)
         }
         else{
-            console.log('Email Sent')
+            // console.log('Email Sent')
         }
     })
     return otp

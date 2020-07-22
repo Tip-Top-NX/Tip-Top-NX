@@ -86,7 +86,7 @@ router
       { safe: true, upsert: true, new: true }
     )
       .then((obj) => res.send(obj))
-      .catch((err) => console.log(err));
+      .catch((err) => next(err));
   });
 
 router
@@ -107,7 +107,7 @@ router
       .then((product) => {
         res.send(product);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => next(err));
   })
   .delete((req, res, next) => {
     Product.findByIdAndUpdate(
@@ -118,7 +118,7 @@ router
       .then((product) => {
         res.send(product);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => next(err));
   });
 
 module.exports = router;
