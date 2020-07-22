@@ -48,6 +48,11 @@ const Options = () => {
     <View style={styles.container}>
       <FlatList
         data={optionList}
+        getItemLayout={(item, index) => ({
+          length: 80,
+          offset: 80 * index,
+          index,
+        })}
         showsVerticalScrollIndicator={false}
         key={optionList.id}
         renderItem={({ item }) => (

@@ -24,15 +24,13 @@ const Home = ({ navigation }) => {
 
   useEffect(() => {
     let mounted = true;
-    myAxios
-      .post("/category/1/get-products/7")
-      .then((res) => {
-        if (mounted) {
-          setIsLoading(false);
-          setPopularProducts([...res.data]);
-        }
-      })
-      .catch((err) => console.log(err));
+    myAxios.post("/category/1/get-products/7").then((res) => {
+      if (mounted) {
+        setIsLoading(false);
+        setPopularProducts([...res.data]);
+      }
+    });
+    // .catch((err) => console.log(err));
     return () => (mounted = false);
   }, []);
 

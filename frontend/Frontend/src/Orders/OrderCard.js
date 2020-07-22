@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -11,24 +11,16 @@ import {
 } from "react-native";
 import { myAxios, getConfig } from "../../../axios";
 import OrderProductCard from "./OrderProductCard";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { cancelOrder2 } from "../../../redux/ActionCreators";
 import Splash from "../Splash";
 
 const width = Dimensions.get("window").width;
 
 const OrderCard = (props) => {
-  let padding = 92 - props._id.toString().length * 9;
   const [show, setShow] = useState(true);
 
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShow(false);
-    }, 1200);
-  });
 
   const cancelOrder = () => {
     const bodyPart = {
@@ -46,6 +38,7 @@ const OrderCard = (props) => {
               myAxios
                 .put("/profile/order/" + props._id, bodyPart, config)
                 .then((res) => {
+                  setShow(false);
                   if (res.data._id == props._id) {
                     dispatch(cancelOrder2(props._id));
                   } else {
@@ -53,8 +46,8 @@ const OrderCard = (props) => {
                       { text: "Ok" },
                     ]);
                   }
-                })
-                .catch((err) => console.log(err));
+                });
+              // .catch((err) => console.log(err));
             });
           },
         },

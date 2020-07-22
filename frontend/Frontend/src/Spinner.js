@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Modal, ActivityIndicator } from "react-native";
 
 const spinner = (props) => {
-  console.log(props.visible);
+  // console.log(props.visible);
   return (
     <Modal animationType="slide" transparent={true} visible={props.visible}>
       <View style={styles.modalView}>

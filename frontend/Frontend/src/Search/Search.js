@@ -22,14 +22,12 @@ const Search = (props) => {
 
   const submitHandler = () => {
     setIsFetching(true);
-    myAxios
-      .post("/product/search", { keyword: keyword })
-      .then((res) => {
-        setProducts([...res.data]);
-        setIsFetching(false);
-        res.data.length == 0 ? setFound(false) : setFound(true);
-      })
-      .catch((err) => console.log(err));
+    myAxios.post("/product/search", { keyword: keyword }).then((res) => {
+      setProducts([...res.data]);
+      setIsFetching(false);
+      res.data.length == 0 ? setFound(false) : setFound(true);
+    });
+    // .catch((err) => console.log(err));
   };
 
   return (
@@ -64,6 +62,11 @@ const Search = (props) => {
               <FlatList
                 data={products}
                 numColumns={2}
+                getItemLayout={(item, index) => ({
+                  length: 300,
+                  offset: 300 * index,
+                  index,
+                })}
                 keyExtractor={(item) => item._id}
                 showsVerticalScrollIndicator={false}
                 //  onScroll={handleScroll}

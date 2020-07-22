@@ -24,7 +24,8 @@ const Catalogue = ({ navigation, route }) => {
   const [fetcher, setFetcher] = useState(false);
   const [counter, setCounter] = useState(1);
   const forFilters = route.params.forFilters;
-  const prodId = route.params.prodId;
+  const prodId =
+    route.params.prodId === undefined ? forFilters : route.params.prodId;
   const sort = route.params.sortBy;
   const order = route.params.sortCode;
   const priceLower =
@@ -52,9 +53,7 @@ const Catalogue = ({ navigation, route }) => {
       })
       .catch((err) => {
         // console.log(err);
-        Alert.alert("Sorry!", "Couldn't load your request", [
-          { text: "Okay", onPress: () => navigation.goBack() },
-        ]);
+        Alert.alert("Sorry!", "No such products available", [{ text: "Okay" }]);
       });
     return () => (mounted = false);
   }, [prodId, sort, order, priceLower, priceUpper]);
@@ -79,7 +78,12 @@ const Catalogue = ({ navigation, route }) => {
             setFetcher(false);
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          // console.log(err);
+          Alert.alert("Sorry!", "No such products available", [
+            { text: "Okay" },
+          ]);
+        });
     }
   };
 
@@ -122,6 +126,11 @@ const Catalogue = ({ navigation, route }) => {
             data={products}
             numColumns={2}
             keyExtractor={(item, index) => index}
+            getItemLayout={(item, index) => ({
+              length: 300,
+              offset: 300 * index,
+              index,
+            })}
             onEndReached={nextItems}
             onEndReachedThreshold={Platform.ios ? 0 : 0.2}
             ListFooterComponent={showFooter}
