@@ -53,17 +53,17 @@ router
   });
 
 //all about products
-router.post("/products",upload.array('myImages'),(req, res, next) => {
-  let paths = []
-  for(let i=0;i<req.files.length;i++){
-    paths.push(req.files[i].path.replace(/\\/g,"/"));
+router.post("/products", upload.array("myImages"), (req, res, next) => {
+  let paths = [];
+  for (let i = 0; i < req.files.length; i++) {
+    paths.push(req.files[i].path.replace(/\\/g, "/"));
   }
   let product = {
     ...req.body,
     images: paths,
-    colors: req.body.colors.split(','),
-    size: req.body.size.split(','),
-  }
+    colors: req.body.colors.split(","),
+    size: req.body.size.split(","),
+  };
   Product.create(product)
     .then((prod) => {
       return Product.findById(prod._id);

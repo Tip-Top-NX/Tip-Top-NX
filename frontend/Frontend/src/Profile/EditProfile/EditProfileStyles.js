@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     height: 70,
     color: "#000",
     borderWidth: 1,
-    fontSize: 18,
+    fontSize: 16,
     paddingLeft: 15,
     paddingRight: 10,
   },

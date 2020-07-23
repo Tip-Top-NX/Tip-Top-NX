@@ -15,14 +15,14 @@ const Points = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
-        source={require("../../../../assets/p.jpg")}
+        source={require("../../../../assets/p.png")}
         style={{
           flex: 1,
           resizeMode: "cover",
           justifyContent: "center",
           width: "100%",
         }}
-        blurRadius={0}
+        blurRadius={2}
       >
         <View style={styles.headingBox}>
           <Text style={styles.headingText}>YOU HAVE EARNED</Text>
@@ -43,7 +43,7 @@ const Points = () => {
         >
           <View style={styles.detailsBox}>
             <View style={styles.subTitleBox}>
-              <Text style={[styles.subTitleText, { color: "#00688B" }]}>
+              <Text style={[styles.subTitleText, { color: "#0D4F8B" }]}>
                 HOW DOES THIS WORK
               </Text>
             </View>
@@ -151,23 +151,23 @@ const styles = StyleSheet.create({
   },
   subTitleText: {
     fontWeight: "500",
-    fontSize: 17,
+    fontSize: 19,
   },
   textBox: {
     borderBottomWidth: 1,
-    borderColor: "#05B8CC",
+    borderColor: "#104E8B",
     paddingVertical: 10,
     justifyContent: "center",
     paddingHorizontal: 10,
   },
   textStyle: {
-    fontSize: 15,
-    fontWeight: "500",
+    fontSize: 16,
+    fontWeight: "600",
   },
   exampleText: {
     fontSize: 14,
-    fontWeight: "400",
-    color: "#36648B",
+    fontWeight: "500",
+    color: "#000",
   },
   tipStyle: {
     width: "100%",

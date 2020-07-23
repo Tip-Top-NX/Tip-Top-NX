@@ -17,7 +17,7 @@ const filterTypes = ["categories", "price"];
 
 const Filters = ({ route }) => {
   const [selectedFilter, setSelectedFilter] = useState();
-  const [prodId, setProdId] = useState();
+  const [prodId, setProdId] = useState(route.params.prodId);
   const [priceLower, setPriceLower] = useState(-1);
   const [priceUpper, setPriceUpper] = useState();
   const [subcats, setSubcats] = useState();

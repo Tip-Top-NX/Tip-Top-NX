@@ -116,7 +116,7 @@ const ResetPassword = () => {
             </View>
           ) : (
             <ImageBackground
-              source={require("../../../assets/background.jpg")}
+              source={require("../../../assets/background.png")}
               style={{
                 flex: 1,
                 resizeMode: "cover",

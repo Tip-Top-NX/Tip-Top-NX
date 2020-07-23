@@ -4,9 +4,9 @@ import { StyleSheet, View, ScrollView, Dimensions } from "react-native";
 import Image from "react-native-scalable-image";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
-const AUTO_SWIPE_INTERVAL = 3000;
+const AUTO_SWIPE_INTERVAL = 3500;
 
-const height = DEVICE_WIDTH * 0.6; //60%
+const height = DEVICE_WIDTH * 0.65; //65%
 
 class BackgroundCarousel extends React.Component {
   _isMounted = false;
@@ -82,7 +82,7 @@ class BackgroundCarousel extends React.Component {
             <Image
               // style={styles.backgroundImage}
               width={Dimensions.get("window").width}
-              source={{ uri: image }}
+              source={image}
               key={image}
             />
           ))}

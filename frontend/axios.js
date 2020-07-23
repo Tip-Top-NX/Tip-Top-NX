@@ -6,11 +6,6 @@ export const myUri = "https://tiptop-nx.herokuapp.com/";
 
 export const port = "5000";
 
-// export const myAxios = axios.create({
-//   baseURL: "http://" + myIP + ":" + port,
-//   withCredentials: true,
-// });
-
 export const myAxios = axios.create({
   baseURL: myUri,
   withCredentials: true,

@@ -100,7 +100,7 @@ const Sort = ({ route }) => {
           style={styles.buttonBox}
           onPress={() => {
             navigation.navigate("Catalogue", {
-              prodId: route.params.prodId,
+              prodId: route.params.forSort,
               sortCode: selected !== -1 ? sortBy[selected].num : -1,
               sortBy:
                 selected !== -1

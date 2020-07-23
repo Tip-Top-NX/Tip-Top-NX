@@ -24,13 +24,15 @@ const Home = ({ navigation }) => {
 
   useEffect(() => {
     let mounted = true;
-    myAxios.post("/category/1/get-products/7").then((res) => {
-      if (mounted) {
-        setIsLoading(false);
-        setPopularProducts([...res.data]);
-      }
-    });
-    // .catch((err) => console.log(err));
+    myAxios
+      .get("/category/popular")
+      .then((res) => {
+        if (mounted) {
+          setIsLoading(false);
+          setPopularProducts([...res.data]);
+        }
+      })
+      .catch((err) => console.log(err));
     return () => (mounted = false);
   }, []);
 
@@ -64,7 +66,7 @@ const Home = ({ navigation }) => {
           >
             <View>
               <ImageBackground
-                source={require("../../../assets/viewAll.jpg")}
+                source={require("../../../assets/viewAll.png")}
                 style={styles.innerBox}
                 blurRadius={3}
               >
