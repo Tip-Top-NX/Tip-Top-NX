@@ -65,6 +65,11 @@ function ClippedDrawer(props) {
       routeName: "add-admin",
       no: 0,
     },
+    {
+      name: "Cut user's points",
+      routeName: "use-points",
+      no: 0,
+    },
   ];
 
   const handleClose = () => {
@@ -162,9 +167,7 @@ function ClippedDrawer(props) {
       </Drawer>
       <main className={classes.content}>
         <Toolbar />
-        {/* <Paper elevation={3} style={{margin:"auto",width:"75vw",padding:"30"}} variant="outlined"> */}
         {props.children}
-        {/* </Paper> */}
       </main>
     </div>
   );

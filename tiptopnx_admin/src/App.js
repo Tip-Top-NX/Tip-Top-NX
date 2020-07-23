@@ -13,6 +13,7 @@ import axios from "./utils/axios";
 import { getConfig } from "./utils/config";
 import DeletedProducts from "./components/Deleted";
 import Signup from "./containers/Signup";
+import User from './containers/User';
 
 function App() {
   const [change, setChange] = React.useState(false);
@@ -54,6 +55,7 @@ function App() {
           >
           <Route exact path="/admin" component={Home} />
             <Route exact path="/admin/add-admin" component={Signup} />
+            <Route exact path="/admin/use-points" component={User} />
             <Route exact path="/admin/add" component={Add} />
             <Route exact path="/admin/deleted" component={DeletedProducts} />
             <Route exact path="/admin/product" component={ProductCard} />
