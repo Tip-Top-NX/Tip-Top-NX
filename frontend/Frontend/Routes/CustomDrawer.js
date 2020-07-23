@@ -34,7 +34,7 @@ function CustomDrawerContent(props) {
           style: "destructive",
         },
         {
-          text: "Cancel",
+          text: "No",
           style: "cancel",
         },
       ],

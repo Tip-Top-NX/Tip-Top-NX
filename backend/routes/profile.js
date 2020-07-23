@@ -165,6 +165,7 @@ router.post("/cart/placeOrder", (req, res, next) => {
       },
       address:req.user.address,
       contact:req.user.contact,
+      user:req.user.email,
       deliveryCharge : req.user.cartTotal>1000? 0 : 50
     })
     .then((order) => {
@@ -172,8 +173,8 @@ router.post("/cart/placeOrder", (req, res, next) => {
       User.findById(req.user._id)
       .then((user) => {
         user.orders.splice(0,0,order._id); //add to orders
-        user.points += user.cartTotal*10/100
-        user.points = user.points.toFixed()
+        //user.points += user.cartTotal*10/100
+        //user.points = user.points.toFixed()
         user.cart = []; //clear cart
         user.cartTotal = 0;
         return User.populate(user,{ path: "orders", populate: { path: "contents.product" }})

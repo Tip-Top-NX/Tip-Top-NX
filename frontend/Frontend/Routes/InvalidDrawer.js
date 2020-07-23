@@ -4,6 +4,7 @@ import HomeStack from "./HomeStack";
 import SignUpStack from "./SignUpStack";
 import ProfileStack from "./ProfileStack";
 import CartStack from "./CartStack";
+import CustomInvalidDrawer from "./CustomInvalidDrawer";
 
 const Drawer = createDrawerNavigator();
 
@@ -13,6 +14,7 @@ const InvalidDrawer = () => {
       initialRouteName="Sign Up | Log In"
       hideStatusBar={true}
       statusBarAnimation={"slide"}
+      drawerContent={(props) => <CustomInvalidDrawer {...props} />}
     >
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="Cart" component={CartStack} />
