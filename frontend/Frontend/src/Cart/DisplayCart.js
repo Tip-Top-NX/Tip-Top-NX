@@ -1,11 +1,23 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useEffect } from "react";
+import { View, StyleSheet, BackHandler } from "react-native";
 import CartItems from "./CartItems";
 import { useSelector } from "react-redux";
 import Empty from "../Empty";
 
-const DisplatCart = (props) => {
+const DisplayCart = (props) => {
   const user = useSelector((state) => state.user);
+
+  const backAction = () => {
+    return true;
+  };
+
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", backAction);
+
+    return () =>
+      BackHandler.removeEventListener("hardwareBackPress", backAction);
+  }, []);
+
   return (
     <View style={styles.container}>
       {user.cart.length === 0 ? (
@@ -21,7 +33,7 @@ const DisplatCart = (props) => {
   );
 };
 
-export default DisplatCart;
+export default DisplayCart;
 
 const styles = StyleSheet.create({
   container: {

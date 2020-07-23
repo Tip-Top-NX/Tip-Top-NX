@@ -2,19 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="caa81cd7-9022-4852-a538-a89dbe34f90b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../tiptopnx_admin/.expo/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/models/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/models/order.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/routes/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/routes/admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/routes/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/routes/profile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/Catalogue/Catalogue.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Catalogue/Catalogue.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Home/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/CheckUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/CheckUser.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/src/Orders/OrderCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Orders/OrderCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/Search/Search.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Search/Search.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/SearchPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/SearchPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/SignIn/GetEmail.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/SignIn/GetEmail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/src/SignIn/OtpForgot.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/SignIn/OtpForgot.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/SignIn/ResetPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/SignIn/ResetPassword.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/SignIn/SignIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/SignIn/SignIn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/SignUp/OtpVerify.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/SignUp/OtpVerify.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/SignUp/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/SignUp/SignUp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/Spinner.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Spinner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/axios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redux/reducers/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/reducers/user.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +39,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -52,8 +53,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">

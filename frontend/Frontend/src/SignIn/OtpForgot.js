@@ -13,7 +13,7 @@ import {
   Image,
   Alert,
 } from "react-native";
-import { AsyncStorage } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { myAxios } from "../../../axios";
 
