@@ -2,18 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="caa81cd7-9022-4852-a538-a89dbe34f90b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../tiptopnx_admin/.expo/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/models/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/models/order.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/routes/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/routes/admin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/routes/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/routes/profile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/CheckUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/CheckUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/Orders/OrderCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Orders/OrderCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/SignIn/OtpForgot.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/SignIn/OtpForgot.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/axios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/Routes/CustomDrawer.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/Routes/CustomDrawer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/Routes/CustomInvalidDrawer.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/Routes/CustomInvalidDrawer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/Routes/HomeStack.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/Routes/HomeStack.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/Routes/InvalidDrawer.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/Routes/InvalidDrawer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/Routes/ValidDrawer.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/Routes/ValidDrawer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/Cart/CartPage3/OrderConfirmed.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Cart/CartPage3/OrderConfirmed.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/Home/BackgroundCarousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Home/BackgroundCarousel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/Home/Carousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Home/Carousel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Home/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/Profile/EditProfile/EditProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Profile/EditProfile/EditProfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/Profile/Points/Points.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Profile/Points/Points.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/Profile/ProfilePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Profile/ProfilePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/Profile/ProfilePage/Picture.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Profile/ProfilePage/Picture.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/Profile/Wishlist/DisplayWishlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Profile/Wishlist/DisplayWishlist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/Profile/Wishlist/Wishlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Profile/Wishlist/Wishlist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/SignIn/GetEmail.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/SignIn/GetEmail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/SignUp/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/SignUp/SignUp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/l.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/log.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/p.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/pro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/r.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/x.gif" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/reducers/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/reducers/user.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,8 +57,6 @@
     </navigator>
     <panes>
       <pane id="ProjectPane" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -53,6 +68,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">

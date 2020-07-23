@@ -14,7 +14,7 @@ const Wishlist = ({ navigation }) => {
       desc={"TO ADD ITEMS TO YOUR WISHLIST"}
     />
   ) : (
-    <DisplayWishlist wishlist={user.wishlist} />
+    <DisplayWishlist wishlist={user.wishlist} navigation={navigation} />
   );
 };
 

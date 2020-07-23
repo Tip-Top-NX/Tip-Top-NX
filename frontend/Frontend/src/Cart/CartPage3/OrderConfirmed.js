@@ -30,7 +30,7 @@ const OrderConfirmed = ({ navigation }) => {
       }}
     >
       <Image
-        source={require("../../../../assets/x.gif")}
+        source={require("../../../../assets/orderPlaced.gif")}
         style={{ height: 300, width: 300 }}
       />
       <Text style={{ marginVertical: 20, fontWeight: "bold", fontSize: 18 }}>

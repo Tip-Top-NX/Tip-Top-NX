@@ -26,6 +26,8 @@ const DisplayWishlist = (props) => {
             brand={item.brand}
             category={item.category}
             style={item.style}
+            size={item.size}
+            colors={item.colors}
             description={item.description}
             price={item.price}
             discountPercentage={item.discountPercentage}

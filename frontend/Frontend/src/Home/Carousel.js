@@ -8,6 +8,7 @@ const images = [
   // "https://image.shutterstock.com/image-vector/happy-diwali-poster-header-banner-600w-1200499357.jpg",
   require("../../../assets/c2.png"),
   require("../../../assets/c1.png"),
+  require("../../../assets/c4.png"),
   require("../../../assets/c3.png"),
 ];
 export default class Carousel extends Component {

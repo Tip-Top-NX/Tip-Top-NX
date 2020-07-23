@@ -56,12 +56,14 @@ const signUp = () => {
       const bodyPart = {
         email: email,
       };
-
+      let valid = true;
       // name check
       if (name == "") {
         checkName(0);
+        valid = false;
       } else if (!alph.test(name)) {
         checkName(0);
+        valid = false;
         // alert("Please enter a valid name")
       } else {
         checkName(1);
@@ -69,8 +71,10 @@ const signUp = () => {
       // email check
       if (email == "") {
         checkEmail(0);
+        valid = false;
       } else if (!emailregex.test(email)) {
         checkEmail(0);
+        valid = false;
         // alert("Please enter a valid email address");
       } else {
         checkEmail(1);
@@ -78,6 +82,7 @@ const signUp = () => {
       // password check
       if (password == "" || password.length < 6) {
         checkPassword(0);
+        valid = false;
         // alert("The length of the password should be atleast 6");
         setPassword("");
       } else {
@@ -86,16 +91,12 @@ const signUp = () => {
       // phone number check
       if (phone == "" || phone.length !== 10 || phone.charAt(0) < 7) {
         checkPhone(0);
+        valid = false;
       } else {
         checkPhone(1);
       }
 
-      if (
-        validEmail == 1 &&
-        validName == 1 &&
-        validPassword == 1 &&
-        validPhone == 1
-      ) {
+      if (valid) {
         setLoader(true);
         myAxios.post("/users/verify-email", bodyPart).then((res) => {
           setLoader(false);

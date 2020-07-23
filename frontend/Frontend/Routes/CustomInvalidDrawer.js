@@ -14,7 +14,7 @@ function CustomInvalidDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props} scrollEnabled={false}>
       {/* <DrawerItemList {...props} /> */}
-      <View>
+      <View style={{ marginTop: 10 }}>
         <DrawerItem
           label="Home"
           focused={selected === "Home" ? true : false}
@@ -60,6 +60,24 @@ function CustomInvalidDrawerContent(props) {
           icon={({ focused }) => (
             <MaterialIcons
               name="face"
+              size={20}
+              color={focused ? "#C2185B" : "grey"}
+              style={{ marginLeft: 10, marginRight: 10 }}
+            />
+          )}
+          activeTintColor="#C2185B"
+          inactiveTintColor="grey"
+          labelStyle={{ marginLeft: 10 }}
+        />
+        <DrawerItem
+          label="Contact Us"
+          focused={selected === "Contact Us" ? true : false}
+          onPress={() => {
+            props.navigation.navigate("Contact Us"), setSelected("Contact Us");
+          }}
+          icon={({ focused }) => (
+            <Feather
+              name="phone-call"
               size={20}
               color={focused ? "#C2185B" : "grey"}
               style={{ marginLeft: 10, marginRight: 10 }}

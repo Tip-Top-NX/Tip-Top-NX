@@ -12,7 +12,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { SimpleLineIcons } from "@expo/vector-icons";
 
 const height = Dimensions.get("window").height;
 
@@ -48,7 +48,8 @@ function CustomDrawerContent(props) {
       <View
         style={{
           justifyContent: "space-between",
-          height: height - 30,
+          height: height - 40,
+          marginTop: 10,
         }}
       >
         <View>
@@ -96,7 +97,7 @@ function CustomDrawerContent(props) {
             }}
             icon={({ focused }) => (
               <MaterialIcons
-                name="face"
+                name="person-outline"
                 size={20}
                 color={focused ? "#C2185B" : "grey"}
                 style={{ marginLeft: 10, marginRight: 10 }}
@@ -131,9 +132,46 @@ function CustomDrawerContent(props) {
               props.navigation.navigate("Orders"), setSelected("Orders");
             }}
             icon={({ focused }) => (
-              <FontAwesome5
-                name="clipboard-list"
-                size={24}
+              <SimpleLineIcons
+                name="notebook"
+                size={20}
+                color={focused ? "#C2185B" : "grey"}
+                style={{ marginLeft: 10, marginRight: 10 }}
+              />
+            )}
+            activeTintColor="#C2185B"
+            inactiveTintColor="grey"
+            labelStyle={{ marginLeft: 10 }}
+          />
+          <DrawerItem
+            label="Points"
+            focused={selected === "Points" ? true : false}
+            onPress={() => {
+              props.navigation.navigate("Points"), setSelected("Points");
+            }}
+            icon={({ focused }) => (
+              <AntDesign
+                name="gift"
+                size={20}
+                color={focused ? "#C2185B" : "grey"}
+                style={{ marginLeft: 10, marginRight: 10 }}
+              />
+            )}
+            activeTintColor="#C2185B"
+            inactiveTintColor="grey"
+            labelStyle={{ marginLeft: 10 }}
+          />
+          <DrawerItem
+            label="Contact Us"
+            focused={selected === "Contact Us" ? true : false}
+            onPress={() => {
+              props.navigation.navigate("Contact Us"),
+                setSelected("Contact Us");
+            }}
+            icon={({ focused }) => (
+              <Feather
+                name="phone-call"
+                size={20}
                 color={focused ? "#C2185B" : "grey"}
                 style={{ marginLeft: 10, marginRight: 10 }}
               />
@@ -143,6 +181,7 @@ function CustomDrawerContent(props) {
             labelStyle={{ marginLeft: 10 }}
           />
         </View>
+
         <DrawerItem
           // style={{ marginTop: 50 }}
           label="Sign Out"

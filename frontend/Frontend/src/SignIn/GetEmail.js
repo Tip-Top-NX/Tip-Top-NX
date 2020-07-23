@@ -49,16 +49,19 @@ const GetEmail = () => {
   const validation = () => {
     requestAnimationFrame(() => {
       const emailregex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+      let checker = true;
 
       if (email == "") {
         setValid(0);
+        checker = false;
       } else if (!emailregex.test(email)) {
         setValid(0);
+        checker = false;
       } else {
         setValid(1);
       }
 
-      if (valid == 1) {
+      if (checker) {
         setLoader(true);
         sendOtp();
       }
