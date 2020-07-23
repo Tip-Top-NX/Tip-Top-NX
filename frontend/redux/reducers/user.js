@@ -1,10 +1,10 @@
-import { AsyncStorage } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage';
 import * as ActionTypes from "../ActionTypes";
 
 const initialState = {
   isValid: false,
-  token: AsyncStorage.getItem("token"),
   isFetching: false,
+  tokenChecking: true,
 };
 
 const reducer = (state = initialState, action) => {
@@ -15,6 +15,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         ...action.payload,
         isValid: true,
+        tokenChecking: false,
       };
     case ActionTypes.SIGNIN_FAILED:
       AsyncStorage.removeItem("token");
@@ -22,6 +23,7 @@ const reducer = (state = initialState, action) => {
         ...initialState,
         isValid: false,
         isFetching: false,
+        tokenChecking: false,
       };
     case ActionTypes.FETCHING_USER:
       return {
@@ -56,8 +58,8 @@ const reducer = (state = initialState, action) => {
       };
     case ActionTypes.CANCEL_ORDER:
       const orders = [...state.orders];
-      for(var i=0;i<orders.length;i++){
-        if(orders[i]._id==action.payload){
+      for (var i = 0; i < orders.length; i++) {
+        if (orders[i]._id == action.payload) {
           orders[i].status = "Cancelled";
           console.log(orders[i]);
           break;
