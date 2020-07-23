@@ -19,6 +19,7 @@ const orderSchema = new Schema({
         default:""
     },
     contact:Number,
+    user:String,
     amount:{
         type:Number,
         required:true
