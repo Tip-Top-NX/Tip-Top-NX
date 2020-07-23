@@ -10,7 +10,7 @@ import {
   Keyboard,
   ImageBackground,
   Alert,
-  Image,
+  Image
 } from "react-native";
 import styles from "./SignUpStyles";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -192,6 +192,7 @@ const signUp = () => {
               <KeyboardAwareScrollView
                 scrollEnabled={true}
                 showsVerticalScrollIndicator={false}
+                keyboardShouldPersistTaps='handled'
               >
                 <View style={styles.title}>
                   <Text style={styles.textStyle}>SIGN UP</Text>

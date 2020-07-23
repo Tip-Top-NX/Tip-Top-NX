@@ -52,7 +52,7 @@ const OrderCard = (props) => {
           },
         },
         {
-          text: "Cancel",
+          text: "No",
           style: "cancel",
         },
       ],

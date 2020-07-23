@@ -12,7 +12,7 @@ import {
   ImageBackground,
   Alert,
   Image,
-  BackHandler,
+  BackHandler
 } from "react-native";
 import { myAxios, getConfig } from "../../../axios";
 import { useNavigation } from "@react-navigation/native";
