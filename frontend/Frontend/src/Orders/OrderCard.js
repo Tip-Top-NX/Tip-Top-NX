@@ -31,6 +31,10 @@ const OrderCard = (props) => {
       "Are you sure you want to cancel this order?",
       [
         {
+          text: "No",
+          style: "cancel",
+        },
+        {
           text: "Yes",
           onPress: () => {
             setShow(true);
@@ -50,10 +54,6 @@ const OrderCard = (props) => {
               // .catch((err) => console.log(err));
             });
           },
-        },
-        {
-          text: "Cancel",
-          style: "cancel",
         },
       ],
       { cancelable: false }

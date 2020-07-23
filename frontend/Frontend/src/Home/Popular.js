@@ -13,7 +13,7 @@ const popular = (props) => {
         <Text style={{ fontWeight: "bold", fontSize: 15, color: "slategrey" }}>
           POPULAR PRODUCTS
         </Text>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={{
             height: 50,
             width: 80,
@@ -31,7 +31,7 @@ const popular = (props) => {
           >
             View all
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <FlatList
         data={props.popularProducts}
