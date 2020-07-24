@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -18,7 +18,21 @@ const Search = (props) => {
   const [keyword, setKeyword] = useState("");
   const [products, setProducts] = useState([]);
   const [found, setFound] = useState(true);
-  const [isFetching, setIsFetching] = useState(false);
+  const [isFetching, setIsFetching] = useState(true);
+
+  useEffect(() => {
+    let mounted = true;
+    myAxios
+      .get("/category/popular")
+      .then((res) => {
+        if (mounted) {
+          setIsFetching(false);
+          setProducts([...res.data]);
+        }
+      })
+      .catch((err) => console.log(err));
+    return () => (mounted = false);
+  }, []);
 
   const submitHandler = () => {
     setIsFetching(true);
@@ -38,7 +52,6 @@ const Search = (props) => {
             <TextInput
               style={styles.inputBox}
               onChange={(event) => setKeyword(event.nativeEvent.text)}
-              autoFocus={true}
               onSubmitEditing={() => submitHandler()}
               placeholder="Type here to search"
               placeholderTextColor="grey"
@@ -117,6 +130,7 @@ const styles = StyleSheet.create({
     height: 35,
     paddingHorizontal: 10,
     borderColor: "#C2185B",
+    marginBottom: 10,
   },
   cardStyle: {
     width: Dimensions.get("window").width / 2 - 10,

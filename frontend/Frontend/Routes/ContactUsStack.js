@@ -2,8 +2,9 @@
 import * as React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Header from "../src/Header";
-import RightHeaderButton from "../src/RightHeaderButton";
+import TC from "../src/TC";
 import ContactUs from "../src/ContactUs/ContactUs";
+import CustomBack from "../src/BackButton";
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,17 @@ const ContactUsStack = () => {
       }}
     >
       <Stack.Screen name="Contact Us" component={ContactUs} />
+      <Stack.Screen
+        name="Terms and Conditions"
+        component={TC}
+        options={{
+          headerShown: true,
+          headerTruncatedBackTitle: "",
+          headerBackTitle: null,
+          headerTitle: null,
+          headerBackImage: () => <CustomBack />,
+        }}
+      />
     </Stack.Navigator>
   );
 };

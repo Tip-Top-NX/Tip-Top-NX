@@ -6,7 +6,6 @@ import ProfileStack from "./ProfileStack";
 import CartStack from "./CartStack";
 import CustomInvalidDrawer from "./CustomInvalidDrawer";
 import ContactUsStack from "./ContactUsStack";
-import TCStack from "./TCStack";
 
 const Drawer = createDrawerNavigator();
 
@@ -23,7 +22,6 @@ const InvalidDrawer = () => {
       <Drawer.Screen name="Profile" component={ProfileStack} />
       <Drawer.Screen name="Sign Up | Log In" component={SignUpStack} />
       <Drawer.Screen name="Contact Us" component={ContactUsStack} />
-      <Drawer.Screen name="Terms and Conditions" component={TCStack} />
     </Drawer.Navigator>
   );
 };

@@ -14,7 +14,7 @@ import { SimpleLineIcons } from "@expo/vector-icons";
 
 const width = Dimensions.get("window").width;
 
-const ContactUs = () => {
+const ContactUs = ({ navigation }) => {
   const message =
     "WE'RE HERE TO HELP AND ANSWER ANY QUESTION YOU MIGHT HAVE. WE LOOK FORWARD TO HEARING FROM YOU !!";
   const locationURL =
@@ -62,6 +62,12 @@ const ContactUs = () => {
           </TouchableOpacity>
         </View>
       </View>
+      <TouchableOpacity
+        style={styles.terms}
+        onPress={() => navigation.navigate("Terms and Conditions")}
+      >
+        <Text style={styles.termsText}>TERMS AND CONDITIONS</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -78,7 +84,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   headerComponent: {
-    height: "40%",
+    height: "30%",
     width: width,
     justifyContent: "space-evenly",
     alignItems: "center",
@@ -109,5 +115,16 @@ const styles = StyleSheet.create({
     width: width,
     height: "50%",
     justifyContent: "space-evenly",
+  },
+  terms: {
+    height: "5%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  termsText: {
+    color: "grey",
+    fontWeight: "bold",
+    textDecorationLine: "underline",
+    fontSize: 15,
   },
 });

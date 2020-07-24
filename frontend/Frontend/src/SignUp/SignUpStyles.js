@@ -1,4 +1,4 @@
-import { StyleSheet} from "react-native";
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -105,25 +105,25 @@ const styles = StyleSheet.create({
   },
   terms: {
     alignSelf: "center",
-    marginLeft:-20,
-    flexDirection:"row",
-    marginBottom : -12
+    marginLeft: -20,
+    flexDirection: "row",
+    marginBottom: -20,
   },
-  agreeText:{
-    marginTop:15,
-    marginLeft:-30,
-    fontWeight:"bold",
-    fontSize:13,
-    letterSpacing : 0.2
+  agreeText: {
+    marginTop: 15,
+    marginLeft: -30,
+    fontWeight: "bold",
+    fontSize: 13,
+    letterSpacing: 0.2,
   },
-  tcText:{
-    marginTop:15,
-    color:"#000080",
-    fontWeight:"bold",
-    fontSize:13,
-    textDecorationLine:"underline",
-    letterSpacing : 0.2
-  }
+  tcText: {
+    marginTop: 15,
+    color: "#000080",
+    fontWeight: "bold",
+    fontSize: 13,
+    textDecorationLine: "underline",
+    letterSpacing: 0.2,
+  },
 });
 
 export default styles;

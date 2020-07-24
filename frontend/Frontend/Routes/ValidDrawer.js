@@ -8,7 +8,6 @@ import CartStack from "./CartStack";
 import WishlistStack from "./WishlistStack";
 import PointsStack from "./PointsStack";
 import ContactUsStack from "./ContactUsStack";
-import TCStack from "./TCStack";
 
 const Drawer = createDrawerNavigator();
 
@@ -30,7 +29,6 @@ const ValidDrawer = () => {
       <Drawer.Screen name="Orders" component={OrderStack} />
       <Drawer.Screen name="Points" component={PointsStack} />
       <Drawer.Screen name="Contact Us" component={ContactUsStack} />
-      <Drawer.Screen name="Terms and Conditions" component={TCStack} />
     </Drawer.Navigator>
   );
 };

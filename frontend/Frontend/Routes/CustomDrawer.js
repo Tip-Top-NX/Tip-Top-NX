@@ -210,26 +210,6 @@ function CustomDrawerContent(props) {
             inactiveTintColor="grey"
             labelStyle={{ marginLeft: 10 }}
           />
-          <DrawerItem
-            label="Terms and Conditions"
-            focused={selected === "Terms and Conditions" ? true : false}
-            onPress={() => {
-              props.navigation.navigate("Terms and Conditions"),
-                setSelected("Terms and Conditions");
-            }}
-            icon={({ focused }) => (
-              <Feather
-                name="info"
-                size={20}
-                color={focused ? "#001833" : "grey"}
-                style={{ marginLeft: 10, marginRight: 10 }}
-              />
-            )}
-            activeTintColor="#001833"
-            inactiveTintColor="grey"
-            labelStyle={{ marginLeft: 10 }}
-            style={{ borderBottomWidth: 1, borderColor: "#ccc" }}
-          />
         </View>
 
         <DrawerItem

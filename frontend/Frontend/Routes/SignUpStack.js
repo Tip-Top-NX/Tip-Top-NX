@@ -6,7 +6,8 @@ import OtpVerify from "../src/SignUp/OtpVerify";
 import OtpForgot from "../src/SignIn/OtpForgot";
 import GetEmail from "../src/SignIn/GetEmail";
 import ResetPassword from "../src/SignIn/ResetPassword";
-import TCStack from "./TCStack";
+import TC from "../src/TC";
+import CustomBack from "../src/BackButton";
 
 const Stack = createStackNavigator();
 
@@ -25,7 +26,13 @@ const SignUpStack = () => {
       />
       <Stack.Screen
         name="Terms and Conditions"
-        component={TCStack}
+        component={TC}
+        options={{
+          headerShown: true,
+          headerTruncatedBackTitle: "",
+          headerBackTitle: null,
+          headerBackImage: () => <CustomBack />,
+        }}
       />
     </Stack.Navigator>
   );
