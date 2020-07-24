@@ -58,7 +58,21 @@ const Search = (props) => {
               // selectionColor={"#000"}
             />
             {isFetching ? (
-              <Splash />
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                  height: "100%",
+                  backgroundColor: "#fff",
+                }}
+              >
+                <Image
+                  source={require("../../../assets/i.gif")}
+                  style={{ height: 100, width: 100 }}
+                />
+              </View>
             ) : !found ? (
               <View
                 style={{

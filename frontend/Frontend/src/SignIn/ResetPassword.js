@@ -12,7 +12,7 @@ import {
   ImageBackground,
   Alert,
   Image,
-  BackHandler
+  BackHandler,
 } from "react-native";
 import { myAxios, getConfig } from "../../../axios";
 import { useNavigation } from "@react-navigation/native";
@@ -110,7 +110,7 @@ const ResetPassword = () => {
               }}
             >
               <Image
-                source={require("../../../assets/q.gif")}
+                source={require("../../../assets/i.gif")}
                 style={{ height: 100, width: 100 }}
               />
             </View>

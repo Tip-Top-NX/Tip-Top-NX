@@ -106,7 +106,7 @@ class OtpVerify extends Component {
                   }}
                 >
                   <Image
-                    source={require("../../../assets/q.gif")}
+                    source={require("../../../assets/i.gif")}
                     style={{ height: 100, width: 100 }}
                   />
                 </View>

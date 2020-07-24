@@ -97,6 +97,7 @@ const EditProfile = ({ navigation }) => {
           gender,
         })
       );
+      alert("The changes have been saved successfully");
       navigation.goBack();
     }
   };

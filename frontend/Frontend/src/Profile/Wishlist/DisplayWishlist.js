@@ -1,6 +1,12 @@
 /* eslint-disable */
 import React from "react";
-import { StyleSheet, Text, View, FlatList, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  ActivityIndicator,
+  View,
+  FlatList,
+  Dimensions,
+} from "react-native";
 import ProductCard from "../../ProductCard";
 
 const width = Dimensions.get("window").width;

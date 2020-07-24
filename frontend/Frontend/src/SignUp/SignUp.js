@@ -52,11 +52,9 @@ const signUp = () => {
     dispatch(signinFailed());
   }, []);
 
-  useEffect(() =>{
-    if(checked==true)
-      setDisable(false);
-    else
-      setDisable(true);
+  useEffect(() => {
+    if (checked == true) setDisable(false);
+    else setDisable(true);
   });
 
   const validation = () => {
@@ -184,7 +182,7 @@ const signUp = () => {
               }}
             >
               <Image
-                source={require("../../../assets/q.gif")}
+                source={require("../../../assets/i.gif")}
                 style={{ height: 100, width: 100 }}
               />
             </View>
@@ -203,7 +201,7 @@ const signUp = () => {
               <KeyboardAwareScrollView
                 scrollEnabled={true}
                 showsVerticalScrollIndicator={false}
-                keyboardShouldPersistTaps='handled'
+                keyboardShouldPersistTaps="handled"
               >
                 <View style={styles.title}>
                   <Text style={styles.textStyle}>SIGN UP</Text>
@@ -269,26 +267,22 @@ const signUp = () => {
                   ></TextInput>
                 </View>
                 <View style={styles.terms}>
-                    <CheckBox
-                      checked={checked}
-                      onIconPress={() => setChecked(!checked)}
-                      checkedColor="black"
-                      uncheckedColor="black"
-                    />
-                    <Text style={styles.agreeText}>I agree to all </Text>
-                    <TouchableOpacity
-                      onPress={() => navigation.navigate("Terms and Conditions")}
-                    >
-                      <Text style={styles.tcText}>Terms and Conditions</Text>
-                    </TouchableOpacity>
+                  <CheckBox
+                    checked={checked}
+                    onIconPress={() => setChecked(!checked)}
+                    checkedColor="black"
+                    uncheckedColor="black"
+                  />
+                  <Text style={styles.agreeText}>I agree to all </Text>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Terms and Conditions")}
+                  >
+                    <Text style={styles.tcText}>Terms and Conditions</Text>
+                  </TouchableOpacity>
                 </View>
                 <View>
                   <TouchableOpacity
-                    style={
-                      isDisable
-                        ? styles.buttonDisabled
-                        : styles.button
-                    }
+                    style={isDisable ? styles.buttonDisabled : styles.button}
                     disabled={isDisable}
                     onPress={() => validation()}
                   >

@@ -61,7 +61,21 @@ const ProductCard = (props) => {
   return (
     <View style={styles.container}>
       {show ? (
-        <Splash />
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            height: "100%",
+            backgroundColor: "#fff",
+          }}
+        >
+          <Image
+            source={require("../../../../assets/i.gif")}
+            style={{ height: 100, width: 100 }}
+          />
+        </View>
       ) : (
         <View>
           <View style={{ flexDirection: "row" }}>

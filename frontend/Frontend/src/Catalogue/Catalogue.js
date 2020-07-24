@@ -7,13 +7,13 @@ import {
   SafeAreaView,
   ActivityIndicator,
   Platform,
+  Image,
   Alert,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import ProductCard from "../ProductCard";
 import { myAxios } from "../../../axios";
 import ButtonBox from "./ButtonBox";
-import Image from "react-native-scalable-image";
 
 const width = Dimensions.get("window").width;
 
@@ -60,6 +60,7 @@ const Catalogue = ({ navigation, route }) => {
   }, [prodId, sort, order, priceLower, priceUpper]);
 
   const nextItems = async () => {
+    let mounted = true;
     if (products.length >= 10 && products.length % 2 === 0 && !endReached) {
       await setCounter(counter + 1);
       setFetcher(true);
@@ -72,13 +73,15 @@ const Catalogue = ({ navigation, route }) => {
       myAxios
         .post("/category/" + prodId + "/get-products/" + counter, body)
         .then((res) => {
-          if (!res.data.end) {
-            setProducts(products.concat([...res.data]));
-            setFetcher(false);
-          } else if (res.data.end) {
-            setEndReached(true);
-          } else {
-            setFetcher(false);
+          if (mounted) {
+            if (!res.data.end) {
+              setProducts(products.concat([...res.data]));
+              setFetcher(false);
+            } else if (res.data.end) {
+              setEndReached(true);
+            } else {
+              setFetcher(false);
+            }
           }
         })
         .catch((err) => {
@@ -88,6 +91,7 @@ const Catalogue = ({ navigation, route }) => {
           ]);
         });
     }
+    return () => (mounted = false);
   };
 
   const showFooter = () => {
@@ -113,8 +117,8 @@ const Catalogue = ({ navigation, route }) => {
           }}
         >
           <Image
-            source={require("../../../assets/loader.gif")}
-            width={Dimensions.get("window").width}
+            source={require("../../../assets/i.gif")}
+            style={{ height: 100, width: 100 }}
           />
         </View>
       ) : (

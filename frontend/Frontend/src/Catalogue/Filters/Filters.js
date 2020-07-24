@@ -4,14 +4,13 @@ import {
   Text,
   TouchableOpacity,
   SafeAreaView,
-  Dimensions,
+  Image,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./FilterStyles";
 import { myAxios } from "../../../../axios";
-import Image from "react-native-scalable-image";
 
 const filterTypes = ["categories", "price"];
 
@@ -56,13 +55,12 @@ const Filters = ({ route }) => {
         alignItems: "center",
         width: "100%",
         height: "100%",
-        backgroundColor: "#FFD845",
-        // backgroundColor: "#fff",
+        backgroundColor: "#fff",
       }}
     >
       <Image
-        source={require("../../../../assets/loader1.gif")}
-        width={Dimensions.get("window").width}
+        source={require("../../../../assets/i.gif")}
+        style={{ height: 100, width: 100 }}
       />
     </View>
   ) : (

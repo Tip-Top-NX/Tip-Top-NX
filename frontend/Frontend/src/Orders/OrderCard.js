@@ -8,12 +8,12 @@ import {
   TouchableOpacity,
   Alert,
   Platform,
+  ActivityIndicator,
 } from "react-native";
 import { myAxios, getConfig } from "../../../axios";
 import OrderProductCard from "./OrderProductCard";
 import { useDispatch } from "react-redux";
 import { cancelOrder2 } from "../../../redux/ActionCreators";
-import Splash from "../Splash";
 
 const width = Dimensions.get("window").width;
 
@@ -72,7 +72,7 @@ const OrderCard = (props) => {
   return (
     <View>
       {show ? (
-        <Splash />
+        <ActivityIndicator size="large" />
       ) : (
         <View
           style={[
@@ -108,7 +108,7 @@ const OrderCard = (props) => {
             data={props.contents}
             vertical={true}
             showsHorizontalScrollIndicator={false}
-            keyExtractor={(item) => item.product._id.toString()}
+            keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
               <OrderProductCard
                 brand={item.product.brand}

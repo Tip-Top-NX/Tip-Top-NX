@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from "@react-native-community/async-storage";
 import * as ActionTypes from "../ActionTypes";
 
 const initialState = {
@@ -61,13 +61,12 @@ const reducer = (state = initialState, action) => {
       for (var i = 0; i < orders.length; i++) {
         if (orders[i]._id == action.payload) {
           orders[i].status = "Cancelled";
-          console.log(orders[i]);
           break;
         }
       }
       return {
         ...state,
-        orders: [...orders]
+        orders: [...orders],
       };
     default:
       return state;
