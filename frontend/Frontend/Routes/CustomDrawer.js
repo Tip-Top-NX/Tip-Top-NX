@@ -88,6 +88,7 @@ function CustomDrawerContent(props) {
             activeTintColor="#C2185B"
             inactiveTintColor="grey"
             labelStyle={{ marginLeft: 10 }}
+            style={{ borderBottomWidth: 1, borderColor: "#ccc" }}
           />
           <DrawerItem
             label="Profile"
@@ -160,6 +161,7 @@ function CustomDrawerContent(props) {
             activeTintColor="#C2185B"
             inactiveTintColor="grey"
             labelStyle={{ marginLeft: 10 }}
+            style={{ borderBottomWidth: 1, borderColor: "#ccc" }}
           />
           <DrawerItem
             label="Contact Us"
@@ -179,6 +181,26 @@ function CustomDrawerContent(props) {
             activeTintColor="#C2185B"
             inactiveTintColor="grey"
             labelStyle={{ marginLeft: 10 }}
+          />
+          <DrawerItem
+            label="Terms and Conditions"
+            focused={selected === "Terms and Conditions" ? true : false}
+            onPress={() => {
+              props.navigation.navigate("Terms and Conditions"),
+                setSelected("Terms and Conditions");
+            }}
+            icon={({ focused }) => (
+              <Feather
+                name="info"
+                size={20}
+                color={focused ? "#C2185B" : "grey"}
+                style={{ marginLeft: 10, marginRight: 10 }}
+              />
+            )}
+            activeTintColor="#C2185B"
+            inactiveTintColor="grey"
+            labelStyle={{ marginLeft: 10 }}
+            style={{ borderBottomWidth: 1, borderColor: "#ccc" }}
           />
         </View>
 
@@ -200,6 +222,7 @@ function CustomDrawerContent(props) {
           activeTintColor="#C2185B"
           inactiveTintColor="grey"
           labelStyle={{ marginLeft: 10 }}
+          style={{ borderTopWidth: 1, borderColor: "#ccc" }}
         />
       </View>
     </DrawerContentScrollView>

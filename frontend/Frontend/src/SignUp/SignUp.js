@@ -12,6 +12,7 @@ import {
   Alert,
   Image,
 } from "react-native";
+import { CheckBox } from "react-native-elements";
 import styles from "./SignUpStyles";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Feather } from "@expo/vector-icons";
@@ -37,6 +38,8 @@ const signUp = () => {
   const [validEmail, checkEmail] = useState(-1);
   const [validPassword, checkPassword] = useState(-1);
   const [validPhone, checkPhone] = useState(-1);
+  const [checked, setChecked] = useState(false);
+  const [isDisable, setDisable] = useState(false);
 
   const [isAlreadyRegistered, setIsAlreadyRegistered] = useState(-1);
 
@@ -48,6 +51,13 @@ const signUp = () => {
   useEffect(() => {
     dispatch(signinFailed());
   }, []);
+
+  useEffect(() =>{
+    if(checked==true)
+      setDisable(false);
+    else
+      setDisable(true);
+  });
 
   const validation = () => {
     requestAnimationFrame(() => {
@@ -193,6 +203,7 @@ const signUp = () => {
               <KeyboardAwareScrollView
                 scrollEnabled={true}
                 showsVerticalScrollIndicator={false}
+                keyboardShouldPersistTaps='handled'
               >
                 <View style={styles.title}>
                   <Text style={styles.textStyle}>SIGN UP</Text>
@@ -257,12 +268,33 @@ const signUp = () => {
                     value={phone}
                   ></TextInput>
                 </View>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => validation()}
-                >
-                  <Text style={styles.buttonText}>JOIN US</Text>
-                </TouchableOpacity>
+                <View style={styles.terms}>
+                    <CheckBox
+                      checked={checked}
+                      onIconPress={() => setChecked(!checked)}
+                      checkedColor="black"
+                      uncheckedColor="black"
+                    />
+                    <Text style={styles.agreeText}>I agree to all </Text>
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate("Terms and Conditions")}
+                    >
+                      <Text style={styles.tcText}>Terms and Conditions</Text>
+                    </TouchableOpacity>
+                </View>
+                <View>
+                  <TouchableOpacity
+                    style={
+                      isDisable
+                        ? styles.buttonDisabled
+                        : styles.button
+                    }
+                    disabled={isDisable}
+                    onPress={() => validation()}
+                  >
+                    <Text style={styles.buttonText}>JOIN US</Text>
+                  </TouchableOpacity>
+                </View>
                 <View style={styles.signInBox}>
                   <Text style={styles.signInText}>ALREADY A MEMBER ?</Text>
                   <TouchableOpacity

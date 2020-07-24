@@ -17,7 +17,7 @@ const DisplayCart = (props) => {
     return () =>
       BackHandler.removeEventListener("hardwareBackPress", backAction);
   }, []);
-
+  
   return (
     <View style={styles.container}>
       {user.cart.length === 0 ? (

@@ -20,7 +20,6 @@ import { myAxios } from "../../../axios";
 const width = Dimensions.get("window").width;
 const quote =
   "I believe in comfort. If you don't feel comfortable in your clothes, it's hard to think of anything else ~ Donna Karan";
-
 const Home = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [popularProducts, setPopularProducts] = useState();
@@ -153,17 +152,17 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   footer: {
-    height: 80,
     width: "100%",
     borderTopWidth: 1,
     marginTop: 20,
     justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 45,
     borderColor: "#ccc",
   },
   footerText: {
     color: "grey",
+    padding: 10,
+    textAlign: "center",
   },
 });
 
