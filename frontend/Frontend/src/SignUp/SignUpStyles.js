@@ -58,11 +58,21 @@ const styles = StyleSheet.create({
     width: 230,
   },
   button: {
-    marginVertical: 10,
+    marginVertical: 5,
     width: 300,
     height: 50,
     borderWidth: 1,
     backgroundColor: "#000",
+    justifyContent: "center",
+    alignSelf: "center",
+    padding: 5,
+  },
+  buttonDisabled: {
+    marginVertical: 10,
+    width: 300,
+    height: 50,
+    borderWidth: 1,
+    backgroundColor: "rgba(0,0,0,0.5)",
     justifyContent: "center",
     alignSelf: "center",
     padding: 5,
@@ -93,6 +103,27 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: "red",
   },
+  terms: {
+    alignSelf: "center",
+    marginLeft:-20,
+    flexDirection:"row",
+    marginBottom : -12
+  },
+  agreeText:{
+    marginTop:15,
+    marginLeft:-30,
+    fontWeight:"bold",
+    fontSize:13,
+    letterSpacing : 0.2
+  },
+  tcText:{
+    marginTop:15,
+    color:"#000080",
+    fontWeight:"bold",
+    fontSize:13,
+    textDecorationLine:"underline",
+    letterSpacing : 0.2
+  }
 });
 
 export default styles;

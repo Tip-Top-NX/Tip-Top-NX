@@ -68,12 +68,14 @@ const EditProfile = ({ navigation }) => {
 
   const validation = () => {
     const alph = /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/;
-
+    let valid = true;
     // name check
     if (name === "") {
       checkName(0);
+      valid = false;
     } else if (!alph.test(name)) {
       checkName(0);
+      valid = false;
     } else {
       checkName(1);
     }
@@ -81,11 +83,12 @@ const EditProfile = ({ navigation }) => {
     // age check
     if (age === "" || age.length >= 3) {
       checkAge(0);
+      valid = false;
     } else {
       checkAge(1);
     }
 
-    if (validName == 1 && validAge == 1) {
+    if (valid) {
       dispatch(
         putProfile({
           name,
@@ -101,7 +104,7 @@ const EditProfile = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ImageBackground
-        source={require("../../../../assets/r.jpg")}
+        source={require("../../../../assets/editProfile.png")}
         style={{ flex: 1, resizeMode: "cover", justifyContent: "center" }}
         blurRadius={2}
       >

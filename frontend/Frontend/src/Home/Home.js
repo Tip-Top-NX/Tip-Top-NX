@@ -10,6 +10,7 @@ import {
   Dimensions,
   Image,
   SafeAreaView,
+  Platform,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Popular from "./Popular";
@@ -68,7 +69,7 @@ const Home = ({ navigation }) => {
               <ImageBackground
                 source={require("../../../assets/viewAll.png")}
                 style={styles.innerBox}
-                blurRadius={3}
+                blurRadius={Platform.OS === "ios" ? 3 : 2}
               >
                 <Text
                   style={{

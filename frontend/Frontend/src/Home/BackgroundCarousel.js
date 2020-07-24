@@ -4,7 +4,7 @@ import { StyleSheet, View, ScrollView, Dimensions } from "react-native";
 import Image from "react-native-scalable-image";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
-const AUTO_SWIPE_INTERVAL = 3500;
+const AUTO_SWIPE_INTERVAL = 5000;
 
 const height = DEVICE_WIDTH * 0.65; //65%
 

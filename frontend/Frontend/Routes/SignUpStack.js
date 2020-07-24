@@ -6,6 +6,7 @@ import OtpVerify from "../src/SignUp/OtpVerify";
 import OtpForgot from "../src/SignIn/OtpForgot";
 import GetEmail from "../src/SignIn/GetEmail";
 import ResetPassword from "../src/SignIn/ResetPassword";
+import TCStack from "./TCStack";
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,10 @@ const SignUpStack = () => {
         name="Reset Password"
         component={ResetPassword}
         options={{ headerShown: true, headerLeft: null }}
+      />
+      <Stack.Screen
+        name="Terms and Conditions"
+        component={TCStack}
       />
     </Stack.Navigator>
   );

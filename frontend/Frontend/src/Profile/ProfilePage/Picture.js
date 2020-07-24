@@ -62,7 +62,7 @@ const Picture = () => {
         >
           {picture === "" ? (
             <Image
-              source={require("../../../../assets/l.png")}
+              source={require("../../../../assets/profilePic.png")}
               style={{ height: 150, width: 150, borderRadius: 75 }}
             ></Image>
           ) : (

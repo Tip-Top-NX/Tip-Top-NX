@@ -19,7 +19,7 @@ const Profile = () => {
     return (
       <SafeAreaView style={styles.container}>
         <ImageBackground
-          source={require("../../../assets/pro.png")}
+          source={require("../../../assets/profile.png")}
           style={{ flex: 1, resizeMode: "cover", justifyContent: "center" }}
           blurRadius={0}
         >
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     flex: 1,
     height: 600,
-    // backgroundColor: "#fff",
+    backgroundColor: "#000",
   },
 });
 

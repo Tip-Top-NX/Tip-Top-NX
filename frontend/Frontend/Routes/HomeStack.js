@@ -30,7 +30,7 @@ const HomeStack = () => {
         component={Home}
         options={{
           headerShown: true,
-          headerTitle: () => <Header title="Home" showRight={true} />,
+          headerTitle: () => <Header title="TIP-TOP NX" showRight={true} />,
         }}
       />
       <Stack.Screen

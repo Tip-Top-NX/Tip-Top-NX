@@ -10,8 +10,9 @@ import {
   Keyboard,
   ImageBackground,
   Alert,
-  Image
+  Image,
 } from "react-native";
+import { CheckBox } from "react-native-elements";
 import styles from "./SignUpStyles";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Feather } from "@expo/vector-icons";
@@ -37,6 +38,8 @@ const signUp = () => {
   const [validEmail, checkEmail] = useState(-1);
   const [validPassword, checkPassword] = useState(-1);
   const [validPhone, checkPhone] = useState(-1);
+  const [checked, setChecked] = useState(false);
+  const [isDisable, setDisable] = useState(false);
 
   const [isAlreadyRegistered, setIsAlreadyRegistered] = useState(-1);
 
@@ -49,6 +52,13 @@ const signUp = () => {
     dispatch(signinFailed());
   }, []);
 
+  useEffect(() =>{
+    if(checked==true)
+      setDisable(false);
+    else
+      setDisable(true);
+  });
+
   const validation = () => {
     requestAnimationFrame(() => {
       const emailregex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
@@ -56,12 +66,14 @@ const signUp = () => {
       const bodyPart = {
         email: email,
       };
-
+      let valid = true;
       // name check
       if (name == "") {
         checkName(0);
+        valid = false;
       } else if (!alph.test(name)) {
         checkName(0);
+        valid = false;
         // alert("Please enter a valid name")
       } else {
         checkName(1);
@@ -69,8 +81,10 @@ const signUp = () => {
       // email check
       if (email == "") {
         checkEmail(0);
+        valid = false;
       } else if (!emailregex.test(email)) {
         checkEmail(0);
+        valid = false;
         // alert("Please enter a valid email address");
       } else {
         checkEmail(1);
@@ -78,6 +92,7 @@ const signUp = () => {
       // password check
       if (password == "" || password.length < 6) {
         checkPassword(0);
+        valid = false;
         // alert("The length of the password should be atleast 6");
         setPassword("");
       } else {
@@ -86,16 +101,12 @@ const signUp = () => {
       // phone number check
       if (phone == "" || phone.length !== 10 || phone.charAt(0) < 7) {
         checkPhone(0);
+        valid = false;
       } else {
         checkPhone(1);
       }
 
-      if (
-        validEmail == 1 &&
-        validName == 1 &&
-        validPassword == 1 &&
-        validPhone == 1
-      ) {
+      if (valid) {
         setLoader(true);
         myAxios.post("/users/verify-email", bodyPart).then((res) => {
           setLoader(false);
@@ -257,12 +268,33 @@ const signUp = () => {
                     value={phone}
                   ></TextInput>
                 </View>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => validation()}
-                >
-                  <Text style={styles.buttonText}>JOIN US</Text>
-                </TouchableOpacity>
+                <View style={styles.terms}>
+                    <CheckBox
+                      checked={checked}
+                      onIconPress={() => setChecked(!checked)}
+                      checkedColor="black"
+                      uncheckedColor="black"
+                    />
+                    <Text style={styles.agreeText}>I agree to all </Text>
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate("Terms and Conditions")}
+                    >
+                      <Text style={styles.tcText}>Terms and Conditions</Text>
+                    </TouchableOpacity>
+                </View>
+                <View>
+                  <TouchableOpacity
+                    style={
+                      isDisable
+                        ? styles.buttonDisabled
+                        : styles.button
+                    }
+                    disabled={isDisable}
+                    onPress={() => validation()}
+                  >
+                    <Text style={styles.buttonText}>JOIN US</Text>
+                  </TouchableOpacity>
+                </View>
                 <View style={styles.signInBox}>
                   <Text style={styles.signInText}>ALREADY A MEMBER ?</Text>
                   <TouchableOpacity

@@ -15,7 +15,7 @@ const Points = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
-        source={require("../../../../assets/p.png")}
+        source={require("../../../../assets/points.png")}
         style={{
           flex: 1,
           resizeMode: "cover",
