@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import React, { useState } from "react";
-import { Dimensions, View } from "react-native";
+import { Dimensions, View, Image, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -14,6 +14,34 @@ function CustomInvalidDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props} scrollEnabled={false}>
       {/* <DrawerItemList {...props} /> */}
+      <View
+        style={{
+          backgroundColor: "#001833",
+          height: 50,
+          marginBottom: 20,
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        <Image
+          source={require("../../assets/tag.png")}
+          style={{
+            width: 40,
+            height: 40,
+            alignSelf: "center",
+            marginHorizontal: 15,
+          }}
+        />
+        <Text
+          style={{
+            color: "white",
+            marginLeft: 20,
+            fontWeight: "bold",
+          }}
+        >
+          TIP-TOP NX
+        </Text>
+      </View>
       <View style={{ marginTop: 10 }}>
         <DrawerItem
           label="Home"
@@ -25,11 +53,11 @@ function CustomInvalidDrawerContent(props) {
             <Feather
               name="home"
               size={20}
-              color={focused ? "#C2185B" : "grey"}
+              color={focused ? "#001833" : "grey"}
               style={{ marginLeft: 10, marginRight: 10 }}
             />
           )}
-          activeTintColor="#C2185B"
+          activeTintColor="#001833"
           inactiveTintColor="grey"
           labelStyle={{ marginLeft: 10 }}
         />
@@ -44,10 +72,10 @@ function CustomInvalidDrawerContent(props) {
               name="shoppingcart"
               size={20}
               style={{ marginLeft: 10, marginRight: 10 }}
-              color={focused ? "#C2185B" : "grey"}
+              color={focused ? "#001833" : "grey"}
             />
           )}
-          activeTintColor="#C2185B"
+          activeTintColor="#001833"
           inactiveTintColor="grey"
           labelStyle={{ marginLeft: 10 }}
         />
@@ -61,11 +89,11 @@ function CustomInvalidDrawerContent(props) {
             <MaterialIcons
               name="face"
               size={20}
-              color={focused ? "#C2185B" : "grey"}
+              color={focused ? "#001833" : "grey"}
               style={{ marginLeft: 10, marginRight: 10 }}
             />
           )}
-          activeTintColor="#C2185B"
+          activeTintColor="#001833"
           inactiveTintColor="grey"
           labelStyle={{ marginLeft: 10 }}
           style={{ borderBottomWidth: 1, borderColor: "#ccc" }}
@@ -80,11 +108,11 @@ function CustomInvalidDrawerContent(props) {
             <Feather
               name="phone-call"
               size={20}
-              color={focused ? "#C2185B" : "grey"}
+              color={focused ? "#001833" : "grey"}
               style={{ marginLeft: 10, marginRight: 10 }}
             />
           )}
-          activeTintColor="#C2185B"
+          activeTintColor="#001833"
           inactiveTintColor="grey"
           labelStyle={{ marginLeft: 10 }}
         />
@@ -99,11 +127,11 @@ function CustomInvalidDrawerContent(props) {
             <Feather
               name="info"
               size={20}
-              color={focused ? "#C2185B" : "grey"}
+              color={focused ? "#001833" : "grey"}
               style={{ marginLeft: 10, marginRight: 10 }}
             />
           )}
-          activeTintColor="#C2185B"
+          activeTintColor="#001833"
           inactiveTintColor="grey"
           labelStyle={{ marginLeft: 10 }}
           style={{ borderBottomWidth: 1, borderColor: "#ccc" }}
@@ -119,11 +147,11 @@ function CustomInvalidDrawerContent(props) {
             <AntDesign
               name="login"
               size={20}
-              color={focused ? "#C2185B" : "grey"}
+              color={focused ? "#001833" : "grey"}
               style={{ marginLeft: 10, marginRight: 10 }}
             />
           )}
-          activeTintColor="#C2185B"
+          activeTintColor="#001833"
           inactiveTintColor="grey"
           labelStyle={{ marginLeft: 10 }}
         />
