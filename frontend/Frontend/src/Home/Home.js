@@ -18,6 +18,8 @@ import Categories from "./Categories";
 import { myAxios } from "../../../axios";
 
 const width = Dimensions.get("window").width;
+const quote =
+  "I believe in comfort. If you don't feel comfortable in your clothes, it's hard to think of anything else ~ Donna Karan";
 
 const Home = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -85,6 +87,9 @@ const Home = ({ navigation }) => {
             </View>
           </TouchableOpacity>
           <Popular navigation={navigation} popularProducts={popularProducts} />
+          <View style={styles.footer}>
+            <Text style={styles.footerText}>{quote}</Text>
+          </View>
         </ScrollView>
       )}
     </SafeAreaView>
@@ -146,6 +151,19 @@ const styles = StyleSheet.create({
     height: 255,
     width: width,
     alignSelf: "center",
+  },
+  footer: {
+    height: 80,
+    width: "100%",
+    borderTopWidth: 1,
+    marginTop: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 45,
+    borderColor: "#ccc",
+  },
+  footerText: {
+    color: "grey",
   },
 });
 

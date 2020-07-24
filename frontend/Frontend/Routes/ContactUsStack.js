@@ -12,8 +12,7 @@ const ContactUsStack = () => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: { height: 60 },
-        headerTitle: () => <Header title="Contact Us" showRight={false} />,
-        headerRight: () => <RightHeaderButton />,
+        headerTitle: () => <Header title="" showRight={false} />,
       }}
     >
       <Stack.Screen name="Contact Us" component={ContactUs} />
