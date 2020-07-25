@@ -143,7 +143,7 @@ export default function ImgMediaCard() {
           }}
           onChange={(event) => setKeyword(event.target.value)}
           className={classes.input}
-          placeholder="Type here to search"
+          placeholder="Type product name to search"
         />
         <IconButton onClick={searchHandler} className={classes.iconButton}>
           <Search />

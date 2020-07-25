@@ -130,7 +130,8 @@ router
 
 router.route("/user/points")
   .post((req,res,next) => {
-    User.findOne({email : req.body.email})
+    const pattern = new RegExp(req.body.email);
+    User.findOne({email : {$regex: pattern,$options:"si"}})
     .then((user) => {
       res.send(user);
     })
