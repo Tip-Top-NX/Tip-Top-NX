@@ -5,10 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.expo/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/Catalogue/Catalogue.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Catalogue/Catalogue.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/Profile/Wishlist/DisplayWishlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Profile/Wishlist/DisplayWishlist.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Splash.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,6 +31,8 @@
     </navigator>
     <panes>
       <pane id="ProjectPane" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -46,8 +44,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
