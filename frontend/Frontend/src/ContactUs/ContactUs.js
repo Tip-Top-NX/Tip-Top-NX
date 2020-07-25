@@ -55,7 +55,7 @@ const ContactUs = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.cardStyle}
-            onPress={() => Linking.openURL(`tel:${2234147}`)}
+            onPress={() => Linking.openURL(`tel:${8308773358}`)}
           >
             <Feather name="phone-call" size={50} color="white" />
             <Text style={styles.textStyle}>PHONE</Text>

@@ -3,6 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="caa81cd7-9022-4852-a538-a89dbe34f90b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.expo/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/ContactUs/ContactUs.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/ContactUs/ContactUs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/Profile/Wishlist/DisplayWishlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Profile/Wishlist/DisplayWishlist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/Search/Search.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Search/Search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,8 +36,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -41,6 +47,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane" />
     </panes>
   </component>

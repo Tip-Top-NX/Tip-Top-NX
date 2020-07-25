@@ -5,10 +5,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 import { ConfigureStore } from "./redux/ConfigureStore";
 import CheckUser from "./Frontend/src/CheckUser";
-// import OTP from "./Frontend/src/OTP";
 
 const store = ConfigureStore();
-
 export default function App() {
   return (
     <Provider store={store}>

@@ -8,11 +8,10 @@ import {
   TouchableWithoutFeedback,
   FlatList,
   Dimensions,
+  Image,
 } from "react-native";
 import { myAxios } from "../../../axios";
 import ProductCard from "../ProductCard";
-import Splash from "../Splash";
-import Image from "react-native-scalable-image";
 
 const Search = (props) => {
   const [keyword, setKeyword] = useState("");

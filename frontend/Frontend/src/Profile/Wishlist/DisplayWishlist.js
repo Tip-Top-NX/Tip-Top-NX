@@ -1,12 +1,6 @@
 /* eslint-disable */
 import React from "react";
-import {
-  StyleSheet,
-  ActivityIndicator,
-  View,
-  FlatList,
-  Dimensions,
-} from "react-native";
+import { StyleSheet, View, FlatList, Dimensions } from "react-native";
 import ProductCard from "../../ProductCard";
 
 const width = Dimensions.get("window").width;
@@ -23,7 +17,7 @@ const DisplayWishlist = (props) => {
           offset: 300 * index,
           index,
         })}
-        keyExtractor={(item, index) => String(index)}
+        keyExtractor={(item, index) => String(item._id)}
         renderItem={({ item }) => (
           <ProductCard
             _id={item._id}
