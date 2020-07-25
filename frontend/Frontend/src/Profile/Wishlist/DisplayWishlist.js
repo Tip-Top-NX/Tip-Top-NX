@@ -2,12 +2,20 @@
 import React from "react";
 import { StyleSheet, View, FlatList, Dimensions } from "react-native";
 import ProductCard from "../../ProductCard";
+import { useDispatch, useSelector } from "react-redux";
 
 const width = Dimensions.get("window").width;
 
 const DisplayWishlist = (props) => {
+  const user = useSelector((state) => state.user);
+
   return (
     <View style={styles.container}>
+      {user.isFetching && (
+        <View style={{ marginVertical: 10 }}>
+          <ActivityIndicator size="large" />
+        </View>
+      )}
       <FlatList
         data={props.wishlist}
         numColumns={2}
