@@ -48,13 +48,17 @@ const Catalogue = ({ navigation, route }) => {
       .post("/category/" + prodId + "/get-products/1", body)
       .then((res) => {
         if (mounted) {
+          if (res.data.end) {
+            Alert.alert("Sorry!", "No such products available", [
+              { text: "Okay" },
+            ]);
+          }
           setIsLoading(false);
           setProducts([...res.data]);
         }
       })
       .catch((err) => {
         // console.log(err);
-        Alert.alert("Sorry!", "No such products available", [{ text: "Okay" }]);
       });
     return () => (mounted = false);
   }, [prodId, sort, order, priceLower, priceUpper]);
@@ -86,9 +90,6 @@ const Catalogue = ({ navigation, route }) => {
         })
         .catch((err) => {
           // console.log(err);
-          Alert.alert("Sorry!", "No such products available", [
-            { text: "Okay" },
-          ]);
         });
     }
     return () => (mounted = false);

@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     justifyContent: "center",
     marginHorizontal: 15,
+    alignItems: "center",
   },
   materialIcon: {
     alignSelf: "center",

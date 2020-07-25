@@ -1,12 +1,13 @@
 /* eslint-disable */
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Alert } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 import { ConfigureStore } from "./redux/ConfigureStore";
 import CheckUser from "./Frontend/src/CheckUser";
 
 const store = ConfigureStore();
+
 export default function App() {
   return (
     <Provider store={store}>

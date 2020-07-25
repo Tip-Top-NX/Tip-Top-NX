@@ -5,7 +5,7 @@ import Profile from "../src/Profile/ProfilePage";
 import EditProfile from "../src/Profile/EditProfile/EditProfile";
 import Points from "../src/Profile/Points/Points";
 import Wishlist from "../src/Profile/Wishlist/Wishlist";
-import OrderStack from "./OrderStack";
+import Orders from "../src/Orders/Orders";
 import CustomBack from "../src/BackButton";
 import ChangePassword from "../src/Profile/ChangePassword/ChangePassword";
 
@@ -40,8 +40,8 @@ const ProfileStack = () => {
       />
       <Stack.Screen
         name="My Orders"
-        component={OrderStack}
-        options={{ headerShown: false }}
+        component={Orders}
+        options={{ headerShown: true }}
       />
       <Stack.Screen
         name="Change Password"

@@ -34,13 +34,14 @@ const ProductInfo = (props) => {
               ( {props.discountPercentage} % )
             </Text>
           </View>
-        ) : (
+        ) : props.price === 0 ? null : (
           <View style={styles.correctedPrice}>
             <Text style={styles.discountedPriceText}>₹ {SP.toFixed(2)}</Text>
           </View>
         )}
-
-        <Text style={styles.note}>INCLUSIVE OF ALL TAXES</Text>
+        {props.price === 0 ? null : (
+          <Text style={styles.note}>INCLUSIVE OF ALL TAXES</Text>
+        )}
       </View>
     </View>
   );

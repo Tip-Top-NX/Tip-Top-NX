@@ -1,6 +1,12 @@
 /* eslint-disable */
 import React from "react";
-import { StyleSheet, View, FlatList, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Dimensions,
+  ActivityIndicator,
+} from "react-native";
 import ProductCard from "../../ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 

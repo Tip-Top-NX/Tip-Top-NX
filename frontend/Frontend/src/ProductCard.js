@@ -93,9 +93,11 @@ const ProductCard = (props) => {
             <Text style={[props.textStyle, { color: "grey", fontSize: 11 }]}>
               {props.name}
             </Text>
-            <Text style={[props.textStyle, { fontWeight: "600" }]}>
-              Price : ₹ {props.price}
-            </Text>
+            {props.price === 0 ? null : (
+              <Text style={[props.textStyle, { fontWeight: "600" }]}>
+                Price : ₹ {props.price}
+              </Text>
+            )}
           </View>
         </View>
       </TouchableOpacity>
