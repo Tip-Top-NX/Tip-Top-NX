@@ -19,7 +19,7 @@ const ProductCard = (props) => {
         setItemStatus(true);
       }
     }
-  }, []);
+  }, [user.wishlist]);
 
   const handleWishlist = () => {
     if (itemStatus) {

@@ -98,10 +98,11 @@ export const postWishlist = (prodId) => {
 
 export const delWishlist = (prodId) => {
   return (dispatch) => {
+    dispatch(isFetching(true));
     getConfig().then((config) => {
       myAxios
         .delete("/product/" + prodId + "/wishlist", config)
-        .then((res) => dispatch(setWishlist(res.data.wishlist)))
+        .then((res) => {dispatch(setWishlist(res.data.wishlist));dispatch(isFetching(false));})
         .catch((err) => console.log(err));
     });
   };

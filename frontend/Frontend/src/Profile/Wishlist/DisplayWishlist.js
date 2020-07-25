@@ -8,12 +8,22 @@ import {
   Dimensions,
 } from "react-native";
 import ProductCard from "../../ProductCard";
+import { useDispatch, useSelector } from 'react-redux';
 
 const width = Dimensions.get("window").width;
 
 const DisplayWishlist = (props) => {
+
+  const user = useSelector(state => state.user);
+  
+
   return (
     <View style={styles.container}>
+      {user.isFetching && (
+        <View style={{ marginVertical: 10 }}>
+          <ActivityIndicator size="large" />
+        </View>
+      )}
       <FlatList
         data={props.wishlist}
         numColumns={2}
@@ -23,7 +33,7 @@ const DisplayWishlist = (props) => {
           offset: 300 * index,
           index,
         })}
-        keyExtractor={(item, index) => String(index)}
+        keyExtractor={(item, index) => item._id}
         renderItem={({ item }) => (
           <ProductCard
             _id={item._id}
