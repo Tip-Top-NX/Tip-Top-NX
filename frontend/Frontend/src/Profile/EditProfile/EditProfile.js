@@ -81,7 +81,9 @@ const EditProfile = ({ navigation }) => {
     }
 
     // age check
-    if (age === "" || age.length >= 3) {
+    if (age === undefined) {
+      checkAge(0);
+    } else if (age === "" || age.length >= 3) {
       checkAge(0);
       valid = false;
     } else {

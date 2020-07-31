@@ -14,7 +14,7 @@ const Drawer = createDrawerNavigator();
 const ValidDrawer = () => {
   return (
     <Drawer.Navigator
-      initialRouteName="HomeStack"
+      initialRouteName="Home"
       statusBarAnimation={"slide"}
       drawerContent={(props) => <CustomDrawer {...props} />}
     >

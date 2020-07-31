@@ -3,8 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="caa81cd7-9022-4852-a538-a89dbe34f90b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.expo/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/Routes/CustomInvalidDrawer.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/Routes/CustomInvalidDrawer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/Routes/ValidDrawer.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/Routes/ValidDrawer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/ProductDescription/Size.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/ProductDescription/Size.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/Profile/EditProfile/EditProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Profile/EditProfile/EditProfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +35,6 @@
     </navigator>
     <panes>
       <pane id="ProjectPane" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
@@ -44,6 +47,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">

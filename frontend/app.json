@@ -25,7 +25,7 @@
     },
     "android": {
       "package": "com.tiptopnx.tiptopnx",
-      "versionCode": 1
+      "versionCode": 2
     },
     "description": "This is an Online Shopping App"
   }

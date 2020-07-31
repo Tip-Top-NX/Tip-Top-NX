@@ -116,7 +116,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
+const sizes = ["XS", "S", "M", "L", "XL", "XXL", "5-6", "7-8", "9-10", "11-12"];
 
 export default function ProductDetails(props) {
   const classes = useStyles();
