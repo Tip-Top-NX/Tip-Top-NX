@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
   sizeChartButton: {
     height: 50,
-    width: 80,
+    // width: 80,
     justifyContent: "center",
   },
   sizeChartButtonText: {

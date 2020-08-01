@@ -131,6 +131,7 @@ const OrderCard = (props) => {
               justifyContent: "space-between",
               height: 25,
               paddingHorizontal: 10,
+              alignItems: "center",
             }}
           >
             <Text style={{ fontSize: 15, color: "#7b7b7b" }}>

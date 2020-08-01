@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, BackHandler } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const OrderConfirmed = ({ navigation }) => {
@@ -17,6 +17,17 @@ const OrderConfirmed = ({ navigation }) => {
       setShowButtons(true);
     }, 5500);
   });
+
+  const backAction = () => {
+    return true;
+  };
+
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", backAction);
+
+    return () =>
+      BackHandler.removeEventListener("hardwareBackPress", backAction);
+  }, []);
 
   return (
     <View

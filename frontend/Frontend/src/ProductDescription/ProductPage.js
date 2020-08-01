@@ -31,7 +31,9 @@ const ProductPage = ({ route }) => {
 
   const [chosenSize, setChosenSize] = useState();
   const [chosenColor, setChosenColor] = useState();
-  const [checkHeight, setHeight] = useState();
+  const [checkHeight1, setHeight1] = useState(0);
+  const [checkHeight2, setHeight2] = useState(0);
+  const [checkHeight, setHeight] = useState(0);
 
   const handleScroll = (event) => {
     setHeight(event.nativeEvent.contentOffset.y);
@@ -44,6 +46,10 @@ const ProductPage = ({ route }) => {
         onScroll={handleScroll}
         scrollEventThrottle={1}
         style={{ height: height - 100 }}
+        onLayout={(event) => {
+          const layout = event.nativeEvent.layout;
+          setHeight1(layout.height);
+        }}
       >
         <ImageCarousel
           images={
@@ -112,11 +118,18 @@ const ProductPage = ({ route }) => {
           category={category}
         />
 
-        <ButtonBar
-          _id={_id}
-          chosenSize={chosenSize}
-          chosenColor={chosenColor}
-        />
+        <View
+          onLayout={(event) => {
+            const layout = event.nativeEvent.layout;
+            setHeight2(layout.y);
+          }}
+        >
+          <ButtonBar
+            _id={_id}
+            chosenSize={chosenSize}
+            chosenColor={chosenColor}
+          />
+        </View>
         <ProductDetails
           styles={styles}
           description={description}
@@ -124,7 +137,7 @@ const ProductPage = ({ route }) => {
           category={category}
         />
       </ScrollView>
-      {checkHeight < 285 ? (
+      {checkHeight <= checkHeight2 - checkHeight1 ? (
         <ButtonBar
           _id={_id}
           chosenSize={chosenSize}
