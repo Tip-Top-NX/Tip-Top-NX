@@ -189,7 +189,7 @@ export default function ProductDetails(props) {
     props.onClose(false);
     axios
       .put("/admin/products/" + id, body, getConfig())
-      .then((res) => console.log(res.data))
+      .then((res) => console.log("done"))
       .catch((err) => {
         console.log(err.message);
       });

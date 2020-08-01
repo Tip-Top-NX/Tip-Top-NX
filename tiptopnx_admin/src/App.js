@@ -55,7 +55,7 @@ function App() {
           >
           <Route exact path="/admin" component={Home} />
             <Route exact path="/admin/add-admin" component={Signup} />
-            <Route exact path="/admin/use-points" component={User} />
+            <Route exact path="/admin/user-points" component={User} />
             <Route exact path="/admin/add" component={Add} />
             <Route exact path="/admin/deleted" component={DeletedProducts} />
             <Route exact path="/admin/product" component={ProductCard} />

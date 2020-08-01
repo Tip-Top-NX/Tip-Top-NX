@@ -82,7 +82,6 @@ export default function ImgMediaCard() {
         if (mounted) {
           // setIsLoading(false);
           setProducts([...res.data]);
-          // console.log(res.data);
         }
       })
       .catch((err) => console.log(err));

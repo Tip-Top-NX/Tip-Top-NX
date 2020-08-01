@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const getChip = (status) => {
-    return <Chip label={status} style={{color:"white",backgroundColor:status === "Delivered" ? "green" : "red"}} />
+    return <Chip label={status} style={{ color: "white", backgroundColor: status === "Delivered" ? "green" : "red" }} />
 }
 
 const History = (props) => {
@@ -56,11 +56,11 @@ const History = (props) => {
 
     return (
         <>
-            <TextField 
-                variant="outlined" 
-                placeholder="Type order-id to search" 
-                style={{marginLeft:"6vw",marginBottom:"5vh",width:"30vw"}}
-                onChange={changeHandler}/>
+            <TextField
+                variant="outlined"
+                placeholder="Type order-id to search"
+                style={{ marginLeft: "6vw", marginBottom: "5vh", width: "30vw" }}
+                onChange={changeHandler} />
             {/* Paper */}
             <Paper className={classes.paper}>
                 <Typography variant="h4" align="center" >
@@ -90,7 +90,7 @@ const History = (props) => {
                                 <td>{order.contact}</td>
                                 <td>{order.payment.method}</td>
                                 <td>{getMyDate(order.createdAt)}</td>
-                                <td align="center">{order.status=="Delivered"?getMyDate(order.deliveryDate):"--"}</td>
+                                <td align="center">{order.status == "Delivered" ? getMyDate(order.deliveryDate) : "--"}</td>
                                 <td>{getChip(order.status)}</td>
                                 <td>
                                     <Button2 onClick={() => viewHandler(order)} variant="contained" color="primary">
@@ -146,7 +146,7 @@ const History = (props) => {
                                 variant="filled"
                                 size="small" />
                         </Grid>
-                        <Grid item xs={8}>
+                        <Grid item xs={12}>
                             <TextField
                                 fullWidth
                                 inputProps={{ readOnly: true }}
@@ -159,10 +159,31 @@ const History = (props) => {
                             <TextField
                                 fullWidth
                                 inputProps={{ readOnly: true }}
+                                label="Name"
+                                value={selected.userName}
+                                variant="filled"
+                                size="small"
+                            />
+                        </Grid>
+                        <Grid item xs={4}>
+                            <TextField
+                                fullWidth
+                                inputProps={{ readOnly: true }}
+                                label="Email"
+                                value={selected.user}
+                                variant="filled"
+                                size="small"
+                            />
+                        </Grid>
+                        <Grid item xs={4}>
+                            <TextField
+                                fullWidth
+                                inputProps={{ readOnly: true }}
                                 label="Contact Number"
                                 value={selected.contact}
                                 variant="filled"
-                                size="small" />
+                                size="small"
+                            />
                         </Grid>
                         <Grid item xs={2} />
                         <Grid item xs={8}>
