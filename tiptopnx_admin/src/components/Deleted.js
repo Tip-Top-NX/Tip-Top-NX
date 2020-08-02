@@ -12,6 +12,8 @@ import { Button } from "@material-ui/core";
 import { Dialog, DialogActions, DialogTitle } from "@material-ui/core";
 import Button2 from "@material-ui/core/Button";
 import { getConfig } from "../utils/config";
+// import { Sentry } from "react-activity";
+import Loader from "react-loader-spinner";
 
 const useStyles = makeStyles({
   root: {
@@ -20,6 +22,13 @@ const useStyles = makeStyles({
   },
   container: {
     padding: "10px 0 10px 0",
+  },
+  container1: {
+    padding: "10px 0 10px 0",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "80vh",
   },
   buttonBox: {
     display: "flex",
@@ -32,13 +41,14 @@ const useStyles = makeStyles({
 
 export default function ImgMediaCard() {
   const classes = useStyles();
-  // const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [products, setProducts] = useState([]);
   const [editable, setEditable] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
   const [body, setBody] = useState({});
-  const [deleted,setDeleted] = useState(false);
+  const [selected, setSelected] = useState();
+  const [deleted, setDeleted] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -46,7 +56,7 @@ export default function ImgMediaCard() {
       .get("/admin/products/deleted", getConfig())
       .then((res) => {
         if (mounted) {
-          // setIsLoading(false);
+          setIsLoading(false);
           setProducts([...res.data]);
         }
       })
@@ -57,15 +67,21 @@ export default function ImgMediaCard() {
 
   const restoreProductHandler = () => {
     setAlertOpen(false);
+    setIsLoading(true);
     axios
       .put("/admin/products/deleted", body, getConfig())
       .then((res) => {
         setDeleted(!deleted);
+        setIsLoading(false);
       })
       .catch((err) => console.log(err));
   };
 
-  return products.length > 0 ? (
+  return isLoading ? (
+    <div className={classes.container1}>
+      <Loader type="BallTriangle" color="#00BFFF" height={80} width={80} />
+    </div>
+  ) : products.length > 0 ? (
     <div className={classes.container}>
       <Dialog
         style={{ zIndex: 10000001 }}
@@ -107,6 +123,7 @@ export default function ImgMediaCard() {
                 onClick={() => {
                   setEditable(false);
                   setShowModal(true);
+                  setSelected(item);
                 }}
               >
                 <CardActionArea>
@@ -135,6 +152,7 @@ export default function ImgMediaCard() {
                   onClick={() => {
                     setEditable(true);
                     setShowModal(true);
+                    setSelected(item);
                   }}
                 >
                   EDIT
@@ -147,26 +165,29 @@ export default function ImgMediaCard() {
                   onClick={() => {
                     setBody({ id: item._id });
                     setAlertOpen(true);
+                    setSelected(item);
                   }}
                 >
                   RESTORE
                 </Button>
               </div>
-              <ProductDetails
-                open={showModal}
-                editable={editable}
-                onClose={() => setShowModal(false)}
-                brand={item.brand}
-                description={item.description}
-                colors={item.colors}
-                images={item.images}
-                size={item.size}
-                discountPercentage={item.discountPercentage}
-                name={item.name}
-                price={item.price}
-                _id={item._id}
-                category={item.category}
-              />
+              {selected === item ? (
+                <ProductDetails
+                  open={showModal}
+                  editable={editable}
+                  onClose={() => setShowModal(false)}
+                  brand={item.brand}
+                  description={item.description}
+                  colors={item.colors}
+                  images={item.images}
+                  size={item.size}
+                  discountPercentage={item.discountPercentage}
+                  name={item.name}
+                  price={item.price}
+                  _id={item._id}
+                  category={item.category}
+                />
+              ) : null}
             </Grid>
           );
         })}
