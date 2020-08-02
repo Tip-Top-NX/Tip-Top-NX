@@ -67,8 +67,9 @@ const User = (props) => {
 
     const cutHandler = () => {
         setSpinner2(true);
-        if (points === 0 || !/\d+/.test(points)) {
+        if (points<=0|| !/\d+/.test(points)||points>user.points) {
             setError(true);
+            setSpinner2(false);
         }
         else {
             setError(false);
@@ -86,8 +87,9 @@ const User = (props) => {
     }
     const addHandler = () => {
         setSpinner2(true);
-        if (points === 0 || !/\d+/.test(points)) {
+        if (points<=0||!/\d+/.test(points)) {
             setError(true);
+            setSpinner2(false);
         }
         else {
             setError(false);

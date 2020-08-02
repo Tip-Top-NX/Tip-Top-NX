@@ -116,7 +116,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const sizes = ["XS", "S", "M", "L", "XL", "XXL", "5-6", "7-8", "9-10", "11-12"];
+const sizes = {
+  men: ["XS", "S", "M", "L", "XL", "XXL"],
+  kids: ["5-6", "7-8", "9-10", "11-12"],
+  women: ["32B", "32C", "34B", "34C", "36B", "36C", "38B", "38C", "40B", "40C", "40D", "40DD", "42B", "42C", "42D"]
+};
 
 export default function ProductDetails(props) {
   const classes = useStyles();
@@ -345,7 +349,7 @@ export default function ProductDetails(props) {
                   </h4>
                   <GridList cellHeight="80px">
                     {props.editable
-                      ? sizes.map((item, index) => (
+                      ? sizes.men.concat(sizes.kids,sizes.women).map((item, index) => (
                           <ListItem key={index}>
                             <Checkbox
                               style={{ marginRight: "20px" }}
