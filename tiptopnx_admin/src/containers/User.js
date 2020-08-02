@@ -1,25 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import axios, { myUri } from "../utils/axios";
 import { getConfig } from '../utils/config';
 import Grid from "@material-ui/core/Grid";
 import { Button, CircularProgress } from "@material-ui/core";
 import {
-    Dialog,
-    DialogActions,
-    DialogTitle,
     TextField,
     Paper,
     InputBase,
-    Divider,
     IconButton,
 } from "@material-ui/core";
-import Button2 from "@material-ui/core/Button";
 import { Search } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
@@ -64,18 +55,21 @@ const User = (props) => {
     const [error, setError] = React.useState(false);
     const [success, setSuccess] = React.useState(false);
     const [spinner, setSpinner] = React.useState(false);
+    const [spinner2, setSpinner2] = React.useState(false);
 
     const searchHandler = () => {
         setSpinner(true);
         axios
             .post("/admin/user/points", { email }, getConfig())
-            .then((res) => { setUser({ ...res.data }); setSpinner(false); })
+            .then((res) => { setUser({ ...res.data }); setSpinner(false); console.log(res.data) })
             .catch((err) => console.log(err));
     };
 
     const cutHandler = () => {
-        if (points > user.points || points === 0 || !/\d+/.test(points) || points < 0) {
+        setSpinner2(true);
+        if (points<=0|| !/\d+/.test(points)||points>user.points) {
             setError(true);
+            setSpinner2(false);
         }
         else {
             setError(false);
@@ -86,7 +80,29 @@ const User = (props) => {
                     setTimeout(() => {
                         setSuccess(false);
                     }, 3000);
+                    setSpinner2(false);
                 })
+                .catch((err) => setSpinner2(false))
+        }
+    }
+    const addHandler = () => {
+        setSpinner2(true);
+        if (points<=0||!/\d+/.test(points)) {
+            setError(true);
+            setSpinner2(false);
+        }
+        else {
+            setError(false);
+            axios.put('/admin/user/points', { email: user.email, pointsUsed: -1 * points }, getConfig())
+                .then(res => {
+                    setUser({ ...res.data });
+                    setSuccess(true);
+                    setTimeout(() => {
+                        setSuccess(false);
+                    }, 3000);
+                    setSpinner2(false);
+                })
+                .catch((err) => setSpinner2(false))
         }
     }
 
@@ -112,7 +128,7 @@ const User = (props) => {
                     </Paper>
                 </Grid>
                 <Grid item xs={6}>
-                    <div style={{ display: spinner === true ? "block" : "none",padding:"4px" }}>
+                    <div style={{ display: spinner === true ? "block" : "none", padding: "4px" }}>
                         <CircularProgress color="secondary" />
                     </div>
                 </Grid>
@@ -154,22 +170,35 @@ const User = (props) => {
                                         inputProps={{ readOnly: true }}
                                         value={user.points} />
                                 </Grid>
-                                <Grid item xs={2} />
+                                <Grid item xs={2}>
+                                    <div style={{ display: spinner2 === true ? "block" : "none", padding: "4px" }}>
+                                        <CircularProgress color="secondary" />
+                                    </div>
+                                </Grid>
                                 <Grid item xs={4}>
                                     <TextField
-                                        label="Use points?"
+                                        label="Cut/Add"
                                         fullWidth
                                         error={error}
                                         onChange={(event) => setPoints(event.target.value)}
                                         variant="outlined" />
                                 </Grid>
-                                <Grid item xs={4}>
+                                <Grid item xs={2}>
+                                    <Button
+                                        style={{ marginTop: "10px" }}
+                                        variant="contained"
+                                        color="secondary"
+                                        onClick={cutHandler}>
+                                        Cut
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={2}>
                                     <Button
                                         style={{ marginTop: "10px" }}
                                         variant="contained"
                                         color="primary"
-                                        onClick={cutHandler}>
-                                        Cut
+                                        onClick={addHandler}>
+                                        Add
                                     </Button>
                                 </Grid>
                                 {error && (

@@ -49,9 +49,14 @@ function ClippedDrawer(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleOrder = [
+    {
+      name: "Edit user points",
+      routeName: "user-points",
+      no: 0,
+    },
     { name: "Pending Orders", routeName: "pending-orders", no: props.pending },
     {
-      name: "Change delivery status",
+      name: "Confirmed Orders",
       routeName: "confirmed-orders",
       no: props.confirmed,
     },
@@ -63,11 +68,6 @@ function ClippedDrawer(props) {
     {
       name: "Add new admin",
       routeName: "add-admin",
-      no: 0,
-    },
-    {
-      name: "Cut user's points",
-      routeName: "use-points",
       no: 0,
     },
   ];

@@ -203,12 +203,32 @@ const ConfirmedOrders = (props) => {
                 size="small"
               />
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={12}>
               <TextField
                 fullWidth
                 inputProps={{ readOnly: true }}
                 label="Address"
                 value={selected.address}
+                variant="filled"
+                size="small"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                fullWidth
+                inputProps={{ readOnly: true }}
+                label="Name"
+                value={selected.userName}
+                variant="filled"
+                size="small"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                fullWidth
+                inputProps={{ readOnly: true }}
+                label="Email"
+                value={selected.user}
                 variant="filled"
                 size="small"
               />

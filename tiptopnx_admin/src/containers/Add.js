@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import InputGroup from "react-bootstrap/InputGroup";
 import { makeStyles } from "@material-ui/core/styles";
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, Grid } from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
 import ListItem from "@material-ui/core/ListItem";
 import IconButton from "@material-ui/core/IconButton";
 import ListItemText from "@material-ui/core/ListItemText";
 import GridList from "@material-ui/core/GridList";
 import ClearIcon from "@material-ui/icons/Clear";
-import axios, { myUri } from "../utils/axios";
-import { getConfig } from "../utils/config";
-import { Backdrop, CircularProgress } from "@material-ui/core";
+import axios from "../utils/axios";
+import { Backdrop, CircularProgress, Divider } from "@material-ui/core";
 import Snackbar from "../components/Snackbar";
 import Carousel from "react-bootstrap/Carousel";
 
-const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
+const sizes = {
+  men: ["XS", "S", "M", "L", "XL", "XXL"],
+  kids: ["5-6", "7-8", "9-10", "11-12"],
+  women: ["32B", "32C", "34B", "34C", "36B", "36C", "38B", "38C", "40B", "40C", "40D", "40DD", "42B", "42C", "42D"]
+};
 
 const Add = () => {
   const classes = useStyles();
@@ -69,6 +72,13 @@ const Add = () => {
     }
   };
 
+  const addSize = (event) => {
+    if (event.key === "Enter") {
+      setSelectedSizes([...selectedSizes, event.target.value]);
+      event.target.value = "";
+    }
+  };
+
   const addProductHandler = () => {
     setOpen(true);
     let data = new FormData();
@@ -104,108 +114,149 @@ const Add = () => {
   };
 
   return (
-    <div className={classes.root}>
-      {/* Backdrop */}
-      <Backdrop
-        className={classes.backdrop}
-        open={open}
-        onClick={() => setOpen(false)}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-      {/* Snackbar */}
-      <Snackbar
-        close={() => setSnackOpen(false)}
-        open={snackOpen}
-        variant={variant}
-        message={message}
-      />
+    <>
+      <div className={classes.root}>
+        {/* Backdrop */}
+        <Backdrop
+          className={classes.backdrop}
+          open={open}
+          onClick={() => setOpen(false)}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+        {/* Snackbar */}
+        <Snackbar
+          close={() => setSnackOpen(false)}
+          open={snackOpen}
+          variant={variant}
+          message={message}
+        />
 
-      <h1 style={{ textAlign: "center" }}>ADD A PRODUCT TO THE SYSTEM</h1>
-      <div className={classes.topBox}>
-        <div className={classes.fieldBoxTop}>
+        <h1 style={{ textAlign: "center" }}>ADD A PRODUCT TO THE SYSTEM</h1>
+        <div className={classes.topBox}>
+          <div className={classes.fieldBoxTop}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-evenly",
+                width: "100%",
+              }}
+            >
+              <TextField
+                required
+                label="Product ID"
+                variant="outlined"
+                value={id}
+                style={{ alignSelf: "flex-start" }}
+                onChange={(e) => setId(e.target.value)}
+              />
+              <TextField
+                required
+                label="Category"
+                variant="outlined"
+                value={category}
+                style={{ alignSelf: "flex-start" }}
+                onChange={(e) => setCategory(e.target.value)}
+              />
+            </div>
+            <TextField
+              fullWidth
+              required
+              label="Brand"
+              variant="outlined"
+              value={brand}
+              onChange={(e) => setBrand(e.target.value)}
+            />
+            <TextField
+              fullWidth
+              required
+              label="Name"
+              variant="outlined"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <div className={classes.priceBox}>
+              <TextField
+                required
+                type="number"
+                label="Price"
+                variant="outlined"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
+              <TextField
+                label="Discount"
+                variant="outlined"
+                type="number"
+                value={disc}
+                onChange={(e) => setDisc(e.target.value)}
+              />
+              <InputGroup.Text>= {priceFinal}</InputGroup.Text>
+            </div>
+          </div>
           <div
             style={{
               display: "flex",
-              justifyContent: "space-evenly",
-              width: "100%",
+              flexDirection: "column",
             }}
           >
-            <TextField
-              required
-              label="Product ID"
-              variant="outlined"
-              value={id}
-              style={{ alignSelf: "flex-start" }}
-              onChange={(e) => setId(e.target.value)}
-            />
-            <TextField
-              required
-              label="Category"
-              variant="outlined"
-              value={category}
-              style={{ alignSelf: "flex-start" }}
-              onChange={(e) => setCategory(e.target.value)}
-            />
+            <div className={classes.imageBox}>
+              <Carousel>
+                {images.map((item, index) => (
+                  <Carousel.Item key={index}>
+                    <img className={classes.imageStyle} src={URL.createObjectURL(item)} />
+                  </Carousel.Item>
+                ))}
+              </Carousel>
+            </div>
+            <input multiple type="file" onChange={addImages} />
           </div>
-          <TextField
-            fullWidth
-            required
-            label="Brand"
-            variant="outlined"
-            value={brand}
-            onChange={(e) => setBrand(e.target.value)}
-          />
-          <TextField
-            fullWidth
-            required
-            label="Name"
-            variant="outlined"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <div className={classes.priceBox}>
-            <TextField
-              required
-              type="number"
-              label="Price"
-              variant="outlined"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-            />
-            <TextField
-              label="Discount"
-              variant="outlined"
-              type="number"
-              value={disc}
-              onChange={(e) => setDisc(e.target.value)}
-            />
-            <InputGroup.Text>= {priceFinal}</InputGroup.Text>
-          </div>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <div className={classes.imageBox}>
-            <Carousel>
-              {images.map((item, index) => (
-                <Carousel.Item key={index}>
-                  <img className={classes.imageStyle} src={URL.createObjectURL(item)} />
-                </Carousel.Item>
-              ))}
-            </Carousel>
-          </div>
-          <input multiple type="file" onChange={addImages} />
         </div>
       </div>
-      <div className={classes.fieldBox}>
-        <div className={classes.bottomBox}>
-          <h4 style={{ marginBottom: "40px", paddingLeft: "15px" }}>Sizes</h4>
+      <h4 style={{ marginBottom: "40px", paddingLeft: "15px", marginLeft: "9vw" }}>Sizes</h4>
+      <Grid style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }} container spacing={2}>
+        <Grid item xs={4}>
+          <Grid container spacing={1}>
+            <Grid item xs={12}>
+              <GridList cellHeight="80px">
+                {sizes.men.map((item, index) => (
+                  <ListItem key={index}>
+                    <Checkbox
+                      style={{ marginRight: "20px" }}
+                      color="primary"
+                      name={item}
+                      inputProps={{ "aria-label": "secondary checkbox" }}
+                      onChange={sizeHandler}
+                    />
+                    <ListItemText>{item}</ListItemText>
+                  </ListItem>
+                ))}
+              </GridList>
+            </Grid>
+            <Grid item xs={12}>
+              <hr style={{ color: "#CFD8DC" }}></hr>
+            </Grid>
+            <Grid item xs={12}>
+              <GridList cellHeight="80px">
+                {sizes.kids.map((item, index) => (
+                  <ListItem key={index}>
+                    <Checkbox
+                      style={{ marginRight: "20px" }}
+                      color="primary"
+                      name={item}
+                      inputProps={{ "aria-label": "secondary checkbox" }}
+                      onChange={sizeHandler}
+                    />
+                    <ListItemText>{item}</ListItemText>
+                  </ListItem>
+                ))}
+              </GridList>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid style={{ borderLeft: "2px solid #CFD8DC" }} item xs={4}>
           <GridList cellHeight="80px">
-            {sizes.map((item, index) => (
+            {sizes.women.map((item, index) => (
               <ListItem key={index}>
                 <Checkbox
                   style={{ marginRight: "20px" }}
@@ -218,7 +269,35 @@ const Add = () => {
               </ListItem>
             ))}
           </GridList>
-        </div>
+        </Grid>
+        <Grid style={{ borderLeft: "2px solid #CFD8DC" }} item xs={4}>
+          <TextField
+            required
+            label="Add new size"
+            variant="outlined"
+            helperText="Press enter to add the size"
+            style={{ marginBottom: "20px", marginLeft: "20px" }}
+            onKeyDown={addSize}
+          />
+          <GridList cellHeight="80px">
+            {selectedSizes.map((item, index) => (
+              <ListItem key={index}>
+                <IconButton
+                  onClick={() => {
+                    selectedSizes.splice(index, 1);
+                    setColors([...selectedSizes]);
+                  }}
+                >
+                  <ClearIcon />
+                </IconButton>
+                <ListItemText>{item}</ListItemText>
+              </ListItem>
+            ))}
+          </GridList>
+        </Grid>
+      </Grid>
+      <hr></hr>
+      <div className={classes.fieldBox}>
         <div className={classes.colorBox}>
           <TextField
             fullWidth
@@ -258,16 +337,18 @@ const Add = () => {
           />
         </div>
       </div>
-      <Button
-        style={{ margin: "5vh auto" }}
-        variant="contained"
-        color="primary"
-        size="Large"
-        onClick={() => addProductHandler()}
-      >
-        Add Product
+      <div style={{ display:"flex",justifyContent:"center" }}>
+        <Button
+          variant="contained"
+          color="primary"
+          size="Large"
+          onClick={() => addProductHandler()}
+        >
+          Add Product
       </Button>
-    </div>
+      </div>
+      {/* </Grid> */}
+    </>
   );
 };
 

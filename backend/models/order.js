@@ -20,6 +20,7 @@ const orderSchema = new Schema({
     },
     contact:Number,
     user:String,
+    userName:String,
     amount:{
         type:Number,
         required:true

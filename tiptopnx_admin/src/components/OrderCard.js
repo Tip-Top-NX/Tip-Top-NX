@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, CardHeader, CardMedia, CardContent } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import logo from "../assets/logo192.png";
 import { myUri } from "../utils/axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,8 +19,6 @@ const useStyles = makeStyles((theme) => ({
 
 const OrderCard = (props) => {
   const classes = useStyles();
-
-  console.log(props.product);
 
   return (
     <Card variant="outlined" className={classes.root}>
