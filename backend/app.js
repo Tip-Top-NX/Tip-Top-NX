@@ -48,18 +48,14 @@ mongoose
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
-//app.use(logger("dev"));
+// app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Cors
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    credentials: true,
-  })
-);
+
+app.use(cors());
 
 app.use("/public", express.static(path.join(__dirname, "public")));
 
@@ -88,6 +84,11 @@ app.use(function (err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render("error");
+});
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
 });
 
 module.exports = app;
